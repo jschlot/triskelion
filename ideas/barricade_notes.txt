@@ -1,0 +1,27 @@
+Movement Actions:
+    Forward
+    Right
+    Left
+    Sleep
+    Describe
+
+Item Actions:
+    Examine
+    Search
+    Open
+    Close
+    Unlock
+    Lock
+    Break
+    Get
+    Get All
+    Throw
+    Open
+    Read
+    Drop
+    Use
+    Eat
+    Drink
+    Turn On
+    Turn Off
+

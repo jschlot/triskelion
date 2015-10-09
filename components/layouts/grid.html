@@ -1,0 +1,103 @@
+    <section>
+        <div class="outline">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="50%">
+                        {{ map.zone.name }}
+                    </td>
+                    <td width="50%" align="right" class="navigator">
+                        [ {{ map.location.coordinates.x }},
+                        {{ map.location.coordinates.y }} ]
+                        {{ map.location.compass }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="outline" width="500" rowspan="2" valign="middle">
+                    <svg width="500" height="300"></svg>
+                </td>
+                <td class="outline" valign="top">
+                    <div class="shim">
+                        <table width="100%" cellspacing="10">
+                            <tbody>
+                                <tr>
+                                    <td>FORWARD</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>LEFT</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>RIGHT</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="outline" valign="top">
+                    <div class="actions shim">
+                        <table width="100%" cellspacing="10">
+                            <tbody>
+                                <tr>
+                                    <td>SPELLS:</td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="outline" valign="top">
+                    <div class="shim"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="outline" valign="top">
+                    <form>
+                        &gt; <input type="text" name="commandPrompt" id="commandPrompt" autofocus/>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="outline" colspan="2" valign="top">
+                    <div class="shim" id="partyList">
+                        <table width="100%">
+                            <thead>
+                                <tr>
+                                    <td width="15">#</td>
+                                    <td width="">Character Name</td>
+                                    <td width="160">HP</td>
+                                    <td width="50">Status</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Jack</td>
+                                    <td>100</td>
+                                    <td>Alive</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </section>

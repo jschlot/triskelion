@@ -1,0 +1,80 @@
+body {
+    background-color: black;
+}
+
+section {
+    width: 960px;
+    margin: 20px auto;
+}
+
+svg {
+    border: 1px solid silver;
+    background-color: black;
+}
+svg polygon {
+    fill: black;
+    stroke: white;
+    stroke-width: 2px;
+    shape-rendering:crispEdges;
+}
+
+text { fill: white; }
+
+.outline {
+    color: white;
+    border: 1px solid white;
+}
+.shim {
+    min-height: 100px;
+    padding: .5em;
+}
+
+.actions,
+.navigator {
+    text-transform: uppercase;
+}
+
+#commandPrompt {
+    background-color: black;
+    color: white;
+    width: 96%;
+    line-height: 2em;
+}
+
+.n, .e, .s, .w {
+    border: 1px solid white;
+    height: 2em;
+    width: 2em;
+}
+
+.n { border-top: none; }
+.e { border-right: none; }
+.s { border-bottom: none; }
+.w { border-left: none; }
+
+.selected { background-color: white; }
+
+
+ul.flex-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.flex-list li
+{
+    display: inline-block;
+    padding: 0 1em 0 0;
+}
+
+ul.vert-list {
+    list-style-type: none;
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+ul.vert-list li
+{
+    padding: 0 1em 0 0;
+}
