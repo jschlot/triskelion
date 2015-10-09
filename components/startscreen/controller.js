@@ -1,5 +1,5 @@
 angular
-    .module('barricade.StartScreen.controller',[])
+    .module('triskelion.StartScreen.controller',[])
     .controller('StartScreenController', [
         '$scope', '$location', 'objectFindByKey', 'hotkeyAction', 'actionNotFound', 'gameModules', 'infoText', 'userData',
         function($scope, $location, objectFindByKey, hotkeyAction, actionNotFound, gameModules, infoText, userData) {

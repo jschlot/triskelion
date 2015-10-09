@@ -1,15 +1,15 @@
 angular
     .module('Game', [
         'ngRoute',
-        'barricade.GameGrid.controller',
-        'barricade.StartScreen.controller',
+        'triskelion.GameGrid.controller',
+        'triskelion.StartScreen.controller',
 
-        'barricade.actionsList.directive',
+        'triskelion.actionsList.directive',
 
-        'barricade.dictionary.service',
-        'barricade.aiSpeech.service',
-        'barricade.stringManipulations.service',
-        'barricade.globalData.service'
+        'triskelion.dictionary.service',
+        'triskelion.aiSpeech.service',
+        'triskelion.stringManipulations.service',
+        'triskelion.globalData.service'
     ])
     .config([
         '$routeProvider',

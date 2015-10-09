@@ -1,5 +1,5 @@
 angular
-    .module('barricade.globalData.service', [])
+    .module('triskelion.globalData.service', [])
     .factory('userData', [
         function() {
             'use strict';

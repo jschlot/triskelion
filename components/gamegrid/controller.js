@@ -1,5 +1,5 @@
 angular
-    .module('barricade.GameGrid.controller',[])
+    .module('triskelion.GameGrid.controller',[])
     .controller('GameGridController', ['$scope', '$location', 'userData',
         function($scope, $location, userData) {
             'use strict';

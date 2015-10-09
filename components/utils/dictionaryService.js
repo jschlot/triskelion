@@ -1,5 +1,5 @@
 angular
-    .module('barricade.dictionary.service', [])
+    .module('triskelion.dictionary.service', [])
     .factory('gameModules',
         function() {
             'use strict';

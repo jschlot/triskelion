@@ -1,5 +1,5 @@
 angular
-    .module('barricade.aiSpeech.service', [])
+    .module('triskelion.aiSpeech.service', [])
     .factory('actionNotFound', [ 'sarcasticQuips',
         function(sarcasticQuips) {
             'use strict';

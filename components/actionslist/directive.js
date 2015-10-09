@@ -1,5 +1,5 @@
 angular
-    .module('barricade.actionsList.directive',[])
+    .module('triskelion.actionsList.directive',[])
     .directive('actionsListDirective', [
         function(){
           'use strict';

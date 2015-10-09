@@ -1,5 +1,5 @@
 angular
-    .module('barricade.stringManipulations.service', [])
+    .module('triskelion.stringManipulations.service', [])
     .factory('objectFindByKey',
         function() {
             'use strict';
