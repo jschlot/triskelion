@@ -1,8 +1,8 @@
 angular
     .module('triskelion.partySelect.controller',[])
     .controller('partySelectController', [
-        '$scope', '$location', 'partyActions', 'infoText', 'userData', 'playerDB', 'partyData', 'objectFindByKey',
-        function($scope, $location, partyActions, infoText, userData, playerDB, partyData, objectFindByKey) {
+        '$scope', '$location', 'partySelectActions', 'infoText', 'userData', 'playerDB', 'partyData', 'objectFindByKey',
+        function($scope, $location, partySelectActions, infoText, userData, playerDB, partyData, objectFindByKey) {
             'use strict';
 
             $scope.tells = [];
@@ -27,14 +27,14 @@ angular
             var switchBoard = {
                 'add': function() {
                     angular.copy($scope.cast, $scope.availableActions);
-                    $scope.availableActions.push(partyActions.back);
+                    $scope.availableActions.push(partySelectActions.back);
                     $scope.tells = [infoText.whowilljoin];
                     subaction = 'add';
                  },
                 'remove': function() {
                     $scope.tells = [infoText.removePlayer];
                     angular.copy(partyData, $scope.availableActions);
-                    $scope.availableActions.push(partyActions.back);
+                    $scope.availableActions.push(partySelectActions.back);
                     subaction = 'remove';
                  },
                  'start': function() {
@@ -48,21 +48,21 @@ angular
                  'mainactions': function() {
                     if (partyData.length === userData.gameModuleSelected.maxparty) {
                         $scope.availableActions = [
-                            partyActions.remove,
-                            partyActions.start,
-                            partyActions.quit
+                            partySelectActions.remove,
+                            partySelectActions.start,
+                            partySelectActions.quit
                         ];
                     } else if (partyData.length === 0) {
                         $scope.availableActions = [
-                            partyActions.add,
-                            partyActions.quit
+                            partySelectActions.add,
+                            partySelectActions.quit
                         ];
                     } else {
                         $scope.availableActions = [
-                            partyActions.add,
-                            partyActions.remove,
-                            partyActions.start,
-                            partyActions.quit
+                            partySelectActions.add,
+                            partySelectActions.remove,
+                            partySelectActions.start,
+                            partySelectActions.quit
                         ];
                     }
                  },
@@ -98,8 +98,8 @@ angular
                         infoText.keys.abilities.replace(/VALUE/, abilityList.join(", "))
                     ];
                     $scope.availableActions = [
-                        partyActions.confirmAdd,
-                        partyActions.backtoselect
+                        partySelectActions.confirmAdd,
+                        partySelectActions.backtoselect
                     ];
                  },
                  'confirmAdd': function() {

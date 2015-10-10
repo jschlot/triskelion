@@ -26,7 +26,7 @@ text { fill: white; }
     border: 1px solid white;
 }
 .shim {
-    min-height: 100px;
+    min-height: 138px;
     padding: .5em;
 }
 .location {

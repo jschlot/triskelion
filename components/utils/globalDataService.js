@@ -9,10 +9,10 @@ angular
             return userData;
         }
     ])
-    .factory('partyData', [
-        function() {
+    .factory('partyData', ['playerDB', 'userData',
+        function(playerDB, userData) {
             'use strict';
-            var partyData = [];
+            var partyData = [playerDB[userData.gameModuleSelected._self][0]];
             return partyData;
         }
     ]);

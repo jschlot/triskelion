@@ -7,6 +7,7 @@ angular
 
         'triskelion.actionsList.directive',
         'triskelion.saytell.directive',
+        'triskelion.partyList.directive',
 
         'triskelion.utils.dictionary.service',
         'triskelion.utils.aiSpeech.service',

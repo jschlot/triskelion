@@ -15,7 +15,6 @@ angular
             $scope.saveAndNext = function(value) {
                 userData.gameModuleSelected = value;
                 $location.path( "/partyselect" );
-            }
-
+            };
         }
     ]);

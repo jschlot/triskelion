@@ -8,7 +8,11 @@ angular
                     name: "Dungeon of Grim Souls",
                     hotkey: "D",
                     _self: "dungeon",
-                    maxparty: 3
+                    maxparty: 3,
+                    mapWidth: 9,
+                    mapHeight: 9,
+                    defaultCameraDepth: 2,
+                    defaultCompassDirection: 'east'
                 }
             };
 
@@ -19,6 +23,40 @@ angular
         function() {
             'use strict';
             var partyActions = {
+                forward: {
+                    name: "Forward",
+                    hotkey: "F",
+                    _self: "forward"
+                },
+                goleft: {
+                    name: "Left",
+                    hotkey: "L",
+                    _self: "goleft"
+                },
+                goright: {
+                    name: "Right",
+                    hotkey: "R",
+                    _self: "right"
+                },
+                camp: {
+                    name: "Camp",
+                    hotkey: "C",
+                    _self: "camp"
+                },
+                describe: {
+                    name: "Describe",
+                    hotkey: "D",
+                    _self: "describe"
+                }
+            };
+
+            return partyActions;
+        }
+    )
+    .factory('partySelectActions',
+        function() {
+            'use strict';
+            var partySelectActions = {
                 add: {
                     name: "Add Party Member",
                     hotkey: "A",
@@ -56,7 +94,7 @@ angular
                 }
             };
 
-            return partyActions;
+            return partySelectActions;
         }
     )
     .factory('infoText',
