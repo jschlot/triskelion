@@ -3,8 +3,10 @@ angular
         'ngRoute',
         'triskelion.gameGrid.controller',
         'triskelion.startScreen.controller',
+        'triskelion.partySelect.controller',
 
         'triskelion.actionsList.directive',
+        'triskelion.saytell.directive',
 
         'triskelion.utils.dictionary.service',
         'triskelion.utils.aiSpeech.service',
@@ -22,9 +24,9 @@ angular
                 templateUrl: "components/layouts/menu.html",
                 controller: 'startScreenController'
             })
-            .when('/story', {
-                templateUrl: "components/layouts/menu.html",
-                controller: 'gameGridController'
+            .when('/partyselect', {
+                templateUrl: "components/layouts/partyselect.html",
+                controller: 'partySelectController'
             })
             .when('/start', {
                 templateUrl: "components/layouts/menu.html",

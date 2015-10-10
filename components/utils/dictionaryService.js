@@ -14,11 +14,30 @@ angular
             return gameModules;
         }
     )
+    .factory('partyActions',
+        function() {
+            'use strict';
+            var partyActions = {
+                add: {
+                    name: "Add Party Member",
+                    hotkey: "A",
+                    _self: "add"
+                },
+                remove: {
+                    name: "Remove Party Member",
+                    hotkey: "R",
+                    _self: "remove"
+                }
+            };
+
+            return partyActions;
+        }
+    )
     .factory('infoText',
         function() {
             'use strict';
             var motd = {
-                startscreen: "Welcome to Triskelion - an apocalypse scenario simulator. Choose a scenario below to begin the game.",
+                startscreen: "Welcome to Triskelion.",
                 actionchoice: "You chose STRING"
             };
 

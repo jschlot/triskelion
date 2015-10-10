@@ -1,0 +1,46 @@
+<section>
+    <div class="outline">
+        <div class="location">
+            <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="50%">
+                        {{ map.zone.name }}
+                    </td>
+                    <td width="50%" align="right" class="navigator">
+                        [ {{ map.location.coordinates.x }},
+                        {{ map.location.coordinates.y }} ]
+                        {{ map.location.compass }}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="outline">
+        <div class="shim">
+            <table width="100%">
+                <thead>
+                    <tr>
+                        <td width="15">#</td>
+                        <td width="">Character Name</td>
+                        <td width="160">HP</td>
+                        <td width="50">Status</td>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <actions-list-directive
+        actions="availableActions"
+    >
+    </actions-list-directive>
+    <br>
+    <saytell-directive
+        tells="tells"
+        actions="availableActions"
+        callback="saveAndNext"
+    ></saytell-directive>
+</section>

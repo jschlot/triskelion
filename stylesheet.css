@@ -28,6 +28,10 @@ text { fill: white; }
     min-height: 100px;
     padding: .5em;
 }
+.location {
+    padding: .5em;
+}
+
 
 .actions,
 .navigator {

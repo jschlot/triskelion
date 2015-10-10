@@ -4,8 +4,9 @@ angular
         function($scope, $location, userData, navigator) {
             'use strict';
 
+            $scope.tells = [];
+
             if (userData.gameModuleSelected) {
-                console.debug(userData);
                 $scope.tells = ["you chose " + userData.gameModuleSelected.name];
                 $scope.gameModuleSelected = userData.gameModuleSelected._self;
             } else {
@@ -22,7 +23,7 @@ angular
 
             $scope.map = {
                 zone: {
-                    name: "Pizza Shop"
+                    name: "Party Select"
                 },
                 location: {
                     coordinates: {

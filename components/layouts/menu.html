@@ -5,21 +5,14 @@
         </div>
     </div>
     <br>
-    <table width="100%" cellpadding="0" cellspacing="0">
-        <tr>
-            <td class="outline" valign="top">
-                <div class="shim">
-                    <ul class="flex-list">
-                        <li ng-repeat="action in availableActions" ng-bind="formatAction(action)"></li>
-                    </ul>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <br>
     <actions-list-directive
+        actions="availableActions"
+    >
+    </actions-list-directive>
+    <br>
+    <saytell-directive
         tells="tells"
-        prompt="prompt"
-        say="say"
-    ></actions-list-directive>
+        actions="availableActions"
+        callback="saveAndNext"
+    ></saytell-directive>
 </section>

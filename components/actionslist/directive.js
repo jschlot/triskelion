@@ -1,7 +1,7 @@
 angular
     .module('triskelion.actionsList.directive',[])
-    .directive('actionsListDirective', [
-        function(){
+    .directive('actionsListDirective', ['$location', 'objectFindByKey', 'actionNotFound', 'infoText', 'userData', 'hotkeyAction',
+        function($location, objectFindByKey, actionNotFound, infoText, userData, hotkeyAction){
           'use strict';
 
           function linkingFunction(scope, element){
@@ -9,6 +9,9 @@ angular
           }
 
           function controller($scope){
+
+            $scope.formatAction = hotkeyAction;
+
 
             $scope.$on('$destroy', function(){
               $scope.element = null;
@@ -23,9 +26,7 @@ angular
             transclude: false,
             controller: controller,
             scope: {
-                tells: '=',
-                prompt: '=',
-                say: "="
+                actions: "="
             },
             templateUrl: 'components/actionslist/partial.html',
             link: linkingFunction

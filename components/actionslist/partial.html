@@ -2,17 +2,10 @@
         <tr>
             <td class="outline" valign="top">
                 <div class="shim">
-                    <ul class="vert-list">
-                        <li ng-repeat="tell in tells" ng-bind="tell"></li>
+                    <ul class="flex-list">
+                        <li ng-repeat="action in actions" ng-bind="formatAction(action)"></li>
                     </ul>
                 </div>
-            </td>
-        </tr>
-        <tr>
-            <td class="outline shim" valign="top">
-                <form ng-submit="say()">
-                    &gt; <input type="text" name="commandPrompt" id="commandPrompt" ng-model="prompt"/>
-                </form>
             </td>
         </tr>
     </table>
