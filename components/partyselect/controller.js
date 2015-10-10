@@ -22,33 +22,51 @@ angular
             $scope.cast = playerDB[userData.gameModuleSelected._self];
             var currentPick = {};
 
+            var subaction = null;
+
             var switchBoard = {
                 'add': function() {
                     angular.copy($scope.cast, $scope.availableActions);
                     $scope.availableActions.push(partyActions.back);
                     $scope.tells = [infoText.whowilljoin];
+                    subaction = 'add';
                  },
                 'remove': function() {
                     $scope.tells = [infoText.removePlayer];
+                    angular.copy(partyData, $scope.availableActions);
+                    $scope.availableActions.push(partyActions.back);
+                    subaction = 'remove';
                  },
                  'start': function() {
                     $location.path( "/crawler" );
                     return;
                  },
+                 'quit': function() {
+                    $location.path( "/startscreen" );
+                    return;
+                 },
                  'mainactions': function() {
-                    $scope.availableActions = [
-                        partyActions.add,
-                        partyActions.remove,
-                        partyActions.start
-                    ];
+                    if (partyData.length === userData.gameModuleSelected.maxparty) {
+                        $scope.availableActions = [
+                            partyActions.remove,
+                            partyActions.start,
+                            partyActions.quit
+                        ];
+                    } else if (partyData.length === 0) {
+                        $scope.availableActions = [
+                            partyActions.add,
+                            partyActions.quit
+                        ];
+                    } else {
+                        $scope.availableActions = [
+                            partyActions.add,
+                            partyActions.remove,
+                            partyActions.start,
+                            partyActions.quit
+                        ];
+                    }
                  },
-                 'partyfullactions': function() {
-                    $scope.availableActions = [
-                        partyActions.remove,
-                        partyActions.start
-                    ];
-                 },
-                 'select': function(value) {
+                 'subaction': function(value) {
                     if (value._self === 'back') {
                         switchBoard.mainactions();
                         return;
@@ -61,6 +79,11 @@ angular
 
                     currentPick = {};
                     angular.copy(value, currentPick);
+
+                    if (subaction === 'remove') {
+                        switchBoard.confirmRemove();
+                        return;
+                    }
 
                     $scope.tells = [
                         infoText.keys.name.replace(/VALUE/, value.name),
@@ -89,9 +112,28 @@ angular
                     if (partyData.length < userData.gameModuleSelected.maxparty) {
                         switchBoard.add();
                     } else {
-                        switchBoard.partyfullactions();
+                        switchBoard.mainactions();
                     }
-                 }
+                 },
+                 'confirmRemove': function() {
+                    var lookup = objectFindByKey(partyData, 'hotkey', currentPick.hotkey);
+                    if (lookup) {
+                        var index = partyData.indexOf(lookup);
+                        if (index > -1) {
+                            partyData.splice(index,1);
+                            $scope.availableActions.splice(index,1);
+
+                        }
+                    }
+
+                    $scope.tells = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
+                    $scope.cast.push(currentPick);
+                    $scope.partyData = partyData;
+
+                    if (!partyData.length) {
+                        switchBoard.mainactions();
+                    }
+                }
             };
 
             switchBoard.mainactions();
@@ -100,7 +142,7 @@ angular
                 if (switchBoard[value._self]) {
                     switchBoard[value._self]();
                 } else {
-                    switchBoard.select(value);
+                    switchBoard.subaction(value);
                 }
             };
         }

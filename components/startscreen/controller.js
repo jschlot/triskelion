@@ -5,7 +5,7 @@ angular
         function($scope, $location, gameModules, infoText, userData) {
             'use strict';
 
-            $scope.tells = [];
+            $scope.tells = [infoText.choosemodule];
             $scope.headerText = infoText.startscreen;
 
             $scope.availableActions = [

@@ -91,6 +91,11 @@ angular
                     name: "Start Game",
                     hotkey: "S",
                     _self: "start"
+                },
+                quit: {
+                    name: "Quit Game",
+                    hotkey: "Q",
+                    _self: "quit"
                 }
             };
 
@@ -102,9 +107,10 @@ angular
             'use strict';
             var infoText = {
                 startscreen: "Welcome to Triskelion.",
+                choosemodule: "To begin, choose an adventure",
                 actionchoice: "You chose STRING",
                 partyselect: "Party Select",
-                removePlayer: "Type a party member's number to remove.",
+                removePlayer: "Who will you ask to leave the party?",
                 whowilljoin: "Who will you add to the party?",
                 whowillleave: "Who will you remove to the party?",
                 keys: {
