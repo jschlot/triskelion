@@ -1,5 +1,6 @@
 body {
     background-color: black;
+    font-family: monospace;
 }
 
 section {
@@ -68,7 +69,7 @@ ul.flex-list {
 ul.flex-list li
 {
     display: inline-block;
-    padding: 0 1em 0 0;
+    padding: 0 2em 0 0;
 }
 
 ul.vert-list {
@@ -80,5 +81,5 @@ ul.vert-list {
 
 ul.vert-list li
 {
-    padding: 0 1em 0 0;
+    padding: 0 2em 0 0;
 }

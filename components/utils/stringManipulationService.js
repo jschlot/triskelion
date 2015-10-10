@@ -22,7 +22,7 @@ angular
 
                 if (action.name) {
                     var remainder = action.name.substr(1,action.name.length);
-                    return hotkey + " ) " + remainder;
+                    return hotkey + ")" + remainder;
                 } else {
                     return null;
                 }

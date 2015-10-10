@@ -3,14 +3,7 @@
         <div class="location">
             <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                    <td width="50%">
-                        {{ map.zone.name }}
-                    </td>
-                    <td width="50%" align="right" class="navigator">
-                        [ {{ map.location.coordinates.x }},
-                        {{ map.location.coordinates.y }} ]
-                        {{ map.location.compass }}
-                    </td>
+                    <td ng-bind="map.zone.name"></td>
                 </tr>
             </table>
         </div>
@@ -23,11 +16,19 @@
                     <tr>
                         <td width="15">#</td>
                         <td width="">Character Name</td>
+                        <td width="160">Class</td>
                         <td width="160">HP</td>
                         <td width="50">Status</td>
                     </tr>
                 </thead>
                 <tbody>
+                    <tr ng-repeat="character in partyData">
+                        <td width="15" ng-bind="$index + 1"></td>
+                        <td width="" ng-bind="character.name"></td>
+                        <td width="80" ng-bind="character.type"></td>
+                        <td width="160" ng-bind="character.health"></td>
+                        <td width="50" ng-bind="character.status"></td>
+                    </tr>
                 </tbody>
             </table>
         </div>

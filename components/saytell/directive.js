@@ -26,8 +26,8 @@ angular
                 }
 
                 $scope.prompt = null;
-            };
 
+            };
 
             $scope.$on('$destroy', function(){
               $scope.element = null;
@@ -44,7 +44,8 @@ angular
             scope: {
                 tells: '=',
                 actions: "=",
-                callback: "="
+                callback: "=",
+                auto: "@"
             },
             templateUrl: 'components/saytell/partial.html',
             link: linkingFunction

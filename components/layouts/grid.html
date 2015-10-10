@@ -1,17 +1,20 @@
     <section>
         <div class="outline">
-            <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td width="50%">
-                        {{ map.zone.name }}
-                    </td>
-                    <td width="50%" align="right" class="navigator">
-                        [ {{ map.location.coordinates.x }},
-                        {{ map.location.coordinates.y }} ]
-                        {{ map.location.compass }}
-                    </td>
-                </tr>
-            </table>
+            <div class="location">
+                <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="50%" ng-bind="map.zone.name"></td>
+                        <td width="50%" align="right"   >
+                            [
+                                <span ng-bind="map.location.coordinates.x"></span>
+                                ,
+                                <span ng-bind="map.location.coordinates.y"></span>
+                            ]
+                            <span ng-bind="map.location.compass" class="navigator"></span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <br>
         <table width="100%" cellpadding="0" cellspacing="0">

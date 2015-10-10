@@ -1,11 +1,18 @@
 angular
     .module('triskelion.utils.globalData.service', [])
-    .factory('userData', [
-        function() {
+    .factory('userData', ['gameModules',
+        function(gameModules) {
             'use strict';
             var userData = {
-                gameModuleSelected: null
+                gameModuleSelected: gameModules.dungeon
             };
             return userData;
+        }
+    ])
+    .factory('partyData', [
+        function() {
+            'use strict';
+            var partyData = [];
+            return partyData;
         }
     ]);
