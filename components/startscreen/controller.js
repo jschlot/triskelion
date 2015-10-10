@@ -1,6 +1,6 @@
 angular
-    .module('triskelion.StartScreen.controller',[])
-    .controller('StartScreenController', [
+    .module('triskelion.startScreen.controller',[])
+    .controller('startScreenController', [
         '$scope', '$location', 'objectFindByKey', 'hotkeyAction', 'actionNotFound', 'gameModules', 'infoText', 'userData',
         function($scope, $location, objectFindByKey, hotkeyAction, actionNotFound, gameModules, infoText, userData) {
             'use strict';
@@ -9,8 +9,7 @@ angular
             $scope.headerText = infoText.startscreen;
 
             $scope.availableActions = [
-                gameModules.zombies,
-                gameModules.robots
+                gameModules.dungeon
             ];
 
             $scope.formatAction = hotkeyAction;
@@ -26,7 +25,7 @@ angular
 
                 if (lookup) {
                     $scope.tells.push(infoText.actionchoice.replace(/STRING/, lookup.name));
-                    userData.gameModuleSelected = lookup._self;
+                    userData.gameModuleSelected = lookup;
                     $location.path( "/story" );
                 } else {
                     $scope.tells.push(actionNotFound());

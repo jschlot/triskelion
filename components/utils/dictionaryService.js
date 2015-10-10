@@ -1,18 +1,13 @@
 angular
-    .module('triskelion.dictionary.service', [])
+    .module('triskelion.utils.dictionary.service', [])
     .factory('gameModules',
         function() {
             'use strict';
             var gameModules = {
-                zombies: {
-                    name: "Zombie Shopping Mall",
-                    hotkey: "Z",
-                    _self: "zombies"
-                },
-                robots: {
-                    name: "Robot Uprising",
-                    hotkey: "R",
-                    _self: "robots"
+                dungeon: {
+                    name: "Dungeon of Grim Souls",
+                    hotkey: "D",
+                    _self: "dungeon"
                 }
             };
 

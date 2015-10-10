@@ -1,17 +1,24 @@
 angular
-    .module('triskelion.GameGrid.controller',[])
-    .controller('GameGridController', ['$scope', '$location', 'userData',
-        function($scope, $location, userData) {
+    .module('triskelion.gameGrid.controller',[])
+    .controller('gameGridController', ['$scope', '$location', 'userData', 'navigator',
+        function($scope, $location, userData, navigator) {
             'use strict';
 
-            $scope.tells = ['one','two'];
-
-
             if (userData.gameModuleSelected) {
-                $scope.gameModuleSelected = userData.gameModuleSelected;
+                console.debug(userData);
+                $scope.tells = ["you chose " + userData.gameModuleSelected.name];
+                $scope.gameModuleSelected = userData.gameModuleSelected._self;
             } else {
                 $location.path( "/startscreen" );
+                return;
             }
+
+            navigator.setDimensions(16,16);
+            navigator.init();
+            navigator.updateNode(1,0, 0x01);
+            var view = navigator.getView(0,0, 'east');
+
+            console.debug(view);
 
             $scope.map = {
                 zone: {

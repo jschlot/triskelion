@@ -1,5 +1,5 @@
 angular
-    .module('triskelion.globalData.service', [])
+    .module('triskelion.utils.globalData.service', [])
     .factory('userData', [
         function() {
             'use strict';

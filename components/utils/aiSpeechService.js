@@ -1,5 +1,5 @@
 angular
-    .module('triskelion.aiSpeech.service', [])
+    .module('triskelion.utils.aiSpeech.service', [])
     .factory('actionNotFound', [ 'sarcasticQuips',
         function(sarcasticQuips) {
             'use strict';

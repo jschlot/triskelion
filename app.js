@@ -1,15 +1,17 @@
 angular
     .module('Game', [
         'ngRoute',
-        'triskelion.GameGrid.controller',
-        'triskelion.StartScreen.controller',
+        'triskelion.gameGrid.controller',
+        'triskelion.startScreen.controller',
 
         'triskelion.actionsList.directive',
 
-        'triskelion.dictionary.service',
-        'triskelion.aiSpeech.service',
-        'triskelion.stringManipulations.service',
-        'triskelion.globalData.service'
+        'triskelion.utils.dictionary.service',
+        'triskelion.utils.aiSpeech.service',
+        'triskelion.utils.stringManipulations.service',
+        'triskelion.utils.globalData.service',
+
+        'triskelion.navigator.service'
     ])
     .config([
         '$routeProvider',
@@ -18,39 +20,39 @@ angular
         $routeProvider
             .when('/startscreen', {
                 templateUrl: "components/layouts/menu.html",
-                controller: 'StartScreenController'
+                controller: 'startScreenController'
             })
             .when('/story', {
-                templateUrl: "components/layouts/story.html",
-                controller: 'GameGridController'
+                templateUrl: "components/layouts/menu.html",
+                controller: 'gameGridController'
             })
             .when('/start', {
                 templateUrl: "components/layouts/menu.html",
-                controller: 'GameGridController'
+                controller: 'gameGridController'
             })
             .when('/home', {
                 templateUrl: "components/layouts/menu.html",
-                controller: 'GameGridController'
+                controller: 'gameGridController'
             })
             .when('/character', {
                 templateUrl: "components/layouts/grid.html",
-                controller: 'GameGridController'
+                controller: 'gameGridController'
             })
             .when('/crawler', {
                 templateUrl: "components/layouts/grid.html",
-                controller: 'GameGridController'
+                controller: 'gameGridController'
             })
             .when('/combat', {
                 templateUrl: "components/layouts/grid.html",
-                controller: 'GameGridController'
+                controller: 'gameGridController'
             })
             .when('/loot', {
                 templateUrl: "components/layouts/grid.html",
-                controller: 'GameGridController'
+                controller: 'gameGridController'
             })
             .when('/room', {
                 templateUrl: "components/layouts/grid.html",
-                controller: 'GameGridController'
+                controller: 'gameGridController'
             })
             .otherwise({
                 redirectTo: '/startscreen'
