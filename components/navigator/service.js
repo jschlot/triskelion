@@ -24,7 +24,7 @@ angular
                 0x10    TELEPORT START
                 0x11    TELEPORT END
                 0x12    COMMENT
-                0x13    WALL
+                0x13    LOOT
                 0X14    UNEXPLORED AREA
             */
             var map = [],
@@ -60,6 +60,18 @@ angular
                     console.log(header.join(", "));
                     for (var i=0; i < width; i++) {
                         var row = map[i].join(", ");
+                        console.log(i.toString(16).toUpperCase() + ": " + row);
+                    }
+                },
+                debugView: function(view) {
+                    var header = []
+                    header[0] = '+';
+                    for (var i=0; i < 3; i++) {
+                        header.push(i.toString(16).toUpperCase());
+                    }
+                    console.log(header.join(", "));
+                    for (var i=0; i <= depth; i++) {
+                        var row = view[i].join(", ");
                         console.log(i.toString(16).toUpperCase() + ": " + row);
                     }
                 },
@@ -116,7 +128,8 @@ angular
                 },
                 updateNode: function(xCoord, yCoord, tileBit) {
                     map[yCoord][xCoord] = tileBit;
-                }            };
+                }
+            };
 
             return navigator;
         }

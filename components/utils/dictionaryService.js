@@ -15,49 +15,6 @@ angular
             return gameModules;
         }
     )
-    .factory('playerDB',
-        function() {
-            'use strict';
-            var playerDB = {
-                'dungeon': [
-                    {
-                        name: "Gregor Mandalor",
-                        hotkey: "G",
-                        _self: "gregor",
-                        health: 100,
-                        status: "alive",
-                        type: "guardian"
-                    },
-                    {
-                        name: "Devonellah",
-                        hotkey: "D",
-                        _self: "devonellah",
-                        health: 80,
-                        status: "alive",
-                        type: "healer"
-                    },
-                    {
-                        name: "Thermofax Magipoor",
-                        hotkey: "T",
-                        _self: "thermofax",
-                        health: 80,
-                        status: "alive",
-                        type: "mage"
-                    },
-                    {
-                        name: "Krayt Manthrax",
-                        hotkey: "K",
-                        _self: "krayt",
-                        health: 90,
-                        status: "alive",
-                        type: "fighter"
-                    }
-                ]
-            };
-
-            return playerDB;
-        }
-    )
     .factory('partyActions',
         function() {
             'use strict';
@@ -115,8 +72,10 @@ angular
                 whowillleave: "Who will you remove to the party?",
                 keys: {
                     name: "Name: VALUE",
-                    class: "Class: VALUE",
-                    health: "Health: VALUE"
+                    type: "Class: VALUE",
+                    health: "Health: VALUE",
+                    abilities: "Abilities: VALUE",
+                    race: "Race: VALUE"
                 }
             };
 

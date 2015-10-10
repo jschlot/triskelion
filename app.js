@@ -12,8 +12,7 @@ angular
         'triskelion.utils.aiSpeech.service',
         'triskelion.utils.stringManipulations.service',
         'triskelion.utils.globalData.service',
-
-        'triskelion.navigator.service'
+        'triskelion.utils.npc.service'
     ])
     .config([
         '$routeProvider',

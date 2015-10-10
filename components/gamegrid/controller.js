@@ -1,25 +1,31 @@
 angular
-    .module('triskelion.gameGrid.controller',[])
-    .controller('gameGridController', ['$scope', '$location', 'userData', 'navigator',
-        function($scope, $location, userData, navigator) {
+    .module('triskelion.gameGrid.controller',[
+        'triskelion.navigator.service',
+        'triskelion.mazeRunner.service'
+    ])
+    .controller('gameGridController', ['$scope', '$location', 'userData', 'navigator', 'mazeRunner',
+        function($scope, $location, userData, navigator, mazeRunner) {
             'use strict';
 
             $scope.tells = [];
 
-            if (userData.gameModuleSelected) {
-                $scope.tells = ["you chose " + userData.gameModuleSelected.name];
-                $scope.gameModuleSelected = userData.gameModuleSelected._self;
-            } else {
+            if (!userData.gameModuleSelected) {
                 $location.path( "/startscreen" );
                 return;
             }
 
             navigator.setDimensions(16,16);
+            navigator.setDepth(2);
             navigator.init();
-            navigator.updateNode(1,0, 0x01);
-            var view = navigator.getView(0,0, 'east');
+            navigator.updateNode(0,0, 0x01);
+//            navigator.updateNode(1,0, 0x01);
+            navigator.updateNode(1,1, 0x01);
 
-            console.debug(view);
+            var view = navigator.getView(0,0, 'east');
+//            navigator.debugMap(view);
+            navigator.debugView(view);
+
+            mazeRunner(view);
 
             $scope.map = {
                 zone: {

@@ -85,10 +85,17 @@ angular
                         return;
                     }
 
+                    var abilityList = [];
+                    for (var i = 0; i< value.abilities.length; i++) {
+                        abilityList.push(value.abilities[i].name);
+                    }
+
                     $scope.tells = [
                         infoText.keys.name.replace(/VALUE/, value.name),
-                        infoText.keys.class.replace(/VALUE/, value.type),
-                        infoText.keys.health.replace(/VALUE/, value.health)
+                        infoText.keys.race.replace(/VALUE/, value.race),
+                        infoText.keys.type.replace(/VALUE/, value.type),
+                        infoText.keys.health.replace(/VALUE/, value.health),
+                        infoText.keys.abilities.replace(/VALUE/, abilityList.join(", "))
                     ];
                     $scope.availableActions = [
                         partyActions.confirmAdd,
