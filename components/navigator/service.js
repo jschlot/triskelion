@@ -6,10 +6,10 @@ angular
             /*
                 // TILE BITS
                 0x00    INACCESSIBLE
-                0x01    VISIBLE AREA
-                0x02    VISIBLE DOOR
-                0x03    HIDDEN DOOR
-                0x04    ONE WAY DOOR
+                0x01    WALL
+                0x02    VISIBLE AREA
+                0x03    VISIBLE DOOR
+                0x04    HIDDEN DOOR
                 0x05    MAGICAL DARKNESS
                 0x06    MAGICAL SEAL
                 0x07    UP STAIRS

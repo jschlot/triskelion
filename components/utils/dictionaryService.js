@@ -11,7 +11,7 @@ angular
                     maxparty: 3,
                     mapWidth: 9,
                     mapHeight: 9,
-                    defaultCameraDepth: 2,
+                    defaultCameraDepth: 3,
                     defaultCompassDirection: 'east'
                 }
             };
