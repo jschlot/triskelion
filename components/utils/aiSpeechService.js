@@ -11,4 +11,16 @@ angular
             };
             return actionNotFound;
         }
+    ])
+    .factory('ouchHappened', [ 'sarcasticOuches',
+        function(sarcasticOuches) {
+            'use strict';
+            var ouchHappened = function() {
+                // This service returns a random quip
+                var i = Math.floor(Math.random() * sarcasticOuches.length);
+
+                return sarcasticOuches[i];
+            };
+            return ouchHappened;
+        }
     ]);

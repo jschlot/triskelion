@@ -1,6 +1,6 @@
 angular
-    .module('triskelion.navigator.service', [])
-    .factory('navigator', [
+    .module('triskelion.levelMap.service', [])
+    .factory('levelMap', [
         function() {
             'use strict';
             /*
@@ -32,7 +32,7 @@ angular
                 height = 9,
                 depth = 1;
 
-            var navigator = {
+            var levelMap = {
                 init: function() {
                     for (var i=0; i < width; i++) {
                         map[i] = new Array(height);
@@ -51,9 +51,9 @@ angular
                 getMap: function() {
                     return map;
                 },
-                debugMap: function() {
+                debugMap: function(orientation) {
                     var header = []
-                    header[0] = '+';
+                    header[0] = orientation[0];
                     for (var i=0; i < height; i++) {
                         header.push(i.toString(16).toUpperCase());
                     }
@@ -63,9 +63,9 @@ angular
                         console.log(i.toString(16).toUpperCase() + ": " + row);
                     }
                 },
-                debugView: function(view) {
+                debugView: function(view,orientation) {
                     var header = []
-                    header[0] = '+';
+                    header[0] = orientation[0];
                     for (var i=0; i < 3; i++) {
                         header.push(i.toString(16).toUpperCase());
                     }
@@ -112,13 +112,13 @@ angular
                                 break;
                             case 'west':
                                 if (map[yCoord - 1]) {
-                                    currentTile[i][2] = (map[yCoord - 1][xCoord - i]) ? map[yCoord - 1][xCoord - i] : 0x00;
+                                    currentTile[i][0] = (map[yCoord - 1][xCoord - i]) ? map[yCoord - 1][xCoord - i] : 0x00;
                                 }
                                 if (map[yCoord]) {
                                     currentTile[i][1] = (map[yCoord][xCoord - i]) ? map[yCoord][xCoord - i] : 0X00;
                                 }
                                 if (map[yCoord + 1]) {
-                                    currentTile[i][0] = (map[yCoord + 1][xCoord - i]) ? map[yCoord + 1][xCoord - i] : 0x00;
+                                    currentTile[i][2] = (map[yCoord + 1][xCoord - i]) ? map[yCoord + 1][xCoord - i] : 0x00;
                                 }
                                 break;
                         }
@@ -131,6 +131,6 @@ angular
                 }
             };
 
-            return navigator;
+            return levelMap;
         }
     ]);

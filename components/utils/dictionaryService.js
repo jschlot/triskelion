@@ -31,7 +31,7 @@ angular
                 goleft: {
                     name: "Left",
                     hotkey: "L",
-                    _self: "goleft"
+                    _self: "left"
                 },
                 goright: {
                     name: "Right",
@@ -132,5 +132,16 @@ angular
             ];
 
             return sarcasticQuips;
+        }
+    )
+    .factory('sarcasticOuches',
+        function() {
+            'use strict';
+            var sarcasticOuches = [
+                "Ouch!",
+                "Thwack!"
+            ];
+
+            return sarcasticOuches;
         }
     );
