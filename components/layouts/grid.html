@@ -16,7 +16,18 @@
         <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
                 <td class="outline" width="500" rowspan="2" valign="middle">
-                    <svg width="500" height="300" id="mazeRunner"></svg>
+                    <div ng-show="showMiniMap">
+                        <table width="500" height="300" id="miniMap">
+                            <tr ng-repeat="row in map.data">
+                                <td ng-repeat="cell in row track by $index" ng-class="minimapCellClass(cell, $index, $parent.$index)" >
+                                    <span>&nbsp;</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div ng-hide="showMiniMap">
+                        <svg width="500" height="300" id="mazeRunner"></svg>
+                    </div>
                 </td>
                 <td class="outline" valign="top">
                     <actions-list-directive actions="availableActions"></actions-list-directive>

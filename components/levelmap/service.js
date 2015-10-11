@@ -4,28 +4,30 @@ angular
         function() {
             'use strict';
             /*
-                // TILE BITS
+                // TILE BITS THAT STOP NAVIGATION
                 0x00    INACCESSIBLE
                 0x01    WALL
-                0x02    VISIBLE AREA
-                0x03    VISIBLE DOOR
-                0x04    HIDDEN DOOR
-                0x05    MAGICAL DARKNESS
-                0x06    MAGICAL SEAL
-                0x07    UP STAIRS
-                0x08    DOWN STAIRS
-                0x09    PORTAL
-                0x0A    PITFALL
-                0x0B    CHUTE
-                0x0C    ROTATING FLOOR
-                0x0D    MESSAGE
-                0x0E    GUARDIAN
-                0x0F    SPECIAL EVENT
-                0x10    TELEPORT START
-                0x11    TELEPORT END
-                0x12    COMMENT
-                0x13    LOOT
-                0X14    UNEXPLORED AREA
+                0x02    HIDDEN DOOR
+                0x03    PITFALL
+                0x04    WATER
+                0x05    SPECIAL EVENT
+                0x06    TELEPORT START
+                0x07    TELEPORT END
+                0x08    UP STAIRS
+                0x09    DOWN STAIRS
+                0x0A    PORTAL
+                0x0B    GUARDIAN
+                0x0C    CHEST
+
+
+                // TILE BITS THAT ALLOW NAVIGATION
+                0x10    VISIBLE AREA
+                0x11    VISIBLE DOOR
+                0x12    MESSAGE
+                0x13    COMMENT
+                0x14    MAGICAL DARKNESS
+                0x15    MAGICAL SEAL
+
             */
             var map = [],
                 width = 9,

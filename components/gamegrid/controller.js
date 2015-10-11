@@ -3,11 +3,12 @@ angular
         'triskelion.levelMap.service',
         'triskelion.mazeRunner.service'
     ])
-    .controller('gameGridController', ['$scope', '$location', 'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened',
-        function($scope, $location, userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened) {
+    .controller('gameGridController', ['$scope', '$location', 'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText',
+        function($scope, $location, userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText) {
             'use strict';
 
             $scope.tells = [];
+            $scope.showMiniMap = false;
 
             if (!userData.gameModuleSelected || partyData.length ===0) {
                 $location.path( "/startscreen" );
@@ -21,10 +22,11 @@ angular
                 partyActions.goleft,
                 partyActions.goright,
                 partyActions.camp,
-                partyActions.describe
+                partyActions.describe,
+                partyActions.map
             ];
 
-            $scope.coordinates = [1,1];
+            $scope.coordinates = userData.gameModuleSelected.startingCoordinates;
             $scope.compassDirection = userData.gameModuleSelected.defaultCompassDirection;
 
             levelMap.setDimensions(userData.gameModuleSelected.mapWidth, userData.gameModuleSelected.mapHeight);
@@ -33,36 +35,38 @@ angular
             levelMap.init();
 
             // this needs to come from the game service somehow
-            levelMap.updateNode(1,1, 0x02);
-            levelMap.updateNode(2,1, 0x02);
-            levelMap.updateNode(2,2, 0x02);
-            levelMap.updateNode(2,3, 0x02);
-            levelMap.updateNode(2,4, 0x02);
-            levelMap.updateNode(3,1, 0x02);
 
             levelMap.updateNode(0,0, 0x01);
             levelMap.updateNode(0,1, 0x01);
             levelMap.updateNode(0,2, 0x01);
+
             levelMap.updateNode(1,0, 0x01);
+                levelMap.updateNode(1,1, 0x10);
             levelMap.updateNode(1,2, 0x01);
             levelMap.updateNode(1,3, 0x01);
-            levelMap.updateNode(1,5, 0x01);
             levelMap.updateNode(1,4, 0x01);
+            levelMap.updateNode(1,5, 0x01);
+
             levelMap.updateNode(2,0, 0x01);
+                levelMap.updateNode(2,1, 0x10);
+                levelMap.updateNode(2,2, 0x10);
+                levelMap.updateNode(2,3, 0x10);
+                levelMap.updateNode(2,4, 0x10);
             levelMap.updateNode(2,5, 0x01);
+
             levelMap.updateNode(3,0, 0x01);
+               levelMap.updateNode(3,1, 0x10);
             levelMap.updateNode(3,2, 0x01);
             levelMap.updateNode(3,3, 0x01);
-            levelMap.updateNode(3,5, 0x01);
             levelMap.updateNode(3,4, 0x01);
-            levelMap.updateNode(4,1, 0x01);
+            levelMap.updateNode(3,5, 0x01);
 
-            levelMap.debugMap($scope.compassDirection);
+            levelMap.updateNode(4,1, 0x01);
 
             var updateMazeRunner = function() {
                 $scope.view = levelMap.getView($scope.coordinates[0],$scope.coordinates[1], $scope.compassDirection);
 
-                // levelMap.debugView($scope.view,$scope.compassDirection);
+                levelMap.debugView($scope.view,$scope.compassDirection);
                 mazeRunner($scope.view);
 
                 $scope.map = {
@@ -75,11 +79,24 @@ angular
                             y: $scope.coordinates[1]
                         },
                         compass: $scope.compassDirection
-                    }
+                    },
+                    data: levelMap.getMap()
                 };
             };
 
             updateMazeRunner();
+
+            $scope.minimapCellClass = function(cell, x, y) {
+                if (cell < 16) {
+                    return "solid";
+                } else {
+                    if (x === $scope.coordinates[0] && y === $scope.coordinates[1]) {
+                        return $scope.compassDirection;
+                    } else {
+                        return "floor";
+                    }
+                }
+            };
 
 
             $scope.saveAndNext = function(value) {
@@ -91,7 +108,7 @@ angular
                     case 'forward':
                         // movement depends on compass
                         var next = $scope.view[1][1];
-                        if (next > 1) {
+                        if (next > 15) {
                             switch($scope.compassDirection) {
                                 case "east":
                                     $scope.coordinates[0] = $scope.coordinates[0] + 1;
@@ -129,6 +146,14 @@ angular
                     case 'camp':
                         break
                     case 'describe':
+                        break
+                    case 'map':
+                        $scope.showMiniMap = ($scope.showMiniMap) ? false : true;
+                        if ($scope.showMiniMap) {
+                            // TO-DO move to dictionary infoText
+                            $scope.tells = [infoText.closeminimap];
+                        }
+
                         break
                 }
                 updateMazeRunner();

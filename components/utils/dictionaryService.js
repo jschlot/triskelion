@@ -9,10 +9,11 @@ angular
                     hotkey: "D",
                     _self: "dungeon",
                     maxparty: 3,
-                    mapWidth: 9,
-                    mapHeight: 9,
-                    defaultCameraDepth: 3,
-                    defaultCompassDirection: 'east'
+                    mapWidth: 19,
+                    mapHeight: 19,
+                    defaultCameraDepth: 4,
+                    defaultCompassDirection: 'south',
+                    startingCoordinates: [2,1]
                 }
             };
 
@@ -47,6 +48,11 @@ angular
                     name: "Describe",
                     hotkey: "D",
                     _self: "describe"
+                },
+                map: {
+                    name: "Map",
+                    hotkey: "M",
+                    _self: "map"
                 }
             };
 
@@ -108,6 +114,7 @@ angular
                 removePlayer: "Who will you ask to leave the party?",
                 whowilljoin: "Who will you add to the party?",
                 whowillleave: "Who will you remove to the party?",
+                closeminimap: "type M again to return to maze view",
                 keys: {
                     name: "Name: VALUE",
                     type: "Class: VALUE",

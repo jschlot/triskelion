@@ -25,6 +25,7 @@ text { fill: white; }
     color: white;
     border: 1px solid white;
 }
+
 .shim {
     min-height: 138px;
     padding: .5em;
@@ -69,7 +70,7 @@ ul.flex-list {
 ul.flex-list li
 {
     display: inline-block;
-    padding: 0 2em 0 0;
+    padding: 0 2em 1em 0;
 }
 
 ul.vert-list {
@@ -82,4 +83,54 @@ ul.vert-list {
 ul.vert-list li
 {
     padding: 0 2em 0 0;
+}
+
+#miniMap .outline {
+    color: white;
+    border: 1px solid silver;
+}
+
+#miniMap {
+    border: 1px solid white;
+}
+
+#miniMap td {
+    border: 1px solid white;
+}
+
+#miniMap td.solid {
+    background-color: black;
+}
+
+#miniMap td.floor {
+    background-color: white;
+}
+
+#miniMap td.north,
+#miniMap td.east,
+#miniMap td.south,
+#miniMap td.west {
+    color: black;
+    background-color: white;
+}
+
+#aminiMap td.north span:before  {
+    content: "↑";
+    position: relative;
+    left: 1.5em;
+}
+#aminiMap td.east span:before  {
+    content: "→";
+    position: relative;
+    left: 1.5em;
+}
+#aminiMap td.south span:before  {
+    content: "↓";
+    position: relative;
+    left: 1.5em;
+}
+#aminiMap td.west span:before  {
+    content: "←";
+    position: relative;
+    left: 1.5em;
 }
