@@ -40,7 +40,9 @@ angular
             levelMap.updateNode(2,4, 0x02);
             levelMap.updateNode(3,1, 0x02);
 
+            levelMap.updateNode(0,0, 0x01);
             levelMap.updateNode(0,1, 0x01);
+            levelMap.updateNode(0,2, 0x01);
             levelMap.updateNode(1,0, 0x01);
             levelMap.updateNode(1,2, 0x01);
             levelMap.updateNode(1,3, 0x01);
