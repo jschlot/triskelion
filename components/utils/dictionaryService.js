@@ -9,18 +9,29 @@ angular
                     hotkey: "D",
                     _self: "dungeon",
                     maxparty: 3,
-                    mapWidth: 23,
-                    mapHeight: 39,
-                    defaultCameraDepth: 4,
-                    defaultCompassDirection: 'south',
-                    startingCoordinates: [2,1],
+                    mapMaxX: 11, // offset by 1
+                    mapMaxY: 12, // offset by 1
+                    defaultCameraDepth: 3, // best resolution is 3
+                    defaultCompassDirection: 'east',
+                    startingCoordinates: [4,1],
                     map: [
-                        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                        [1,17,17,17,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                        [1,1,17,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                        [1,1,17,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                        [1,1,17,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-                        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+                        {
+                            name: "The Catacombs (lvl 1)",
+                            layout: [
+                                // 0     1     2     3     4     5     6     7     8     9    10    11
+                                [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01],  // 0
+                                [0x01, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x01],  // 1
+                                [0x01, 0x01, 0x11, 0x01, 0x01, 0x01, 0x01, 0x01, 0x11, 0x01, 0x11, 0x01],  // 2
+                                [0x01, 0x11, 0x11, 0x11, 0x01, 0x01, 0x01, 0x11, 0x11, 0x01, 0x11, 0x01],  // 3
+                                [0x01, 0x11, 0x01, 0x11, 0x11, 0x11, 0x11, 0x11, 0x01, 0x01, 0x11, 0x01],  // 4
+                                [0x01, 0x11, 0x01, 0x11, 0x01, 0x01, 0x01, 0x11, 0x01, 0x01, 0x11, 0x01],  // 5
+                                [0x01, 0x11, 0x11, 0x11, 0x01, 0x01, 0x01, 0x11, 0x11, 0x01, 0x11, 0x01],  // 6
+                                [0x01, 0x01, 0x11, 0x01, 0x01, 0x01, 0x01, 0x01, 0x11, 0x01, 0x11, 0x01],  // 7
+                                [0x01, 0x01, 0x11, 0x01, 0x01, 0x01, 0x01, 0x01, 0x11, 0x01, 0x11, 0x01],  // 8
+                                [0x01, 0x01, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x01],  // 9
+                                [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01]   // 10
+                            ]
+                        }
                     ]
                 }
             };
@@ -123,6 +134,7 @@ angular
                 whowilljoin: "Who will you add to the party?",
                 whowillleave: "Who will you remove to the party?",
                 closeminimap: "type M again to return to maze view",
+                campingislovely: "Your team kicks it's collective shoes off, leans back, and smokes the halfling leaf for 2 turns...",
                 keys: {
                     name: "Name: VALUE",
                     type: "Class: VALUE",

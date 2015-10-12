@@ -25,8 +25,8 @@ angular
 
               $scope.tells = [];
 
-              if ($scope.prompt.length === 1) {
-                lookup = objectFindByKey($scope.actions, 'hotkey', $scope.prompt);
+              if ($scope.prompt) {
+                lookup = objectFindByKey($scope.actions, 'hotkey', $scope.prompt.substring(0, 1));
               }
 
               if (lookup) {

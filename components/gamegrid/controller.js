@@ -31,21 +31,24 @@ angular
             $scope.coordinates = userData.gameModuleSelected.startingCoordinates;
             $scope.compassDirection = userData.gameModuleSelected.defaultCompassDirection;
 
-            levelMap.setDimensions(userData.gameModuleSelected.mapWidth, userData.gameModuleSelected.mapHeight);
+            levelMap.setDimensions(userData.gameModuleSelected.mapMaxX, userData.gameModuleSelected.mapMaxY);
             levelMap.setDepth(userData.gameModuleSelected.defaultCameraDepth);
 
-            levelMap.init(userData.gameModuleSelected.map);
+            var currentLevelMap = userData.gameModuleSelected.map[0];
+            levelMap.init(currentLevelMap.layout);
 
             // this needs to come from the game service somehow
 
             var updateMazeRunner = function() {
                 $scope.view = levelMap.getView($scope.coordinates[0],$scope.coordinates[1], $scope.compassDirection);
 
+                // levelMap.debugMap($scope.compassDirection);
                 mazeRunner($scope.view);
+                levelMap.debugView($scope.view, $scope.compassDirection);
 
                 $scope.map = {
                     zone: {
-                        name: userData.gameModuleSelected.name + ": Level One"
+                        name: userData.gameModuleSelected.name + ": " + currentLevelMap.name
                     },
                     location: {
                         coordinates: {
@@ -104,6 +107,7 @@ angular
                         $scope.compassDirection = compassOptions[currentCompassIndex];
                         break
                     case 'camp':
+                            $scope.tells = [infoText.campingislovely];
                         break
                     case 'describe':
                         break
