@@ -1,34 +1,8 @@
 angular
     .module('triskelion.levelMap.service', [])
-    .factory('levelMap', [
-        function() {
+    .factory('levelMap', ['tileService',
+        function(tileService) {
             'use strict';
-            /*
-                // TILE BITS THAT STOP NAVIGATION
-                0x00    INACCESSIBLE
-                0x01    WALL
-                0x02    HIDDEN DOOR
-                0x03    PITFALL
-                0x04    WATER
-                0x05    SPECIAL EVENT
-                0x06    TELEPORT START
-                0x07    TELEPORT END
-                0x08    UP STAIRS
-                0x09    DOWN STAIRS
-                0x0A    PORTAL
-                0x0B    GUARDIAN
-                0x0C    CHEST
-
-
-                // TILE BITS THAT ALLOW NAVIGATION
-                0x10    VISIBLE AREA
-                0x11    VISIBLE DOOR
-                0x12    MESSAGE
-                0x13    COMMENT
-                0x14    MAGICAL DARKNESS
-                0x15    MAGICAL SEAL
-
-            */
             var map = [],
                 width = 9,
                 height = 9,
@@ -39,7 +13,7 @@ angular
                     for (var i=0; i < width; i++) {
                         map[i] = new Array(height);
                         for (var j=0; j < height; j++) {
-                            map[i][j] = 0x00;
+                            map[i][j] = tileService.set.NOTHING;
                         }
                     }
                 },
@@ -84,43 +58,43 @@ angular
                     for (var i=0; i <= depth; i++) {
                         currentTile[i] = new Array(3);
                         for (var j=0; j < 3; j++) {
-                            currentTile[i][j] = 0x00;
+                            currentTile[i][j] = tileService.set.NOTHING;
                         }
                         switch (orientation) {
                             case 'north':
                                 if (map[yCoord - i]) {
-                                    currentTile[i][0] = (map[yCoord - i][xCoord - 1]) ? map[yCoord - i][xCoord - 1] : 0x00;
-                                    currentTile[i][1] = (map[yCoord - i][xCoord]) ? map[yCoord - i][xCoord] : 0x00;
-                                    currentTile[i][2] = (map[yCoord - i][xCoord + 1]) ? map[yCoord - i][xCoord + 1] : 0x00;
+                                    currentTile[i][0] = (map[yCoord - i][xCoord - 1]) ? map[yCoord - i][xCoord - 1] : tileService.set.NOTHING;
+                                    currentTile[i][1] = (map[yCoord - i][xCoord]) ? map[yCoord - i][xCoord] : tileService.set.NOTHING;
+                                    currentTile[i][2] = (map[yCoord - i][xCoord + 1]) ? map[yCoord - i][xCoord + 1] : tileService.set.NOTHING;
                                 }
                                 break;
                             case 'south':
                                 if (map[yCoord + i]) {
-                                    currentTile[i][0] = (map[yCoord + i][xCoord - 1]) ? map[yCoord + i][xCoord - 1] : 0x00;
-                                    currentTile[i][1] = (map[yCoord + i][xCoord]) ? map[yCoord + i][xCoord] : 0x00;
-                                    currentTile[i][2] = (map[yCoord + i][xCoord + 1]) ? map[yCoord + i][xCoord + 1] : 0x00;
+                                    currentTile[i][0] = (map[yCoord + i][xCoord - 1]) ? map[yCoord + i][xCoord - 1] : tileService.set.NOTHING;
+                                    currentTile[i][1] = (map[yCoord + i][xCoord]) ? map[yCoord + i][xCoord] : tileService.set.NOTHING;
+                                    currentTile[i][2] = (map[yCoord + i][xCoord + 1]) ? map[yCoord + i][xCoord + 1] : tileService.set.NOTHING;
                                 }
                                 break;
                             case 'east':
                                 if (map[yCoord - 1]) {
-                                    currentTile[i][2] = (map[yCoord - 1][xCoord + i]) ? map[yCoord - 1][xCoord + i] : 0x00;
+                                    currentTile[i][2] = (map[yCoord - 1][xCoord + i]) ? map[yCoord - 1][xCoord + i] : tileService.set.NOTHING;
                                 }
                                 if (map[yCoord]) {
-                                    currentTile[i][1] = (map[yCoord][xCoord + i]) ? map[yCoord][xCoord + i] : 0X00;
+                                    currentTile[i][1] = (map[yCoord][xCoord + i]) ? map[yCoord][xCoord + i] : tileService.set.NOTHING;
                                 }
                                 if (map[yCoord + 1]) {
-                                    currentTile[i][0] = (map[yCoord + 1][xCoord + i]) ? map[yCoord + 1][xCoord + i] : 0x00;
+                                    currentTile[i][0] = (map[yCoord + 1][xCoord + i]) ? map[yCoord + 1][xCoord + i] : tileService.set.NOTHING;
                                 }
                                 break;
                             case 'west':
                                 if (map[yCoord - 1]) {
-                                    currentTile[i][0] = (map[yCoord - 1][xCoord - i]) ? map[yCoord - 1][xCoord - i] : 0x00;
+                                    currentTile[i][0] = (map[yCoord - 1][xCoord - i]) ? map[yCoord - 1][xCoord - i] : tileService.set.NOTHING;
                                 }
                                 if (map[yCoord]) {
-                                    currentTile[i][1] = (map[yCoord][xCoord - i]) ? map[yCoord][xCoord - i] : 0X00;
+                                    currentTile[i][1] = (map[yCoord][xCoord - i]) ? map[yCoord][xCoord - i] : tileService.set.NOTHING;
                                 }
                                 if (map[yCoord + 1]) {
-                                    currentTile[i][2] = (map[yCoord + 1][xCoord - i]) ? map[yCoord + 1][xCoord - i] : 0x00;
+                                    currentTile[i][2] = (map[yCoord + 1][xCoord - i]) ? map[yCoord + 1][xCoord - i] : tileService.set.NOTHING;
                                 }
                                 break;
                         }

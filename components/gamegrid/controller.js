@@ -3,8 +3,10 @@ angular
         'triskelion.levelMap.service',
         'triskelion.mazeRunner.service'
     ])
-    .controller('gameGridController', ['$scope', '$location', 'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText',
-        function($scope, $location, userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText) {
+    .controller('gameGridController', ['$scope', '$location',
+        'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText', 'tileService', 'miniMap',
+        function($scope, $location,
+            userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText, tileService, miniMap) {
             'use strict';
 
             $scope.tells = [];
@@ -36,32 +38,32 @@ angular
 
             // this needs to come from the game service somehow
 
-            levelMap.updateNode(0,0, 0x01);
-            levelMap.updateNode(0,1, 0x01);
-            levelMap.updateNode(0,2, 0x01);
+            levelMap.updateNode(0,0, tileService.set.WALL);
+            levelMap.updateNode(0,1, tileService.set.WALL);
+            levelMap.updateNode(0,2, tileService.set.WALL);
 
-            levelMap.updateNode(1,0, 0x01);
-                levelMap.updateNode(1,1, 0x10);
-            levelMap.updateNode(1,2, 0x01);
-            levelMap.updateNode(1,3, 0x01);
-            levelMap.updateNode(1,4, 0x01);
-            levelMap.updateNode(1,5, 0x01);
+            levelMap.updateNode(1,0, tileService.set.WALL);
+                levelMap.updateNode(1,1, tileService.set.CORRIDOR);
+            levelMap.updateNode(1,2, tileService.set.WALL);
+            levelMap.updateNode(1,3, tileService.set.WALL);
+            levelMap.updateNode(1,4, tileService.set.WALL);
+            levelMap.updateNode(1,5, tileService.set.WALL);
 
-            levelMap.updateNode(2,0, 0x01);
-                levelMap.updateNode(2,1, 0x10);
-                levelMap.updateNode(2,2, 0x10);
-                levelMap.updateNode(2,3, 0x10);
-                levelMap.updateNode(2,4, 0x10);
-            levelMap.updateNode(2,5, 0x01);
+            levelMap.updateNode(2,0, tileService.set.WALL);
+                levelMap.updateNode(2,1, tileService.set.CORRIDOR);
+                levelMap.updateNode(2,2, tileService.set.CORRIDOR);
+                levelMap.updateNode(2,3, tileService.set.CORRIDOR);
+                levelMap.updateNode(2,4, tileService.set.CORRIDOR);
+            levelMap.updateNode(2,5, tileService.set.WALL);
 
-            levelMap.updateNode(3,0, 0x01);
-               levelMap.updateNode(3,1, 0x10);
-            levelMap.updateNode(3,2, 0x01);
-            levelMap.updateNode(3,3, 0x01);
-            levelMap.updateNode(3,4, 0x01);
-            levelMap.updateNode(3,5, 0x01);
+            levelMap.updateNode(3,0, tileService.set.WALL);
+               levelMap.updateNode(3,1, tileService.set.CORRIDOR);
+            levelMap.updateNode(3,2, tileService.set.WALL);
+            levelMap.updateNode(3,3, tileService.set.WALL);
+            levelMap.updateNode(3,4, tileService.set.WALL);
+            levelMap.updateNode(3,5, tileService.set.WALL);
 
-            levelMap.updateNode(4,1, 0x01);
+            levelMap.updateNode(4,1, tileService.set.WALL);
 
             var updateMazeRunner = function() {
                 $scope.view = levelMap.getView($scope.coordinates[0],$scope.coordinates[1], $scope.compassDirection);
@@ -87,7 +89,7 @@ angular
             updateMazeRunner();
 
             $scope.minimapCellClass = function(cell, x, y) {
-                if (cell < 16) {
+                if (tileService.isBlock(cell)) {
                     return "solid";
                 } else {
                     if (x === $scope.coordinates[0] && y === $scope.coordinates[1]) {
@@ -108,7 +110,7 @@ angular
                     case 'forward':
                         // movement depends on compass
                         var next = $scope.view[1][1];
-                        if (next > 15) {
+                        if (tileService.isForward(next)) {
                             switch($scope.compassDirection) {
                                 case "east":
                                     $scope.coordinates[0] = $scope.coordinates[0] + 1;
@@ -150,8 +152,9 @@ angular
                     case 'map':
                         $scope.showMiniMap = ($scope.showMiniMap) ? false : true;
                         if ($scope.showMiniMap) {
-                            // TO-DO move to dictionary infoText
+                            miniMap(levelMap.getMap())
                             $scope.tells = [infoText.closeminimap];
+                            return;
                         }
 
                         break

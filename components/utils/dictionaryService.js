@@ -9,8 +9,8 @@ angular
                     hotkey: "D",
                     _self: "dungeon",
                     maxparty: 3,
-                    mapWidth: 19,
-                    mapHeight: 19,
+                    mapWidth: 39,
+                    mapHeight: 23,
                     defaultCameraDepth: 4,
                     defaultCompassDirection: 'south',
                     startingCoordinates: [2,1]
