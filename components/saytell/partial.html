@@ -3,7 +3,7 @@
             <td class="outline" valign="top">
                 <div class="shim">
                     <ul class="vert-list">
-                        <li ng-repeat="tell in tells" ng-bind="tell"></li>
+                        <li ng-repeat="tell in tells track by $index" ng-bind="tell"></li>
                     </ul>
                 </div>
             </td>

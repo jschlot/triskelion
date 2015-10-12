@@ -4,12 +4,12 @@ angular
         'triskelion.mazeRunner.service'
     ])
     .controller('gameGridController', ['$scope', '$location',
-        'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText', 'tileService', 'miniMap',
+        'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText', 'tileService', 'miniMap', 'auraMethods', 'tellsList',
         function($scope, $location,
-            userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText, tileService, miniMap) {
+            userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText, tileService, miniMap, auraMethods, tellsList) {
             'use strict';
 
-            $scope.tells = [];
+            $scope.tells = tellsList;
             $scope.auras = [];
             $scope.showMiniMap = false;
 
@@ -58,15 +58,19 @@ angular
             $scope.saveAndNext = function(value) {
                 var compassOptions = ['north','east', 'south', 'west'];
 
-                // resolve any tells
-                $scope.tells = [];
+                tellsList = [];
+
+                var msg = [];
+                // decrement aura turns
+                for (var i=0; i < $scope.auras.length; i++) {
+                    tellsList = tellsList.concat(auraMethods[$scope.auras[i].aura]($scope.auras[i]));
+                    $scope.auras[i].remaining--;
+                }
 
                 // resolve any auras
-                for (var i=0; i<$scope.auras.length; i++) {
-                    if ($scope.auras[i].turns === 1) {
+                for (var i=0; i < $scope.auras.length; i++) {
+                    if ($scope.auras[i].remaining === 0) {
                         $scope.auras.splice(i,1);
-                    } else {
-                        $scope.auras[i].turns--;
                     }
                 }
 
@@ -92,18 +96,20 @@ angular
                             var actionID = "action_" + next;
                             if (userData.gameModuleSelected.tileAction[actionID]) {
                                 var actionStack = userData.gameModuleSelected.tileAction[actionID];
-                                $scope.tells = [];
                                 for (var i=0; i<actionStack.length; i++) {
                                     if (actionStack[i].tell) {
-                                        $scope.tells.push(actionStack[i].tell);
+                                        tellsList.push(actionStack[i].tell);
                                     }
                                     if (actionStack[i].aura) {
+                                        var results = auraMethods[actionStack[i].aura](actionStack[i]);
+                                        actionStack[i].remaining = actionStack[i].turns;
                                         $scope.auras[$scope.auras.length] = actionStack[i];
+                                        tellsList = tellsList.concat(results);
                                     }
                                 }
                             }
                         } else {
-                            $scope.tells = [ouchHappened()];
+                            tellsList = [ouchHappened()];
                         }
                         break
                     case 'left':
@@ -124,23 +130,31 @@ angular
                         break
                     case 'camp':
                             //// camp takes you to the camp screen
-                            $scope.tells = [infoText.campingislovely];
+                            $scope.tells = tellsList.concat(infoText.campingislovely);
                             return;
                         break
                     case 'describe':
                             //// describe gets any metadata abount the current cell
-                            $scope.tells = ["describe() method not installed"];
+                            $scope.tells = tellsList.concat("you look around. how nice");
                             return;
                         break
                     case 'map':
                         $scope.showMiniMap = ($scope.showMiniMap) ? false : true;
                         if ($scope.showMiniMap) {
                             miniMap(levelMap.getMap())
-                            $scope.tells = [infoText.closeminimap];
+                            $scope.tells = tellsList.concat(infoText.closeminimap);
                             return;
                         }
                         break
                 }
+
+                if (tellsList) {
+                    $scope.tells = tellsList;
+                }
+
+
+
+
                 updateMazeRunner();
             };
 

@@ -26,7 +26,7 @@ angular
                                 [0x01, 0x11, 0x01, 0x11, 0x11, 0x11, 0x11, 0x11, 0x01, 0x01, 0x11, 0x01],  // 4
                                 [0x01, 0x11, 0x01, 0x11, 0x01, 0x01, 0x01, 0x11, 0x01, 0x01, 0x11, 0x01],  // 5
                                 [0x01, 0x11, 0x11, 0x11, 0x01, 0x01, 0x01, 0x11, 0x11, 0x01, 0x11, 0x01],  // 6
-                                [0x01, 0x01, 0x11, 0x01, 0x01, 0x01, 0x01, 0x01, 0x11, 0x01, 0x11, 0x01],  // 7
+                                [0x01, 0x01, 0x33, 0x01, 0x01, 0x01, 0x01, 0x01, 0x11, 0x01, 0x11, 0x01],  // 7
                                 [0x01, 0x01, 0x11, 0x01, 0x01, 0x01, 0x01, 0x01, 0x11, 0x01, 0x11, 0x01],  // 8
                                 [0x01, 0x01, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x01],  // 9
                                 [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01]   // 10
@@ -35,12 +35,28 @@ angular
                     ],
                     tileAction: {
                         "action_33": [
-                            { tell: "I did this thing this one time." },
-                            { tell: "I did this other thing twice." }
+                            {
+                                tell: "You feel a sense of dread up ahead"
+                            }
                         ],
                         "action_50": [
-                            { tell: "Your party is cursed for 3 turns.", aura: "CURSED", turns: 3 },
-                            { tell: "Your party is feared for 5 turns.", aura: "FEAR", turns: 5 }
+                            {
+                                tell: "Dark words hang upon the air in a language you cannot understand. " +
+                                      "Your party is cursed for 3 turns by [ angerfuge ].",
+                                type: "DEBUFF", aura: "cursed", turns: 3, remaining: 3
+                            },
+                            {
+                                tell: "A spike trap explodes, sending needles flying into the air. " +
+                                      " Your party will bleed for 4 turns by [ needle trap ].",
+                                type: "DEBUFF", aura: "bleed", turns: 4, remaining: 4
+                            }
+                        ],
+                        "action_51": [
+                            {
+                                tell: "A ray of light shines upon your group. " +
+                                      "Your party is granted a healing buff for 5 turns by [ hopefulness ]",
+                                type: "BUFF", aura: "blessed", turns: 5, remaining: 5
+                            }
                         ]
                     }
                 }
@@ -132,6 +148,47 @@ angular
             return partySelectActions;
         }
     )
+    .factory('auraMethods', ['infoText', 'partyData',
+        function(infoText, partyData) {
+            'use strict';
+
+            var dealDamage = function(index, damageDone, auraName) {
+                partyData[index].health = partyData[index].health - damageDone;
+
+                if (partyData[index].health) {
+                    return infoText.auraDamage
+                        .replace(/PLAYER/, partyData[index].name)
+                        .replace(/DAMAGE/, damageDone)
+                        .replace(/AURA/, auraName);
+                } else {
+                    return infoText.deathNote
+                        .replace(/PLAYER/, partyData[index].name);
+                }
+            };
+
+            // auras are done to everyone in the party; they can be resisted by each member.
+            var auraMethods = {
+                'bleed': function(aura) {
+                    var msg = [];
+                    for (var i=0; i<partyData.length; i++) {
+                        if (partyData[i].health > 0) {
+                            var returnvalue = dealDamage(i, 10, aura.aura);
+                            msg.push(returnvalue);
+                        }
+                    }
+                    return msg;
+                },
+                'cursed': function(aura) {
+                    console.log("DOING " + aura.aura);
+                },
+                'blessed': function(aura) {
+                    console.log("DOING " + aura.aura);
+                }
+            };
+
+            return auraMethods;
+        }]
+    )
     .factory('infoText',
         function() {
             'use strict';
@@ -139,12 +196,14 @@ angular
                 startscreen: "Welcome to Triskelion.",
                 choosemodule: "To begin, choose an adventure",
                 actionchoice: "You chose STRING",
+                auraDamage: "PLAYER takes DAMAGE points of damage from AURA",
                 partyselect: "Party Select",
                 removePlayer: "Who will you ask to leave the party?",
                 whowilljoin: "Who will you add to the party?",
                 whowillleave: "Who will you remove to the party?",
                 closeminimap: "type M again to return to maze view",
                 campingislovely: "Your team kicks it's collective shoes off, leans back, and smokes the halfling leaf for 2 turns...",
+                deathNote: "PLAYER dies",
                 keys: {
                     name: "Name: VALUE",
                     type: "Class: VALUE",

@@ -81,7 +81,7 @@ ul.vert-list {
 
 ul.vert-list li
 {
-    padding: 0 2em 0 0;
+    padding: 0 2em 1em 0;
 }
 
 #mazeRunner .floor {

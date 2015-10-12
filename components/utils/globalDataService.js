@@ -12,7 +12,14 @@ angular
     .factory('partyData', ['playerDB', 'userData',
         function(playerDB, userData) {
             'use strict';
-            var partyData = [playerDB[userData.gameModuleSelected._self][0]];
+            var partyData = playerDB[userData.gameModuleSelected._self].slice(0,2);
             return partyData;
+        }
+    ])
+    .factory('tellsList', [
+        function() {
+            'use strict';
+            var tellsList = [];
+            return tellsList;
         }
     ]);
