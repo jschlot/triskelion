@@ -68,7 +68,6 @@ angular
             var updateMazeRunner = function() {
                 $scope.view = levelMap.getView($scope.coordinates[0],$scope.coordinates[1], $scope.compassDirection);
 
-                levelMap.debugView($scope.view,$scope.compassDirection);
                 mazeRunner($scope.view);
 
                 $scope.map = {
@@ -108,7 +107,6 @@ angular
                 var compassOptions = ['north','east', 'south', 'west'];
                 switch (value._self) {
                     case 'forward':
-                        // movement depends on compass
                         var next = $scope.view[1][1];
                         if (tileService.isForward(next)) {
                             switch($scope.compassDirection) {
@@ -156,7 +154,6 @@ angular
                             $scope.tells = [infoText.closeminimap];
                             return;
                         }
-
                         break
                 }
                 updateMazeRunner();
