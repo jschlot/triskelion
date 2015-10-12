@@ -41,21 +41,16 @@ angular
                         ],
                         "action_50": [
                             {
-                                tell: "Dark words hang upon the air in a language you cannot understand. " +
-                                      "Your party is cursed for 3 turns by [ angerfuge ].",
-                                type: "DEBUFF", aura: "cursed", turns: 3, remaining: 3
-                            },
-                            {
-                                tell: "A spike trap explodes, sending needles flying into the air. " +
-                                      " Your party will bleed for 4 turns by [ needle trap ].",
-                                type: "DEBUFF", aura: "bleed", turns: 4, remaining: 4
+                                tell: "A ray of light shines upon your group. " +
+                                      "Your party is granted a healing buff for 5 turns by [ hopefulness ]",
+                                type: "BUFF", aura: "blessed", turns: 5, remaining: 5, amount: 20
                             }
                         ],
                         "action_51": [
                             {
-                                tell: "A ray of light shines upon your group. " +
-                                      "Your party is granted a healing buff for 5 turns by [ hopefulness ]",
-                                type: "BUFF", aura: "blessed", turns: 5, remaining: 5
+                                tell: "A spike trap explodes, sending needles flying into the air. " +
+                                      " Your party will bleed for 4 turns by [ needle trap ].",
+                                type: "DEBUFF", aura: "bleed", turns: 2, remaining: 2, amount: 1
                             }
                         ]
                     }
@@ -64,6 +59,54 @@ angular
 
             return gameModules;
         }
+    )
+    .factory('auraMethods', ['abilityText', 'partyData',
+        function(abilityText, partyData) {
+            'use strict';
+
+            var dealDamage = function(index, damageDone, auraName) {
+                partyData[index].health = (partyData[index].health - damageDone > 0) ? partyData[index].health - damageDone : 0;
+                if (partyData[index].health) {
+                    return abilityText.auraDamage
+                        .replace(/PLAYER/, partyData[index].name)
+                        .replace(/DAMAGE/, damageDone)
+                        .replace(/AURA/, auraName);
+                } else {
+                    var output = abilityText.deathNote
+                        .replace(/PLAYER/, partyData[index].name);
+
+                    alert(output);
+
+                    return output;
+                }
+            };
+
+            // auras are done to everyone in the party; they can be resisted by each member.
+            var auraMethods = {
+                'bleed': function(aura) {
+                    var msg = [];
+                    for (var i=0; i<partyData.length; i++) {
+                        if (partyData[i].health > 0) {
+                            var returnvalue = dealDamage(i, aura.amount, aura.aura);
+                            msg.push(returnvalue);
+                        }
+                    }
+                    return msg;
+                },
+                'cursed': function(aura) {
+                    var msg = [];
+                    msg.push("the active curse debuffs your group.");
+                    return msg;
+                },
+                'blessed': function(aura) {
+                    var msg = [];
+                    msg.push("you receive a blessing from the heavens.");
+                    return msg;
+                }
+            };
+
+            return auraMethods;
+        }]
     )
     .factory('partyActions',
         function() {
@@ -148,47 +191,6 @@ angular
             return partySelectActions;
         }
     )
-    .factory('auraMethods', ['infoText', 'partyData',
-        function(infoText, partyData) {
-            'use strict';
-
-            var dealDamage = function(index, damageDone, auraName) {
-                partyData[index].health = partyData[index].health - damageDone;
-
-                if (partyData[index].health) {
-                    return infoText.auraDamage
-                        .replace(/PLAYER/, partyData[index].name)
-                        .replace(/DAMAGE/, damageDone)
-                        .replace(/AURA/, auraName);
-                } else {
-                    return infoText.deathNote
-                        .replace(/PLAYER/, partyData[index].name);
-                }
-            };
-
-            // auras are done to everyone in the party; they can be resisted by each member.
-            var auraMethods = {
-                'bleed': function(aura) {
-                    var msg = [];
-                    for (var i=0; i<partyData.length; i++) {
-                        if (partyData[i].health > 0) {
-                            var returnvalue = dealDamage(i, 10, aura.aura);
-                            msg.push(returnvalue);
-                        }
-                    }
-                    return msg;
-                },
-                'cursed': function(aura) {
-                    console.log("DOING " + aura.aura);
-                },
-                'blessed': function(aura) {
-                    console.log("DOING " + aura.aura);
-                }
-            };
-
-            return auraMethods;
-        }]
-    )
     .factory('infoText',
         function() {
             'use strict';
@@ -216,7 +218,17 @@ angular
             return infoText;
         }
     )
-    .factory('sarcasticQuips',
+    .factory('abilityText',
+        function() {
+            'use strict';
+            var abilityText = {
+                auraDamage: "PLAYER takes DAMAGE points of damage from AURA",
+                deathNote: "PLAYER dies",
+            };
+
+            return abilityText;
+        }
+    )    .factory('sarcasticQuips',
         function() {
             'use strict';
             var sarcasticQuips = [

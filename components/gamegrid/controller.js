@@ -18,16 +18,7 @@ angular
                 return;
             }
 
-            $scope.partyData = partyData
-
-            $scope.availableActions = [
-                partyActions.forward,
-                partyActions.goleft,
-                partyActions.goright,
-                partyActions.camp,
-                partyActions.describe,
-                partyActions.map
-            ];
+            $scope.partyData = partyData;
 
             $scope.coordinates = userData.gameModuleSelected.startingCoordinates;
             $scope.compassDirection = userData.gameModuleSelected.defaultCompassDirection;
@@ -53,7 +44,17 @@ angular
                 };
             };
 
-            updateMazeRunner();
+            var updateActionsList = function() {
+                $scope.availableActions = [
+                    partyActions.forward,
+                    partyActions.goleft,
+                    partyActions.goright,
+                    partyActions.camp,
+                    partyActions.describe,
+                    partyActions.map
+                ];
+            };
+
 
             $scope.saveAndNext = function(value) {
                 var compassOptions = ['north','east', 'south', 'west'];
@@ -61,6 +62,7 @@ angular
                 tellsList = [];
 
                 var msg = [];
+
                 // decrement aura turns
                 for (var i=0; i < $scope.auras.length; i++) {
                     tellsList = tellsList.concat(auraMethods[$scope.auras[i].aura]($scope.auras[i]));
@@ -152,11 +154,11 @@ angular
                     $scope.tells = tellsList;
                 }
 
-
-
-
                 updateMazeRunner();
             };
+
+            updateMazeRunner();
+            updateActionsList();
 
         }
     ]);
