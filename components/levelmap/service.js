@@ -9,11 +9,15 @@ angular
                 depth = 1;
 
             var levelMap = {
-                init: function() {
+                init: function(config) {
                     for (var i=0; i < width; i++) {
                         map[i] = new Array(height);
                         for (var j=0; j < height; j++) {
-                            map[i][j] = tileService.set.NOTHING;
+                            if (config[i]) {
+                                map[i][j] = config[i][j];
+                            } else {
+                                map[i][j] = tileService.set.NOTHING;
+                            }
                         }
                     }
                 },

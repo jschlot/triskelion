@@ -34,36 +34,9 @@ angular
             levelMap.setDimensions(userData.gameModuleSelected.mapWidth, userData.gameModuleSelected.mapHeight);
             levelMap.setDepth(userData.gameModuleSelected.defaultCameraDepth);
 
-            levelMap.init();
+            levelMap.init(userData.gameModuleSelected.map);
 
             // this needs to come from the game service somehow
-
-            levelMap.updateNode(0,0, tileService.set.WALL);
-            levelMap.updateNode(0,1, tileService.set.WALL);
-            levelMap.updateNode(0,2, tileService.set.WALL);
-
-            levelMap.updateNode(1,0, tileService.set.WALL);
-                levelMap.updateNode(1,1, tileService.set.CORRIDOR);
-            levelMap.updateNode(1,2, tileService.set.WALL);
-            levelMap.updateNode(1,3, tileService.set.WALL);
-            levelMap.updateNode(1,4, tileService.set.WALL);
-            levelMap.updateNode(1,5, tileService.set.WALL);
-
-            levelMap.updateNode(2,0, tileService.set.WALL);
-                levelMap.updateNode(2,1, tileService.set.CORRIDOR);
-                levelMap.updateNode(2,2, tileService.set.CORRIDOR);
-                levelMap.updateNode(2,3, tileService.set.CORRIDOR);
-                levelMap.updateNode(2,4, tileService.set.CORRIDOR);
-            levelMap.updateNode(2,5, tileService.set.WALL);
-
-            levelMap.updateNode(3,0, tileService.set.WALL);
-               levelMap.updateNode(3,1, tileService.set.CORRIDOR);
-            levelMap.updateNode(3,2, tileService.set.WALL);
-            levelMap.updateNode(3,3, tileService.set.WALL);
-            levelMap.updateNode(3,4, tileService.set.WALL);
-            levelMap.updateNode(3,5, tileService.set.WALL);
-
-            levelMap.updateNode(4,1, tileService.set.WALL);
 
             var updateMazeRunner = function() {
                 $scope.view = levelMap.getView($scope.coordinates[0],$scope.coordinates[1], $scope.compassDirection);
@@ -86,19 +59,6 @@ angular
             };
 
             updateMazeRunner();
-
-            $scope.minimapCellClass = function(cell, x, y) {
-                if (tileService.isBlock(cell)) {
-                    return "solid";
-                } else {
-                    if (x === $scope.coordinates[0] && y === $scope.coordinates[1]) {
-                        return $scope.compassDirection;
-                    } else {
-                        return "floor";
-                    }
-                }
-            };
-
 
             $scope.saveAndNext = function(value) {
                 //// camp takes you to the camp screen
