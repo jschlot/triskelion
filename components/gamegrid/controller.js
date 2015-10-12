@@ -10,6 +10,7 @@ angular
             'use strict';
 
             $scope.tells = [];
+            $scope.auras = [];
             $scope.showMiniMap = false;
 
             if (!userData.gameModuleSelected || partyData.length ===0) {
@@ -37,24 +38,15 @@ angular
             var currentLevelMap = userData.gameModuleSelected.map[0];
             levelMap.init(currentLevelMap.layout);
 
-            // this needs to come from the game service somehow
-
             var updateMazeRunner = function() {
                 $scope.view = levelMap.getView($scope.coordinates[0],$scope.coordinates[1], $scope.compassDirection);
 
-                // levelMap.debugMap($scope.compassDirection);
                 mazeRunner($scope.view);
-                levelMap.debugView($scope.view, $scope.compassDirection);
 
                 $scope.map = {
-                    zone: {
-                        name: userData.gameModuleSelected.name + ": " + currentLevelMap.name
-                    },
+                    zone: { name: userData.gameModuleSelected.name + ": " + currentLevelMap.name },
                     location: {
-                        coordinates: {
-                            x: $scope.coordinates[0],
-                            y: $scope.coordinates[1]
-                        },
+                        coordinates: { x: $scope.coordinates[0], y: $scope.coordinates[1] },
                         compass: $scope.compassDirection
                     },
                     data: levelMap.getMap()
@@ -64,14 +56,24 @@ angular
             updateMazeRunner();
 
             $scope.saveAndNext = function(value) {
-                //// camp takes you to the camp screen
-                //// describe gets any metadata abount the current cell
-
                 var compassOptions = ['north','east', 'south', 'west'];
+
+                // resolve any tells
+                $scope.tells = [];
+
+                // resolve any auras
+                for (var i=0; i<$scope.auras.length; i++) {
+                    if ($scope.auras[i].turns === 1) {
+                        $scope.auras.splice(i,1);
+                    } else {
+                        $scope.auras[i].turns--;
+                    }
+                }
+
                 switch (value._self) {
                     case 'forward':
                         var next = $scope.view[1][1];
-                        if (tileService.isForward(next)) {
+                        if (tileService.canGoForward(next)) {
                             switch($scope.compassDirection) {
                                 case "east":
                                     $scope.coordinates[0] = $scope.coordinates[0] + 1;
@@ -85,6 +87,20 @@ angular
                                 case "south":
                                     $scope.coordinates[1] = $scope.coordinates[1] + 1;
                                     break;
+                            }
+
+                            var actionID = "action_" + next;
+                            if (userData.gameModuleSelected.tileAction[actionID]) {
+                                var actionStack = userData.gameModuleSelected.tileAction[actionID];
+                                $scope.tells = [];
+                                for (var i=0; i<actionStack.length; i++) {
+                                    if (actionStack[i].tell) {
+                                        $scope.tells.push(actionStack[i].tell);
+                                    }
+                                    if (actionStack[i].aura) {
+                                        $scope.auras[$scope.auras.length] = actionStack[i];
+                                    }
+                                }
                             }
                         } else {
                             $scope.tells = [ouchHappened()];
@@ -107,9 +123,14 @@ angular
                         $scope.compassDirection = compassOptions[currentCompassIndex];
                         break
                     case 'camp':
+                            //// camp takes you to the camp screen
                             $scope.tells = [infoText.campingislovely];
+                            return;
                         break
                     case 'describe':
+                            //// describe gets any metadata abount the current cell
+                            $scope.tells = ["describe() method not installed"];
+                            return;
                         break
                     case 'map':
                         $scope.showMiniMap = ($scope.showMiniMap) ? false : true;

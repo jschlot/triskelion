@@ -13,14 +13,14 @@ angular
                     mapMaxY: 12, // offset by 1
                     defaultCameraDepth: 3, // best resolution is 3
                     defaultCompassDirection: 'east',
-                    startingCoordinates: [4,1],
+                    startingCoordinates: [1,1],
                     map: [
                         {
                             name: "The Catacombs (lvl 1)",
                             layout: [
                                 // 0     1     2     3     4     5     6     7     8     9    10    11
                                 [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01],  // 0
-                                [0x01, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x01],  // 1
+                                [0x01, 0x11, 0x21, 0x32, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x01],  // 1
                                 [0x01, 0x01, 0x11, 0x01, 0x01, 0x01, 0x01, 0x01, 0x11, 0x01, 0x11, 0x01],  // 2
                                 [0x01, 0x11, 0x11, 0x11, 0x01, 0x01, 0x01, 0x11, 0x11, 0x01, 0x11, 0x01],  // 3
                                 [0x01, 0x11, 0x01, 0x11, 0x11, 0x11, 0x11, 0x11, 0x01, 0x01, 0x11, 0x01],  // 4
@@ -32,7 +32,17 @@ angular
                                 [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01]   // 10
                             ]
                         }
-                    ]
+                    ],
+                    tileAction: {
+                        "action_33": [
+                            { tell: "I did this thing this one time." },
+                            { tell: "I did this other thing twice." }
+                        ],
+                        "action_50": [
+                            { tell: "Your party is cursed for 3 turns.", aura: "CURSED", turns: 3 },
+                            { tell: "Your party is feared for 5 turns.", aura: "FEAR", turns: 5 }
+                        ]
+                    }
                 }
             };
 

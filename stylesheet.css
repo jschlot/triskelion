@@ -84,14 +84,14 @@ ul.vert-list li
     padding: 0 2em 0 0;
 }
 
-#mazeRunner .fill {
+#mazeRunner .floor {
     stroke-opacity: 0.1;
     stroke-width: 1px;
     stroke: black;
     fill: white;
 }
 
-#mazeRunner .empty {
+#mazeRunner .wall {
     stroke-opacity: 0.1;
     stroke-width: 1px;
     stroke: white;
