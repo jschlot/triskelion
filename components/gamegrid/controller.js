@@ -132,7 +132,7 @@ angular
                         break
                     case 'describe':
                             //// describe gets any metadata abount the current cell
-                            $scope.tells = tellsList.concat("you look around. how nice");
+                            $scope.tells = tellsList.concat("HACK - d now opens doors");
                             levelMap.updateTile(6,4,0x012);
 //                            return;
                         break
