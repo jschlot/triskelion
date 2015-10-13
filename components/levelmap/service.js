@@ -106,7 +106,7 @@ angular
 
                     return currentTile;
                 },
-                updateNode: function(xCoord, yCoord, tileBit) {
+                updateTile: function(xCoord, yCoord, tileBit) {
                     map[yCoord][xCoord] = tileBit;
                 }
             };

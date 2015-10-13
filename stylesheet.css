@@ -98,7 +98,7 @@ ul.vert-list li
     fill: none;
 }
 
-#mazeRunner .cursor {
+#mazeRunner .door {
     stroke-opacity: 0.1;
     stroke-width: 1px;
     stroke: black;

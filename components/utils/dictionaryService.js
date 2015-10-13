@@ -13,7 +13,7 @@ angular
                     mapMaxY: 12, // offset by 1
                     defaultCameraDepth: 3, // best resolution is 3
                     defaultCompassDirection: 'east',
-                    startingCoordinates: [1,1],
+                    startingCoordinates: [5,4],
                     map: [
                         {
                             name: "The Catacombs (lvl 1)",
@@ -23,7 +23,7 @@ angular
                                 [0x01, 0x11, 0x21, 0x32, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x11, 0x01],  // 1
                                 [0x01, 0x01, 0x11, 0x01, 0x01, 0x01, 0x01, 0x01, 0x11, 0x01, 0x11, 0x01],  // 2
                                 [0x01, 0x11, 0x11, 0x11, 0x01, 0x01, 0x01, 0x11, 0x11, 0x01, 0x11, 0x01],  // 3
-                                [0x01, 0x11, 0x01, 0x11, 0x11, 0x11, 0x11, 0x11, 0x01, 0x01, 0x11, 0x01],  // 4
+                                [0x01, 0x11, 0x01, 0x11, 0x11, 0x11, 0x0B, 0x11, 0x01, 0x01, 0x11, 0x01],  // 4
                                 [0x01, 0x11, 0x01, 0x11, 0x01, 0x01, 0x01, 0x11, 0x01, 0x01, 0x11, 0x01],  // 5
                                 [0x01, 0x11, 0x11, 0x11, 0x01, 0x01, 0x01, 0x11, 0x11, 0x01, 0x11, 0x01],  // 6
                                 [0x01, 0x01, 0x33, 0x01, 0x01, 0x01, 0x01, 0x01, 0x11, 0x01, 0x11, 0x01],  // 7
@@ -42,14 +42,14 @@ angular
                         "action_50": [
                             {
                                 tell: "A ray of light shines upon your group. " +
-                                      "Your party is granted a healing buff for 5 turns by [ hopefulness ]",
-                                type: "BUFF", aura: "blessed", turns: 5, remaining: 5, amount: 20
+                                      "Your party is granted [ healing ] for 5 turns by [ spirit of hopefulness ]",
+                                type: "BUFF", aura: "healing", turns: 5, remaining: 5, amount: 20
                             }
                         ],
                         "action_51": [
                             {
                                 tell: "A spike trap explodes, sending needles flying into the air. " +
-                                      " Your party will bleed for 4 turns by [ needle trap ].",
+                                      " Your party will [ bleed ] for 4 turns by [ needle trap ].",
                                 type: "DEBUFF", aura: "bleed", turns: 2, remaining: 2, amount: 1
                             }
                         ]

@@ -171,17 +171,17 @@ angular
                     var closedCoordinates = [leftFront,leftMid, leftBack, backgroundLeftEnd, backgroundMidThru];
                     var thruCoordinates = [leftFrontThru, leftMidThru, leftBackThru, backgroundLeftThru, backgroundMidThru];
 
-                    if (tileService.isBlock(tile)) {
+                    if (tileService.isBlock(tile) && closedClassNames[index]) {
                         wallFactory(closedCoordinates[index], closedClassNames[index]);
                     } else {
                         wallFactory(thruCoordinates[index], thruClassNames[index]);
                     }
                 },
                 mid = function(index, tile) {
-                    var closedClassNames = [null, 'background-closed-front', 'background-closed-mid', 'background-mid-back', 'background-mid-thru'];
-                    var closedCoordinates = [null, backgroundClosedFront, backgroundClosedMid, backgroundClosedBack, backgroundMidThru];
+                    var closedClassNames = ['background-closed-front', 'background-closed-mid', 'background-mid-back'].reverse();
+                    var closedCoordinates = [backgroundClosedFront, backgroundClosedMid, backgroundClosedBack].reverse();
 
-                    if (tileService.isBlock(tile)) {
+                    if (tileService.isBlock(tile) && closedClassNames[index]) {
                         wallFactory(closedCoordinates[index], closedClassNames[index]);
                     }
                 },
@@ -191,7 +191,7 @@ angular
                     var closedCoordinates = [rightFront,rightMid, rightBack, backgroundRightEnd, backgroundMidThru];
                     var thruCoordinates = [rightFrontThru, rightMidThru, rightBackThru, backgroundRightThru, backgroundMidThru];
 
-                    if (tileService.isBlock(tile)) {
+                    if (tileService.isBlock(tile) && closedClassNames[index]) {
                         wallFactory(closedCoordinates[index], closedClassNames[index]);
                     } else {
                         wallFactory(thruCoordinates[index], thruClassNames[index]);
@@ -204,11 +204,13 @@ angular
                     right(i, view[i][0]);
                 }
 
+                view = view.reverse();
+
                 // mid-srcreens always have to go last; first found stops the loop
                 for (var i = 0; i<view.length; i++) {
                     mid(i, view[i][1]);
-                    if (tileService.isBlock(view[i][1])) {
-                        return;
+                    if (tileService.isDoor(view[i][1])) {
+                        textFactory('door');
                     }
                 }
             };

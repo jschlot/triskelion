@@ -18,6 +18,15 @@ angular
                 return;
             }
 
+            $scope.availableActions = [
+                partyActions.forward,
+                partyActions.goleft,
+                partyActions.goright,
+                partyActions.camp,
+                partyActions.describe,
+                partyActions.map
+            ];
+
             $scope.partyData = partyData;
 
             $scope.coordinates = userData.gameModuleSelected.startingCoordinates;
@@ -44,32 +53,17 @@ angular
                 };
             };
 
-            var updateActionsList = function() {
-                $scope.availableActions = [
-                    partyActions.forward,
-                    partyActions.goleft,
-                    partyActions.goright,
-                    partyActions.camp,
-                    partyActions.describe,
-                    partyActions.map
-                ];
-            };
-
-
             $scope.saveAndNext = function(value) {
                 var compassOptions = ['north','east', 'south', 'west'];
 
                 tellsList = [];
-
                 var msg = [];
 
-                // decrement aura turns
                 for (var i=0; i < $scope.auras.length; i++) {
                     tellsList = tellsList.concat(auraMethods[$scope.auras[i].aura]($scope.auras[i]));
                     $scope.auras[i].remaining--;
                 }
 
-                // resolve any auras
                 for (var i=0; i < $scope.auras.length; i++) {
                     if ($scope.auras[i].remaining === 0) {
                         $scope.auras.splice(i,1);
@@ -78,6 +72,7 @@ angular
 
                 switch (value._self) {
                     case 'forward':
+                        $scope.view.reverse();
                         var next = $scope.view[1][1];
                         if (tileService.canGoForward(next)) {
                             switch($scope.compassDirection) {
@@ -138,7 +133,8 @@ angular
                     case 'describe':
                             //// describe gets any metadata abount the current cell
                             $scope.tells = tellsList.concat("you look around. how nice");
-                            return;
+                            levelMap.updateTile(6,4,0x012);
+//                            return;
                         break
                     case 'map':
                         $scope.showMiniMap = ($scope.showMiniMap) ? false : true;
@@ -158,7 +154,5 @@ angular
             };
 
             updateMazeRunner();
-            updateActionsList();
-
         }
     ]);
