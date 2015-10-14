@@ -61,52 +61,13 @@ angular
     .factory('mazeRunner', ['tileService',
         function(tileService) {
             'use strict';
-            /* ALL POSSIBLE WALLS
-            //wallFactory(backgroundMidThru, "background-mid-thru");
-            //wallFactory(backgroundLeftThru, "background-left-thru");
-            //wallFactory(backgroundRightThru, "background-right-thru");
 
-            //wallFactory(backgroundLeftEnd, "background-left-end");
-            //wallFactory(backgroundRightEnd, "background-right-end");
+            var mazeRunner = function(levelmap) {
 
-            //wallFactory(leftFront, "left-front");
-            //wallFactory(leftFrontThru, "left-front-thru");
-
-            //wallFactory(leftMid, "left-mid");
-            //wallFactory(leftMidThru, "left-mid-thru");
-
-            //wallFactory(leftBack, "left-back");
-            //wallFactory(leftBackThru, "left-back-thru");
-
-            //wallFactory(rightFront, "right-front");
-            //wallFactory(rightFrontThru, "right-front-thru");
-
-            //wallFactory(rightMid, "right-mid");
-            //wallFactory(rightMidThru, "right-mid-thru");
-
-            //wallFactory(rightBack, "right-back");
-            //wallFactory(rightBackThru, "right-back-thru");
-
-            //wallFactory(backgroundClosedBack, "background-closed-back");
-            //wallFactory(backgroundClosedMid, "background-closed-mid");
-            //wallFactory(backgroundClosedFront, "background-closed-front");
-
-            //wallFactory(ceilFront, "ceil-front");
-            //wallFactory(ceilMid, "ceil-mid");
-            //wallFactory(ceilBack, "ceil-back");
-
-            //wallFactory(floorFront, "floor-front");
-            //wallFactory(floorMid, "floor-mid");
-            //wallFactory(floorBack, "floor-back");
-
-            //textFactory('door');
-            */
-
-            var mazeRunner = function(view) {
+                var view = levelmap.reverse()
 
                 var vis = d3.select("#mazeRunner")
-                         .attr("width", 500)
-                         .attr("height", 300);
+                    .attr("viewBox", "0 0 500 300")
 
                 vis.selectAll("*").remove()
 
@@ -136,25 +97,27 @@ angular
                 var leftFront = [ {"x":0, "y":0}, {"x":0,"y":300}, {"x":60,"y":270}, {"x":60,"y":30} ],
                  leftFrontThru = [ {"x":0, "y":30}, {"x":0,"y":270}, {"x":60,"y":270}, {"x":60,"y":30} ],
                  leftMid = [ {"x":60, "y":30}, {"x":60,"y":270}, {"x":120,"y":240}, {"x":120,"y":60} ],
-                 leftMidThru = [ {"x":60, "y":60}, {"x":60,"y":240}, {"x":120,"y":240}, {"x":120,"y":60} ],
+                 leftMidThru = [ {"x":0, "y":60}, {"x": 0,"y":240}, {"x":120,"y":240}, {"x":120,"y":60} ],
                  leftBack = [ {"x":120, "y":60}, {"x":120,"y":240}, {"x":180,"y":210}, {"x":180,"y":90} ],
-                 leftBackThru = [ {"x":120, "y":90}, {"x":120,"y":210}, {"x":180,"y":210}, {"x":180,"y":90} ],
+                 leftBackThru = [ {"x":60, "y":90}, {"x":60,"y":210}, {"x":180,"y":210}, {"x":180,"y":90} ],
 
                  rightFront = [ {"x":440, "y":30}, {"x":440,"y":270}, {"x":500,"y":300}, {"x":500,"y":0} ],
                  rightFrontThru = [ {"x":440, "y":30}, {"x":440,"y":270}, {"x":500,"y":270}, {"x":500,"y":30} ],
                  rightMid = [ {"x":380, "y":60}, {"x":380,"y":240}, {"x":440,"y":270}, {"x":440,"y":30} ],
-                 rightMidThru = [ {"x":380, "y":60}, {"x":380,"y":240}, {"x":440,"y":240}, {"x":440,"y":60} ],
+                 rightMidThru = [ {"x":380, "y":60}, {"x":380,"y":240}, {"x":500,"y":240}, {"x":500,"y":60} ],
                  rightBack = [ {"x":320, "y":90}, {"x":320,"y":210}, {"x":380,"y":240}, {"x":380,"y":60} ],
-                 rightBackThru = [ {"x":320, "y":90}, {"x":320,"y":210}, {"x":380,"y":210}, {"x":380,"y":90} ],
+                 rightBackThru = [ {"x":320, "y":90}, {"x":320,"y":210}, {"x":440,"y":210}, {"x":440,"y":90} ],
 
                  backgroundClosedBack = [ {"x":180, "y":90}, {"x":180,"y":210}, {"x":320,"y":210}, {"x":320,"y":90} ],
                  backgroundClosedMid = [ {"x":120, "y":60}, {"x":120,"y":240}, {"x":380,"y":240}, {"x":380,"y":60} ],
                  backgroundClosedFront = [ {"x":60, "y":30}, {"x":60,"y":270}, {"x":440,"y":270}, {"x":440,"y":30} ],
-                 backgroundLeftThru = [ {"x":180, "y":110}, {"x":180,"y":190}, {"x":220,"y":190}, {"x":220,"y":110} ],
+
                  backgroundLeftEnd = [ {"x":180, "y":90}, {"x":180,"y":210}, {"x":220,"y":190}, {"x":220,"y":110} ],
-                 backgroundMidThruWide = [ {"x":180, "y":110}, {"x":180,"y":190}, {"x":320,"y":190}, {"x":320,"y":110} ],
-                 backgroundMidThru = [ {"x":220, "y":110}, {"x":220,"y":190}, {"x":280,"y":190}, {"x":280,"y":110} ],
-                 backgroundRightThru = [ {"x":280, "y":110}, {"x":280,"y":190}, {"x":320,"y":190}, {"x":320,"y":110} ],
+
+                 backgroundLeftThru = [ {"x":100, "y":110}, {"x":100,"y":190}, {"x":200,"y":190}, {"x":200,"y":110} ],
+                 backgroundMidThru = [ {"x":200, "y":110}, {"x":200,"y":190}, {"x":300,"y":190}, {"x":300,"y":110} ],
+                 backgroundRightThru = [ {"x":300, "y":110}, {"x":300,"y":190}, {"x":400,"y":190}, {"x":400,"y":110} ],
+
                  backgroundRightEnd = [ {"x":280, "y":110}, {"x":280,"y":190}, {"x":320,"y":210}, {"x":320,"y":90} ],
 
                  ceilFront = [ {"x":0, "y":0}, {"x":500,"y":0}, {"x":440,"y":30}, {"x":60,"y":30} ],
@@ -165,55 +128,72 @@ angular
                  floorMid = [ {"x":60, "y":270}, {"x":120,"y":240}, {"x":380,"y":240}, {"x":440,"y":270} ],
                  floorBack = [ {"x":120, "y":240}, {"x":180,"y":210}, {"x":320,"y":210}, {"x":380,"y":240} ];
 
-                var left = function(index, tile) {
-                    var closedClassNames = ['left-front', 'left-mid', 'left-back', 'background-left-end','deep-left-end'];
-                    var thruClassNames = ['left-front-thru', 'left-mid-thru', 'left-back-thru', 'background-left-thru','deep-left-thru'];
-                    var closedCoordinates = [leftFront,leftMid, leftBack, backgroundLeftEnd, backgroundMidThru];
-                    var thruCoordinates = [leftFrontThru, leftMidThru, leftBackThru, backgroundLeftThru, backgroundMidThru];
-
-                    if (tileService.isBlock(tile) && closedClassNames[index]) {
-                        wallFactory(closedCoordinates[index], closedClassNames[index]);
-                    } else {
-                        wallFactory(thruCoordinates[index], thruClassNames[index]);
-                    }
-                },
-                mid = function(index, tile) {
-                    var closedClassNames = ['background-mid-thru', 'background-closed-mid', 'background-closed-front'];
-                    var closedCoordinates = [backgroundMidThru, backgroundClosedMid, backgroundClosedFront];
-
-                    if (tileService.isBlock(tile) && closedClassNames[index]) {
-                        console.log("Drawing wall = " + closedClassNames[index]);
-                        wallFactory(closedCoordinates[index], closedClassNames[index]);
-                    }
-                },
-                right = function(index, tile) {
-                    var closedClassNames = ['right-front', 'right-mid', 'right-back', 'background-right-end','deep-right-end'];
-                    var thruClassNames = ['right-front-thru', 'right-mid-thru', 'right-back-thru', 'background-right-thru','deep-right-thru'];
-                    var closedCoordinates = [rightFront,rightMid, rightBack, backgroundRightEnd, backgroundMidThru];
-                    var thruCoordinates = [rightFrontThru, rightMidThru, rightBackThru, backgroundRightThru, backgroundMidThru];
-
-                    if (tileService.isBlock(tile) && closedClassNames[index]) {
-                        wallFactory(closedCoordinates[index], closedClassNames[index]);
-                    } else {
-                        wallFactory(thruCoordinates[index], thruClassNames[index]);
-                    }
-                };
-
-                var r = view.length-1;
-                for (var i = 0; i<view.length; i++) {
-                    left(i, view[i][2]);
-                    right(i, view[i][0]);
+                // right side
+                if (tileService.isBlock(view[0][0])) {
+                    wallFactory(backgroundRightThru, "right-5");
                 }
 
-                view = view.reverse();
-
-                // mid-srcreens always have to go last; first found stops the loop
-                for (var i = 0; i<view.length; i++) {
-                    mid(i, view[i][1]);
-                    if (tileService.isDoor(view[i][1])) {
-                        textFactory('door');
-                    }
+                if (tileService.isBlock(view[1][0])) {
+                    wallFactory(backgroundRightEnd, 'right-4b');
+                    wallFactory(rightBackThru, 'right-4a');
                 }
+
+                if (tileService.isBlock(view[2][0])) {
+                    wallFactory(rightBack, 'right-3b');
+                    wallFactory(rightMidThru, 'right-3a');
+                }
+
+                if (tileService.isBlock(view[3][0])) {
+                    wallFactory(rightMid, 'right-2b');
+                    wallFactory(rightFrontThru, 'right-2a');
+                }
+
+                if (tileService.isBlock(view[4][0])) {
+                    wallFactory(rightFront, 'right-1');
+                }
+
+                // left side
+                if (tileService.isBlock(view[0][2])) {
+                    wallFactory(backgroundLeftThru, "left-5");
+                }
+
+                if (tileService.isBlock(view[1][2])) {
+                    wallFactory(backgroundLeftEnd, 'left-4b');
+                    wallFactory(leftBackThru, 'left-4a');
+                }
+
+                if (tileService.isBlock(view[2][2])) {
+                    wallFactory(leftBack, 'left-3b');
+                    wallFactory(leftMidThru, 'left-3a');
+                }
+
+                if (tileService.isBlock(view[3][2])) {
+                    wallFactory(leftMid, 'left-2b');
+                    wallFactory(leftFrontThru, 'left-2a');
+                }
+
+                if (tileService.isBlock(view[4][2])) {
+                    wallFactory(leftFront, 'left-1');
+                }
+
+                // up the middle
+                if (tileService.isBlock(view[0][1])) {
+                    wallFactory(backgroundMidThru, 'mid-5');
+                }
+
+                if (tileService.isBlock(view[1][1])) {
+                    wallFactory(backgroundClosedBack, 'mid-4');
+                }
+
+                if (tileService.isBlock(view[2][1])) {
+                    wallFactory(backgroundClosedMid, 'mid-3');
+                }
+
+                if (tileService.isBlock(view[3][1])) {
+                    wallFactory(backgroundClosedFront, 'mid-2');
+                }
+
+                // 4, 1 will always be empty because someone is standing in it.
             };
 
             return mazeRunner;

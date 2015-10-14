@@ -26,11 +26,6 @@ angular
                     height = h;
                 },
                 setDepth: function(d) {
-                    if (d > 3) {
-                        depth = 3;
-                        console.error("configuration error - can never have a view depth more than 3");
-                        return;
-                    }
                     depth = d;
                 },
                 getMap: function() {

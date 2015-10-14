@@ -130,7 +130,11 @@ angular
                     case 'camp':
                             //// camp takes you to the camp screen
                             $scope.tells = tellsList.concat(infoText.campingislovely);
-                            return;
+
+                            $scope.coordinates[0] = 1;
+                            $scope.coordinates[1] = 1;
+                            $scope.compassDirection = 'east';
+//                            return;
                         break
                     case 'describe':
                             //// describe gets any metadata abount the current cell
