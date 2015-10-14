@@ -5,10 +5,10 @@ angular
     ])
     .controller('gameGridController', ['$scope', '$location',
         'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText',
-        'tileService', 'miniMap', 'auraMethods', 'tellsList', 'mapModal',
+        'tileService', 'miniMap', 'tellsList', 'mapModal',
         function($scope, $location,
             userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText,
-            tileService, miniMap, auraMethods, tellsList, mapModal) {
+            tileService, miniMap, tellsList, mapModal) {
             'use strict';
 
             $scope.tells = tellsList;
@@ -36,7 +36,6 @@ angular
             $scope.coordinates = userData.gameModuleSelected.startingCoordinates;
             $scope.compassDirection = userData.gameModuleSelected.defaultCompassDirection;
 
-
             levelMap.setDimensions(userData.gameModuleSelected.mapMaxX, userData.gameModuleSelected.mapMaxY);
             levelMap.init(currentLevelMap.layout);
 
@@ -59,24 +58,11 @@ angular
                 var compassOptions = ['north','east', 'south', 'west'];
 
                 tellsList = [];
-                var msg = [];
-
-                for (var i=0; i < $scope.auras.length; i++) {
-                    tellsList = tellsList.concat(auraMethods[$scope.auras[i].aura]($scope.auras[i]));
-                    $scope.auras[i].remaining--;
-                }
-
-                for (var i=0; i < $scope.auras.length; i++) {
-                    if ($scope.auras[i].remaining === 0) {
-                        $scope.auras.splice(i,1);
-                    }
-                }
 
                 switch (value._self) {
                     case 'forward':
                         var ouch = false;
-                        $scope.view.reverse();  // must rotate for movement
-                        var next = $scope.view[1][1];
+                        var next = $scope.view[3][1]; // this is the next forward tile
                         if (tileService.canGoForward(next)) {
                             switch($scope.compassDirection) {
                                 case "east":
@@ -92,24 +78,6 @@ angular
                                     $scope.coordinates[1] = $scope.coordinates[1] + 1;
                                     break;
                             }
-
-                            var actionID = "action_" + next;
-                            /*
-                            if (userData.gameModuleSelected.tileAction[actionID]) {
-                                var actionStack = userData.gameModuleSelected.tileAction[actionID];
-                                for (var i=0; i<actionStack.length; i++) {
-                                    if (actionStack[i].tell) {
-                                        tellsList.push(actionStack[i].tell);
-                                    }
-                                    if (actionStack[i].aura) {
-                                        var results = auraMethods[actionStack[i].aura](actionStack[i]);
-                                        actionStack[i].remaining = actionStack[i].turns;
-                                        $scope.auras[$scope.auras.length] = actionStack[i];
-                                        tellsList = tellsList.concat(results);
-                                    }
-                                }
-                            }
-                            */
                         } else {
                             ouch = ouchHappened();
                         }
@@ -131,19 +99,12 @@ angular
                         $scope.compassDirection = compassOptions[currentCompassIndex];
                         break
                     case 'camp':
-                            //// camp takes you to the camp screen
                             $scope.tells = tellsList.concat(infoText.campingislovely);
-
-                            $scope.coordinates[0] = 1;
-                            $scope.coordinates[1] = 1;
-                            $scope.compassDirection = 'east';
-//                            return;
+                            return;
                         break
                     case 'describe':
                             //// describe gets any metadata abount the current cell
-                            $scope.tells = tellsList.concat("HACK - d now opens doors");
-                            levelMap.updateTile(6,4,0x012);
-//                            return;
+                            return;
                         break
                     case 'map':
                         $scope.showMiniMap = ($scope.showMiniMap) ? false : true;

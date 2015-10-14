@@ -14,6 +14,7 @@ angular
         'triskelion.utils.stringManipulations.service',
         'triskelion.utils.globalData.service',
         'triskelion.utils.npc.service',
+        'triskelion.utils.dungeon.service',
         'triskelion.utils.tileService.service'
     ])
     .config([
