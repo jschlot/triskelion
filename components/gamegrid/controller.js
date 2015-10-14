@@ -99,7 +99,8 @@ angular
                         $scope.compassDirection = compassOptions[currentCompassIndex];
                         break
                     case 'camp':
-                            $scope.tells = tellsList.concat(infoText.campingislovely);
+                            tellsList.push(infoText.campingislovely);
+                            $scope.tells = tellsList;
                             return;
                         break
                     case 'describe':
@@ -110,7 +111,8 @@ angular
                         $scope.showMiniMap = ($scope.showMiniMap) ? false : true;
                         if ($scope.showMiniMap) {
                             miniMap(levelMap.getMap())
-                            $scope.tells = tellsList.concat(infoText.closeminimap);
+                            tellsList.push(infoText.closeminimap);
+                            $scope.tells = tellsList;
                             return;
                         }
                         break

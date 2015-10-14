@@ -1,18 +1,16 @@
 angular
     .module('triskelion.partySelect.controller',[])
     .controller('partySelectController', [
-        '$scope', '$location', 'partySelectActions', 'infoText', 'userData', 'playerDB', 'partyData', 'objectFindByKey',
-        function($scope, $location, partySelectActions, infoText, userData, playerDB, partyData, objectFindByKey) {
+        '$scope', '$location', 'partySelectActions', 'infoText', 'userData', 'playerDB', 'partyData', 'tellsList', 'objectFindByKey',
+        function($scope, $location, partySelectActions, infoText, userData, playerDB, partyData, tellsList, objectFindByKey) {
             'use strict';
-
-            $scope.tells = [];
 
             if (!userData.gameModuleSelected) {
                 $location.path( "/startscreen" );
                 return;
             }
 
-            $scope.tells = [infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name)];
+            tellsList = [infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name)];
             $scope.map = {
                 zone: {
                     name: infoText.partyselect
@@ -28,11 +26,11 @@ angular
                 'add': function() {
                     angular.copy($scope.cast, $scope.availableActions);
                     $scope.availableActions.push(partySelectActions.back);
-                    $scope.tells = [infoText.whowilljoin];
+                    tellsList = [infoText.whowilljoin];
                     subaction = 'add';
                  },
                 'remove': function() {
-                    $scope.tells = [infoText.removePlayer];
+                    tellsList = [infoText.removePlayer];
                     angular.copy(partyData, $scope.availableActions);
                     $scope.availableActions.push(partySelectActions.back);
                     subaction = 'remove';
@@ -90,7 +88,7 @@ angular
                         abilityList.push(value.abilities[i].name);
                     }
 
-                    $scope.tells = [
+                    tellsList = [
                         infoText.keys.name.replace(/VALUE/, value.name),
                         infoText.keys.race.replace(/VALUE/, value.race),
                         infoText.keys.type.replace(/VALUE/, value.type),
@@ -112,7 +110,7 @@ angular
                     }
 
                     if (partyData.length < userData.gameModuleSelected.maxparty) {
-                        $scope.tells = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
+                        tellsList = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
                         partyData.push(currentPick);
                         $scope.partyData = partyData;
                     }
@@ -133,7 +131,7 @@ angular
                         }
                     }
 
-                    $scope.tells = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
+                    tellsList = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
                     $scope.cast.push(currentPick);
                     $scope.partyData = partyData;
 
@@ -144,6 +142,8 @@ angular
             };
 
             switchBoard.mainactions();
+            $scope.tells = tellsList;
+
 
             $scope.saveAndNext = function(value) {
                 if (switchBoard[value._self]) {
@@ -151,6 +151,7 @@ angular
                 } else {
                     switchBoard.subaction(value);
                 }
+                $scope.tells = tellsList;
             };
         }
     ]);
