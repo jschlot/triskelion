@@ -26,6 +26,11 @@ angular
                     height = h;
                 },
                 setDepth: function(d) {
+                    if (d > 3) {
+                        depth = 3;
+                        console.error("configuration error - can never have a view depth more than 3");
+                        return;
+                    }
                     depth = d;
                 },
                 getMap: function() {
@@ -67,9 +72,9 @@ angular
                         switch (orientation) {
                             case 'north':
                                 if (map[yCoord - i]) {
-                                    currentTile[i][0] = (map[yCoord - i][xCoord - 1]) ? map[yCoord - i][xCoord - 1] : tileService.set.NOTHING;
+                                    currentTile[i][2] = (map[yCoord - i][xCoord - 1]) ? map[yCoord - i][xCoord - 1] : tileService.set.NOTHING;
                                     currentTile[i][1] = (map[yCoord - i][xCoord]) ? map[yCoord - i][xCoord] : tileService.set.NOTHING;
-                                    currentTile[i][2] = (map[yCoord - i][xCoord + 1]) ? map[yCoord - i][xCoord + 1] : tileService.set.NOTHING;
+                                    currentTile[i][0] = (map[yCoord - i][xCoord + 1]) ? map[yCoord - i][xCoord + 1] : tileService.set.NOTHING;
                                 }
                                 break;
                             case 'south':

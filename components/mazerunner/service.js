@@ -178,10 +178,11 @@ angular
                     }
                 },
                 mid = function(index, tile) {
-                    var closedClassNames = ['background-closed-front', 'background-closed-mid', 'background-mid-back'].reverse();
-                    var closedCoordinates = [backgroundClosedFront, backgroundClosedMid, backgroundClosedBack].reverse();
+                    var closedClassNames = ['background-mid-thru', 'background-closed-mid', 'background-closed-front'];
+                    var closedCoordinates = [backgroundMidThru, backgroundClosedMid, backgroundClosedFront];
 
                     if (tileService.isBlock(tile) && closedClassNames[index]) {
+                        console.log("Drawing wall = " + closedClassNames[index]);
                         wallFactory(closedCoordinates[index], closedClassNames[index]);
                     }
                 },

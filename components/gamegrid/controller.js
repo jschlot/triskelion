@@ -91,6 +91,7 @@ angular
                             }
 
                             var actionID = "action_" + next;
+                            /*
                             if (userData.gameModuleSelected.tileAction[actionID]) {
                                 var actionStack = userData.gameModuleSelected.tileAction[actionID];
                                 for (var i=0; i<actionStack.length; i++) {
@@ -105,6 +106,7 @@ angular
                                     }
                                 }
                             }
+                            */
                         } else {
                             tellsList = [ouchHappened()];
                         }
