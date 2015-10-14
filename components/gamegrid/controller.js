@@ -12,8 +12,8 @@ angular
             'use strict';
 
             $scope.tells = tellsList;
-            $scope.auras = [];
-            $scope.showMiniMap = false;
+            $scope.auras = []; // is this right? maybe we don't want to always reset auras???
+            $scope.showMiniMap = false; // should probably move minimap to it's own screen layout
 
             if (!userData.gameModuleSelected || partyData.length ===0) {
                 $location.path( "/startscreen" );
@@ -31,12 +31,12 @@ angular
 
             $scope.partyData = partyData;
 
-            var currentLevelMap = userData.gameModuleSelected.map[0];
+            var currentLevelMap = userData.gameModuleSelected.map[0]; // this feels hackish - current level should not be manually set to 1st level
 
-            $scope.coordinates = userData.gameModuleSelected.startingCoordinates;
-            $scope.compassDirection = userData.gameModuleSelected.defaultCompassDirection;
+            $scope.coordinates = userData.gameModuleSelected.startingCoordinates; // maybe this should be private
+            $scope.compassDirection = userData.gameModuleSelected.defaultCompassDirection; // maybe this should be private
 
-            levelMap.setDimensions(userData.gameModuleSelected.mapMaxX, userData.gameModuleSelected.mapMaxY);
+            levelMap.setDimensions(userData.gameModuleSelected.mapMaxX, userData.gameModuleSelected.mapMaxY); // naming is awkward
             levelMap.init(currentLevelMap.layout);
 
             var updateMazeRunner = function() {
@@ -54,15 +54,21 @@ angular
                 };
             };
 
+            /*
+                TO-DO: Use actionDispatcher service to run these commands
+                get more organized with the methods provided
+
+            */
+
             $scope.saveAndNext = function(value) {
                 var compassOptions = ['north','east', 'south', 'west'];
 
-                tellsList = [];
+                tellsList.length = 0;
 
                 switch (value._self) {
                     case 'forward':
                         var ouch = false;
-                        var next = $scope.view[3][1]; // this is the next forward tile
+                        var next = $scope.view[3][1]; // this is the next forward tile it's also kind of awkward
                         if (tileService.canGoForward(next)) {
                             switch($scope.compassDirection) {
                                 case "east":

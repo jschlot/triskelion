@@ -43,9 +43,7 @@ angular
                 //beep();
               }
 
-
               $scope.prompt = null;
-
           };
 
           $scope.$on('$destroy', function(){

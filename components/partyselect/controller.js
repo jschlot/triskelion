@@ -10,12 +10,27 @@ angular
                 return;
             }
 
-            tellsList = [infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name)];
+            tellsList.push(infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name));
             $scope.map = {
                 zone: {
                     name: infoText.partyselect
                 }
             };
+
+            /*
+                TO-DO: Use actionDispatcher service to run these commands
+                get more organized with the methods provided
+                also, might want to break out character data into it's own layout screen
+
+
+                TO-DO: Change how we work with the partyData and playerData tables
+                cast should be able to know where we are at in the current state of things
+                for example, if we go to playerselect at the CAMP, then cast should know who
+                is in the group and who is not in the group
+                Right now, partyData is the list of party members
+                and cast is a bit confusing. I think it was meant to be the playerDB - the partyData
+                but instead it has a mixed purpose.
+            */
 
             $scope.cast = playerDB[userData.gameModuleSelected._self];
             var currentPick = {};

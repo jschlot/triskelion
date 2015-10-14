@@ -1,11 +1,13 @@
 angular
     .module('triskelion.startScreen.controller',[])
     .controller('startScreenController', [
-        '$scope', '$location', 'gameModules', 'infoText', 'userData',
-        function($scope, $location, gameModules, infoText, userData) {
+        '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher',
+        function($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher) {
             'use strict';
 
-            $scope.tells = [infoText.choosemodule];
+            tellsList.push(infoText.choosemodule);
+
+            $scope.tells = tellsList;
             $scope.headerText = infoText.startscreen;
 
             $scope.availableActions = [
@@ -13,8 +15,15 @@ angular
             ];
 
             $scope.saveAndNext = function(value) {
-                userData.gameModuleSelected = value;
-                $location.path( "/partyselect" );
+                var actionsList = {
+                     partyselect: function(value) {
+                        userData.gameModuleSelected = value;
+                        tellsList.length = 0;
+                        $location.path( "/partyselect" );
+                    }
+                };
+
+                actionDispatcher(actionsList['partyselect'], value);
             };
         }
     ]);
