@@ -4,9 +4,11 @@ angular
         'triskelion.mazeRunner.service'
     ])
     .controller('gameGridController', ['$scope', '$location',
-        'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText', 'tileService', 'miniMap', 'auraMethods', 'tellsList',
+        'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText',
+        'tileService', 'miniMap', 'auraMethods', 'tellsList', 'mapModal',
         function($scope, $location,
-            userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText, tileService, miniMap, auraMethods, tellsList) {
+            userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText,
+            tileService, miniMap, auraMethods, tellsList, mapModal) {
             'use strict';
 
             $scope.tells = tellsList;
@@ -72,7 +74,8 @@ angular
 
                 switch (value._self) {
                     case 'forward':
-                        $scope.view.reverse();
+                        var ouch = false;
+                        $scope.view.reverse();  // must rotate for movement
                         var next = $scope.view[1][1];
                         if (tileService.canGoForward(next)) {
                             switch($scope.compassDirection) {
@@ -108,7 +111,7 @@ angular
                             }
                             */
                         } else {
-                            tellsList = [ouchHappened()];
+                            ouch = ouchHappened();
                         }
                         break
                     case 'left':
@@ -157,6 +160,11 @@ angular
                 }
 
                 updateMazeRunner();
+
+                if (ouch) {
+                    mapModal(ouch);
+                }
+
             };
 
             updateMazeRunner();
