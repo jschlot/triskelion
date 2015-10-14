@@ -14,7 +14,7 @@ svg {
 svg polygon {
     fill: black;
     stroke: white;
-    stroke-width: 1px;
+    stroke-width: 2px;
     shape-rendering:crispEdges;
 }
 
