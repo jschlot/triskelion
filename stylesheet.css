@@ -84,23 +84,16 @@ ul.vert-list li
     padding: 0 2em 1em 0;
 }
 
-#mazeRunner .floor {
+#mazeRunner .opened {
     stroke-opacity: 0.1;
     stroke-width: 1px;
     stroke: black;
     fill: white;
 }
 
-#mazeRunner .wall {
+#mazeRunner .closed {
     stroke-opacity: 0.1;
     stroke-width: 1px;
     stroke: white;
     fill: none;
-}
-
-#mazeRunner .door {
-    stroke-opacity: 0.1;
-    stroke-width: 1px;
-    stroke: black;
-    fill: red;
 }
