@@ -29,13 +29,13 @@ angular
 
             $scope.partyData = partyData;
 
+            var currentLevelMap = userData.gameModuleSelected.map[0];
+
             $scope.coordinates = userData.gameModuleSelected.startingCoordinates;
             $scope.compassDirection = userData.gameModuleSelected.defaultCompassDirection;
 
-            levelMap.setDimensions(userData.gameModuleSelected.mapMaxX, userData.gameModuleSelected.mapMaxY);
-            levelMap.setDepth(userData.gameModuleSelected.defaultCameraDepth);
 
-            var currentLevelMap = userData.gameModuleSelected.map[0];
+            levelMap.setDimensions(userData.gameModuleSelected.mapMaxX, userData.gameModuleSelected.mapMaxY);
             levelMap.init(currentLevelMap.layout);
 
             var updateMazeRunner = function() {

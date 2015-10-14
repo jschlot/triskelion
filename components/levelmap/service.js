@@ -6,7 +6,7 @@ angular
             var map = [],
                 width = 9,
                 height = 9,
-                depth = 1;
+                depth = 4;
 
             var levelMap = {
                 init: function(config) {

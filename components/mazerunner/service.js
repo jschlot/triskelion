@@ -4,6 +4,7 @@ angular
         function(tileService) {
             'use strict';
             var miniMap = function(map) {
+                // requires that the mazerunner has been loaded
                 var vis = d3.select("#mazeRunner");
                 vis.selectAll("*").remove()
 
@@ -128,72 +129,72 @@ angular
                  floorMid = [ {"x":60, "y":270}, {"x":120,"y":240}, {"x":380,"y":240}, {"x":440,"y":270} ],
                  floorBack = [ {"x":120, "y":240}, {"x":180,"y":210}, {"x":320,"y":210}, {"x":380,"y":240} ];
 
-                // right side
-                if (tileService.isBlock(view[0][0])) {
-                    wallFactory(backgroundRightThru, "right-5");
-                }
-
-                if (tileService.isBlock(view[1][0])) {
-                    wallFactory(backgroundRightEnd, 'right-4b');
-                    wallFactory(rightBackThru, 'right-4a');
-                }
-
-                if (tileService.isBlock(view[2][0])) {
-                    wallFactory(rightBack, 'right-3b');
-                    wallFactory(rightMidThru, 'right-3a');
-                }
-
-                if (tileService.isBlock(view[3][0])) {
-                    wallFactory(rightMid, 'right-2b');
-                    wallFactory(rightFrontThru, 'right-2a');
-                }
-
-                if (tileService.isBlock(view[4][0])) {
-                    wallFactory(rightFront, 'right-1');
-                }
-
-                // left side
-                if (tileService.isBlock(view[0][2])) {
-                    wallFactory(backgroundLeftThru, "left-5");
-                }
-
-                if (tileService.isBlock(view[1][2])) {
-                    wallFactory(backgroundLeftEnd, 'left-4b');
-                    wallFactory(leftBackThru, 'left-4a');
-                }
-
-                if (tileService.isBlock(view[2][2])) {
-                    wallFactory(leftBack, 'left-3b');
-                    wallFactory(leftMidThru, 'left-3a');
-                }
-
-                if (tileService.isBlock(view[3][2])) {
-                    wallFactory(leftMid, 'left-2b');
-                    wallFactory(leftFrontThru, 'left-2a');
-                }
-
-                if (tileService.isBlock(view[4][2])) {
-                    wallFactory(leftFront, 'left-1');
-                }
-
-                // up the middle
+                 // depth 4's background goes first as it's the final back wall
                 if (tileService.isBlock(view[0][1])) {
                     wallFactory(backgroundMidThru, 'mid-5');
                 }
 
-                if (tileService.isBlock(view[1][1])) {
+                // right side
+                if (view[0] && tileService.isBlock(view[0][0])) {
+                    wallFactory(backgroundRightThru, "right-5");
+                }
+
+                if (view[1] && tileService.isBlock(view[1][0])) {
+                    wallFactory(backgroundRightEnd, 'right-4b');
+                    wallFactory(rightBackThru, 'right-4a');
+                }
+
+                if (view[2] && tileService.isBlock(view[2][0])) {
+                    wallFactory(rightBack, 'right-3b');
+                    wallFactory(rightMidThru, 'right-3a');
+                }
+
+                if (view[3] && tileService.isBlock(view[3][0])) {
+                    wallFactory(rightMid, 'right-2b');
+                    wallFactory(rightFrontThru, 'right-2a');
+                }
+
+                if (view[4] && tileService.isBlock(view[4][0])) {
+                    wallFactory(rightFront, 'right-1');
+                }
+
+                // left side
+                if (view[0] && tileService.isBlock(view[0][2])) {
+                    wallFactory(backgroundLeftThru, "left-5");
+                }
+
+                if (view[1] && tileService.isBlock(view[1][2])) {
+                    wallFactory(backgroundLeftEnd, 'left-4b');
+                    wallFactory(leftBackThru, 'left-4a');
+                }
+
+                if (view[2] && tileService.isBlock(view[2][2])) {
+                    wallFactory(leftBack, 'left-3b');
+                    wallFactory(leftMidThru, 'left-3a');
+                }
+
+                if (view[3] && tileService.isBlock(view[3][2])) {
+                    wallFactory(leftMid, 'left-2b');
+                    wallFactory(leftFrontThru, 'left-2a');
+                }
+
+                if (view[4] && tileService.isBlock(view[4][2])) {
+                    wallFactory(leftFront, 'left-1');
+                }
+
+                // up the middle
+                if (view[1] && tileService.isBlock(view[1][1])) {
                     wallFactory(backgroundClosedBack, 'mid-4');
                 }
 
-                if (tileService.isBlock(view[2][1])) {
+                if (view[2] && tileService.isBlock(view[2][1])) {
                     wallFactory(backgroundClosedMid, 'mid-3');
                 }
 
-                if (tileService.isBlock(view[3][1])) {
+                if (view[3] && tileService.isBlock(view[3][1])) {
                     wallFactory(backgroundClosedFront, 'mid-2');
                 }
 
-                // 4, 1 will always be empty because someone is standing in it.
             };
 
             return mazeRunner;
