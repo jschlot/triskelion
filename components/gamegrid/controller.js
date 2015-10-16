@@ -107,11 +107,9 @@ angular
                     case 'camp':
                             tellsList.push(infoText.campingislovely);
                             $scope.tells = tellsList;
-                            return;
                         break;
                     case 'describe':
                             //// describe gets any metadata abount the current cell
-                            return;
                         break;
                     case 'map':
                         $scope.showMiniMap = ($scope.showMiniMap) ? false : true;
