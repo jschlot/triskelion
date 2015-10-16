@@ -8,9 +8,14 @@
   },
   "author": "jschlot",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jschlot/triskelion.git"
+  },
   "devDependencies": {
     "browser-sync": "^2.9.10",
     "grunt": "^0.4.5",
-    "grunt-cli": "^0.1.13"
+    "grunt-cli": "^0.1.13",
+    "time-grunt": "^1.2.1"
   }
 }
