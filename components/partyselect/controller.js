@@ -11,6 +11,7 @@ angular
             }
 
             tellsList.push(infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name));
+
             $scope.map = {
                 zone: {
                     name: infoText.partyselect

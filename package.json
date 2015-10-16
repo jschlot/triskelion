@@ -9,6 +9,7 @@
   "author": "jschlot",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "^2.9.10"
+    "browser-sync": "^2.9.10",
+    "grunt-cli": "^0.1.13"
   }
 }
