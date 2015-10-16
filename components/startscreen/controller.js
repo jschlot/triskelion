@@ -37,7 +37,8 @@ angular
                     }
                 };
 
-                actionDispatcher(actionsList['partyselect'], value);
+                //actionDispatcher(actionsList['partyselect'], value);
+                actionDispatcher(actionsList.partyselect, value);
             };
         }
     ]);

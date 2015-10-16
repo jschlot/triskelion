@@ -27,7 +27,7 @@ angular
                     return null;
                 }
 
-            }
+            };
             return hotkeyAction;
         }
     );

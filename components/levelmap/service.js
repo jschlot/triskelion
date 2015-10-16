@@ -32,27 +32,27 @@ angular
                     return map;
                 },
                 debugMap: function(orientation) {
-                    var header = []
+                    var header = [];
                     header[0] = orientation[0];
                     for (var i=0; i < height; i++) {
                         header.push(i.toString(16).toUpperCase());
                     }
                     console.log(header.join(", "));
-                    for (var i=0; i < width; i++) {
-                        var row = map[i].join(", ");
-                        console.log(i.toString(16).toUpperCase() + ": " + row);
+                    for (var j=0; j < width; j++) {
+                        var row = map[j].join(", ");
+                        console.log(j.toString(16).toUpperCase() + ": " + row);
                     }
                 },
                 debugView: function(view,orientation) {
-                    var header = []
+                    var header = [];
                     header[0] = orientation[0];
                     for (var i=0; i < 3; i++) {
                         header.push(i.toString(16).toUpperCase());
                     }
                     console.log(header.join(", "));
-                    for (var i=0; i <= depth; i++) {
-                        var row = view[i].join(", ");
-                        console.log(i.toString(16).toUpperCase() + ": " + row);
+                    for (var j=0; j <= depth; j++) {
+                        var row = view[j].join(", ");
+                        console.log(j.toString(16).toUpperCase() + ": " + row);
                     }
                 },
                 getView: function(xCoord,yCoord, orientation) {

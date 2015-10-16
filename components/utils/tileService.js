@@ -22,7 +22,7 @@ angular
                 set: {
                     'NOTHING': 0x00
                 }
-            }
+            };
             return tileService;
         }
     );

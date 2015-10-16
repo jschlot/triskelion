@@ -62,7 +62,7 @@ angular
 
             $scope.saveAndNext = function(value) {
                 var compassOptions = ['north','east', 'south', 'west'];
-
+                var currentCompassIndex;
                 tellsList.length = 0;
 
                 switch (value._self) {
@@ -87,41 +87,41 @@ angular
                         } else {
                             ouch = ouchHappened();
                         }
-                        break
+                        break;
                     case 'left':
-                        var currentCompassIndex = compassOptions.indexOf($scope.compassDirection);
+                        currentCompassIndex = compassOptions.indexOf($scope.compassDirection);
                         currentCompassIndex--;
                         if (currentCompassIndex < 0) {
                             currentCompassIndex = compassOptions.length-1;
                         }
                         $scope.compassDirection = compassOptions[currentCompassIndex];
-                        break
+                        break;
                     case 'right':
-                        var currentCompassIndex = compassOptions.indexOf($scope.compassDirection);
+                        currentCompassIndex = compassOptions.indexOf($scope.compassDirection);
                         currentCompassIndex++;
                         if (currentCompassIndex === compassOptions.length) {
                             currentCompassIndex = 0;
                         }
                         $scope.compassDirection = compassOptions[currentCompassIndex];
-                        break
+                        break;
                     case 'camp':
                             tellsList.push(infoText.campingislovely);
                             $scope.tells = tellsList;
                             return;
-                        break
+                        break;
                     case 'describe':
                             //// describe gets any metadata abount the current cell
                             return;
-                        break
+                        break;
                     case 'map':
                         $scope.showMiniMap = ($scope.showMiniMap) ? false : true;
                         if ($scope.showMiniMap) {
-                            miniMap(levelMap.getMap())
+                            miniMap(levelMap.getMap());
                             tellsList.push(infoText.closeminimap);
                             $scope.tells = tellsList;
                             return;
                         }
-                        break
+                        break;
                 }
 
                 if (tellsList) {

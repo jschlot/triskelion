@@ -8,7 +8,7 @@ angular
           $element[0].focus();
         });
       }
-    }
+    };
   }])
   .directive('saytellDirective', ['objectFindByKey', 'actionNotFound', 'infoText',
       function(objectFindByKey, actionNotFound, infoText){

@@ -1,3 +1,4 @@
+/* global angular, d3 */
 angular
     .module('triskelion.mazeRunner.service', [])
     .factory('mapModal', [
@@ -28,7 +29,7 @@ angular
                         .attr("text-anchor","middle")
                         .text(function(d) { return d; });
                 return true;
-            }
+            };
             return mapModal;
         }
     ])
@@ -37,9 +38,9 @@ angular
             'use strict';
             var miniMap = function(map) {
                 var vis = d3.select("#mazeRunner")
-                    .attr("viewBox", "0 0 500 300")
+                    .attr("viewBox", "0 0 500 300");
 
-                vis.selectAll("*").remove()
+                vis.selectAll("*").remove();
 
                 var width = map[0].length;
                 var height = map.length;
@@ -87,7 +88,7 @@ angular
                         cellFactory(plot, "c-" + i + "-" + j, fill);
                     }
                 }
-            }
+            };
 
             return miniMap;
         }
@@ -98,12 +99,12 @@ angular
 
             var mazeRunner = function(levelmap) {
 
-                var view = levelmap.reverse()
+                var view = levelmap.reverse();
 
                 var vis = d3.select("#mazeRunner")
-                    .attr("viewBox", "0 0 500 300")
+                    .attr("viewBox", "0 0 500 300");
 
-                vis.selectAll("*").remove()
+                vis.selectAll("*").remove();
 
                 var scaleX = d3.scale.linear();
                 var scaleY = d3.scale.linear();
