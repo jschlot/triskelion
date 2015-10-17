@@ -25,6 +25,8 @@ angular
     .config([
         '$routeProvider', '$compileProvider',
         function($routeProvider, $compileProvider) {
+            'use strict';
+            
             $compileProvider.debugInfoEnabled(false);
             $routeProvider
                 .when('/startscreen', {
