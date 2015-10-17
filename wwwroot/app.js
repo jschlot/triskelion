@@ -1,3 +1,4 @@
+/* global angular, d3 */
 angular
     .module('Game', [
         'ngRoute',
