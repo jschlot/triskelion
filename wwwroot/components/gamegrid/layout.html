@@ -32,11 +32,15 @@
             </tr>
         </table>
         <br>
-        <saytell-directive
-            tells="tells"
-            actions="availableActions"
-            callback="saveAndNext"
-        ></saytell-directive>
+        <div class="outline">
+            <div class="shim">
+                <saytell-directive tells="tells" actions="availableActions" callback="saveAndNext"></saytell-directive>
+            </div>
+        </div>
         <br>
-        <party-list-directive partydata="partyData"></party-list-directive>
+        <div class="outline">
+            <div class="shim">
+                <party-list-directive partydata="partyData"></party-list-directive>
+            </div>
+        </div>
     </section>

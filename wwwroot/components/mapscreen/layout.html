@@ -11,11 +11,15 @@
         </div>
     </div>
     <br>
-    <actions-list-directive actions="availableActions"></actions-list-directive>
+    <div class="outline">
+        <div class="shim">
+            <actions-list-directive actions="availableActions"></actions-list-directive>
+        </div>
+    </div>
     <br>
-    <saytell-directive
-        tells="tells"
-        actions="availableActions"
-        callback="saveAndNext"
-    ></saytell-directive>
+    <div class="outline">
+        <div class="shim">
+            <saytell-directive tells="tells" actions="availableActions" callback="saveAndNext"></saytell-directive>
+        </div>
+    </div>
 </section>

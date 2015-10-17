@@ -1,24 +1,20 @@
-    <div class="outline">
-        <div class="shim">
-            <table width="100%">
-                <thead>
-                    <tr>
-                        <td width="15">#</td>
-                        <td width="">NAME</td>
-                        <td width="160">CLASS</td>
-                        <td width="160">HP</td>
-                        <td width="50">STATUS</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="character in partydata">
-                        <td width="15" ng-bind="$index + 1"></td>
-                        <td width="" ng-bind="character.name"></td>
-                        <td width="80" ng-bind="character.type"></td>
-                        <td width="160" ng-bind="character.health"></td>
-                        <td width="50" ng-bind="character.status"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+<table width="100%">
+    <thead>
+        <tr>
+            <td width="15">#</td>
+            <td width="">NAME</td>
+            <td width="160">CLASS</td>
+            <td width="160">HP</td>
+            <td width="50">STATUS</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="character in partydata">
+            <td width="15" ng-bind="$index + 1"></td>
+            <td width="" ng-bind="character.name"></td>
+            <td width="80" ng-bind="character.type"></td>
+            <td width="160" ng-bind="character.health"></td>
+            <td width="50" ng-bind="character.status"></td>
+        </tr>
+    </tbody>
+</table>

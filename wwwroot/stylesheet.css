@@ -40,6 +40,11 @@ svg text {
     border: 1px solid white;
 }
 
+.topline {
+    color: white;
+    border-top: 1px solid white;
+}
+
 .shim {
     min-height: 138px;
     padding: .5em;
