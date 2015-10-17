@@ -18,7 +18,19 @@ svg polygon {
     shape-rendering:crispEdges;
 }
 
-text { fill: white; }
+svg rect { 
+    stroke: black; 
+    shape-rendering:crispEdges; 
+}
+
+svg line { 
+    stroke: black; 
+    shape-rendering:crispEdges; 
+}
+
+svg text { 
+    fill: white; 
+}
 
 .outline {
     color: white;
@@ -84,14 +96,14 @@ ul.vert-list li
     padding: 0 2em 1em 0;
 }
 
-#mazeRunner .opened {
+#mazeRunner .floor {
     stroke-opacity: 0.1;
     stroke-width: 1px;
     stroke: black;
     fill: white;
 }
 
-#mazeRunner .closed {
+#mazeRunner .wall {
     stroke-opacity: 0.1;
     stroke-width: 1px;
     stroke: white;

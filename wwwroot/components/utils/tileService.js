@@ -6,15 +6,19 @@ angular
 
             var tileService = {
                 isBlock: function(tile) {
-                    return (tile < 96) ? true : false;
+                    return (tile < 24) ? true : false;
                 },
                 canGoForward: function(tile) {
-                    return (tile > 95) ? true : false;
+                    return (tile > 23) ? true : false;
                 },
                 mapClass: function(tile) {
-                    var className = 'closed';
-                    if (tile > 95) {
-                        className = 'opened';
+                    var className = 'wall';
+                    if (tile > 23) {
+                        className = 'floor';
+                    } else if (tile === 4) {
+                        className = 'floor';                        
+                    } else if (tile === 5) {
+                        className = 'floor';                        
                     }
 
                     return className;

@@ -54,18 +54,67 @@ angular
                     .domain([0, height])
                     .range([0, canvas.height]);
 
-                var cellFactory = function (data, wall, fill) {
-                    vis.selectAll("polygon." + wall)
-                        .data([data])
+                var cellFactory = function (plotCoords, className, tile) {
+                    var isDoor = "";
+                    if (tile === 0x26) {
+                        isDoor = "ns-unlocked";
+                    } else if (tile === 0x25) {
+                        isDoor = "ew-unlocked";
+                    } else if (tile === 0x5) {
+                        isDoor = "ns-locked";
+                    } else if (tile === 0x04) {
+                        isDoor = "ew-locked";
+                    }
+                    var fill = tileService.mapClass(tile);
+                    var cell = vis.append("svg:g")
+                        .attr("class", className);
+        
+                    cell.selectAll("polygon." + className)
+                        .data([plotCoords])
                         .enter().append("polygon")
-                        .attr("class", wall)
+                        .attr("class", className)
                         .attr("class", fill)
                         .attr("points", function (d) {
                             return d.map(function (d) {
                                 return [scaleX(d.x), scaleY(d.y)].join(",");
                             }).join(" ");
                         });
-                    return true;
+                    
+                    if (isDoor) {                        
+                        var rectWidth = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 0.20 : 0.50,
+                            rectHeight = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 0.50 : 0.30,
+                            lineCenter = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? rectHeight : 0,
+                            lineMid = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 0 : rectWidth,
+                            idxA = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 1 : 2,
+                            idxB = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 1 : 0;
+                
+                        cell.selectAll("line." + className)
+                            .data([plotCoords])
+                            .enter()
+                            .append("svg:line")
+                            .attr("class", className)
+                //        	.attr("stroke-dasharray", "5,5") // portcullis
+                            .attr("x1", function(d, i) { return scaleX(d[0].x + lineCenter); })
+                            .attr("y1", function(d, i) { return scaleY(d[0].y + lineMid); })
+                            .attr("x2", function(d, i) { return scaleX(d[idxA].x + lineCenter); })
+                            .attr("y2", function(d, i) { return scaleY(d[idxB].y + lineMid); });
+                
+                        var xPadding = (1 - rectWidth)/2,
+                        yPadding = (1 - rectHeight)/2;
+                
+                        cell.selectAll("rect." + className + ".door")
+                            .data([plotCoords])
+                            .enter()
+                            .append("svg:rect")
+                            .attr("class", className + " door")
+                            .attr("fill", function() { 
+                                return (isDoor === "ew-unlocked" || isDoor === "ns-unlocked" ) ? "white" : "black"; 
+                            })
+                            .attr("x", function(d, i) { return scaleX(d[0].x) + scaleX(xPadding); })
+                            .attr("y", function(d, i) { return scaleY(d[0].y) + scaleY(yPadding); })
+                            .attr("width", scaleX(rectWidth))
+                            .attr("height", scaleY(rectHeight));
+                    }
                 };
 
                 for (var i = 0; i < width; i++) {
@@ -76,8 +125,7 @@ angular
 
                     for (var j = 0; j < height; j++) {
                         var yOffset = j,
-                            yBotOffset = 1 + j,
-                            fill = tileService.mapClass(map[j][i]);
+                            yBotOffset = 1 + j;
                         var plot = [
                             { "x": topleft, "y": yOffset },
                             { "x": botleft, "y": yBotOffset },
@@ -85,7 +133,7 @@ angular
                             { "x": toprright, "y": yOffset }
                         ];
 
-                        cellFactory(plot, "c-" + i + "-" + j, fill);
+                        cellFactory(plot, "c-" + i + "-" + j, map[j][i]);
                     }
                 }
             };
@@ -115,18 +163,8 @@ angular
                         .enter().append("polygon")
                         .attr("class", wall)
                         .attr("points",function(d) {
-                            return d.map(function(d) { return [scaleX(d.x),scaleY(d.y)].join(","); }).join(" ");});
-                };
-
-                var textFactory = function(message) {
-                    vis.selectAll("text").data([message])
-                        .enter()
-                        .append("text")
-                        .attr("class", "center-label")
-                        .attr("x",250)
-                        .attr("y",154)
-                        .attr("text-anchor","middle")
-                        .text(function(d) { return d; });
+                            return d.map(function(d) { return [scaleX(d.x),scaleY(d.y)].join(","); }).join(" ");
+                        });
                 };
 
                 var leftFront = [ {"x":0, "y":0}, {"x":0,"y":300}, {"x":60,"y":270}, {"x":60,"y":30} ],

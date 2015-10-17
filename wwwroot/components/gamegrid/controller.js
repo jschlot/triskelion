@@ -25,7 +25,7 @@ angular
                 compassDirection = userData.gameModuleSelected.defaultCompassDirection,
                 actionsList = {};
 
-            levelMap.setDimensions(userData.gameModuleSelected.mapMaxX, userData.gameModuleSelected.mapMaxY); // naming is awkward
+            levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols); // naming is awkward
             levelMap.init(currentLevelMap.layout);
 
             actionsList = {
