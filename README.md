@@ -15,16 +15,15 @@ Maze Crawler, RPG, Text-Based Adventure a'la Wizardry, Zork, and D&amp;D
 * Add curson/pointer to mapscreen
 
 ### Add Interactive Tiles
-* Model what Aura Tiles look like
-* Add Aura Tile
-** Debuff Tiles
-** Buff Tiles
-** Message Tiles
-
-### Improve Gameplay
-* Add random encounters
-* Add Initiative
-* Add Turn List Widget
+* Model what Interactive Tiles look like
+* Add Debuff Tiles
+* Add Buff Tiles
+* Add Message Tiles
 * Loot Tiles
-* Combat Tiles
 
+### Combat Mode
+* Add Dice 4, 6, 8, 10, 12, 20
+* Add random encounters
+* Add Initiative rolls
+* Add Turn List Widget
+* Add Monsters DB
