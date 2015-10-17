@@ -10,6 +10,11 @@ angular
                 return;
             }
 
+            var currentPick = {},
+                context = null,
+                switchBoard = {};
+
+
             tellsList.push(infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name));
 
             $scope.map = {
@@ -25,28 +30,25 @@ angular
                 cast should be able to know where we are at in the current state of things
                 for example, if we go to playerselect at the CAMP, then cast should know who
                 is in the group and who is not in the group
+
                 Right now, partyData is the list of party members
                 and cast is a bit confusing. I think it was meant to be the playerDB - the partyData
                 but instead it has a mixed purpose.
             */
 
-            $scope.cast = playerDB[userData.gameModuleSelected._self];
-            var currentPick = {};
-
-            var subaction = null;
-
-            var switchBoard = {
+            $scope.cast = playerDB[userData.gameModuleSelected._self];                
+            switchBoard = {
                 'add': function() {
+                    tellsList = [infoText.whowilljoin];
                     angular.copy($scope.cast, $scope.availableActions);
                     $scope.availableActions.push(partySelectActions.back);
-                    tellsList = [infoText.whowilljoin];
-                    subaction = 'add';
+                    context = 'add';
                  },
                 'remove': function() {
                     tellsList = [infoText.removePlayer];
                     angular.copy(partyData, $scope.availableActions);
                     $scope.availableActions.push(partySelectActions.back);
-                    subaction = 'remove';
+                    context = 'remove';
                  },
                  'start': function() {
                     $location.path( "/crawler" );
@@ -56,7 +58,7 @@ angular
                     $location.path( "/startscreen" );
                     return;
                  },
-                 'mainactions': function() {
+                 'mainActions': function() {
                     if (partyData.length === userData.gameModuleSelected.maxparty) {
                         $scope.availableActions = [
                             partySelectActions.remove,
@@ -78,17 +80,17 @@ angular
                     }
                  },
                  'back': function() {
-                    switchBoard.mainactions();
+                    switchBoard.mainActions();
                  },
                  'backtoselect': function() {
                     switchBoard.add();
                  },
-                 'subaction': function(value) {
+                 'playerchoice': function(value) {
 
                     currentPick = {};
                     angular.copy(value, currentPick);
 
-                    if (subaction === 'remove') {
+                    if (context === 'remove') {
                         switchBoard.confirmRemove();
                         return;
                     }
@@ -127,7 +129,7 @@ angular
                     if (partyData.length < userData.gameModuleSelected.maxparty) {
                         switchBoard.add();
                     } else {
-                        switchBoard.mainactions();
+                        switchBoard.mainActions();
                     }
                  },
                  'confirmRemove': function() {
@@ -146,20 +148,20 @@ angular
                     $scope.partyData = partyData;
 
                     if (!partyData.length) {
-                        switchBoard.mainactions();
+                        switchBoard.mainActions();
                     }
                 }
             };
 
-            switchBoard.mainactions();
+            switchBoard.mainActions();
             $scope.tells = tellsList;
-
-
+            
+            
             $scope.saveAndNext = function(value) {
                 if (switchBoard[value._self]) {
                     actionDispatcher(switchBoard[value._self], value);
                 } else {
-                    switchBoard.subaction(value);
+                    switchBoard.playerchoice(value);
                 }
                 $scope.tells = tellsList;
             };
