@@ -79,7 +79,7 @@ angular
                 'updateMazeRunner': function() {
                     $scope.view = levelMap.getView(coordinates[0],coordinates[1], compassDirection);
         
-                    $scope.map = {
+                    $scope.page = {
                         zone: { name: userData.gameModuleSelected.name + ": " + currentLevelMap.name },
                         location: {
                             coordinates: { x: coordinates[0], y: coordinates[1] },

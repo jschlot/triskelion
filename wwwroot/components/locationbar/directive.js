@@ -24,7 +24,7 @@ angular
             transclude: false,
             controller: controller,
             scope: {
-                map: "="
+                page: "="
             },
             templateUrl: 'components/locationbar/partial.html',
             link: linkingFunction

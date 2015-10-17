@@ -39,7 +39,7 @@ angular
                 name: infoText.mapscreen
             };                      
 
-            $scope.map = {
+            $scope.page = {
                 zone: { name: userData.gameModuleSelected.name + ": " + currentLevelMap.name },
                 location: {
                     coordinates: { x: coordinates[0], y: coordinates[1] },

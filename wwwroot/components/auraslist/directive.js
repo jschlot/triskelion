@@ -1,3 +1,4 @@
+/* global angular */
 angular
     .module('triskelion.aurasList.directive',[])
     .directive('aurasListDirective', [

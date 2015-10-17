@@ -28,7 +28,7 @@ svg rect {
 
 svg line { 
     stroke: black; 
-    stroke-width: 1px;
+    stroke-width: 2px;
     shape-rendering:crispEdges; 
 }
 
@@ -48,22 +48,22 @@ svg text {
 
 .shim {
     min-height: 138px;
-    padding: .5em;
+    padding: 0.5em;
 }
 .location {
-    padding: .5em;
+    padding: 0.5em;
 }
 
 .navigator {
     text-transform: uppercase;
 }
 
-
 #commandPrompt {
     background-color: black;
     color: white;
     width: 96%;
     line-height: 2em;
+    margin-top: 0.4em;
 }
 
 .selected { 
@@ -104,8 +104,12 @@ ul.vert-list li {
 #minimap .wall {
     stroke-opacity: 0.1;
     stroke-width: 1px;
-    /*stroke: white; */
     fill: none;
+}
+
+#minimap .arch {
+    stroke: white;
+    fill: white;
 }
 
 #minimap polygon {

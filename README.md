@@ -3,8 +3,6 @@ Maze Crawler, RPG, Text-Based Adventure a'la Wizardry, Zork, and D&amp;D
 
 ## Stack Ranked To-Do List
 
-* P0 - Clear up any tech debt
-
 ### Complete Mazerunner and Minimap SVGs
 * Add Existing Doors Tiles 
 * Add Arch Tile

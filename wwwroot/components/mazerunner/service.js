@@ -55,16 +55,7 @@ angular
                     .range([0, canvas.height]);
 
                 var cellFactory = function (plotCoords, className, tile) {
-                    var isDoor = "";
-                    if (tile === 0x26) {
-                        isDoor = "ns-unlocked";
-                    } else if (tile === 0x25) {
-                        isDoor = "ew-unlocked";
-                    } else if (tile === 0x5) {
-                        isDoor = "ns-locked";
-                    } else if (tile === 0x04) {
-                        isDoor = "ew-locked";
-                    }
+                    var isDoor = tileService.isDoor(tile);
                     var fill = tileService.mapClass(tile);
                     var cell = vis.append("svg:g")
                         .attr("class", className);
@@ -80,13 +71,15 @@ angular
                             }).join(" ");
                         });
                     
-                    if (isDoor) {                        
-                        var rectWidth = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 0.20 : 0.50,
-                            rectHeight = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 0.50 : 0.20,
-                            lineCenter = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? rectHeight : 0,
-                            lineMid = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 0 : rectWidth,
-                            idxA = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 1 : 2,
-                            idxB = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 1 : 0;
+                    if (isDoor) {
+                        var dir = isDoor.substr(0,2);
+                        var doorType = isDoor.substr(3, isDoor.length);
+                        var rectWidth = (dir === "ew") ? 0.20 : 0.50,
+                            rectHeight = (dir === "ew") ? 0.50 : 0.20,
+                            lineCenter = (dir === "ew") ? rectHeight : 0,
+                            lineMid = (dir === "ew") ? 0 : rectWidth,
+                            idxA = (dir === "ew") ? 1 : 2,
+                            idxB = (dir === "ew") ? 1 : 0;
                 
                         cell.selectAll("line." + className)
                             .data([plotCoords])
@@ -102,13 +95,13 @@ angular
                         var xPadding = (1 - rectWidth)/2,
                         yPadding = (1 - rectHeight)/2;
                 
-                        cell.selectAll("rect." + className + ".door")
+                        cell.selectAll("rect." + className + "." + doorType)
                             .data([plotCoords])
                             .enter()
                             .append("svg:rect")
-                            .attr("class", className + " door")
+                            .attr("class", className + " " + doorType)
                             .attr("fill", function() { 
-                                return (isDoor === "ew-unlocked" || isDoor === "ns-unlocked" ) ? "white" : "black"; 
+                                return (doorType === "unlocked" || doorType === "arch" ) ? "white" : "black"; 
                             })
                             .attr("x", function(d, i) { return scaleX(d[0].x) + scaleX(xPadding); })
                             .attr("y", function(d, i) { return scaleY(d[0].y) + scaleY(yPadding); })
@@ -146,7 +139,7 @@ angular
             'use strict';
 
             var mazeRunner = function(levelmap) {
-
+                var check;
                 var view = levelmap.reverse();
 
                 var vis = d3.select("#mazeRunner")
@@ -157,15 +150,26 @@ angular
                 var scaleX = d3.scale.linear();
                 var scaleY = d3.scale.linear();
 
-                var wallFactory = function(data, wall) {
-                    vis.selectAll("polygon." + wall)
+                var wallFactory = function(data, className, cellValue) {
+                    vis.selectAll("polygon." + className)
                         .data([data])
                         .enter().append("polygon")
-                        .attr("class", wall)
+                        .attr("class", className)
                         .attr("points",function(d) {
                             return d.map(function(d) { return [scaleX(d.x),scaleY(d.y)].join(","); }).join(" ");
                         });
                 };
+
+                var doorFactory = function(data, className, cellValue) {
+                    vis.selectAll("polygon." + className)
+                        .data([data])
+                        .enter().append("polygon")
+                        .attr("class", className)
+                        .attr("points",function(d) {
+                            return d.map(function(d) { return [scaleX(d.x),scaleY(d.y)].join(","); }).join(" ");
+                        });
+                };
+
 
                 var leftFront = [ {"x":0, "y":0}, {"x":0,"y":300}, {"x":60,"y":270}, {"x":60,"y":30} ],
                  leftFrontThru = [ {"x":0, "y":30}, {"x":0,"y":270}, {"x":60,"y":270}, {"x":60,"y":30} ],
@@ -184,15 +188,21 @@ angular
                  backgroundClosedBack = [ {"x":180, "y":90}, {"x":180,"y":210}, {"x":320,"y":210}, {"x":320,"y":90} ],
                  backgroundClosedMid = [ {"x":120, "y":60}, {"x":120,"y":240}, {"x":380,"y":240}, {"x":380,"y":60} ],
                  backgroundClosedFront = [ {"x":60, "y":30}, {"x":60,"y":270}, {"x":440,"y":270}, {"x":440,"y":30} ],
+                 
+                 backgroundDoorBack = [ {"x":180, "y":90}, {"x":180,"y":210}, {"x":200,"y":210}, {"x":200,"y":110}, {"x":300,"y":110}, {"x":300,"y":210}, {"x":320,"y":210}, {"x":320,"y":90} ],
+                 backgroundDoorMid = [{"x":120, "y":60}, {"x":120,"y":240}, {"x":160,"y":240}, {"x":160,"y":90}, {"x":340,"y":90}, {"x":340,"y":240}, {"x":380,"y":240}, {"x":380,"y":60}],
+                 backgroundDoorFront = [ {"x":60, "y":30}, {"x":60,"y":270}, {"x":120,"y":270}, {"x":120,"y":60}, {"x":380,"y":60}, {"x":380,"y":270}, {"x":440,"y":270}, {"x":440,"y":30} ],
 
                  backgroundLeftEnd = [ {"x":180, "y":90}, {"x":180,"y":210}, {"x":220,"y":190}, {"x":220,"y":110} ],
-
                  backgroundLeftThru = [ {"x":100, "y":110}, {"x":100,"y":190}, {"x":200,"y":190}, {"x":200,"y":110} ],
                  backgroundMidThru = [ {"x":200, "y":110}, {"x":200,"y":190}, {"x":300,"y":190}, {"x":300,"y":110} ],
+                 backgroundMidDoor = [ {"x":200, "y":110}, {"x":200,"y":190}, {"x":230, "y":190}, {"x":230,"y":120}, {"x":270, "y":120}, {"x":270,"y":190}, {"x":300,"y":190}, {"x":300,"y":110} ],
+
+
                  backgroundRightThru = [ {"x":300, "y":110}, {"x":300,"y":190}, {"x":400,"y":190}, {"x":400,"y":110} ],
+                 backgroundRightEnd = [ {"x":280, "y":110}, {"x":280,"y":190}, {"x":320,"y":210}, {"x":320,"y":90} ];
 
-                 backgroundRightEnd = [ {"x":280, "y":110}, {"x":280,"y":190}, {"x":320,"y":210}, {"x":320,"y":90} ],
-
+/*
                  ceilFront = [ {"x":0, "y":0}, {"x":500,"y":0}, {"x":440,"y":30}, {"x":60,"y":30} ],
                  ceilMid = [ {"x":60, "y":30}, {"x":440,"y":30}, {"x":380,"y":60}, {"x":120,"y":60} ],
                  ceilBack = [ {"x":120, "y":60}, {"x":380,"y":60}, {"x":320,"y":90}, {"x":180,"y":90} ],
@@ -200,8 +210,11 @@ angular
                  floorFront = [ {"x":0, "y":300}, {"x":60,"y":270}, {"x":440,"y":270}, {"x":500,"y":300} ],
                  floorMid = [ {"x":60, "y":270}, {"x":120,"y":240}, {"x":380,"y":240}, {"x":440,"y":270} ],
                  floorBack = [ {"x":120, "y":240}, {"x":180,"y":210}, {"x":320,"y":210}, {"x":380,"y":240} ];
+*/
+                 
 
-                 // depth 4's background goes first as it's the final back wall
+                 // depth 4's background goes first as it's the final back wall, 
+                 // also we skip the door since the back wall is sort of a hack
                 if (tileService.isBlock(view[0][1])) {
                     wallFactory(backgroundMidThru, 'mid-5');
                 }
@@ -254,17 +267,45 @@ angular
                     wallFactory(leftFront, 'left-1');
                 }
 
-                // up the middle
-                if (view[1] && tileService.isBlock(view[1][1])) {
-                    wallFactory(backgroundClosedBack, 'mid-4');
+                // up the middle, always skip the 4th tile because we assume it's empty cuz you're standing in it
+
+                if (view[1]) {
+                    if (tileService.isBlock(view[1][1])) {
+                        wallFactory(backgroundClosedBack, 'mid-4');
+                    }
+                    check = tileService.isDoor(view[1][1]);
+                    if (check) {
+                        if (check !== 'ns-arch' && check !== 'ew-arch' ) {
+                            wallFactory(backgroundClosedBack, 'mid-4');
+                        }                       
+                        doorFactory(backgroundDoorBack, 'mid-door-4');
+                    }
                 }
 
-                if (view[2] && tileService.isBlock(view[2][1])) {
-                    wallFactory(backgroundClosedMid, 'mid-3');
+                if (view[2]) { 
+                    if (tileService.isBlock(view[2][1])) {
+                        wallFactory(backgroundClosedMid, 'mid-3');
+                    }
+                    check = tileService.isDoor(view[2][1]);
+                    if (check) {
+                        if (check !== 'ns-arch' && check !== 'ew-arch' ) {
+                            wallFactory(backgroundClosedMid, 'mid-3');
+                        }                       
+                        doorFactory(backgroundDoorMid, 'mid-door-3');
+                    }
                 }
 
-                if (view[3] && tileService.isBlock(view[3][1])) {
-                    wallFactory(backgroundClosedFront, 'mid-2');
+                if (view[3]) {
+                    if (tileService.isBlock(view[3][1])) {
+                        wallFactory(backgroundClosedFront, 'mid-2');
+                    }
+                    check = tileService.isDoor(view[3][1]);
+                    if (check) {
+                        if (check !== 'ns-arch' && check !== 'ew-arch' ) {
+                            wallFactory(backgroundClosedFront, 'mid-2');
+                        }                       
+                        doorFactory(backgroundDoorFront, 'mid-door-2');
+                    }
                 }
 
             };

@@ -14,6 +14,26 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		concat: {
+			controllers: {
+				// the files to concatenate
+				src: ['wwwroot/components/**/controller.js'],
+				// the location of the resulting JS file
+				dest: 'wwwroot/dist/controllers.js'
+			},
+			directives: {
+				// the files to concatenate
+				src: ['wwwroot/components/**/directive.js'],
+				// the location of the resulting JS file
+				dest: 'wwwroot/dist/directives.js'
+			},
+			services: {
+				// the files to concatenate
+				src: ['wwwroot/components/**/service.js', 'wwwroot/components/utils/*.js'],
+				// the location of the resulting JS file
+				dest: 'wwwroot/dist/services.js'
+			}
+		},
 		connect: {
 			server: {
 				options: {
@@ -26,7 +46,7 @@ module.exports = function(grunt) {
     	watch: {
 			scripts: {
 				files: ['wwwroot/components/**/*.js'],
-				tasks: ['jshint'],
+				tasks: ['jshint', 'concat'],
 				options: {
 					spawn: false,
 				},
@@ -38,11 +58,12 @@ module.exports = function(grunt) {
 	
 	// Plugins
 	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-connect');
 	
 	// Task(s).
-	grunt.registerTask('default', ['jshint']);
+	grunt.registerTask('default', ['jshint', 'concat']);
 
 };
 

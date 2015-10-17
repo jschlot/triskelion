@@ -1,3 +1,4 @@
+/* global angular */
 angular
     .module('triskelion.actionsList.directive',[])
     .directive('actionsListDirective', ['$location', 'objectFindByKey', 'actionNotFound', 'infoText', 
