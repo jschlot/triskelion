@@ -4,21 +4,21 @@ angular
         'triskelion.mazeRunner.service'
     ])
     .controller('gameGridController', ['$scope', '$location',
-        'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText',
-        'tileService', 'miniMap', 'tellsList', 'mapModal',
+            'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText',
+            'tileService', 'miniMap', 'tellsList', 'mapModal',
         function($scope, $location,
             userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText,
             tileService, miniMap, tellsList, mapModal) {
             'use strict';
 
-            $scope.tells = tellsList;
-            $scope.auras = []; // is this right? maybe we don't want to always reset auras???
-            $scope.showMiniMap = false; // should probably move minimap to it's own screen layout
-
             if (!userData.gameModuleSelected || partyData.length ===0) {
                 $location.path( "/startscreen" );
                 return;
             }
+
+            $scope.tells = tellsList;
+            $scope.auras = []; // is this right? maybe we don't want to always reset auras???
+            $scope.showMiniMap = false; // should probably move minimap to it's own screen layout
 
             $scope.availableActions = [
                 partyActions.forward,
@@ -110,6 +110,7 @@ angular
                         break;
                     case 'describe':
                             //// describe gets any metadata abount the current cell
+                            $location.path( "/partyselect" );
                         break;
                     case 'map':
                         $scope.showMiniMap = ($scope.showMiniMap) ? false : true;

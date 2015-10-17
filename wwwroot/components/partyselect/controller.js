@@ -16,7 +16,9 @@ angular
 
             var currentPick = {},
                 context = null,
-                switchBoard = {};
+                actionsList = {},
+                cast = [],
+                allPlayers = [];
 
             tellsList.push(infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name));
 
@@ -24,22 +26,13 @@ angular
                 name: infoText.partyselect
             };
 
-            /*
-                IDEA: Might want to break out character data into it's own layout screen
-
-                TO-DO: Change how we work with the partyData and playerData tables
-                cast should be able to know where we are at in the current state of things
-                for example, if we go to playerselect at the CAMP, then cast should know who
-                is in the group and who is not in the group
-
-                Right now, partyData is the list of party members
-                and cast is a bit confusing. I think it was meant to be the playerDB - the partyData
-                but instead it has a mixed purpose.
-            */
-
-            var cast = angular.copy(playerDB[userData.gameModuleSelected._self]);
-
-            switchBoard = {
+            allPlayers = playerDB[userData.gameModuleSelected._self];
+            cast = allPlayers.filter( function( el ) {
+                var lookup = objectFindByKey(partyData, 'hotkey', el.hotkey);
+                return lookup ? false : el;
+            });
+            
+            actionsList = {
                 'add': function() {
                     tellsList = [infoText.whowilljoin];                   
                     $scope.availableActions = angular.copy(cast);
@@ -82,10 +75,10 @@ angular
                     }
                  },
                  'back': function() {
-                    switchBoard.mainActions();
+                    actionsList.mainActions();
                  },
                  'backtoselect': function() {
-                    switchBoard.add();
+                    actionsList.add();
                  },
                  'describePlayer': function(value) {
                     var abilityList = [];
@@ -122,7 +115,7 @@ angular
                     
                     $scope.availableActions.length = 0;
                     
-                    switchBoard.mainActions();
+                    actionsList.mainActions();
                  },
                  'confirmRemove': function() {
                     var lookup = objectFindByKey(partyData, 'hotkey', currentPick.hotkey);
@@ -136,28 +129,31 @@ angular
 
                     tellsList = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
                     cast.push(currentPick);
+ 
                     $scope.partyData = partyData;
 
                     if (!partyData.length) {
-                        switchBoard.mainActions();
+                        actionsList.mainActions();
                     }
                 }
             };
 
-            switchBoard.mainActions();
+            actionsList.mainActions();
+
             $scope.tells = tellsList;
+            $scope.partyData = partyData;
             
             $scope.saveAndNext = function(value) {
-                if (switchBoard[value._self]) {
-                    actionDispatcher(switchBoard[value._self], value);
+                if (actionsList[value._self]) {
+                    actionDispatcher(actionsList[value._self], value);
                 } else {
                     currentPick = {};
                     angular.copy(value, currentPick);
 
                     if (context === 'remove') {
-                        switchBoard.confirmRemove();
+                        actionsList.confirmRemove();
                     } else { 
-                        switchBoard.describePlayer(value);                    
+                        actionsList.describePlayer(value);                    
                     }
                 }
                 $scope.tells = tellsList;
