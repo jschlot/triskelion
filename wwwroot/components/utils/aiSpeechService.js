@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module('triskelion.utils.aiSpeech.service', [])
-    .factory('actionNotFound', [ 'sarcasticQuips',
+    .service('actionNotFound', [ 'sarcasticQuips',
         function(sarcasticQuips) {
             'use strict';
             var actionNotFound = function() {
@@ -13,7 +13,7 @@ angular
             return actionNotFound;
         }
     ])
-    .factory('ouchHappened', [ 'sarcasticOuches',
+    .service('ouchHappened', [ 'sarcasticOuches',
         function(sarcasticOuches) {
             'use strict';
             var ouchHappened = function() {

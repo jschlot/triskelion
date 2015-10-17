@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module('triskelion.utils.dictionary.service', [])
-    .factory('partyActions',
+    .service('partyActions',
         function() {
             'use strict';
             var partyActions = {
@@ -45,7 +45,7 @@ angular
             return partyActions;
         }
     )
-    .factory('partySelectActions',
+    .service('partySelectActions',
         function() {
             'use strict';
             var partySelectActions = {
@@ -89,7 +89,7 @@ angular
             return partySelectActions;
         }
     )
-    .factory('infoText',
+    .service('infoText',
         function() {
             'use strict';
             var infoText = {
@@ -117,7 +117,7 @@ angular
             return infoText;
         }
     )
-    .factory('abilityText',
+    .service('abilityText',
         function() {
             'use strict';
             var abilityText = {
@@ -127,7 +127,8 @@ angular
 
             return abilityText;
         }
-    )    .factory('sarcasticQuips',
+    )
+    .service('sarcasticQuips',
         function() {
             'use strict';
             var sarcasticQuips = [
@@ -141,7 +142,7 @@ angular
             return sarcasticQuips;
         }
     )
-    .factory('sarcasticOuches',
+    .service('sarcasticOuches',
         function() {
             'use strict';
             var sarcasticOuches = [

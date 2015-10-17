@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module('triskelion.utils.dungeon.service', [])
-    .factory('gameModules',
+    .service('gameModules',
         function() {
             'use strict';
             var gameModules = {

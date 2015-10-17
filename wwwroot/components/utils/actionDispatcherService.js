@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module('triskelion.utils.actionDispatcher.service', [])
-    .factory('actionDispatcher',
+    .service('actionDispatcher',
         function() {
             'use strict';
             var actionDispatcher = function(transformationFn, value) {

@@ -438,7 +438,7 @@ angular
 /* global angular */
 angular
     .module('triskelion.utils.actionDispatcher.service', [])
-    .factory('actionDispatcher',
+    .service('actionDispatcher',
         function() {
             'use strict';
             var actionDispatcher = function(transformationFn, value) {
@@ -450,7 +450,7 @@ angular
 /* global angular */
 angular
     .module('triskelion.utils.aiSpeech.service', [])
-    .factory('actionNotFound', [ 'sarcasticQuips',
+    .service('actionNotFound', [ 'sarcasticQuips',
         function(sarcasticQuips) {
             'use strict';
             var actionNotFound = function() {
@@ -462,7 +462,7 @@ angular
             return actionNotFound;
         }
     ])
-    .factory('ouchHappened', [ 'sarcasticOuches',
+    .service('ouchHappened', [ 'sarcasticOuches',
         function(sarcasticOuches) {
             'use strict';
             var ouchHappened = function() {
@@ -477,8 +477,25 @@ angular
 
 /* global angular */
 angular
+    .module('triskelion.utils.dice.service', [])
+    .factory('DiceService',
+        function() {
+            'use strict';
+            return function() {
+				this.roll = function(howmany, sides) {
+					var total = 0;
+					for (var i = 0; i < howmany; i++) {
+						total += Math.floor(Math.random() * sides);
+					}
+                    return total;
+				};
+            };
+        }
+    );
+/* global angular */
+angular
     .module('triskelion.utils.dictionary.service', [])
-    .factory('partyActions',
+    .service('partyActions',
         function() {
             'use strict';
             var partyActions = {
@@ -522,7 +539,7 @@ angular
             return partyActions;
         }
     )
-    .factory('partySelectActions',
+    .service('partySelectActions',
         function() {
             'use strict';
             var partySelectActions = {
@@ -566,7 +583,7 @@ angular
             return partySelectActions;
         }
     )
-    .factory('infoText',
+    .service('infoText',
         function() {
             'use strict';
             var infoText = {
@@ -594,7 +611,7 @@ angular
             return infoText;
         }
     )
-    .factory('abilityText',
+    .service('abilityText',
         function() {
             'use strict';
             var abilityText = {
@@ -604,7 +621,8 @@ angular
 
             return abilityText;
         }
-    )    .factory('sarcasticQuips',
+    )
+    .service('sarcasticQuips',
         function() {
             'use strict';
             var sarcasticQuips = [
@@ -618,7 +636,7 @@ angular
             return sarcasticQuips;
         }
     )
-    .factory('sarcasticOuches',
+    .service('sarcasticOuches',
         function() {
             'use strict';
             var sarcasticOuches = [
@@ -633,7 +651,7 @@ angular
 /* global angular */
 angular
     .module('triskelion.utils.dungeon.service', [])
-    .factory('gameModules',
+    .service('gameModules',
         function() {
             'use strict';
             var gameModules = {
@@ -706,7 +724,7 @@ angular
 /* global angular */
 angular
     .module('triskelion.utils.globalData.service', [])
-    .factory('userData', ['gameModules',
+    .service('userData', ['gameModules',
         function(gameModules) {
             'use strict';
             var userData = {
@@ -716,14 +734,14 @@ angular
             return userData;
         }
     ])
-    .factory('partyData', ['playerDB', 'userData',
+    .service('partyData', ['playerDB', 'userData',
         function(playerDB, userData) {
             'use strict';
             var partyData = playerDB[userData.gameModuleSelected._self].slice(0,2);
             return partyData;
         }
     ])
-    .factory('tellsList', [
+    .service('tellsList', [
         function() {
             'use strict';
             var tellsList = [];
@@ -734,7 +752,7 @@ angular
 /* global angular */
 angular
     .module('triskelion.utils.npc.service', [])
-    .factory('npcabilities',
+    .service('npcabilities',
         function() {
             'use strict';
             var npcabilities = {
@@ -835,7 +853,7 @@ angular
             return npcabilities;
         }
     )
-    .factory('npcraces',
+    .service('npcraces',
         function() {
             'use strict';
             var npcraces = {
@@ -861,7 +879,7 @@ angular
             return npcraces;
         }
     )
-    .factory('npctypes',
+    .service('npctypes',
         function() {
             'use strict';
             var npctypes = {
@@ -897,7 +915,7 @@ angular
             return npctypes;
         }
     )
-    .factory('playerDB',['npcabilities', 'npcraces', 'npctypes',
+    .service('playerDB',['npcabilities', 'npcraces', 'npctypes',
         function(npcabilities,npcraces,npctypes) {
             'use strict';
             var playerDB = {

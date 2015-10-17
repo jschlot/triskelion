@@ -3,10 +3,10 @@ angular
     .module('triskelion.gameGrid.controller',[])
     .controller('gameGridController', ['$scope', '$location',
             'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText',
-            'tileService', 'tellsList', 'mapModal', 'actionDispatcher',
+            'tileService', 'tellsList', 'mapModal', 'actionDispatcher', 'DiceService', 
         function($scope, $location,
             userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText,
-            tileService, tellsList, mapModal, actionDispatcher) {
+            tileService, tellsList, mapModal, actionDispatcher, DiceService) {
 
             'use strict';
 
@@ -104,6 +104,9 @@ angular
             $scope.tells = tellsList;
             $scope.partyData = partyData;
             $scope.auras = []; // is this right? maybe we don't want to always reset auras???
+
+            var dice = new DiceService();
+            console.log(dice.roll(3,4));
 
             $scope.availableActions = [
                 partyActions.forward,

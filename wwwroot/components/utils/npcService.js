@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module('triskelion.utils.npc.service', [])
-    .factory('npcabilities',
+    .service('npcabilities',
         function() {
             'use strict';
             var npcabilities = {
@@ -102,7 +102,7 @@ angular
             return npcabilities;
         }
     )
-    .factory('npcraces',
+    .service('npcraces',
         function() {
             'use strict';
             var npcraces = {
@@ -128,7 +128,7 @@ angular
             return npcraces;
         }
     )
-    .factory('npctypes',
+    .service('npctypes',
         function() {
             'use strict';
             var npctypes = {
@@ -164,7 +164,7 @@ angular
             return npctypes;
         }
     )
-    .factory('playerDB',['npcabilities', 'npcraces', 'npctypes',
+    .service('playerDB',['npcabilities', 'npcraces', 'npctypes',
         function(npcabilities,npcraces,npctypes) {
             'use strict';
             var playerDB = {
