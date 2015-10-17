@@ -14,21 +14,18 @@ angular
                 with our actionDispatch service (a simple functional factory)
             */
             
-            
             tellsList.push(infoText.choosemodule);
 
-            $scope.tells = tellsList;
-            $scope.headerText = infoText.startscreen;
+            $scope.menu = {
+                name: infoText.startscreen
+            };                      
 
             $scope.availableActions = [
                 gameModules.dungeon
             ];
 
+            $scope.tells = tellsList;
 
-            /*
-                how will we do subactions?
-                a good test would be to set up the main startscreen to have only
-            */
             $scope.saveAndNext = function(value) {
                 var actionsList = {
                      partyselect: function(value) {
@@ -38,7 +35,6 @@ angular
                     }
                 };
 
-                //actionDispatcher(actionsList['partyselect'], value);
                 actionDispatcher(actionsList.partyselect, value);
             };
         }

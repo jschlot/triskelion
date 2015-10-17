@@ -1,8 +1,12 @@
+/* global angular */
 angular
     .module('triskelion.partySelect.controller',[])
     .controller('partySelectController', [
-        '$scope', '$location', 'partySelectActions', 'infoText', 'userData', 'playerDB', 'partyData', 'tellsList', 'objectFindByKey', 'actionDispatcher',
-        function($scope, $location, partySelectActions, infoText, userData, playerDB, partyData, tellsList, objectFindByKey, actionDispatcher) {
+            '$scope', '$location', 'partySelectActions', 'infoText', 'userData', 
+            'playerDB', 'partyData', 'tellsList', 'objectFindByKey', 'actionDispatcher',
+        function($scope, $location, partySelectActions, infoText, userData, 
+            playerDB, partyData, tellsList, objectFindByKey, actionDispatcher) {
+
             'use strict';
 
             if (!userData.gameModuleSelected) {
@@ -14,13 +18,10 @@ angular
                 context = null,
                 switchBoard = {};
 
-
             tellsList.push(infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name));
 
-            $scope.map = {
-                zone: {
-                    name: infoText.partyselect
-                }
+            $scope.menu = {
+                name: infoText.partyselect
             };
 
             /*
@@ -86,17 +87,8 @@ angular
                     switchBoard.add();
                  },
                  'playerchoice': function(value) {
-
-                    currentPick = {};
-                    angular.copy(value, currentPick);
-
-                    if (context === 'remove') {
-                        switchBoard.confirmRemove();
-                        return;
-                    }
-
                     var abilityList = [];
-                    for (var i = 0; i< value.abilities.length; i++) {
+                    for (var i = 0; i < value.abilities.length; i++) {
                         abilityList.push(value.abilities[i].name);
                     }
 
@@ -139,7 +131,6 @@ angular
                         if (index > -1) {
                             partyData.splice(index,1);
                             $scope.availableActions.splice(index,1);
-
                         }
                     }
 
@@ -156,12 +147,18 @@ angular
             switchBoard.mainActions();
             $scope.tells = tellsList;
             
-            
             $scope.saveAndNext = function(value) {
                 if (switchBoard[value._self]) {
                     actionDispatcher(switchBoard[value._self], value);
                 } else {
-                    switchBoard.playerchoice(value);
+                    currentPick = {};
+                    angular.copy(value, currentPick);
+
+                    if (context === 'remove') {
+                        switchBoard.confirmRemove();
+                    } else { 
+                        switchBoard.playerchoice(value);                    
+                    }
                 }
                 $scope.tells = tellsList;
             };
