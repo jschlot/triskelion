@@ -1,8 +1,8 @@
 angular
     .module('triskelion.partySelect.controller',[])
     .controller('partySelectController', [
-        '$scope', '$location', 'partySelectActions', 'infoText', 'userData', 'playerDB', 'partyData', 'tellsList', 'objectFindByKey',
-        function($scope, $location, partySelectActions, infoText, userData, playerDB, partyData, tellsList, objectFindByKey) {
+        '$scope', '$location', 'partySelectActions', 'infoText', 'userData', 'playerDB', 'partyData', 'tellsList', 'objectFindByKey', 'actionDispatcher',
+        function($scope, $location, partySelectActions, infoText, userData, playerDB, partyData, tellsList, objectFindByKey, actionDispatcher) {
             'use strict';
 
             if (!userData.gameModuleSelected) {
@@ -19,10 +19,7 @@ angular
             };
 
             /*
-                TO-DO: Use actionDispatcher service to run these commands
-                get more organized with the methods provided
-                also, might want to break out character data into it's own layout screen
-
+                IDEA: Might want to break out character data into it's own layout screen
 
                 TO-DO: Change how we work with the partyData and playerData tables
                 cast should be able to know where we are at in the current state of things
@@ -80,16 +77,13 @@ angular
                         ];
                     }
                  },
+                 'back': function() {
+                    switchBoard.mainactions();
+                 },
+                 'backtoselect': function() {
+                    switchBoard.add();
+                 },
                  'subaction': function(value) {
-                    if (value._self === 'back') {
-                        switchBoard.mainactions();
-                        return;
-                    }
-
-                    if (value._self === 'backtoselect') {
-                        switchBoard.add();
-                        return;
-                    }
 
                     currentPick = {};
                     angular.copy(value, currentPick);
@@ -163,7 +157,7 @@ angular
 
             $scope.saveAndNext = function(value) {
                 if (switchBoard[value._self]) {
-                    switchBoard[value._self]();
+                    actionDispatcher(switchBoard[value._self], value);
                 } else {
                     switchBoard.subaction(value);
                 }
