@@ -20,7 +20,7 @@ angular
 
             tellsList.push(infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name));
 
-            $scope.menu = {
+            $scope.screen = {
                 name: infoText.partyselect
             };
 
@@ -37,17 +37,18 @@ angular
                 but instead it has a mixed purpose.
             */
 
-            $scope.cast = playerDB[userData.gameModuleSelected._self];                
+            var cast = angular.copy(playerDB[userData.gameModuleSelected._self]);
+
             switchBoard = {
                 'add': function() {
-                    tellsList = [infoText.whowilljoin];
-                    angular.copy($scope.cast, $scope.availableActions);
+                    tellsList = [infoText.whowilljoin];                   
+                    $scope.availableActions = angular.copy(cast);
                     $scope.availableActions.push(partySelectActions.back);
                     context = 'add';
                  },
                 'remove': function() {
                     tellsList = [infoText.removePlayer];
-                    angular.copy(partyData, $scope.availableActions);
+                    $scope.availableActions = angular.copy(partyData);
                     $scope.availableActions.push(partySelectActions.back);
                     context = 'remove';
                  },
@@ -86,7 +87,7 @@ angular
                  'backtoselect': function() {
                     switchBoard.add();
                  },
-                 'playerchoice': function(value) {
+                 'describePlayer': function(value) {
                     var abilityList = [];
                     for (var i = 0; i < value.abilities.length; i++) {
                         abilityList.push(value.abilities[i].name);
@@ -105,12 +106,12 @@ angular
                     ];
                  },
                  'confirmAdd': function() {
-                    var lookup = objectFindByKey($scope.cast, 'hotkey', currentPick.hotkey);
+                    var lookup = objectFindByKey(cast, 'hotkey', currentPick.hotkey);
                     if (lookup) {
-                        var index = $scope.cast.indexOf(lookup);
+                        var index = cast.indexOf(lookup);
                         if (index > -1) {
-                            $scope.cast.splice(index,1);
-                        }
+                            cast.splice(index,1);
+                        }                        
                     }
 
                     if (partyData.length < userData.gameModuleSelected.maxparty) {
@@ -118,11 +119,10 @@ angular
                         partyData.push(currentPick);
                         $scope.partyData = partyData;
                     }
-                    if (partyData.length < userData.gameModuleSelected.maxparty) {
-                        switchBoard.add();
-                    } else {
-                        switchBoard.mainActions();
-                    }
+                    
+                    $scope.availableActions.length = 0;
+                    
+                    switchBoard.mainActions();
                  },
                  'confirmRemove': function() {
                     var lookup = objectFindByKey(partyData, 'hotkey', currentPick.hotkey);
@@ -135,7 +135,7 @@ angular
                     }
 
                     tellsList = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
-                    $scope.cast.push(currentPick);
+                    cast.push(currentPick);
                     $scope.partyData = partyData;
 
                     if (!partyData.length) {
@@ -157,7 +157,7 @@ angular
                     if (context === 'remove') {
                         switchBoard.confirmRemove();
                     } else { 
-                        switchBoard.playerchoice(value);                    
+                        switchBoard.describePlayer(value);                    
                     }
                 }
                 $scope.tells = tellsList;

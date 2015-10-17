@@ -16,7 +16,7 @@ angular
             
             tellsList.push(infoText.choosemodule);
 
-            $scope.menu = {
+            $scope.page = {
                 name: infoText.startscreen
             };                      
 
