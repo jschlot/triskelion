@@ -69,7 +69,7 @@ angular
                     compassDirection = compassOptions[currentCompassIndex];
                 },
                 'camp': function() {
-                    tellsList.push(infoText.campingislovely);
+                    tellsList = [infoText.campingislovely];
                     $scope.tells = tellsList;
                 },
                 'describe': function() {
