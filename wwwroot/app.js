@@ -29,7 +29,7 @@ angular
                     controller: 'startScreenController'
                 })
                 .when('/partyselect', {
-                    templateUrl: "components/layouts/partyselect.html",
+                    templateUrl: "components/partyselect/layout.html",
                     controller: 'partySelectController'
                 })
                 .when('/start', {
