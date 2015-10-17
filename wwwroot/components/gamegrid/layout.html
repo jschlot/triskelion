@@ -1,5 +1,9 @@
     <section>
-        <location-bar-directive map="map"></location-bar-directive>
+        <div class="outline">
+            <div class="location">
+                <location-bar-directive map="map"></location-bar-directive>
+            </div>
+        </div>
         <br>
         <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
@@ -13,20 +17,7 @@
             <tr>
                 <td class="outline" valign="top">
                     <div class="actions shim">
-                        <table width="100%" cellspacing="10">
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        AURAS:
-                                        <ul class="flex-list">
-                                            <li ng-repeat="aura in auras track by $index">
-                                                {{ aura.aura }} ({{ aura.remaining }})
-                                            </li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <auras-list-directive auras="auras"></auras-list-directive>                        
                     </div>
                 </td>
             </tr>

@@ -11,6 +11,7 @@ angular
         'triskelion.saytell.directive',
         'triskelion.partyList.directive',
         'triskelion.locationBar.directive',
+        'triskelion.aurasList.directive',
 
         'triskelion.utils.dictionary.service',
         'triskelion.utils.aiSpeech.service',
