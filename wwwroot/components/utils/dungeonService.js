@@ -9,8 +9,8 @@ angular
                     hotkey: "D",
                     _self: "dungeon",
                     maxparty: 3,
-                    mapRows: 11, // offset by 1
-                    mapCols: 12, // offset by 1
+                    mapRows: 30, // offset by 1
+                    mapCols: 50, // offset by 1
                     defaultCompassDirection: 'south',
                     startingCoordinates: [2,1], // [ X, Y ]
                     map: [

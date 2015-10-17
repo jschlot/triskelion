@@ -48,7 +48,6 @@ angular
                 }
             };
 
-
             $scope.availableActions = [
                 partyActions.returntogame
             ];

@@ -38,13 +38,13 @@ angular
             'use strict';
             var miniMap = function(map) {
                 var vis = d3.select("#minimap")
-                    .attr("viewBox", "0 0 500 300");
+                    .attr("viewBox", "0 0 940 570");
 
                 vis.selectAll("*").remove();
 
                 var width = map[0].length;
                 var height = map.length;
-                var canvas = { width: 500, height: 300 };
+                var canvas = { width: 940, height: 570 };
 
                 var scaleX = d3.scale.linear()
                     .domain([0, width])
@@ -82,7 +82,7 @@ angular
                     
                     if (isDoor) {                        
                         var rectWidth = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 0.20 : 0.50,
-                            rectHeight = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 0.50 : 0.30,
+                            rectHeight = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 0.50 : 0.20,
                             lineCenter = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? rectHeight : 0,
                             lineMid = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 0 : rectWidth,
                             idxA = (isDoor === "ew-unlocked" || isDoor === "ew-locked") ? 1 : 2,

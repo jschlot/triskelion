@@ -11,20 +11,23 @@ section {
 svg {
     background-color: black;
 }
+
 svg polygon {
     fill: black;
     stroke: white;
-    stroke-width: 2px;
+    stroke-width: 1px;
     shape-rendering:crispEdges;
 }
 
 svg rect { 
     stroke: black; 
+    stroke-width: 1px;
     shape-rendering:crispEdges; 
 }
 
 svg line { 
     stroke: black; 
+    stroke-width: 1px;
     shape-rendering:crispEdges; 
 }
 
@@ -106,6 +109,10 @@ ul.vert-list li
 #minimap .wall {
     stroke-opacity: 0.1;
     stroke-width: 1px;
-    stroke: white;
+    /*stroke: white; */
     fill: none;
+}
+
+#minimap polygon {
+    stroke: none;
 }
