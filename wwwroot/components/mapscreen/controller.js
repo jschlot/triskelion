@@ -23,7 +23,6 @@ angular
             levelMap.init(currentLevelMap.layout);
 
             miniMap(levelMap.getMap());
-            $scope.tells = [infoText.closeminimap];
           
             $scope.saveAndNext = function(value) {
                 var actionsList = {

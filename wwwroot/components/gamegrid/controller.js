@@ -5,10 +5,10 @@ angular
     ])
     .controller('gameGridController', ['$scope', '$location',
             'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText',
-            'tileService', 'miniMap', 'tellsList', 'mapModal', 'actionDispatcher',
+            'tileService', 'tellsList', 'mapModal', 'actionDispatcher',
         function($scope, $location,
             userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText,
-            tileService, miniMap, tellsList, mapModal, actionDispatcher) {
+            tileService, tellsList, mapModal, actionDispatcher) {
 
             'use strict';
 
