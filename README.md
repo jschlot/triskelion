@@ -17,6 +17,14 @@ Maze Crawler, RPG, Text-Based Adventure a'la Wizardry, Zork, and D&amp;D
 ### Add Interactive Tiles
 * Model what Aura Tiles look like
 * Add Aura Tile
+** Debuff Tiles
+** Buff Tiles
+** Message Tiles
 
-
+### Improve Gameplay
+* Add random encounters
+* Add Initiative
+* Add Turn List Widget
+* Loot Tiles
+* Combat Tiles
 
