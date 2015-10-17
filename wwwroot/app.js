@@ -14,6 +14,8 @@ angular
         'triskelion.aurasList.directive',
         'triskelion.levelMap.service',
         'triskelion.mazeRunner.service',
+        'triskelion.mapModal.service',
+        'triskelion.miniMap.service',
 
         'triskelion.utils.dictionary.service',
         'triskelion.utils.aiSpeech.service',

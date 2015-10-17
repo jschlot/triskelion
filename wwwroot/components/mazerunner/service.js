@@ -1,139 +1,6 @@
 /* global angular, d3 */
 angular
     .module('triskelion.mazeRunner.service', [])
-    .factory('mapModal', [
-        function() {
-            'use strict';
-            var mapModal = function(message) {
-                var scaleX = d3.scale.linear();
-                var scaleY = d3.scale.linear();
-
-                // requires that the mazerunner has been loaded
-                var vis = d3.select("#mazeRunner");
-                    vis.selectAll("polygon.modal")
-                        .data([[ {"x":200, "y":130}, {"x":200,"y":170}, {"x":300,"y":170}, {"x":300,"y":130} ]])
-                        .enter().append("polygon")
-                        .attr("class", "modal")
-                        .attr("points", function (d) {
-                            return d.map(function (d) {
-                                return [scaleX(d.x), scaleY(d.y)].join(",");
-                            }).join(" ");
-                        });
-
-                    vis.selectAll("text").data([message])
-                        .enter()
-                        .append("text")
-                        .attr("class", "center-label")
-                        .attr("x",250)
-                        .attr("y",154)
-                        .attr("text-anchor","middle")
-                        .text(function(d) { return d; });
-                return true;
-            };
-            return mapModal;
-        }
-    ])
-    .factory('miniMap', ['tileService',
-        function(tileService) {
-            'use strict';
-            var miniMap = function(map) {
-                var vis = d3.select("#minimap")
-                    .attr("viewBox", "0 0 940 570");
-
-                vis.selectAll("*").remove();
-
-                var width = map[0].length;
-                var height = map.length;
-                var canvas = { width: 940, height: 570 };
-
-                var scaleX = d3.scale.linear()
-                    .domain([0, width])
-                    .range([0, canvas.width]);
-
-                var scaleY = d3.scale.linear()
-                    .domain([0, height])
-                    .range([0, canvas.height]);
-
-                var cellFactory = function (plotCoords, className, tile) {
-                    var isDoor = tileService.isDoor(tile);
-                    var fill = tileService.mapClass(tile);
-                    var cell = vis.append("svg:g")
-                        .attr("class", className);
-        
-                    cell.selectAll("polygon." + className)
-                        .data([plotCoords])
-                        .enter().append("polygon")
-                        .attr("class", className)
-                        .attr("class", fill)
-                        .attr("points", function (d) {
-                            return d.map(function (d) {
-                                return [scaleX(d.x), scaleY(d.y)].join(",");
-                            }).join(" ");
-                        });
-                    
-                    if (isDoor) {
-                        var dir = isDoor.substr(0,2);
-                        var doorType = isDoor.substr(3, isDoor.length);
-                        var rectWidth = (dir === "ew") ? 0.20 : 0.50,
-                            rectHeight = (dir === "ew") ? 0.50 : 0.20,
-                            lineCenter = (dir === "ew") ? rectHeight : 0,
-                            lineMid = (dir === "ew") ? 0 : rectWidth,
-                            idxA = (dir === "ew") ? 1 : 2,
-                            idxB = (dir === "ew") ? 1 : 0;
-                
-                        cell.selectAll("line." + className)
-                            .data([plotCoords])
-                            .enter()
-                            .append("svg:line")
-                            .attr("class", className)
-                //        	.attr("stroke-dasharray", "5,5") // portcullis
-                            .attr("x1", function(d, i) { return scaleX(d[0].x + lineCenter); })
-                            .attr("y1", function(d, i) { return scaleY(d[0].y + lineMid); })
-                            .attr("x2", function(d, i) { return scaleX(d[idxA].x + lineCenter); })
-                            .attr("y2", function(d, i) { return scaleY(d[idxB].y + lineMid); });
-                
-                        var xPadding = (1 - rectWidth)/2,
-                        yPadding = (1 - rectHeight)/2;
-                
-                        cell.selectAll("rect." + className + "." + doorType)
-                            .data([plotCoords])
-                            .enter()
-                            .append("svg:rect")
-                            .attr("class", className + " " + doorType)
-                            .attr("fill", function() { 
-                                return (doorType === "unlocked" || doorType === "arch" ) ? "white" : "black"; 
-                            })
-                            .attr("x", function(d, i) { return scaleX(d[0].x) + scaleX(xPadding); })
-                            .attr("y", function(d, i) { return scaleY(d[0].y) + scaleY(yPadding); })
-                            .attr("width", scaleX(rectWidth))
-                            .attr("height", scaleY(rectHeight));
-                    }
-                };
-
-                for (var i = 0; i < width; i++) {
-                    var topleft = i,
-                        botleft = i,
-                        botright = 1 + i,
-                        toprright = 1 + i;
-
-                    for (var j = 0; j < height; j++) {
-                        var yOffset = j,
-                            yBotOffset = 1 + j;
-                        var plot = [
-                            { "x": topleft, "y": yOffset },
-                            { "x": botleft, "y": yBotOffset },
-                            { "x": botright, "y": yBotOffset },
-                            { "x": toprright, "y": yOffset }
-                        ];
-
-                        cellFactory(plot, "c-" + i + "-" + j, map[j][i]);
-                    }
-                }
-            };
-
-            return miniMap;
-        }
-    ])
     .factory('mazeRunner', ['tileService',
         function(tileService) {
             'use strict';
@@ -196,13 +63,12 @@ angular
                  backgroundLeftEnd = [ {"x":180, "y":90}, {"x":180,"y":210}, {"x":220,"y":190}, {"x":220,"y":110} ],
                  backgroundLeftThru = [ {"x":100, "y":110}, {"x":100,"y":190}, {"x":200,"y":190}, {"x":200,"y":110} ],
                  backgroundMidThru = [ {"x":200, "y":110}, {"x":200,"y":190}, {"x":300,"y":190}, {"x":300,"y":110} ],
-                 backgroundMidDoor = [ {"x":200, "y":110}, {"x":200,"y":190}, {"x":230, "y":190}, {"x":230,"y":120}, {"x":270, "y":120}, {"x":270,"y":190}, {"x":300,"y":190}, {"x":300,"y":110} ],
-
 
                  backgroundRightThru = [ {"x":300, "y":110}, {"x":300,"y":190}, {"x":400,"y":190}, {"x":400,"y":110} ],
                  backgroundRightEnd = [ {"x":280, "y":110}, {"x":280,"y":190}, {"x":320,"y":210}, {"x":320,"y":90} ];
 
 /*
+                 backgroundMidDoor = [ {"x":200, "y":110}, {"x":200,"y":190}, {"x":230, "y":190}, {"x":230,"y":120}, {"x":270, "y":120}, {"x":270,"y":190}, {"x":300,"y":190}, {"x":300,"y":110} ],
                  ceilFront = [ {"x":0, "y":0}, {"x":500,"y":0}, {"x":440,"y":30}, {"x":60,"y":30} ],
                  ceilMid = [ {"x":60, "y":30}, {"x":440,"y":30}, {"x":380,"y":60}, {"x":120,"y":60} ],
                  ceilBack = [ {"x":120, "y":60}, {"x":380,"y":60}, {"x":320,"y":90}, {"x":180,"y":90} ],
@@ -215,8 +81,8 @@ angular
 
                  // depth 4's background goes first as it's the final back wall, 
                  // also we skip the door since the back wall is sort of a hack
-                if (tileService.isBlock(view[0][1])) {
-                    wallFactory(backgroundMidThru, 'mid-5');
+                if (tileService.isBlock(view[0][1]) || tileService.isDoor(view[0][1])) {
+                   wallFactory(backgroundMidThru, 'mid-5');
                 }
 
                 // right side
