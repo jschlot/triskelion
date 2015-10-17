@@ -5,10 +5,11 @@ angular
     ])
     .controller('gameGridController', ['$scope', '$location',
             'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText',
-            'tileService', 'miniMap', 'tellsList', 'mapModal',
+            'tileService', 'miniMap', 'tellsList', 'mapModal', 'actionDispatcher',
         function($scope, $location,
             userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText,
-            tileService, miniMap, tellsList, mapModal) {
+            tileService, miniMap, tellsList, mapModal, actionDispatcher) {
+
             'use strict';
 
             if (!userData.gameModuleSelected || partyData.length ===0) {
@@ -16,9 +17,102 @@ angular
                 return;
             }
 
+            var currentLevel = userData.currentMapLevel,
+                currentLevelMap = userData.gameModuleSelected.map[currentLevel],
+                currentCompassIndex,
+                compassOptions = ['north','east', 'south', 'west'],
+                coordinates = userData.gameModuleSelected.startingCoordinates,
+                compassDirection = userData.gameModuleSelected.defaultCompassDirection,
+                actionsList = {};
+
+            levelMap.setDimensions(userData.gameModuleSelected.mapMaxX, userData.gameModuleSelected.mapMaxY); // naming is awkward
+            levelMap.init(currentLevelMap.layout);
+
+            actionsList = {
+                'forward': function() {
+                    var currentTileIndex = $scope.view.length - 2;
+                    var next = $scope.view[currentTileIndex][1];
+                    if (tileService.canGoForward(next)) {
+                        switch(compassDirection) {
+                            case "east":
+                                coordinates[0] = coordinates[0] + 1;
+                                break;
+                            case "west":
+                                coordinates[0] = coordinates[0] - 1;
+                                break;
+                            case "north":
+                                coordinates[1] = coordinates[1] - 1;
+                                break;
+                            case "south":
+                                coordinates[1] = coordinates[1] + 1;
+                                break;
+                        }
+                    } else {
+                        mapModal(ouchHappened());
+                        return 'stop mazerunner';
+                    }
+                },
+                'left': function() {
+                    currentCompassIndex = compassOptions.indexOf(compassDirection);
+                    currentCompassIndex--;
+                    if (currentCompassIndex < 0) {
+                        currentCompassIndex = compassOptions.length-1;
+                    }
+                    compassDirection = compassOptions[currentCompassIndex];
+                },
+                'right': function() {
+                    currentCompassIndex = compassOptions.indexOf(compassDirection);
+                    currentCompassIndex++;
+                    if (currentCompassIndex === compassOptions.length) {
+                        currentCompassIndex = 0;
+                    }
+                    compassDirection = compassOptions[currentCompassIndex];
+                },
+                'camp': function() {
+                    tellsList.push(infoText.campingislovely);
+                    $scope.tells = tellsList;
+                },
+                'describe': function() {
+                    //// describe gets any metadata abount the current cell
+                },
+                'map': function() {
+                    $scope.showMiniMap = ($scope.showMiniMap) ? false : true;
+                    if ($scope.showMiniMap) {
+                        miniMap(levelMap.getMap());
+                        tellsList.push(infoText.closeminimap);
+                        $scope.tells = tellsList;
+                        return 'stop mazerunner';
+                    }
+                },
+                'updateMazeRunner': function() {
+                    $scope.view = levelMap.getView(coordinates[0],coordinates[1], compassDirection);
+        
+                    $scope.map = {
+                        zone: { name: userData.gameModuleSelected.name + ": " + currentLevelMap.name },
+                        location: {
+                            coordinates: { x: coordinates[0], y: coordinates[1] },
+                            compass: compassDirection
+                        },
+                        data: levelMap.getMap()
+                    };
+    
+                    mazeRunner($scope.view);
+                }                
+            };
+
+            $scope.saveAndNext = function(value) {
+                tellsList.length = 0;
+
+                var returnValue = actionDispatcher(actionsList[value._self], value);
+                if (returnValue !== 'stop mazerunner') {
+                    actionsList.updateMazeRunner();
+                }
+            };
+
             $scope.tells = tellsList;
+            $scope.partyData = partyData;
             $scope.auras = []; // is this right? maybe we don't want to always reset auras???
-            $scope.showMiniMap = false; // should probably move minimap to it's own screen layout
+            $scope.showMiniMap = false;
 
             $scope.availableActions = [
                 partyActions.forward,
@@ -29,112 +123,7 @@ angular
                 partyActions.map
             ];
 
-            $scope.partyData = partyData;
+            actionsList.updateMazeRunner();
 
-            var currentLevelMap = userData.gameModuleSelected.map[0]; // this feels hackish - current level should not be manually set to 1st level
-
-            $scope.coordinates = userData.gameModuleSelected.startingCoordinates; // maybe this should be private
-            $scope.compassDirection = userData.gameModuleSelected.defaultCompassDirection; // maybe this should be private
-
-            levelMap.setDimensions(userData.gameModuleSelected.mapMaxX, userData.gameModuleSelected.mapMaxY); // naming is awkward
-            levelMap.init(currentLevelMap.layout);
-
-            var updateMazeRunner = function() {
-                $scope.view = levelMap.getView($scope.coordinates[0],$scope.coordinates[1], $scope.compassDirection);
-
-                mazeRunner($scope.view);
-
-                $scope.map = {
-                    zone: { name: userData.gameModuleSelected.name + ": " + currentLevelMap.name },
-                    location: {
-                        coordinates: { x: $scope.coordinates[0], y: $scope.coordinates[1] },
-                        compass: $scope.compassDirection
-                    },
-                    data: levelMap.getMap()
-                };
-            };
-
-            /*
-                TO-DO: Use actionDispatcher service to run these commands
-                get more organized with the methods provided
-
-            */
-
-            $scope.saveAndNext = function(value) {
-                var compassOptions = ['north','east', 'south', 'west'];
-                var currentCompassIndex;
-                tellsList.length = 0;
-
-                switch (value._self) {
-                    case 'forward':
-                        var ouch = false;
-                        var next = $scope.view[3][1]; // this is the next forward tile it's also kind of awkward
-                        if (tileService.canGoForward(next)) {
-                            switch($scope.compassDirection) {
-                                case "east":
-                                    $scope.coordinates[0] = $scope.coordinates[0] + 1;
-                                    break;
-                                case "west":
-                                    $scope.coordinates[0] = $scope.coordinates[0] - 1;
-                                    break;
-                                case "north":
-                                    $scope.coordinates[1] = $scope.coordinates[1] - 1;
-                                    break;
-                                case "south":
-                                    $scope.coordinates[1] = $scope.coordinates[1] + 1;
-                                    break;
-                            }
-                        } else {
-                            ouch = ouchHappened();
-                        }
-                        break;
-                    case 'left':
-                        currentCompassIndex = compassOptions.indexOf($scope.compassDirection);
-                        currentCompassIndex--;
-                        if (currentCompassIndex < 0) {
-                            currentCompassIndex = compassOptions.length-1;
-                        }
-                        $scope.compassDirection = compassOptions[currentCompassIndex];
-                        break;
-                    case 'right':
-                        currentCompassIndex = compassOptions.indexOf($scope.compassDirection);
-                        currentCompassIndex++;
-                        if (currentCompassIndex === compassOptions.length) {
-                            currentCompassIndex = 0;
-                        }
-                        $scope.compassDirection = compassOptions[currentCompassIndex];
-                        break;
-                    case 'camp':
-                            tellsList.push(infoText.campingislovely);
-                            $scope.tells = tellsList;
-                        break;
-                    case 'describe':
-                            //// describe gets any metadata abount the current cell
-                            $location.path( "/partyselect" );
-                        break;
-                    case 'map':
-                        $scope.showMiniMap = ($scope.showMiniMap) ? false : true;
-                        if ($scope.showMiniMap) {
-                            miniMap(levelMap.getMap());
-                            tellsList.push(infoText.closeminimap);
-                            $scope.tells = tellsList;
-                            return;
-                        }
-                        break;
-                }
-
-                if (tellsList) {
-                    $scope.tells = tellsList;
-                }
-
-                updateMazeRunner();
-
-                if (ouch) {
-                    mapModal(ouch);
-                }
-
-            };
-
-            updateMazeRunner();
         }
     ]);

@@ -4,7 +4,8 @@ angular
         function(gameModules) {
             'use strict';
             var userData = {
-                gameModuleSelected: null // gameModules.dungeon
+                gameModuleSelected: gameModules.dungeon,
+                currentMapLevel: 0
             };
             return userData;
         }
@@ -12,7 +13,7 @@ angular
     .factory('partyData', ['playerDB', 'userData',
         function(playerDB, userData) {
             'use strict';
-            var partyData = []; //playerDB[userData.gameModuleSelected._self].slice(0,2);
+            var partyData = playerDB[userData.gameModuleSelected._self].slice(0,2);
             return partyData;
         }
     ])

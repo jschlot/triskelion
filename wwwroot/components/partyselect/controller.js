@@ -14,19 +14,14 @@ angular
                 return;
             }
 
-            var currentPick = {},
+            var allPlayers = playerDB[userData.gameModuleSelected._self],
+                currentPick = {},
                 context = null,
                 actionsList = {},
-                cast = [],
-                allPlayers = [];
+                cast = [];
 
             tellsList.push(infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name));
 
-            $scope.screen = {
-                name: infoText.partyselect
-            };
-
-            allPlayers = playerDB[userData.gameModuleSelected._self];
             cast = allPlayers.filter( function( el ) {
                 var lookup = objectFindByKey(partyData, 'hotkey', el.hotkey);
                 return lookup ? false : el;
@@ -132,17 +127,10 @@ angular
  
                     $scope.partyData = partyData;
 
-                    if (!partyData.length) {
-                        actionsList.mainActions();
-                    }
+                    actionsList.mainActions();
                 }
             };
 
-            actionsList.mainActions();
-
-            $scope.tells = tellsList;
-            $scope.partyData = partyData;
-            
             $scope.saveAndNext = function(value) {
                 if (actionsList[value._self]) {
                     actionDispatcher(actionsList[value._self], value);
@@ -158,5 +146,13 @@ angular
                 }
                 $scope.tells = tellsList;
             };
+
+            $scope.screen = {
+                name: infoText.partyselect
+            };
+            $scope.tells = tellsList;
+            $scope.partyData = partyData;
+
+            actionsList.mainActions();            
         }
     ]);
