@@ -2,7 +2,7 @@
   "name": "triskelion",
   "version": "1.0.0",
   "description": "game",
-  "main": "index.html",
+  "main": "triskelion",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

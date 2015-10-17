@@ -14,7 +14,7 @@ module.exports = function(grunt) {
 				}
 			}
 		},
-  		watch: {
+    	watch: {
 			scripts: {
 				files: ['wwwroot/components/**/*.js'],
 				tasks: ['jshint'],
@@ -27,11 +27,11 @@ module.exports = function(grunt) {
 
 
 	
-	// Load the plugin that provides the "uglify" task.
+	// Plugins
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-
-	// Default task(s).
+	
+	// Task(s).
 	grunt.registerTask('default', ['jshint']);
 
 };
