@@ -14,17 +14,7 @@ angular
                 with our actionDispatch service (a simple functional factory)
             */
             
-            tellsList.push(infoText.choosemodule);
-
-            $scope.page = {
-                name: infoText.startscreen
-            };                      
-
-            $scope.availableActions = [
-                gameModules.dungeon
-            ];
-
-            $scope.tells = tellsList;
+            tellsList = [infoText.choosemodule];
 
             $scope.saveAndNext = function(value) {
                 var actionsList = {
@@ -37,5 +27,15 @@ angular
 
                 actionDispatcher(actionsList.partyselect, value);
             };
+
+            $scope.page = {
+                name: infoText.startscreen
+            };                      
+
+            $scope.availableActions = [
+                gameModules.dungeon
+            ];
+
+            $scope.tells = tellsList;
         }
     ]);

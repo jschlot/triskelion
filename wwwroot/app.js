@@ -5,6 +5,7 @@ angular
         'triskelion.gameGrid.controller',
         'triskelion.startScreen.controller',
         'triskelion.partySelect.controller',
+        'triskelion.mapScreen.controller',
 
         'triskelion.actionsList.directive',
         'triskelion.saytell.directive',
@@ -44,8 +45,8 @@ angular
                     templateUrl: "components/layouts/grid.html",
                     controller: 'gameGridController'
                 })
-                .when('/crawler', {
-                    templateUrl: "components/layouts/grid.html",
+                .when('/gamegrid', {
+                    templateUrl: "components/gamegrid/layout.html",
                     controller: 'gameGridController'
                 })
                 .when('/combat', {
@@ -56,9 +57,9 @@ angular
                     templateUrl: "components/layouts/grid.html",
                     controller: 'gameGridController'
                 })
-                .when('/room', {
-                    templateUrl: "components/layouts/grid.html",
-                    controller: 'gameGridController'
+                .when('/mapscreen', {
+                    templateUrl: "components/mapscreen/layout.html",
+                    controller: 'mapScreenController'
                 })
                 .otherwise({
                     redirectTo: '/startscreen'

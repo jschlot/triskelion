@@ -25,7 +25,7 @@ angular
                 compassDirection = userData.gameModuleSelected.defaultCompassDirection,
                 actionsList = {};
 
-            levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols); // naming is awkward
+            levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols);
             levelMap.init(currentLevelMap.layout);
 
             actionsList = {
@@ -76,13 +76,7 @@ angular
                     //// describe gets any metadata abount the current cell
                 },
                 'map': function() {
-                    $scope.showMiniMap = ($scope.showMiniMap) ? false : true;
-                    if ($scope.showMiniMap) {
-                        miniMap(levelMap.getMap());
-                        tellsList.push(infoText.closeminimap);
-                        $scope.tells = tellsList;
-                        return 'stop mazerunner';
-                    }
+                    $location.path( "/mapscreen" );
                 },
                 'updateMazeRunner': function() {
                     $scope.view = levelMap.getView(coordinates[0],coordinates[1], compassDirection);
@@ -112,7 +106,6 @@ angular
             $scope.tells = tellsList;
             $scope.partyData = partyData;
             $scope.auras = []; // is this right? maybe we don't want to always reset auras???
-            $scope.showMiniMap = false;
 
             $scope.availableActions = [
                 partyActions.forward,

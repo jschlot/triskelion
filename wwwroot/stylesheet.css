@@ -96,14 +96,14 @@ ul.vert-list li
     padding: 0 2em 1em 0;
 }
 
-#mazeRunner .floor {
+#minimap .floor {
     stroke-opacity: 0.1;
     stroke-width: 1px;
     stroke: black;
     fill: white;
 }
 
-#mazeRunner .wall {
+#minimap .wall {
     stroke-opacity: 0.1;
     stroke-width: 1px;
     stroke: white;

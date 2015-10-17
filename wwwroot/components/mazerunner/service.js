@@ -37,7 +37,7 @@ angular
         function(tileService) {
             'use strict';
             var miniMap = function(map) {
-                var vis = d3.select("#mazeRunner")
+                var vis = d3.select("#minimap")
                     .attr("viewBox", "0 0 500 300");
 
                 vis.selectAll("*").remove();

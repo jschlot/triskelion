@@ -33,6 +33,11 @@ angular
                     name: "Map",
                     hotkey: "M",
                     _self: "map"
+                },
+                returntogame: {
+                    name: "Return to Game",
+                    hotkey: "R",
+                    _self: "returntogame"
                 }
             };
 
@@ -89,13 +94,14 @@ angular
             var infoText = {
                 startscreen: "Welcome to Triskelion.",
                 choosemodule: "To begin, choose an adventure",
+                mapscreen: "Map",
                 actionchoice: "You chose STRING",
                 auraDamage: "PLAYER takes DAMAGE points of damage from AURA",
                 partyselect: "Party Select",
                 removePlayer: "Who will you ask to leave the party?",
                 whowilljoin: "Who will you add to the party?",
                 whowillleave: "Who will you remove to the party?",
-                closeminimap: "type M again to return to maze view",
+                closeminimap: "R)eturn to Game",
                 campingislovely: "Your team kicks it's collective shoes off, leans back, and smokes the halfling leaf for 2 turns...",
                 deathNote: "PLAYER dies",
                 keys: {

@@ -41,7 +41,7 @@ angular
                     context = 'remove';
                  },
                  'start': function() {
-                    $location.path( "/crawler" );
+                    $location.path( "/gamegrid" );
                     return;
                  },
                  'quit': function() {
@@ -147,7 +147,7 @@ angular
                 $scope.tells = tellsList;
             };
 
-            $scope.screen = {
+            $scope.page = {
                 name: infoText.partyselect
             };
             $scope.tells = tellsList;
