@@ -14,12 +14,21 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		connect: {
+			server: {
+				options: {
+					port: 8000,
+					base: 'wwwroot',
+					keepalive: true
+				}
+			}
+		},
     	watch: {
 			scripts: {
 				files: ['wwwroot/components/**/*.js'],
 				tasks: ['jshint'],
 				options: {
-				spawn: false,
+					spawn: false,
 				},
 			}
 		}		
@@ -30,6 +39,7 @@ module.exports = function(grunt) {
 	// Plugins
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-connect');
 	
 	// Task(s).
 	grunt.registerTask('default', ['jshint']);
