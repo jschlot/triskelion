@@ -1,3 +1,4 @@
+/* global angular */
 angular
     .module('triskelion.partyList.directive',[])
     .directive('partyListDirective', [

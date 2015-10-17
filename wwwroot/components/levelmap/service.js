@@ -1,3 +1,4 @@
+/* global angular */
 angular
     .module('triskelion.levelMap.service', [])
     .factory('levelMap', ['tileService',

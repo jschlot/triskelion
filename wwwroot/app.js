@@ -12,6 +12,8 @@ angular
         'triskelion.partyList.directive',
         'triskelion.locationBar.directive',
         'triskelion.aurasList.directive',
+        'triskelion.levelMap.service',
+        'triskelion.mazeRunner.service',
 
         'triskelion.utils.dictionary.service',
         'triskelion.utils.aiSpeech.service',

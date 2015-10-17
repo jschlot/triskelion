@@ -1,8 +1,6 @@
+/* global angular */
 angular
-    .module('triskelion.gameGrid.controller',[
-        'triskelion.levelMap.service',
-        'triskelion.mazeRunner.service'
-    ])
+    .module('triskelion.gameGrid.controller',[])
     .controller('gameGridController', ['$scope', '$location',
             'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText',
             'tileService', 'tellsList', 'mapModal', 'actionDispatcher',

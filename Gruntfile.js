@@ -13,29 +13,14 @@ module.exports = function(grunt) {
 				jQuery: true
 				}
 			}
-		},		
-		watch: {
+		},
+  		watch: {
 			scripts: {
 				files: ['wwwroot/components/**/*.js'],
 				tasks: ['jshint'],
 				options: {
 				spawn: false,
 				},
-			}
-		},
-		browserSync: {
-			proxy: 'localhost:3000',
-			bsFiles: {
-				src: [
-					'wwwroot/components/index.html',
-					'wwwroot/components/*/*.js',
-					'wwwroot/components/*/*.html'
-				]
-			},
-			options: {
-				server: {
-					baseDir: "wwwroot"
-				}
 			}
 		}		
 	});
@@ -45,7 +30,6 @@ module.exports = function(grunt) {
 	// Load the plugin that provides the "uglify" task.
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-browser-sync');
 
 	// Default task(s).
 	grunt.registerTask('default', ['jshint']);

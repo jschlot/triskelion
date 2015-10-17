@@ -1,3 +1,4 @@
+/* global angular */
 angular
   .module('triskelion.saytell.directive',[])
   .directive('autofocus', ['$timeout', function($timeout) {
