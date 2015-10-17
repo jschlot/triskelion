@@ -1,3 +1,4 @@
+/* global angular */
 angular
     .module('triskelion.startScreen.controller',[])
     .controller('startScreenController', [
@@ -12,8 +13,8 @@ angular
                 One principal shown here is using functional programming to dispatch events
                 with our actionDispatch service (a simple functional factory)
             */
-
-
+            
+            
             tellsList.push(infoText.choosemodule);
 
             $scope.tells = tellsList;
