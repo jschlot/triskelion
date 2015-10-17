@@ -1,3 +1,4 @@
+/* global angular */
 angular
     .module('triskelion.utils.npc.service', [])
     .factory('npcabilities',
@@ -132,30 +133,30 @@ angular
             'use strict';
             var npctypes = {
                 'dungeon': {
-                    tank: {
-                        name: "Tank",
-                        hotkey: "T",
-                        _self: "tank",
-                    },
                     support: {
                         name: "Healer",
                         hotkey: "H",
-                        _self: "support",
+                        _self: "support"
                     },
-                    melee: {
+                    fighter: {
                         name: "Fighter",
                         hotkey: "F",
-                        _self: "melee",
+                        _self: "fighter"
                     },
                     caster: {
-                        name: "Caster",
-                        hotkey: "C",
-                        _self: "caster",
+                        name: "Mage",
+                        hotkey: "M",
+                        _self: "caster"
                     },
-                    ranged: {
-                        name: "Archer",
-                        hotkey: "A",
-                        _self: "ranged",
+                    thief: {
+                        name: "Thief",
+                        hotkey: "T",
+                        _self: "thief"
+                    },
+                    archer: {
+                        name: "Ranger",
+                        hotkey: "R",
+                        _self: "archer"
                     }
                 }
             };
@@ -174,7 +175,7 @@ angular
                         _self: "gregor",
                         health: 200,
                         status: "Alive",
-                        type: npctypes.dungeon.tank.name,
+                        type: npctypes.dungeon.fighter.name,
                         race: npcraces.dungeon.human.name,
                         abilities: [
                             npcabilities.dungeon.swing,
@@ -202,7 +203,7 @@ angular
                         _self: "jupiterra",
                         health: 100,
                         status: "Alive",
-                        type: npctypes.dungeon.ranged.name,
+                        type: npctypes.dungeon.archer.name,
                         race: npcraces.dungeon.elf.name,
                         abilities: [
                             npcabilities.dungeon.shoot,
@@ -230,7 +231,7 @@ angular
                         _self: "krayt",
                         health: 120,
                         status: "Alive",
-                        type: npctypes.dungeon.melee.name,
+                        type: npctypes.dungeon.thief.name,
                         race: npcraces.dungeon.dwarf.name,
                         abilities: [
                             npcabilities.dungeon.pummel,
@@ -244,3 +245,4 @@ angular
             return playerDB;
         }]
     );
+    

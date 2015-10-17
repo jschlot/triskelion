@@ -30,7 +30,7 @@ angular
             $compileProvider.debugInfoEnabled(false);
             $routeProvider
                 .when('/startscreen', {
-                    templateUrl: "components/layouts/menu.html",
+                    templateUrl: "components/startscreen/layout.html",
                     controller: 'startScreenController'
                 })
                 .when('/partyselect', {

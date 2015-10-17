@@ -1,3 +1,4 @@
+/* global angular */
 angular
     .module('triskelion.utils.aiSpeech.service', [])
     .factory('actionNotFound', [ 'sarcasticQuips',
