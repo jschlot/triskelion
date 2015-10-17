@@ -4,8 +4,9 @@ body {
 }
 
 section {
-    width: 960px;
-    margin: 20px auto;
+    width: 80%;
+    min-width: 800px;
+    margin: 2em auto;
 }
 
 svg {
@@ -53,10 +54,10 @@ svg text {
     padding: .5em;
 }
 
-.actions,
 .navigator {
     text-transform: uppercase;
 }
+
 
 #commandPrompt {
     background-color: black;
@@ -79,6 +80,7 @@ ul.flex-list li
 {
     display: inline-block;
     padding: 0 2em 1em 0;
+    width: 25%;
 }
 
 ul.vert-list {
