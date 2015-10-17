@@ -53,7 +53,6 @@ svg text {
     padding: .5em;
 }
 
-
 .actions,
 .navigator {
     text-transform: uppercase;
@@ -66,19 +65,9 @@ svg text {
     line-height: 2em;
 }
 
-.n, .e, .s, .w {
-    border: 1px solid white;
-    height: 2em;
-    width: 2em;
+.selected { 
+    background-color: white; 
 }
-
-.n { border-top: none; }
-.e { border-right: none; }
-.s { border-bottom: none; }
-.w { border-left: none; }
-
-.selected { background-color: white; }
-
 
 ul.flex-list {
     list-style-type: none;
@@ -99,8 +88,7 @@ ul.vert-list {
     padding: 0;
 }
 
-ul.vert-list li
-{
+ul.vert-list li {
     padding: 0 2em 1em 0;
 }
 
