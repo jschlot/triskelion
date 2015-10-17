@@ -1,6 +1,7 @@
 angular
     .module('triskelion.actionsList.directive',[])
-    .directive('actionsListDirective', ['$location', 'objectFindByKey', 'actionNotFound', 'infoText', 'userData', 'hotkeyAction',
+    .directive('actionsListDirective', ['$location', 'objectFindByKey', 'actionNotFound', 'infoText', 
+        'userData', 'hotkeyAction',
         function($location, objectFindByKey, actionNotFound, infoText, userData, hotkeyAction){
           'use strict';
 
@@ -9,9 +10,7 @@ angular
           }
 
           function controller($scope){
-
             $scope.formatAction = hotkeyAction;
-
 
             $scope.$on('$destroy', function(){
               $scope.element = null;
