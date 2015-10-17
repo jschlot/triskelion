@@ -35,28 +35,8 @@ angular
                     templateUrl: "components/partyselect/layout.html",
                     controller: 'partySelectController'
                 })
-                .when('/start', {
-                    templateUrl: "components/layouts/menu.html",
-                    controller: 'gameGridController'
-                })
-                .when('/home', {
-                    templateUrl: "components/layouts/menu.html",
-                    controller: 'gameGridController'
-                })
-                .when('/character', {
-                    templateUrl: "components/layouts/grid.html",
-                    controller: 'gameGridController'
-                })
                 .when('/gamegrid', {
                     templateUrl: "components/gamegrid/layout.html",
-                    controller: 'gameGridController'
-                })
-                .when('/combat', {
-                    templateUrl: "components/layouts/grid.html",
-                    controller: 'gameGridController'
-                })
-                .when('/loot', {
-                    templateUrl: "components/layouts/grid.html",
                     controller: 'gameGridController'
                 })
                 .when('/mapscreen', {
