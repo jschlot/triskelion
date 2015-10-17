@@ -27,3 +27,9 @@ Maze Crawler, RPG, Text-Based Adventure a'la Wizardry, Zork, and D&amp;D
 * Add Initiative rolls
 * Add Turn List Widget
 * Add Monsters DB
+
+### Game Design Mode
+* Bite the bullet and move data to a server
+* Write python API codes
+* Add a level design module
+* Add an NPC creator
