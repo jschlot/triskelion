@@ -22,7 +22,7 @@ angular
                                 // 0     1     2     3     4     5     6     7     8     9    10    11
                                 [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01],  // 0
 
-                                [0x01, 0x01, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x01],  // 1
+                                [0x01, 0x01, 0x80, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x01],  // 1
 
                                 [0x01, 0x01, 0x18, 0x01, 0x01, 0x01, 0x01, 0x01, 0x18, 0x01, 0x18, 0x01],  // 2
 
@@ -71,27 +71,16 @@ angular
                                 [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01]   // 10
 
                             ]
-                        }                    ],
-                    tileAction: {
-                        "action_33": [
-                            {
-                                tell: "You feel a sense of dread up ahead"
-                            }
-                        ],
-                        "action_50": [
-                            {
-                                tell: "A ray of light shines upon your group. " +
-                                      "Your party is granted [ healing ] for 5 turns by [ spirit of hopefulness ]",
-                                type: "BUFF", aura: "healing", turns: 5, remaining: 5, amount: 20
-                            }
-                        ],
-                        "action_51": [
-                            {
-                                tell: "A spike trap explodes, sending needles flying into the air. " +
-                                      " Your party will [ bleed ] for 4 turns by [ needle trap ].",
-                                type: "DEBUFF", aura: "bleed", turns: 2, remaining: 2, amount: 1
-                            }
-                        ]
+                        }
+                    ],
+                    tileActions: function() {
+                        var actionsList = [];
+                        
+                        actionsList[128] = function(actionSelected) {
+                            console.log(actionSelected);                            
+                        };
+                        
+                        return actionsList;
                     }
                 }
             };

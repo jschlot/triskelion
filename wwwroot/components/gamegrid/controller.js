@@ -3,7 +3,7 @@ angular
     .module('triskelion.gameGrid.controller',[])
     .controller('gameGridController', ['$scope', '$location',
             'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText',
-            'tileService', 'tellsList', 'mapModal', 'actionDispatcher',
+            'tileService', 'tellsList', 'mapModal', 'actionDispatcher', 
         function($scope, $location,
             userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText,
             tileService, tellsList, mapModal, actionDispatcher) {
@@ -29,8 +29,8 @@ angular
 
             actionsList = {
                 'forward': function() {
-                    var currentTileIndex = $scope.view.length - 2;
-                    var next = $scope.view[currentTileIndex][1];
+                    var nextTileIndex = $scope.view.length - 2;
+                    var next = $scope.view[nextTileIndex][1];
                     if (tileService.canGoForward(next)) {
                         switch(compassDirection) {
                             case "east":
@@ -46,7 +46,7 @@ angular
                                 coordinates[1] = coordinates[1] + 1;
                                 break;
                         }
-                        tileService.action({_self: 255});
+                        tileService.action({_self: next});
                     } else {
                         mapModal(ouchHappened());
                         return 'stop mazerunner';

@@ -1,18 +1,13 @@
 /* global angular */
 angular
     .module('triskelion.utils.tileService.service', [])
-    .service('tileService', ['actionDispatcher', 'diceService',
-        function(actionDispatcher, diceService) {
+    .service('tileService', ['actionDispatcher', 'userData',
+        function(actionDispatcher, userData) {
             'use strict';
 
             this.action = function(value) {
                 var actionsList = [];
-                //console.log(diceService.roll(2,4));
-
-                actionsList[128] = function(actionSelected) {
-                    console.log(actionSelected);
-                };
-
+                actionsList = userData.gameModuleSelected.tileActions();
                 actionDispatcher(actionsList[value._self], value);
             };
 
