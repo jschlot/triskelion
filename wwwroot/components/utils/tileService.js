@@ -8,6 +8,7 @@ angular
             this.isBlock = function(tile) {
                 return (tile < 18) ? true : false;
             };
+            
             this.isDoor = function(tile) {
                 var isDoor;
                 if (tile === 26) {

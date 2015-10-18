@@ -13,12 +13,10 @@ angular
         'triskelion.locationBar.directive',
         'triskelion.aurasList.directive',
 
-        // should be factories
-        'triskelion.levelMap.service',
-        'triskelion.mazeRunner.service',
-        'triskelion.mapModal.service',
-        'triskelion.miniMap.service',
-
+        'triskelion.utils.mazeRunner.service',
+        'triskelion.utils.miniMap.service',
+        'triskelion.utils.mapModal.service',
+        'triskelion.utils.levelMap.service',
         'triskelion.utils.dice.service',
         'triskelion.utils.dictionary.service',
         'triskelion.utils.aiSpeech.service',
