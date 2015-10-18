@@ -77,7 +77,7 @@ angular
                         var actionsList = [];
                         
                         actionsList[128] = function(actionSelected) {
-                            console.log(actionSelected);                            
+                            console.log("Bleed");
                         };
                         
                         return actionsList;

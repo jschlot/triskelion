@@ -11,7 +11,6 @@ angular
                 actionDispatcher(actionsList[value._self], value);
             };
 
-
             this.isBlock = function(tile) {
                 return (tile < 18) ? true : false;
             };
