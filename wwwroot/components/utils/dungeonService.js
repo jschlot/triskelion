@@ -11,7 +11,7 @@ angular
                     _self: "dungeon",
                     maxparty: 3,
                     mapRows: 12, // offset by 1
-                    mapCols: 11, // offset by 1
+                    mapCols: 15, // offset by 1
                     defaultCompassDirection: 'east',
                     defaultLevel: 0,
                     startingCoordinates: [2,2], // [ X, Y ]
