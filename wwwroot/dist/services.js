@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module('triskelion.levelMap.service', [])
-    .factory('levelMap', ['tileService',
+    .service('levelMap', ['tileService',
         function(tileService) {
             'use strict';
             var map = [],
@@ -118,7 +118,7 @@ angular
 /* global angular, d3 */
 angular
     .module('triskelion.mapModal.service', [])
-    .factory('mapModal', [
+    .service('mapModal', [
         function() {
             'use strict';
             var mapModal = function(message) {
@@ -153,7 +153,7 @@ angular
 /* global angular, d3 */
 angular
     .module('triskelion.mazeRunner.service', [])
-    .factory('mazeRunner', ['tileService',
+    .service('mazeRunner', ['tileService',
         function(tileService) {
             'use strict';
 
@@ -334,7 +334,7 @@ angular
 /* global angular, d3 */
 angular
     .module('triskelion.miniMap.service', [])
-    .factory('miniMap', ['tileService',
+    .service('miniMap', ['tileService',
         function(tileService) {
             'use strict';
             var miniMap = function(map) {
@@ -1036,7 +1036,7 @@ angular
 /* global angular */
 angular
     .module('triskelion.utils.tileService.service', [])
-    .factory('tileService',
+    .service('tileService',
         function() {
             'use strict';
 

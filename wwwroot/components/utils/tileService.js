@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module('triskelion.utils.tileService.service', [])
-    .factory('tileService',
+    .service('tileService',
         function() {
             'use strict';
 

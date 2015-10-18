@@ -173,6 +173,10 @@ angular
             $scope.availableActions = [
                 partyActions.returntogame
             ];
+            
+            $scope.tells = [
+                "R)eturn to game"               
+            ];
                         
         }
     ]);
