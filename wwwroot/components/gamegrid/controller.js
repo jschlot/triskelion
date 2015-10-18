@@ -3,10 +3,10 @@ angular
     .module('triskelion.gameGrid.controller',[])
     .controller('gameGridController', ['$scope', '$location',
             'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText',
-            'tileService', 'tellsList', 'mapModal', 'actionDispatcher', 'diceService', 
+            'tileService', 'tellsList', 'mapModal', 'actionDispatcher',
         function($scope, $location,
             userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText,
-            tileService, tellsList, mapModal, actionDispatcher, diceService) {
+            tileService, tellsList, mapModal, actionDispatcher) {
 
             'use strict';
 
@@ -15,12 +15,12 @@ angular
                 return;
             }
 
-            var currentLevel = userData.currentMapLevel,
+            var currentLevel = userData.currentMap.level,
                 currentLevelMap = userData.gameModuleSelected.map[currentLevel],
                 currentCompassIndex,
                 compassOptions = ['north','east', 'south', 'west'],
-                coordinates = userData.gameModuleSelected.startingCoordinates,
-                compassDirection = userData.gameModuleSelected.defaultCompassDirection,
+                coordinates = userData.currentMap.coordinates,
+                compassDirection = userData.currentMap.direction,
                 actionsList = {};
 
             levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols);
@@ -45,6 +45,7 @@ angular
                                 coordinates[1] = coordinates[1] + 1;
                                 break;
                         }
+                        tileService.action({_self: 255});
                     } else {
                         mapModal(ouchHappened());
                         return 'stop mazerunner';
@@ -57,6 +58,7 @@ angular
                         currentCompassIndex = compassOptions.length-1;
                     }
                     compassDirection = compassOptions[currentCompassIndex];
+                    userData.currentMap.direction = compassDirection;
                 },
                 'right': function() {
                     currentCompassIndex = compassOptions.indexOf(compassDirection);
@@ -65,6 +67,7 @@ angular
                         currentCompassIndex = 0;
                     }
                     compassDirection = compassOptions[currentCompassIndex];
+                    userData.currentMap.direction = compassDirection;
                 },
                 'camp': function() {
                     tellsList = [infoText.campingislovely];
@@ -78,9 +81,7 @@ angular
                 },
                 'updateMazeRunner': function() {
                     $scope.view = levelMap.getView(coordinates[0],coordinates[1], compassDirection);
-        
-                    console.log(diceService.roll(3,4));
-        
+                
                     $scope.page = {
                         zone: { name: userData.gameModuleSelected.name + ": " + currentLevelMap.name },
                         location: {

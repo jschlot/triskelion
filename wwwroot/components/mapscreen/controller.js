@@ -14,10 +14,9 @@ angular
                 return;
             }
 
-            var currentLevel = userData.currentMapLevel,
+            var currentLevel = userData.currentMap.level,
                 currentLevelMap = userData.gameModuleSelected.map[currentLevel],
-                coordinates = userData.gameModuleSelected.startingCoordinates,
-                compassDirection = userData.gameModuleSelected.defaultCompassDirection;
+                coordinates = userData.currentMap.coordinates;
 
             levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols);
             levelMap.init(currentLevelMap.layout);
@@ -43,7 +42,7 @@ angular
                 zone: { name: userData.gameModuleSelected.name + ": " + currentLevelMap.name },
                 location: {
                     coordinates: { x: coordinates[0], y: coordinates[1] },
-                    compass: compassDirection
+                    compass: "map"
                 }
             };
 

@@ -6,7 +6,11 @@ angular
             'use strict';
             var userData = {
                 gameModuleSelected: gameModules.dungeon,
-                currentMapLevel: 0
+                currentMap: {
+                    level: 0,
+                    direction: "west",
+                    coordinates: [4,4]
+                }
             };
             return userData;
         }
