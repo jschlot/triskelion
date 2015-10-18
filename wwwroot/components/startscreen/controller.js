@@ -18,14 +18,14 @@ angular
 
             $scope.saveAndNext = function(value) {
                 var actionsList = {
-                     partyselect: function(value) {
-                        userData.gameModuleSelected = value;
+                     saveAndGoToPartyselect: function(actionSelected) {
+                        userData.gameModuleSelected = actionSelected;
                         tellsList.length = 0;
                         $location.path( "/partyselect" );
                     }
                 };
 
-                actionDispatcher(actionsList.partyselect, value);
+                actionDispatcher(actionsList.saveAndGoToPartyselect, value);
             };
 
             $scope.page = {

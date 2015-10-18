@@ -1,9 +1,22 @@
 /* global angular */
 angular
     .module('triskelion.utils.tileService.service', [])
-    .service('tileService',
-        function() {
+    .service('tileService', ['actionDispatcher',
+        function(actionDispatcher) {
             'use strict';
+
+            this.tileAction = function(actionSelected) {
+                var actionsList = {
+                     partyselect: function(value) {
+                        userData.gameModuleSelected = value;
+                        tellsList.length = 0;
+                        $location.path( "/partyselect" );
+                    }
+                };
+
+                actionDispatcher(actionsList.partyselect, actionSelected);
+            };
+
 
             this.isBlock = function(tile) {
                 return (tile < 18) ? true : false;
@@ -48,4 +61,4 @@ angular
                 'NOTHING': 0x00
             };
         }
-    );
+    ]);
