@@ -24,16 +24,15 @@ angular
           $scope.say = function() {
               var lookup;
 
-              $scope.tells = [];
-
               if ($scope.prompt) {
                 lookup = objectFindByKey($scope.actions, 'hotkey', $scope.prompt.substring(0, 1));
               }
 
               if (lookup) {
+                $scope.tells = [];
                 $scope.callback(lookup);
               } else {
-                $scope.tells.push(actionNotFound());
+                $scope.tells.push(actionNotFound());              
               }
 
               $scope.prompt = null;
