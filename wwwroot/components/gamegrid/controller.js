@@ -25,7 +25,6 @@ angular
 
             levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols);
             levelMap.init(currentLevelMap.layout);
-            tellsList = [];
 
             actionsList = {
                 'forward': function() {
@@ -46,7 +45,9 @@ angular
                                 coordinates[1] = coordinates[1] + 1;
                                 break;
                         }
-                        tileService.action({_self: next});
+
+                        $scope.tells = [];
+                        tileService.action({_self: next, party: partyData, tells: $scope.tells});
                     } else {
                         mapModal(ouchHappened());
                         return 'stop mazerunner';

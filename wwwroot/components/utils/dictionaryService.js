@@ -127,17 +127,6 @@ angular
             return infoText;
         }
     )
-    .service('abilityText',
-        function() {
-            'use strict';
-            var abilityText = {
-                auraDamage: "PLAYER takes DAMAGE points of damage from AURA",
-                deathNote: "PLAYER dies",
-            };
-
-            return abilityText;
-        }
-    )
     .service('sarcasticQuips',
         function() {
             'use strict';
