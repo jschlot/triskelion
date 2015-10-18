@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module('triskelion.levelMap.service', [])
-    .factory('levelMap', ['tileService',
+    .service('levelMap', ['tileService',
         function(tileService) {
             'use strict';
             var map = [],

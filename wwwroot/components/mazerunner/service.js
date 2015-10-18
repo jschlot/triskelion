@@ -1,7 +1,7 @@
 /* global angular, d3 */
 angular
     .module('triskelion.mazeRunner.service', [])
-    .factory('mazeRunner', ['tileService',
+    .service('mazeRunner', ['tileService',
         function(tileService) {
             'use strict';
 

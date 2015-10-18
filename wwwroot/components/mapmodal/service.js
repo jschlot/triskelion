@@ -1,7 +1,7 @@
 /* global angular, d3 */
 angular
     .module('triskelion.mapModal.service', [])
-    .factory('mapModal', [
+    .service('mapModal', [
         function() {
             'use strict';
             var mapModal = function(message) {
