@@ -7,9 +7,9 @@ angular
             var userData = {
                 gameModuleSelected: gameModules.dungeon,
                 currentMap: {
-                    level: 0,
-                    direction: "west",
-                    coordinates: [4,4]
+                    level: gameModules.dungeon.defaultLevel,
+                    direction: gameModules.dungeon.defaultCompassDirection,
+                    coordinates: gameModules.dungeon.startingCoordinates
                 }
             };
             return userData;

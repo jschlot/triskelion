@@ -20,6 +20,10 @@ angular
                 var actionsList = {
                      saveAndGoToPartyselect: function(actionSelected) {
                         userData.gameModuleSelected = actionSelected;
+                        userData.currentMap.level = gameModules.dungeon.defaultLevel;
+                        userData.currentMap.direction = gameModules.dungeon.defaultCompassDirection;
+                        userData.currentMap.coordinates = gameModules.dungeon.startingCoordinates;
+
                         tellsList.length = 0;
                         $location.path( "/partyselect" );
                     }
