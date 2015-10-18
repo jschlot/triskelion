@@ -1,8 +1,8 @@
 /* global angular */
 angular
     .module('triskelion.utils.dungeon.service', [])
-    .service('gameModules', ['diceService', 'infoText',
-        function(diceService, infoText) {
+    .service('gameModules', ['tileService', 
+        function(tileService) {
             'use strict';
             var gameModules = {
                 dungeon: {
@@ -75,31 +75,14 @@ angular
                     ],
                     tileActions: function() {
                         var actionsList = [];
-                                               
+
                         actionsList[128] = function(actionSelected) {
-                            actionSelected.tells.push("A spray of lava splashes on the party!");
-
-                            angular.forEach(actionSelected.party, function(player, key) {
-                                var message = "";
-                                var damage = diceService.roll(1,10);
-                                var savingthrow = diceService.roll(1,20);
-                                if (savingthrow < 15) {
-                                    player.health = player.health - damage;
-
-                                    message = infoText.auraDamage
-                                        .replace(/PLAYER/, player.name)
-                                        .replace(/DAMAGE/, damage)
-                                        .replace(/AURA/, "fire damage from the lava");
-
-                                    if (player.health < 1) { 
-                                        player.health = 0;
-                                        message = message + " and died";
-                                    }
-
-                                    actionSelected.tells.push(message);
-                                } else {
-                                    actionSelected.tells.push(player.name + " avoided the lava.");                                    
-                                }
+                            var results = tileService.debuff(actionSelected, {
+                                description: "A spray of lava splashes on the party!",
+                                damageType:  "lava",
+                                savingThrow: 15,
+                                numberOfDice: 1,
+                                diceSides: 10
                             });
                         };
                         

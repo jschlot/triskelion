@@ -1,14 +1,46 @@
 /* global angular */
 angular
     .module('triskelion.utils.tileService.service', [])
-    .service('tileService', ['actionDispatcher', 'userData',
-        function(actionDispatcher, userData) {
+    .service('tileService', ['actionDispatcher', 'userData', 'infoText', 'diceService',
+        function(actionDispatcher, userData, infoText, diceService) {
             'use strict';
 
             this.action = function(value) {
                 var actionsList = [];
                 actionsList = userData.gameModuleSelected.tileActions();
                 actionDispatcher(actionsList[value._self], value);
+            };
+
+            this.debuff = function(obj, aura) {
+                obj.tells.push(aura.description);
+
+                angular.forEach(obj.party, function(player, key) {
+                    var message = "";
+                    var damage = diceService.roll(aura.numberOfDice,aura.diceSides);
+                    var savingThrow = diceService.roll(1,20);
+
+                    if (player.health < 1) {
+                        return;
+                    }
+
+                    if (savingThrow < aura.savingThrow) {
+                        player.health = player.health - damage;
+
+                        message = infoText.auraDamage
+                            .replace(/PLAYER/, player.name)
+                            .replace(/DAMAGE/, damage)
+                            .replace(/AURA/, aura.damageType);
+
+                        if (player.health < 1) { 
+                            player.health = 0;
+                            message = message + infoText.deathNote;
+                        }
+
+                        obj.tells.push(message);
+                    } else {
+                        obj.tells.push(infoText.auraMissed.replace(/PLAYER/, player.name));                                    
+                    } 
+                });
             };
 
             this.isBlock = function(tile) {

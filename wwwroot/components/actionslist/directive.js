@@ -2,8 +2,8 @@
 angular
     .module('triskelion.actionsList.directive',[])
     .directive('actionsListDirective', ['$location', 'objectFindByKey', 'actionNotFound', 'infoText', 
-        'userData', 'hotkeyAction',
-        function($location, objectFindByKey, actionNotFound, infoText, userData, hotkeyAction){
+        'hotkeyAction',
+        function($location, objectFindByKey, actionNotFound, infoText, hotkeyAction){
           'use strict';
 
           function linkingFunction(scope, element){

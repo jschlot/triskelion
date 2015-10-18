@@ -1,8 +1,8 @@
 /* global angular */
 angular
     .module('triskelion.utils.globalData.service', [])
-    .service('userData', ['gameModules',
-        function(gameModules) {
+    .service('userData', [
+        function() {
             'use strict';
             var userData = {
                 gameModuleSelected: null,
@@ -11,8 +11,8 @@ angular
             return userData;
         }
     ])
-    .service('partyData', ['playerDB', 'userData',
-        function(playerDB, userData) {
+    .service('partyData', [
+        function() {
             'use strict';
             var partyData = [];
             return partyData;
