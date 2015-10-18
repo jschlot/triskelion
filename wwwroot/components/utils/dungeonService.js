@@ -22,7 +22,7 @@ angular
                                 // 0     1     2     3     4     5     6     7     8     9    10    11
                                 [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01],  // 0
 
-                                [0x01, 0x01, 0x80, 0x18, 0x81, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x01],  // 1
+                                [0x01, 0x01, 0x80, 0x18, 0x81, 0x82, 0x18, 0x18, 0x18, 0x18, 0x18, 0x01],  // 1
 
                                 [0x01, 0x01, 0x18, 0x01, 0x01, 0x01, 0x01, 0x01, 0x18, 0x01, 0x18, 0x01],  // 2
 
@@ -77,16 +77,26 @@ angular
                         var actionsList = [];
 
                         actionsList[128] = function(actionSelected) {
-                            var results = tileService.debuff(actionSelected, {
+                            var results = tileService.damage(actionSelected, {
                                 description: "A spray of lava splashes on the party!",
-                                damageType:  "lava",
+                                type:  "lava",
                                 savingThrow: 15,
                                 numberOfDice: 1,
                                 diceSides: 10
                             });
                         };
-                        
+
                         actionsList[129] = function(actionSelected) {
+                            var results = tileService.heal(actionSelected, {
+                                description: "A ray of light shines upon the group!",
+                                type:  "light",
+                                numberOfDice: 2,
+                                diceSides: 8
+                            });
+                        };
+
+                        
+                        actionsList[130] = function(actionSelected) {
                             actionSelected.tells.push("A eerie wailing sound comes from down the hallway...");
                         };
                         

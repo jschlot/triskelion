@@ -11,7 +11,7 @@ angular
                 actionDispatcher(actionsList[value._self], value);
             };
 
-            this.debuff = function(obj, aura) {
+            this.damage = function(obj, aura) {
                 obj.tells.push(aura.description);
 
                 angular.forEach(obj.party, function(player, key) {
@@ -29,7 +29,7 @@ angular
                         message = infoText.auraDamage
                             .replace(/PLAYER/, player.name)
                             .replace(/DAMAGE/, damage)
-                            .replace(/AURA/, aura.damageType);
+                            .replace(/AURA/, aura.type);
 
                         if (player.health < 1) { 
                             player.health = 0;
@@ -40,6 +40,28 @@ angular
                     } else {
                         obj.tells.push(infoText.auraMissed.replace(/PLAYER/, player.name));                                    
                     } 
+                });
+            };
+
+            this.heal = function(obj, aura) {
+                obj.tells.push(aura.description);
+
+                angular.forEach(obj.party, function(player, key) {
+                    var message = "";
+                    var health = diceService.roll(aura.numberOfDice,aura.diceSides);
+
+                    if (player.health >= player.maxhealth) {
+                        return;
+                    }
+
+                    player.health = player.health + health;
+
+                    message = infoText.auraHeal
+                        .replace(/PLAYER/, player.name)
+                        .replace(/HEALTH/, health)
+                        .replace(/AURA/, aura.type);
+
+                    obj.tells.push(message);
                 });
             };
 
