@@ -62,9 +62,18 @@ svg text {
 #commandPrompt {
     background-color: black;
     color: white;
-    width: 96%;
+    width: 90%;
     line-height: 2em;
     margin-top: 0.4em;
+    margin: 1em 0.5em;
+}
+
+label {
+    padding-left: 0.5em;
+}
+
+label::before {
+    content: "$:";
 }
 
 .selected { 
