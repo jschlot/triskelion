@@ -41,7 +41,7 @@ angular
                     _self: "returntogame"
                 },
                 teleport: {
-                    name: "Teleport",
+                    name: "Teleport to Entrance",
                     hotkey: "T",
                     _self: "teleport"
                 }

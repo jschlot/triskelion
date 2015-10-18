@@ -24,7 +24,7 @@ angular
                         userData.currentMap.direction = actionSelected.defaultCompassDirection;
                         userData.currentMap.coordinates = actionSelected.startingCoordinates;
 
-                        tellsList.length = 0;
+                        tellsList.length = [];
                         $location.path( "/partyselect" );
                     }
                 };

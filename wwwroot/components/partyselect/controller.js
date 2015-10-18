@@ -20,7 +20,7 @@ angular
                 actionsList = {},
                 cast = [];
 
-            tellsList.push(infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name));
+//            tellsList.push(infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name));
 
             cast = allPlayers.filter( function( el ) {
                 var lookup = objectFindByKey(partyData, 'hotkey', el.hotkey);

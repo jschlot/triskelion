@@ -33,13 +33,14 @@ angular
           
             $scope.saveAndNext = function(value) {
                 var actionsList = {
-                     returntogame: function(actionSelected) {
+                    returntogame: function(actionSelected) {
                         tellsList.length = 0;
                         $location.path( "/gamegrid" );
                     },
-                     teleport: function(actionSelected) {
-                        alert("Bamf");
-                        startingActionTells();
+                    teleport: function(actionSelected) {
+                        userData.currentMap.coordinates = [2,2];
+                        userData.currentMap.direction = "east";
+                        $location.path( "/gamegrid" );
                     },
                 };
 
