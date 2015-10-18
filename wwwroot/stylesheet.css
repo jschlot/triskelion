@@ -1,6 +1,6 @@
 body {
     background-color: black;
-    font-family: monospace;
+    font-family: "Courier New", Courier, monospace;
 }
 
 section {
@@ -47,9 +47,10 @@ svg text {
 }
 
 .shim {
-    min-height: 138px;
+    min-height: 150px;
     padding: 0.5em;
 }
+
 .location {
     padding: 0.5em;
 }

@@ -10,7 +10,7 @@
                 <td class="outline" width="500" valign="middle">
                     <svg width="500" height="300" id="mazeRunner"></svg>
                 </td>
-                <td class="outline" valign="top" height="150">
+                <td class="outline" valign="top" height="300">
                     <actions-list-directive actions="availableActions"></actions-list-directive>
                     <hr>
                     <auras-list-directive auras="auras"></auras-list-directive>                        
@@ -19,9 +19,7 @@
         </table>
         <br>
         <div class="outline">
-            <div class="shim">
-                <saytell-directive tells="tells" actions="availableActions" callback="saveAndNext"></saytell-directive>
-            </div>
+            <saytell-directive tells="tells" actions="availableActions" callback="saveAndNext"></saytell-directive>
         </div>
         <br>
         <div class="outline">
