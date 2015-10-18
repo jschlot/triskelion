@@ -3,20 +3,28 @@ angular
     .module('triskelion.mapScreen.controller',[])
     .controller('mapScreenController', [
             '$scope', '$location', 'gameModules', 'infoText', 'userData', 'partyData', 'tellsList', 'partyActions', 
-            'actionDispatcher', 'levelMap', 'miniMap',
+            'actionDispatcher', 'levelMap', 'miniMap', 'hotkeyAction',  
         function($scope, $location, gameModules, infoText, userData, partyData, tellsList, partyActions, 
-            actionDispatcher, levelMap, miniMap) {
+            actionDispatcher, levelMap, miniMap, hotkeyAction) {
             
             'use strict';
 
-            if (!userData.gameModuleSelected || partyData.length ===0) {
+            if (!userData.gameModuleSelected || partyData.length === 0) {
                 $location.path( "/startscreen" );
                 return;
             }
 
             var currentLevel = userData.currentMap.level,
                 currentLevelMap = userData.gameModuleSelected.map[currentLevel],
-                coordinates = userData.currentMap.coordinates;
+                coordinates = userData.currentMap.coordinates,
+                startingActionTells;
+                
+            startingActionTells = function() {
+                $scope.tells = [];
+                for (var i=0; i<$scope.availableActions.length; i++) {
+                    $scope.tells.push(hotkeyAction($scope.availableActions[i]));
+                }
+            };
 
             levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols);
             levelMap.init(currentLevelMap.layout);
@@ -25,13 +33,17 @@ angular
           
             $scope.saveAndNext = function(value) {
                 var actionsList = {
-                     returntogame: function(value) {
+                     returntogame: function(actionSelected) {
                         tellsList.length = 0;
                         $location.path( "/gamegrid" );
-                    }
+                    },
+                     teleport: function(actionSelected) {
+                        alert("Bamf");
+                        startingActionTells();
+                    },
                 };
 
-                actionDispatcher(actionsList.returntogame, value);
+                actionDispatcher(actionsList[value._self], value);
             };
 
             $scope.page = {
@@ -47,12 +59,12 @@ angular
             };
 
             $scope.availableActions = [
-                partyActions.returntogame
+                partyActions.returntogame,
+                partyActions.teleport
             ];
             
-            $scope.tells = [
-                "R)eturn to game"               
-            ];
+            $scope.tells = [];
+            startingActionTells();
                         
         }
     ]);

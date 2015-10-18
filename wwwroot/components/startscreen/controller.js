@@ -18,18 +18,18 @@ angular
 
             $scope.saveAndNext = function(value) {
                 var actionsList = {
-                     saveAndGoToPartyselect: function(actionSelected) {
+                     createNewGame: function(actionSelected) {                         
                         userData.gameModuleSelected = actionSelected;
-                        userData.currentMap.level = gameModules.dungeon.defaultLevel;
-                        userData.currentMap.direction = gameModules.dungeon.defaultCompassDirection;
-                        userData.currentMap.coordinates = gameModules.dungeon.startingCoordinates;
+                        userData.currentMap.level = actionSelected.defaultLevel;
+                        userData.currentMap.direction = actionSelected.defaultCompassDirection;
+                        userData.currentMap.coordinates = actionSelected.startingCoordinates;
 
                         tellsList.length = 0;
                         $location.path( "/partyselect" );
                     }
                 };
 
-                actionDispatcher(actionsList.saveAndGoToPartyselect, value);
+                actionDispatcher(actionsList.createNewGame, value);
             };
 
             $scope.page = {

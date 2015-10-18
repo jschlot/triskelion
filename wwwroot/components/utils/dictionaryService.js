@@ -39,6 +39,11 @@ angular
                     name: "Return to Game",
                     hotkey: "R",
                     _self: "returntogame"
+                },
+                teleport: {
+                    name: "Teleport",
+                    hotkey: "T",
+                    _self: "teleport"
                 }
             };
 

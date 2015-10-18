@@ -5,12 +5,8 @@ angular
         function(gameModules) {
             'use strict';
             var userData = {
-                gameModuleSelected: gameModules.dungeon,
-                currentMap: {
-                    level: gameModules.dungeon.defaultLevel,
-                    direction: gameModules.dungeon.defaultCompassDirection,
-                    coordinates: gameModules.dungeon.startingCoordinates
-                }
+                gameModuleSelected: null,
+                currentMap: {}
             };
             return userData;
         }
@@ -18,7 +14,7 @@ angular
     .service('partyData', ['playerDB', 'userData',
         function(playerDB, userData) {
             'use strict';
-            var partyData = playerDB[userData.gameModuleSelected._self].slice(0,2);
+            var partyData = [];
             return partyData;
         }
     ])
