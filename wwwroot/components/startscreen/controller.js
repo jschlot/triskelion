@@ -2,8 +2,8 @@
 angular
     .module('triskelion.startScreen.controller',[])
     .controller('startScreenController', [
-        '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher',
-        function($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher) {
+        '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher', 'partySelectActions',
+        function($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher, partySelectActions) {
             'use strict';
 
             /*
@@ -14,22 +14,34 @@ angular
                 with our actionDispatch service (a simple functional factory)
             */
             
-            tellsList = [infoText.choosemodule];
+            tellsList = [];
+
+            var actionsList = {
+                newgame: function(actionSelected) {
+                    $scope.tells = [ infoText.choosemodule ];
+                    $scope.availableActions = [
+                        gameModules.dungeon
+                    ];                    
+                },
+                createNewGame: function(actionSelected) {
+                    userData.gameModuleSelected = actionSelected;
+                    userData.currentMap.level = actionSelected.defaultLevel;
+                    userData.currentMap.direction = actionSelected.defaultCompassDirection;
+                    userData.currentMap.coordinates = actionSelected.startingCoordinates;
+    
+                    $scope.tells.length = 0;
+                    $location.path( "/partyselect" );
+                }
+            };
+
 
             $scope.saveAndNext = function(value) {
-                var actionsList = {
-                     createNewGame: function(actionSelected) {                         
-                        userData.gameModuleSelected = actionSelected;
-                        userData.currentMap.level = actionSelected.defaultLevel;
-                        userData.currentMap.direction = actionSelected.defaultCompassDirection;
-                        userData.currentMap.coordinates = actionSelected.startingCoordinates;
 
-                        tellsList.length = [];
-                        $location.path( "/partyselect" );
-                    }
-                };
-
-                actionDispatcher(actionsList.createNewGame, value);
+                if (actionsList[value._self]) { 
+                    actionDispatcher(actionsList[value._self], value);                    
+                } else {
+                    actionDispatcher(actionsList.createNewGame, value);                    
+                }
             };
 
             $scope.page = {
@@ -37,7 +49,7 @@ angular
             };                      
 
             $scope.availableActions = [
-                gameModules.dungeon
+                partySelectActions.newgame
             ];
 
             $scope.tells = tellsList;

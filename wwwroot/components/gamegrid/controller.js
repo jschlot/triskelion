@@ -71,8 +71,7 @@ angular
                     userData.currentMap.direction = compassDirection;
                 },
                 'camp': function() {
-                    tellsList = [infoText.campingislovely];
-                    $scope.tells = tellsList;
+                    $location.path( "/partyselect" );
                 },
                 'describe': function() {
                     //// describe gets any metadata abount the current cell
@@ -97,7 +96,7 @@ angular
             };
 
             $scope.saveAndNext = function(value) {
-                tellsList.length = [];
+                $scope.tells = [];
 
                 var returnValue = actionDispatcher(actionsList[value._self], value);
                 if (returnValue !== 'stop mazerunner') {

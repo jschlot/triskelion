@@ -88,6 +88,11 @@ angular
                     name: "Quit Game",
                     hotkey: "Q",
                     _self: "quit"
+                },
+                newgame: {
+                    name: "Create new Game",
+                    hotkey: "C",
+                    _self: "newgame"
                 }
             };
 
@@ -103,7 +108,7 @@ angular
                 mapscreen: "Map",
                 actionchoice: "You chose STRING",
                 auraDamage: "PLAYER takes DAMAGE points of damage from AURA",
-                partyselect: "Party Select",
+                camp: "Camp",
                 removePlayer: "Who will you ask to leave the party?",
                 whowilljoin: "Who will you add to the party?",
                 whowillleave: "Who will you remove to the party?",

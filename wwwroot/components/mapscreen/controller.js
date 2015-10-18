@@ -34,7 +34,7 @@ angular
             $scope.saveAndNext = function(value) {
                 var actionsList = {
                     returntogame: function(actionSelected) {
-                        tellsList.length = 0;
+                        $scope.tells = [];
                         $location.path( "/gamegrid" );
                     },
                     teleport: function(actionSelected) {

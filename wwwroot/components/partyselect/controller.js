@@ -27,13 +27,13 @@ angular
             
             actionsList = {
                 'add': function() {
-                    tellsList = [infoText.whowilljoin];                   
+                    $scope.tells = [infoText.whowilljoin];                   
                     $scope.availableActions = angular.copy(cast);
                     $scope.availableActions.push(partySelectActions.back);
                     context = 'add';
                  },
                 'remove': function() {
-                    tellsList = [infoText.removePlayer];
+                    $scope.tells = [infoText.removePlayer];
                     $scope.availableActions = angular.copy(partyData);
                     $scope.availableActions.push(partySelectActions.back);
                     context = 'remove';
@@ -79,13 +79,14 @@ angular
                         abilityList.push(value.abilities[i].name);
                     }
 
-                    tellsList = [
+                    $scope.tells = [
                         infoText.keys.name.replace(/VALUE/, value.name),
                         infoText.keys.race.replace(/VALUE/, value.race),
                         infoText.keys.type.replace(/VALUE/, value.type),
                         infoText.keys.health.replace(/VALUE/, value.health),
                         infoText.keys.abilities.replace(/VALUE/, abilityList.join(", "))
                     ];
+                    
                     $scope.availableActions = [
                         partySelectActions.confirmAdd,
                         partySelectActions.backtoselect
@@ -101,7 +102,7 @@ angular
                     }
 
                     if (partyData.length < userData.gameModuleSelected.maxparty) {
-                        tellsList = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
+                        $scope.tells = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
                         partyData.push(currentPick);
                         $scope.partyData = partyData;
                     }
@@ -120,7 +121,7 @@ angular
                         }
                     }
 
-                    tellsList = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
+                    $scope.tells = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
                     cast.push(currentPick);
  
                     $scope.partyData = partyData;
@@ -142,14 +143,13 @@ angular
                         actionsList.describePlayer(value);                    
                     }
                 }
-                $scope.tells = tellsList;
             };
 
             $scope.page = {
-                name: infoText.partyselect
+                name: infoText.camp
             };
+            
             $scope.tells = tellsList;
-            tellsList.push(infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name));
 
             $scope.partyData = partyData;
 
