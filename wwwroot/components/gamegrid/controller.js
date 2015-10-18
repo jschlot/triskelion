@@ -25,6 +25,7 @@ angular
 
             levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols);
             levelMap.init(currentLevelMap.layout);
+            tellsList = [];
 
             actionsList = {
                 'forward': function() {
@@ -96,7 +97,7 @@ angular
             };
 
             $scope.saveAndNext = function(value) {
-                tellsList.length = 0;
+                tellsList.length = [];
 
                 var returnValue = actionDispatcher(actionsList[value._self], value);
                 if (returnValue !== 'stop mazerunner') {

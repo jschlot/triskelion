@@ -20,8 +20,6 @@ angular
                 actionsList = {},
                 cast = [];
 
-//            tellsList.push(infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name));
-
             cast = allPlayers.filter( function( el ) {
                 var lookup = objectFindByKey(partyData, 'hotkey', el.hotkey);
                 return lookup ? false : el;
@@ -151,6 +149,8 @@ angular
                 name: infoText.partyselect
             };
             $scope.tells = tellsList;
+            tellsList.push(infoText.actionchoice.replace(/STRING/, userData.gameModuleSelected.name));
+
             $scope.partyData = partyData;
 
             actionsList.mainActions();            

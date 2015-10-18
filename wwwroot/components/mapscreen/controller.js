@@ -2,9 +2,9 @@
 angular
     .module('triskelion.mapScreen.controller',[])
     .controller('mapScreenController', [
-            '$scope', '$location', 'gameModules', 'infoText', 'userData', 'partyData', 'tellsList', 'partyActions', 
+            '$scope', '$location', 'infoText', 'userData', 'partyData', 'tellsList', 'partyActions', 
             'actionDispatcher', 'levelMap', 'miniMap', 'hotkeyAction',  
-        function($scope, $location, gameModules, infoText, userData, partyData, tellsList, partyActions, 
+        function($scope, $location, infoText, userData, partyData, tellsList, partyActions, 
             actionDispatcher, levelMap, miniMap, hotkeyAction) {
             
             'use strict';
@@ -38,8 +38,8 @@ angular
                         $location.path( "/gamegrid" );
                     },
                     teleport: function(actionSelected) {
-                        userData.currentMap.coordinates = [2,2];
-                        userData.currentMap.direction = "east";
+                        userData.currentMap.coordinates = userData.gameModuleSelected.startingCoordinates;
+                        userData.currentMap.direction = userData.gameModuleSelected.defaultCompassDirection;
                         $location.path( "/gamegrid" );
                     },
                 };
