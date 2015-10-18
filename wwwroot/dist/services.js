@@ -478,18 +478,20 @@ angular
 /* global angular */
 angular
     .module('triskelion.utils.dice.service', [])
-    .factory('DiceService',
+    .service('diceService',
         function() {
             'use strict';
-            return function() {
-				this.roll = function(howmany, sides) {
+            var diceService = {
+				roll: function(howmany, sides) {
 					var total = 0;
 					for (var i = 0; i < howmany; i++) {
-						total += Math.floor(Math.random() * sides);
+						total += Math.floor(Math.random() * sides) + 1;
 					}
                     return total;
-				};
+				}
             };
+            
+            return diceService;
         }
     );
 /* global angular */
