@@ -6,41 +6,33 @@ angular
             'use strict';
 
             return function() {
+                this.character = {};
                 this.character.meta = {};
-                this.character.meta.created = function(date) {
-                    return (date) ? date : new Date();
-                };
+                this.character.meta.created = new Date();
 
                 this.character.identity = {};
-				this.character.identity.name = 'skeleton';
+				this.character.identity.name = 'grunt';
                 this.character.identity.race = 'human';
                 this.character.identity.class = 'fighter';
 
-                this.character.status = function() {
-                    return 'undead';
-                };
-
                 this.character.alignment = {};
-                this.character.alignment.points = {};
-                this.character.alignment.points.evil = 0;
-                this.character.alignment.points.good = 0;
-                this.character.alignment.points.order = 0;
-                this.character.alignment.points.chaos = 0;
-
-                this.character.alignment.rating = function() {
-                    var morals = 'neutral', ethics = 'neutral';
-
-                    return morals + " " + ethics;
-                };
+                this.character.alignment.morals = 0;
+                this.character.alignment.ethics = 0;
 
                 this.character.experience = {};
                 this.character.experience.level = 1;
                 this.character.experience.points = 0;
-                this.character.experience.bonus = 0;
+                this.character.experience.bonus = 1;
+                this.character.experience.add = function(xp) {
+                    var earned = xp + (xp * this.bonus);
+                    this.points = this.points + earned;
+                    this.level = Math.floor(this.points / 1000) + 1;
+                    return earned;
+                };
                 
                 this.character.stats = {};
                 this.character.stats.health = 1;
-                this.character.stats.energy = 1;
+                this.character.stats.energy = 0;
                 this.character.stats.strength = 1;
                 this.character.stats.agility = 1;
                 this.character.stats.intelligence = 1;
@@ -63,12 +55,16 @@ angular
                 this.character.defense.parry = 0;
                 this.character.defense.block = 0;
 
+                this.character.abilities = {};
+                this.character.abilities.small = {};
+                this.character.abilities.medium = {};
+                this.character.abilities.large = {};
+                this.character.abilities.super = {};
+
                 this.character.savingThrows = [];
-                this.character.abilities = [];
                 this.character.inventory = [];
                 this.character.quips = [];
                 this.character.tags = [];
-                                
             };
         }
     );

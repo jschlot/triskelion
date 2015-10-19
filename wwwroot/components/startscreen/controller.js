@@ -2,8 +2,8 @@
 angular
     .module('triskelion.startScreen.controller',[])
     .controller('startScreenController', [
-        '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher', 'partySelectActions', 'Player',
-        function($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher, partySelectActions, Player) {
+        '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher', 'partySelectActions',
+        function($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher, partySelectActions) {
             'use strict';
 
             /*
@@ -52,12 +52,6 @@ angular
                 partySelectActions.newgame
             ];
 
-            $scope.tells = tellsList;
-            
-            
-            var jack = new Player();
-            console.log(angular.toJson(jack, true));
-            console.log(jack.alignment.get());
-            
+            $scope.tells = tellsList;                     
         }
     ]);
