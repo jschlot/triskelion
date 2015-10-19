@@ -1,13 +1,14 @@
 /* global angular */
 angular
     .module('triskelion.gameGrid.controller',[
-        'triskelion.gamegrid.mapModal.service', 'triskelion.gamegrid.menuOptions.service', 'triskelion.gamegrid.mazeRunner.service', 'triskelion.utils.levelMap.service'
+        'triskelion.gamegrid.mapModal.service', 'triskelion.gamegrid.menuOptions.service', 
+        'triskelion.gamegrid.mazeRunner.service', 'triskelion.utils.levelMap.service'
     ])
     .controller('gameGridController', ['$scope', '$location',
-            'userData', 'partyData', 'levelMap', 'mazeRunner', 'menuOptions', 'ouchHappened', 'infoText',
+            'userData', 'partyData', 'levelMap', 'mazeRunner', 'gameGridMenuOptions', 'ouchHappened', 'infoText',
             'tileService', 'tellsList', 'mapModal', 'actionDispatcher', 
         function($scope, $location,
-            userData, partyData, levelMap, mazeRunner, menuOptions, ouchHappened, infoText,
+            userData, partyData, levelMap, mazeRunner, gameGridMenuOptions, ouchHappened, infoText,
             tileService, tellsList, mapModal, actionDispatcher) {
 
             'use strict';
@@ -23,7 +24,8 @@ angular
                 compassOptions = ['north','east', 'south', 'west'],
                 coordinates = userData.currentMap.coordinates,
                 compassDirection = userData.currentMap.direction,
-                actionsList = {};
+                actionsList = {},
+                menuOptions = gameGridMenuOptions;
 
             levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols);
             levelMap.init(currentLevelMap.layout);

@@ -1,10 +1,10 @@
 /* global angular */
 angular
     .module('triskelion.gamegrid.menuOptions.service', [])
-    .service('menuOptions',
+    .service('gameGridMenuOptions',
         function() {
             'use strict';
-            var partyActions = {
+            var menuOptions = {
                 forward: {
                     name: "Forward",
                     hotkey: "F",
@@ -47,6 +47,6 @@ angular
                 }
             };
 
-            return partyActions;
+            return menuOptions;
         }
     );

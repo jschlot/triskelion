@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module('triskelion.mapscreen.menuOptions.service', [])
-    .service('menuOptions',
+    .service('mapScreenMenuOptions',
         function() {
             'use strict';
             var partyActions = {

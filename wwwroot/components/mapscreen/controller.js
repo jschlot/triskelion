@@ -4,9 +4,9 @@ angular
         'triskelion.mapscreen.miniMap.service', 'triskelion.mapscreen.menuOptions.service', 'triskelion.utils.levelMap.service'
     ])
     .controller('mapScreenController', [
-            '$scope', '$location', 'infoText', 'userData', 'partyData', 'tellsList', 'menuOptions', 
+            '$scope', '$location', 'infoText', 'userData', 'partyData', 'tellsList', 'mapScreenMenuOptions', 
             'actionDispatcher', 'levelMap', 'miniMap', 'hotkeyAction',  
-        function($scope, $location, infoText, userData, partyData, tellsList, menuOptions, 
+        function($scope, $location, infoText, userData, partyData, tellsList, mapScreenMenuOptions, 
             actionDispatcher, levelMap, miniMap, hotkeyAction) {
             
             'use strict';
@@ -19,7 +19,8 @@ angular
             var currentLevel = userData.currentMap.level,
                 currentLevelMap = userData.gameModuleSelected.map[currentLevel],
                 coordinates = userData.currentMap.coordinates,
-                startingActionTells;
+                startingActionTells,
+                menuOptions = mapScreenMenuOptions;
                 
             startingActionTells = function() {
                 $scope.tells = [];
