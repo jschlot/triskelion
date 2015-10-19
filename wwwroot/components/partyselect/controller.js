@@ -1,6 +1,6 @@
 /* global angular */
 angular
-    .module('triskelion.partySelect.controller',[])
+    .module('triskelion.partySelect.controller',['triskelion.partySelect.service'])
     .controller('partySelectController', [
             '$scope', '$location', 'partySelectActions', 'infoText', 'userData', 
             'playerDB', 'partyData', 'tellsList', 'objectFindByKey', 'actionDispatcher',

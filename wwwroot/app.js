@@ -25,7 +25,9 @@ angular
         'triskelion.utils.npc.service',
         'triskelion.utils.dungeon.service',
         'triskelion.utils.tileService.service',
-        'triskelion.utils.actionDispatcher.service'
+        'triskelion.utils.actionDispatcher.service',
+
+        'triskelion.player.factory'
     ])
     .config([
         '$routeProvider', '$compileProvider',
