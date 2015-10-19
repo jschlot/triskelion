@@ -23,7 +23,6 @@ angular
         //// tile service should not be in dungeon service
         //// this requires refactor of dungeon service into dungeon factory
         // dungeon service should be in globalData service
-        'triskelion.utils.dungeon.service',
         'triskelion.utils.globalData.service'
     ])
     .config([

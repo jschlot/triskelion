@@ -8,7 +8,8 @@ angular
             this.action = function(value) {
                 var actionsList = [];
                 actionsList = userData.gameModuleSelected.tileActions();
-                actionDispatcher(actionsList[value._self], value);
+                console.log(actionsList[value._self]);
+                console.log(value);
             };
 
             this.damage = function(obj, aura) {
