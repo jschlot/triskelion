@@ -57,6 +57,7 @@ angular
             
             var jack = new Player();
             console.log(angular.toJson(jack, true));
+            console.log(jack.alignment.get());
             
         }
     ]);
