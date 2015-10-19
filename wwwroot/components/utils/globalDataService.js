@@ -1,6 +1,8 @@
 /* global angular */
 angular
-    .module('triskelion.utils.globalData.service', ['triskelion.character.factory', 'triskelion.character.service'])
+    .module('triskelion.utils.globalData.service', [
+        'triskelion.character.factory', 'triskelion.character.service'
+    ])
     .service('userData', [
         function() {
             'use strict';

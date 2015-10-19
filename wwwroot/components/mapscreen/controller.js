@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module('triskelion.mapScreen.controller',[
-        'triskelion.mapscreen.miniMap.service', 'triskelion.mapscreen.menuOptions.service'
+        'triskelion.mapscreen.miniMap.service', 'triskelion.mapscreen.menuOptions.service', 'triskelion.utils.levelMap.service'
     ])
     .controller('mapScreenController', [
             '$scope', '$location', 'infoText', 'userData', 'partyData', 'tellsList', 'menuOptions', 

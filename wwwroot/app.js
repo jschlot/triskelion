@@ -18,13 +18,11 @@ angular
         'triskelion.utils.dice.service',
         'triskelion.utils.dictionary.service',
         'triskelion.utils.stringManipulations.service',
-
-        'triskelion.utils.levelMap.service',
-        
-        //// should not be in dungeonService
         'triskelion.utils.tileService.service',
 
-        // this will need rethinking also
+        //// tile service should not be in dungeon service
+        //// this requires refactor of dungeon service into dungeon factory
+        // dungeon service should be in globalData service
         'triskelion.utils.dungeon.service',
         'triskelion.utils.globalData.service'
     ])
