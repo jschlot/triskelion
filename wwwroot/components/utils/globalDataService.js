@@ -24,7 +24,7 @@ angular
                                 // 0     1     2     3     4     5     6     7     8     9    10    11
                                 [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01],  // 0
 
-                                [0x01, 0x01, 0x80, 0x18, 0x81, 0x82, 0x18, 0x18, 0x18, 0x18, 0x18, 0x01],  // 1
+                                [0x01, 0x01, 0x20, 0x18, 0x21, 0x22, 0x18, 0x18, 0x18, 0x18, 0x18, 0x01],  // 1
 
                                 [0x01, 0x01, 0x18, 0x01, 0x01, 0x01, 0x01, 0x01, 0x18, 0x01, 0x18, 0x01],  // 2
 
@@ -45,64 +45,29 @@ angular
                                 [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01]   // 10
 
                             ]
-                        },
-                        {
-                            name: "The Crypt",
-                            layout: [
-                                // 0     1     2     3     4     5     6     7     8     9    10    11
-                                [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01],  // 0
-
-                                [0x01, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x01],  // 1
-
-                                [0x01, 0x01, 0x18, 0x01, 0x01, 0x01, 0x01, 0x01, 0x18, 0x01, 0x18, 0x01],  // 2
-
-                                [0x01, 0x01, 0x18, 0x01, 0x01, 0x01, 0x18, 0x18, 0x18, 0x01, 0x18, 0x01],  // 3
-
-                                [0x01, 0x01, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x01, 0x01, 0x18, 0x01],  // 4
-
-                                [0x01, 0x01, 0x1A, 0x01, 0x01, 0x01, 0x01, 0x18, 0x01, 0x01, 0x18, 0x01],  // 5
-
-                                [0x01, 0x18, 0x18, 0x18, 0x01, 0x01, 0x01, 0x18, 0x18, 0x01, 0x18, 0x01],  // 6
-
-                                [0x01, 0x18, 0x18, 0x18, 0x01, 0x01, 0x01, 0x01, 0x18, 0x01, 0x18, 0x01],  // 7
-
-                                [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x18, 0x01, 0x18, 0x01],  // 8
-
-                                [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x18, 0x18, 0x18, 0x01],  // 9
-
-                                [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01]   // 10
-
-                            ]
                         }
                     ],
-                    tileActions: function() {
-                        var actionsList = [];
-
-                        actionsList[128] = {                                
+                    tileActions: [
+                        {                                
                             actionType: "damage",
                             description: "A spray of lava splashes on the party!",
                             savingThrow: 15,
                             numberOfDice: 1,
                             diceSides: 10
-                        };
-
-                        actionsList[129] = {
+                        },
+                        {
                             actionType:  "heal",
                             description: "A ray of light shines upon the group!",
                             numberOfDice: 2,
                             diceSides: 8
-                        };
-
-                        
-                        actionsList[130] = {
+                        },                        
+                        {
                             actionType:  "message",
                             description: "A eerie wailing sound comes from down the hallway...",
                             numberOfDice: 2,
                             diceSides: 8
                         }
-                        
-                        return actionsList;
-                    }
+                    ]
                 }
             };
 

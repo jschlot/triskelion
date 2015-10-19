@@ -20,9 +20,7 @@ angular
         'triskelion.utils.stringManipulations.service',
         'triskelion.utils.tileService.service',
 
-        //// tile service should not be in dungeon service
-        //// this requires refactor of dungeon service into dungeon factory
-        // dungeon service should be in globalData service
+        // to be replaced by a cloud based data service
         'triskelion.utils.globalData.service'
     ])
     .config([

@@ -7,9 +7,26 @@ angular
 
             this.action = function(value) {
                 var actionsList = [];
-                actionsList = userData.gameModuleSelected.tileActions();
-                console.log(actionsList[value._self]);
-                console.log(value);
+                actionsList = userData.gameModuleSelected.tileActions;
+                var lookup = value._self - 32;
+                var event = actionsList[lookup];
+
+                switch (event.actionType) {
+                    case 'damage':
+                        this.damage(value, event);
+                        break;
+                    case 'heal':
+                        this.heal(value, event);
+                        break;
+                    case 'message':
+                        this.message(value, event);
+                        break;
+                }
+
+            };
+            
+            this.message = function(obj, aura) {
+                obj.tells.push(aura.description);
             };
 
             this.damage = function(obj, aura) {
