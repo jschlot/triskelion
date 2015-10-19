@@ -1,7 +1,7 @@
 /* global angular */
 angular
-    .module('triskelion.player.factory', [])
-    .factory('Player',
+    .module('triskelion.character.factory', ['triskelion.character.service'])
+    .factory('Character', [
         function() {
             'use strict';
 
@@ -67,4 +67,4 @@ angular
                 this.character.tags = [];
             };
         }
-    );
+    ]);

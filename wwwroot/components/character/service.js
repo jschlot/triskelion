@@ -1,6 +1,6 @@
 /* global angular */
 angular
-    .module('triskelion.utils.npc.service', [])
+    .module('triskelion.character.service', [])
     .service('npcabilities',
         function() {
             'use strict';
