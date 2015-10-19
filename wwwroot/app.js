@@ -13,25 +13,18 @@ angular
         'triskelion.locationBar.directive',
         'triskelion.aurasList.directive',
 
-        // these should be moved to a new folder - "world" maybe?
-        'triskelion.utils.mazeRunner.service',
-        'triskelion.utils.miniMap.service',
-        'triskelion.utils.mapModal.service',
-        'triskelion.utils.levelMap.service',
-        'triskelion.utils.tileService.service',
-
+        'triskelion.utils.actionDispatcher.service',
+        'triskelion.utils.aiSpeech.service',
         'triskelion.utils.dice.service',
         'triskelion.utils.dictionary.service',
-        'triskelion.utils.aiSpeech.service',
         'triskelion.utils.stringManipulations.service',
-        'triskelion.utils.actionDispatcher.service',
-        
+
 
         // these should be moved to another folder
+        'triskelion.utils.levelMap.service',
+        'triskelion.utils.tileService.service',
         'triskelion.utils.dungeon.service',
-        'triskelion.utils.globalData.service',
-
-        'triskelion.character.service'
+        'triskelion.utils.globalData.service'
     ])
     .config([
         '$routeProvider', '$compileProvider',

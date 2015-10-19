@@ -11,7 +11,7 @@ angular
                 This is, by far, the simplest of controller modules
                 It also happens to be a good starting point for creating new modules
                 One principal shown here is using functional programming to dispatch events
-                with our actionDispatch service (a simple functional factory)
+                with our actionDispatch service
             */
             
             tellsList = [];

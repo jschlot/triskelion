@@ -1,6 +1,6 @@
 /* global angular */
 angular
-    .module('triskelion.utils.globalData.service', [])
+    .module('triskelion.utils.globalData.service', ['triskelion.character.factory', 'triskelion.character.service'])
     .service('userData', [
         function() {
             'use strict';
@@ -24,4 +24,19 @@ angular
             var tellsList = [];
             return tellsList;
         }
-    ]);
+    ])
+    .service('playerDB',['Character', 'ability', 'race', 'classType',
+        function(Character, ability, race, classType) {
+            'use strict';
+            var playerDB = {};
+            playerDB.dungeon = [];
+            
+            var devonellah = new Character("Devonellah");
+                devonellah.character.abilities.small = ability.quickheal;
+                        
+            playerDB.dungeon.push(devonellah);
+            
+            return playerDB;
+        }]
+    );
+    
