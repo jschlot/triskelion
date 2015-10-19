@@ -15,7 +15,10 @@ angular
 				this.character.identity.name = 'skeleton';
                 this.character.identity.race = 'human';
                 this.character.identity.class = 'fighter';
-                this.character.identity.status = 'undead';
+
+                this.character.status = function() {
+                    return 'undead';
+                };
 
                 this.character.alignment = {};
                 this.character.alignment.points = {};
@@ -24,7 +27,7 @@ angular
                 this.character.alignment.points.order = 0;
                 this.character.alignment.points.chaos = 0;
 
-                this.character.alignment.get = function() {
+                this.character.alignment.rating = function() {
                     var morals = 'neutral', ethics = 'neutral';
 
                     return morals + " " + ethics;
