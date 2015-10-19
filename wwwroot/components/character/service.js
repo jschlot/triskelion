@@ -1,6 +1,6 @@
 /* global angular */
 angular
-    .module('triskelion.character.service', [])
+    .module('triskelion.character.service', ['triskelion.character.factory'])
     .service('npcabilities',
         function() {
             'use strict';
@@ -164,88 +164,17 @@ angular
             return npctypes;
         }
     )
-    .service('playerDB',['npcabilities', 'npcraces', 'npctypes',
-        function(npcabilities,npcraces,npctypes) {
+    .service('playerDB',['Character', 'npcabilities', 'npcraces', 'npctypes',
+        function(Character, npcabilities,npcraces,npctypes) {
             'use strict';
-            var playerDB = {
-                'dungeon': [
-                    {
-                        name: "Gregor Mandalor",
-                        hotkey: "G",
-                        _self: "gregor",
-                        health: 200,
-                        maxhealth: 200,
-                        status: "Alive",
-                        type: npctypes.dungeon.fighter.name,
-                        race: npcraces.dungeon.human.name,
-                        abilities: [
-                            npcabilities.dungeon.swing,
-                            npcabilities.dungeon.block,
-                            npcabilities.dungeon.taunt
-                        ]
-                    },
-                    {
-                        name: "Devonellah",
-                        hotkey: "D",
-                        _self: "devonellah",
-                        health: 80,
-                        maxhealth: 80,
-                        status: "Alive",
-                        type: npctypes.dungeon.support.name,
-                        race: npcraces.dungeon.elf.name,
-                        abilities: [
-                            npcabilities.dungeon.quickheal,
-                            npcabilities.dungeon.bubble,
-                            npcabilities.dungeon.radiate
-                        ]
-                    },
-                    {
-                        name: "Jupiterra",
-                        hotkey: "J",
-                        _self: "jupiterra",
-                        health: 100,
-                        maxhealth: 100,
-                        status: "Alive",
-                        type: npctypes.dungeon.archer.name,
-                        race: npcraces.dungeon.elf.name,
-                        abilities: [
-                            npcabilities.dungeon.shoot,
-                            npcabilities.dungeon.powershot,
-                            npcabilities.dungeon.flurry
-                        ]
-                    },
-                    {
-                        name: "Thermofax Magipoor",
-                        hotkey: "T",
-                        _self: "thermofax",
-                        health: 80,
-                        maxhealth: 80,
-                        status: "Alive",
-                        type: npctypes.dungeon.caster.name,
-                        race: npcraces.dungeon.human.name,
-                        abilities: [
-                            npcabilities.dungeon.fireball,
-                            npcabilities.dungeon.dragonblast,
-                            npcabilities.dungeon.inferno
-                        ]
-                    },
-                    {
-                        name: "Krayt Stoneleg",
-                        hotkey: "K",
-                        _self: "krayt",
-                        health: 120,
-                        maxhealth: 120,
-                        status: "Alive",
-                        type: npctypes.dungeon.thief.name,
-                        race: npcraces.dungeon.dwarf.name,
-                        abilities: [
-                            npcabilities.dungeon.pummel,
-                            npcabilities.dungeon.smash,
-                            npcabilities.dungeon.whirlwind
-                        ]
-                    }
-                ]
-            };
+            var playerDB = {};
+            playerDB.dungeon = [];
+            
+            var devonellah = new Character("Devonellah");
+            devonellah.character.abilities.small = { name: "flash heal" };
+                        
+            playerDB.dungeon.push(devonellah);
+            
 
             return playerDB;
         }]

@@ -73,17 +73,20 @@ angular
                  'backtoselect': function() {
                     actionsList.add();
                  },
-                 'describePlayer': function(value) {
-                    var abilityList = [];
-                    for (var i = 0; i < value.abilities.length; i++) {
-                        abilityList.push(value.abilities[i].name);
-                    }
+                 'describePlayer': function(player) {
+                    var abilityList = [], character = player.character;
+
+                    angular.forEach(character.abilities, function(ability, key) {
+                        if (!angular.equals({}, ability)) {
+                            this.push(ability.name);                            
+                        }
+                    }, abilityList);
 
                     $scope.tells = [
-                        infoText.keys.name.replace(/VALUE/, value.name),
-                        infoText.keys.race.replace(/VALUE/, value.race),
-                        infoText.keys.type.replace(/VALUE/, value.type),
-                        infoText.keys.health.replace(/VALUE/, value.health),
+                        infoText.keys.name.replace(/VALUE/, character.identity.name),
+                        infoText.keys.race.replace(/VALUE/, character.identity.race),
+                        infoText.keys.type.replace(/VALUE/, character.identity.class),
+                        infoText.keys.health.replace(/VALUE/, character.stats.health),
                         infoText.keys.abilities.replace(/VALUE/, abilityList.join(", "))
                     ];
                     

@@ -1,19 +1,24 @@
 /* global angular */
 angular
-    .module('triskelion.character.factory', ['triskelion.character.service'])
+    .module('triskelion.character.factory', [])
     .factory('Character', [
         function() {
             'use strict';
 
-            return function() {
+            return function(name) {
+                this.name = (name) ? name : 'Grunt';
+                this.created = new Date();
+                this.hotkey = this.name.substr(0,1);
+                this._self = this.name.toLowerCase();
+                
                 this.character = {};
-                this.character.meta = {};
-                this.character.meta.created = new Date();
 
                 this.character.identity = {};
-				this.character.identity.name = 'grunt';
+				this.character.identity.name = this.name;
                 this.character.identity.race = 'human';
                 this.character.identity.class = 'fighter';
+
+
 
                 this.character.alignment = {};
                 this.character.alignment.morals = 0;
@@ -32,7 +37,9 @@ angular
                 
                 this.character.stats = {};
                 this.character.stats.health = 1;
+                this.character.stats.maxhealth = 1;
                 this.character.stats.energy = 0;
+                this.character.stats.maxenergy = 1;
                 this.character.stats.strength = 1;
                 this.character.stats.agility = 1;
                 this.character.stats.intelligence = 1;

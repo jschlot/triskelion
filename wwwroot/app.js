@@ -25,12 +25,13 @@ angular
         'triskelion.utils.aiSpeech.service',
         'triskelion.utils.stringManipulations.service',
         'triskelion.utils.actionDispatcher.service',
+        
 
         // these should be moved to another folder
         'triskelion.utils.dungeon.service',
         'triskelion.utils.globalData.service',
 
-        'triskelion.character.factory'
+        'triskelion.character.service'
     ])
     .config([
         '$routeProvider', '$compileProvider',
