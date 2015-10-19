@@ -29,13 +29,13 @@ module.exports = function(grunt) {
 			},
 			services: {
 				// the files to concatenate
-				src: ['wwwroot/components/**/service.js', 'wwwroot/components/utils/*.js'],
+				src: ['wwwroot/components/**/service.js', 'wwwroot/components/**/services/**.js', 'wwwroot/components/utils/*.js'],
 				// the location of the resulting JS file
 				dest: 'wwwroot/dist/services.js'
 			},
 			factories: {
 				// the files to concatenate
-				src: ['wwwroot/components/**/factory.js', 'wwwroot/components/**/factory.js'],
+				src: ['wwwroot/components/**/factory.js', 'wwwroot/components/**/factories/**.js', 'wwwroot/components/**/factory.js'],
 				// the location of the resulting JS file
 				dest: 'wwwroot/dist/factories.js'
 			}

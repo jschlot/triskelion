@@ -19,10 +19,12 @@ angular
         'triskelion.utils.dictionary.service',
         'triskelion.utils.stringManipulations.service',
 
-
-        // these should be moved to another folder
         'triskelion.utils.levelMap.service',
+        
+        //// should not be in dungeonService
         'triskelion.utils.tileService.service',
+
+        // this will need rethinking also
         'triskelion.utils.dungeon.service',
         'triskelion.utils.globalData.service'
     ])

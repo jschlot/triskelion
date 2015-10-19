@@ -1,10 +1,12 @@
 /* global angular */
 angular
-    .module('triskelion.mapScreen.controller',['triskelion.miniMap.service'])
+    .module('triskelion.mapScreen.controller',[
+        'triskelion.mapscreen.miniMap.service', 'triskelion.mapscreen.menuOptions.service'
+    ])
     .controller('mapScreenController', [
-            '$scope', '$location', 'infoText', 'userData', 'partyData', 'tellsList', 'partyActions', 
+            '$scope', '$location', 'infoText', 'userData', 'partyData', 'tellsList', 'menuOptions', 
             'actionDispatcher', 'levelMap', 'miniMap', 'hotkeyAction',  
-        function($scope, $location, infoText, userData, partyData, tellsList, partyActions, 
+        function($scope, $location, infoText, userData, partyData, tellsList, menuOptions, 
             actionDispatcher, levelMap, miniMap, hotkeyAction) {
             
             'use strict';
@@ -60,8 +62,8 @@ angular
             };
 
             $scope.availableActions = [
-                partyActions.returntogame,
-                partyActions.teleport
+                menuOptions.returntogame,
+                menuOptions.teleport
             ];
             
             $scope.tells = [];

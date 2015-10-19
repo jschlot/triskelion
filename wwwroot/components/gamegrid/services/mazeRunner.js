@@ -1,6 +1,6 @@
 /* global angular, d3 */
 angular
-    .module('triskelion.utils.mazeRunner.service', [])
+    .module('triskelion.gamegrid.mazeRunner.service', [])
     .service('mazeRunner', ['tileService',
         function(tileService) {
             'use strict';

@@ -1,6 +1,6 @@
 /* global angular, d3 */
 angular
-    .module('triskelion.miniMap.service', [])
+    .module('triskelion.mapscreen.miniMap.service', [])
     .service('miniMap', ['tileService',
         function(tileService) {
             'use strict';

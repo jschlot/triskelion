@@ -1,13 +1,13 @@
 /* global angular */
 angular
     .module('triskelion.gameGrid.controller',[
-        'triskelion.gameGrid.service', 'triskelion.utils.mazeRunner.service',
+        'triskelion.gamegrid.mapModal.service', 'triskelion.gamegrid.menuOptions.service', 'triskelion.gamegrid.mazeRunner.service',
     ])
     .controller('gameGridController', ['$scope', '$location',
-            'userData', 'partyData', 'levelMap', 'mazeRunner', 'partyActions', 'ouchHappened', 'infoText',
+            'userData', 'partyData', 'levelMap', 'mazeRunner', 'menuOptions', 'ouchHappened', 'infoText',
             'tileService', 'tellsList', 'mapModal', 'actionDispatcher', 
         function($scope, $location,
-            userData, partyData, levelMap, mazeRunner, partyActions, ouchHappened, infoText,
+            userData, partyData, levelMap, mazeRunner, menuOptions, ouchHappened, infoText,
             tileService, tellsList, mapModal, actionDispatcher) {
 
             'use strict';
@@ -112,12 +112,12 @@ angular
             $scope.auras = []; // is this right? maybe we don't want to always reset auras???
 
             $scope.availableActions = [
-                partyActions.forward,
-                partyActions.goleft,
-                partyActions.goright,
-                partyActions.camp,
-                partyActions.describe,
-                partyActions.map
+                menuOptions.forward,
+                menuOptions.goleft,
+                menuOptions.goright,
+                menuOptions.camp,
+                menuOptions.describe,
+                menuOptions.map
             ];
 
             actionsList.updateMazeRunner();
