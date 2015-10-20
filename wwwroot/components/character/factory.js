@@ -73,12 +73,12 @@ angular
             };
         }
     ])
-    .factory('Priest', ['Character', 'ability', 'race', 'spec',
+    .factory('Priest', ['Character', 'ability', 'race', 'spec', 'armor'
          function(Character, ability, race, spec) {
             'use strict';
 
             return function(name) {
-                angular.extend(this,new Character(name));
+                angular.extend(this, new Character(name));
 
                 this.character.identity.race = race.elf.name;
                 this.character.identity.spec = spec.priestess.name;
@@ -102,6 +102,9 @@ angular
 
                 this.character.savingThrows = [
                     'intellect', 'wisdom'  
+                ];
+                this.character.inventory = [
+                    armor.cloth.name
                 ];
 
             };

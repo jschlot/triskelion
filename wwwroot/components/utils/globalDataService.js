@@ -1,8 +1,6 @@
 /* global angular */
 angular
-    .module('triskelion.utils.globalData.service', [
-        'triskelion.character.factory',
-    ])
+    .module('triskelion.utils.globalData.service', ['triskelion.character.factory'])
     .service('gameModules', [ 
         function(tileService) {
             'use strict';
@@ -105,7 +103,6 @@ angular
             playerDB.dungeon = [];
             
             var devonellah = new Priest("Devonellah");
-                        
             playerDB.dungeon.push(devonellah);
             
             return playerDB;

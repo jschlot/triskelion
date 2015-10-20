@@ -61,7 +61,7 @@ angular
     .service('spec',
         function() {
             'use strict';
-            var classType = {
+            var spec = {
                 priestess: {
                     name: "Healer",
                     hotkey: "H",
@@ -84,6 +84,30 @@ angular
                 }
             };
 
-            return classType;
+            return spec;
+        }
+    )
+    .service('armor',
+        function() {
+            'use strict';
+            var armor = {
+                cloth: {
+                    name: "Cloth Robes",
+                    hotkey: "C",
+                    _self: "cloth"
+                },
+                leather: {
+                    name: "Leather Vestments",
+                    hotkey: "L",
+                    _self: "leather"
+                },
+                plate: {
+                    name: "Plate Armor",
+                    hotkey: "P",
+                    _self: "plate"
+                }
+            };
+
+            return armor;
         }
     );    
