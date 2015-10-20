@@ -76,7 +76,7 @@ angular
                     userData.currentMap.direction = compassDirection;
                 },
                 'camp': function() {
-                    $location.path( "/partyselect" );
+                    $location.path( "/camp" );
                 },
                 'describe': function() {
                     //// describe gets any metadata abount the current cell

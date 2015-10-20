@@ -2,8 +2,8 @@
 angular
     .module('triskelion.startScreen.controller',[])
     .controller('startScreenController', [
-        '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher', 'partySelectActions',
-        function($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher, partySelectActions) {
+        '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher', 'campActions',
+        function($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher, campActions) {
             'use strict';
 
             /*
@@ -30,7 +30,7 @@ angular
                     userData.currentMap.coordinates = actionSelected.startingCoordinates;
     
                     $scope.tells.length = 0;
-                    $location.path( "/partyselect" );
+                    $location.path( "/camp" );
                 }
             };
 
@@ -49,7 +49,7 @@ angular
             };                      
 
             $scope.availableActions = [
-                partySelectActions.newgame
+                campActions.newgame
             ];
 
             $scope.tells = tellsList;                     

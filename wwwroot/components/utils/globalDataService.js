@@ -4,6 +4,7 @@ angular
     .service('gameModules', [ 
         function(tileService) {
             'use strict';
+
             var gameModules = {
                 dungeon: {
                     name: "Dungeon of Grim Souls",
@@ -75,6 +76,7 @@ angular
     .service('userData', [
         function() {
             'use strict';
+
             var userData = {
                 gameModuleSelected: null,
                 currentMap: {}
@@ -85,6 +87,7 @@ angular
     .service('partyData', [
         function() {
             'use strict';
+
             var partyData = [];
             return partyData;
         }
@@ -92,6 +95,7 @@ angular
     .service('tellsList', [
         function() {
             'use strict';
+
             var tellsList = [];
             return tellsList;
         }
@@ -99,6 +103,7 @@ angular
     .service('playerDB',['Priest',
         function(Priest) {
             'use strict';
+
             var playerDB = {};
             playerDB.dungeon = [];
             

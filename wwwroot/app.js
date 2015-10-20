@@ -4,7 +4,7 @@ angular
         'ngRoute',
         'triskelion.gameGrid.controller',
         'triskelion.startScreen.controller',
-        'triskelion.partySelect.controller',
+        'triskelion.camp.controller',
         'triskelion.mapScreen.controller',
 
         'triskelion.actionsList.directive',
@@ -34,9 +34,9 @@ angular
                     templateUrl: "components/startscreen/layout.html",
                     controller: 'startScreenController'
                 })
-                .when('/partyselect', {
-                    templateUrl: "components/partyselect/layout.html",
-                    controller: 'partySelectController'
+                .when('/camp', {
+                    templateUrl: "components/camp/layout.html",
+                    controller: 'campController'
                 })
                 .when('/gamegrid', {
                     templateUrl: "components/gamegrid/layout.html",

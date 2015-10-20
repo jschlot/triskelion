@@ -73,8 +73,8 @@ angular
             };
         }
     ])
-    .factory('Priest', ['Character', 'ability', 'race', 'spec', 'armor'
-         function(Character, ability, race, spec) {
+    .factory('Priest', ['Character', 'diceService', 'ability', 'race', 'spec', 'armor',
+         function(Character, diceService, ability, race, spec, armor) {
             'use strict';
 
             return function(name) {
@@ -92,13 +92,14 @@ angular
                 this.character.stats.maxhealth = 10;
                 this.character.stats.energy = 30;
                 this.character.stats.maxenergy = 30;
-                this.character.stats.strength = 3;
-                this.character.stats.agility = 4;
-                this.character.stats.intelligence = 17;
-                this.character.stats.wisdom = 19;
-                this.character.stats.stamina = 9;
                 this.character.stats.movement = 1;
                 this.character.defense.armor = 1;
+
+                this.character.stats.strength = diceService.roll(3,6);
+                this.character.stats.agility = diceService.roll(3,6);
+                this.character.stats.intelligence = diceService.roll(2,5) + 10;
+                this.character.stats.wisdom = diceService.roll(2,5) + 10;
+                this.character.stats.stamina = diceService.roll(3,6);
 
                 this.character.savingThrows = [
                     'intellect', 'wisdom'  
@@ -106,7 +107,6 @@ angular
                 this.character.inventory = [
                     armor.cloth.name
                 ];
-
             };
         }
     ]);

@@ -1,10 +1,10 @@
 /* global angular */
 angular
-    .module('triskelion.partySelect.service', [])
-    .service('partySelectActions',
+    .module('triskelion.camp.service', [])
+    .service('campActions',
         function() {
             'use strict';
-            var partySelectActions = {
+            var campActions = {
                 add: {
                     name: "Add Party Member",
                     hotkey: "A",
@@ -47,6 +47,6 @@ angular
                 }
             };
 
-            return partySelectActions;
+            return campActions;
         }
     );
