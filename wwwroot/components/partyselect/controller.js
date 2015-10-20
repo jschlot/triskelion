@@ -83,10 +83,15 @@ angular
                     }, abilityList);
 
                     $scope.tells = [
-                        infoText.keys.name.replace(/VALUE/, character.identity.name),
-                        infoText.keys.race.replace(/VALUE/, character.identity.race),
-                        infoText.keys.type.replace(/VALUE/, character.identity.class),
+                        //NAME, lvl LEVEL RACE SPEC
+                        infoText.describeCharacter
+                            .replace(/NAME/, character.identity.name)
+                            .replace(/LEVEL/, character.experience.level)
+                            .replace(/RACE/, character.identity.race)
+                            .replace(/SPEC/, character.identity.spec),
+                        infoText.keys.armor.replace(/VALUE/, character.defense.armor),
                         infoText.keys.health.replace(/VALUE/, character.stats.health),
+                        infoText.keys.energy.replace(/VALUE/, character.stats.energy),
                         infoText.keys.abilities.replace(/VALUE/, abilityList.join(", "))
                     ];
                     

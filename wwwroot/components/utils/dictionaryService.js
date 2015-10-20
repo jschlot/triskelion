@@ -44,10 +44,13 @@ angular
                 closeminimap: "R)eturn to Game",
                 campingislovely: "Your team kicks it's collective shoes off, leans back, and smokes the halfling leaf for 2 turns...",
                 deathNote: "and died",
+                describeCharacter: "NAME, lvl LEVEL RACE SPEC",
                 keys: {
                     name: "Name: VALUE",
-                    type: "Class: VALUE",
+                    spec: "Spec: VALUE",
+                    armor: "Armor: VALUE",
                     health: "Health: VALUE",
+                    energy: "Energy: VALUE",
                     abilities: "Abilities: VALUE",
                     race: "Race: VALUE"
                 }

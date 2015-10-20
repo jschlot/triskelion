@@ -4,106 +4,40 @@ angular
     .service('ability',
         function() {
             'use strict';
-            var npcabilities = {
-                swing: {
-                    name: "Swing",
-                    hotkey: "S",
-                    description: "",
-                    _self: "swing"
+            var ability = {
+                heal: {
+                    name: "Healing Word",
+                    hotkey: "h",
+                    _self: "heal",
+                    actionType: "heal"
                 },
-                block: {
-                    name: "Block Attack",
-                    hotkey: "B",
-                    description: "",
-                    _self: "block"
+                bolt: {
+                    name: "Bolt of Light",
+                    hotkey: "b",
+                    _self: "bolt",
+                    actionType: "damage"
                 },
-                taunt: {
-                    name: "Taunt Enemies",
-                    hotkey: "T",
-                    description: "",
-                    _self: "taunt"
+                restoration: {
+                    name: "Restoration",
+                    hotkey: "r",
+                    _self: "restoration",
+                    actionType: "heal"
                 },
-                fireball: {
-                    name: "Fireball Volley",
-                    hotkey: "F",
-                    description: "",
-                    _self: "fireball"
-                },
-                dragonblast: {
-                    name: "Dragon Blast",
-                    hotkey: "D",
-                    description: "",
-                    _self: "dragonblast"
-                },
-                inferno: {
-                    name: "Inferno Strike",
-                    hotkey: "I",
-                    description: "",
-                    _self: "inferno"
-                },
-                quickheal: {
-                    name: "Quick Heal",
-                    hotkey: "q",
-                    description: "",
-                    _self: "quickheal"
-                },
-                bubble: {
-                    name: "Bubble Shield",
-                    hotkey: "B",
-                    description: "",
-                    _self: "bubble"
-                },
-                radiate: {
-                    name: "Radiate Livelihood",
-                    hotkey: "R",
-                    description: "",
-                    _self: "radiate"
-                },
-                shoot: {
-                    name: "Shoot Arrow",
-                    hotkey: "S",
-                    description: "",
-                    _self: "shoot"
-                },
-                powershot: {
-                    name: "Power Shot",
-                    hotkey: "P",
-                    description: "",
-                    _self: "powershot"
-                },
-                flurry: {
-                    name: "Furry of Arrows",
-                    hotkey: "F",
-                    description: "",
-                    _self: "flurry"
-                },
-                pummel: {
-                    name: "Pummel",
+                prayer: {
+                    name: "Prayer of Hope",
                     hotkey: "p",
-                    description: "",
-                    _self: "pummel"
-                },
-                whirlwind: {
-                    name: "Whirlwind",
-                    hotkey: "w",
-                    description: "",
-                    _self: "whirlwind"
-                },
-                smash: {
-                    name: "Smashing Blow",
-                    hotkey: "s",
-                    description: "",
-                    _self: "smash"
+                    _self: "prayer",
+                    actionType: "heal"
                 }
             };
 
-            return npcabilities;
+            return ability;
         }
     )
     .service('race',
         function() {
             'use strict';
-            var npcraces = {
+            var race = {
                 human: {
                     name: "Human",
                     hotkey: "H",
@@ -121,40 +55,35 @@ angular
                 }
             };
 
-            return npcraces;
+            return race;
         }
     )
-    .service('classType',
+    .service('spec',
         function() {
             'use strict';
-            var npctypes = {
-                support: {
+            var classType = {
+                priestess: {
                     name: "Healer",
                     hotkey: "H",
-                    _self: "support"
+                    _self: "priestess"
                 },
                 fighter: {
                     name: "Fighter",
                     hotkey: "F",
                     _self: "fighter"
                 },
-                caster: {
-                    name: "Mage",
-                    hotkey: "M",
-                    _self: "caster"
+                wizard: {
+                    name: "Wizard",
+                    hotkey: "W",
+                    _self: "wizard"
                 },
                 thief: {
                     name: "Thief",
                     hotkey: "T",
                     _self: "thief"
-                },
-                archer: {
-                    name: "Ranger",
-                    hotkey: "R",
-                    _self: "archer"
                 }
             };
 
-            return npctypes;
+            return classType;
         }
     );    

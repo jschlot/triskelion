@@ -1,24 +1,22 @@
 /* global angular */
 angular
-    .module('triskelion.character.factory', [])
-    .factory('Character', [
-        function() {
+    .module('triskelion.character.factory', ['triskelion.character.service'])
+    .factory('Character', ['ability', 'race', 'spec',
+        function(ability, race, spec) {
             'use strict';
 
             return function(name) {
                 this.name = (name) ? name : 'Grunt';
                 this.created = new Date();
                 this.hotkey = this.name.substr(0,1);
-                this._self = this.name.toLowerCase();
+                this._this = this.name.toLowerCase();
                 
                 this.character = {};
 
                 this.character.identity = {};
 				this.character.identity.name = this.name;
-                this.character.identity.race = 'human';
-                this.character.identity.class = 'fighter';
-
-
+                this.character.identity.race = race.human.name;
+                this.character.identity.spec = spec.fighter.name;
 
                 this.character.alignment = {};
                 this.character.alignment.morals = 0;
@@ -71,7 +69,41 @@ angular
                 this.character.savingThrows = [];
                 this.character.inventory = [];
                 this.character.quips = [];
-                this.character.tags = [];
+                this.character.tags = [];                                               
+            };
+        }
+    ])
+    .factory('Priest', ['Character', 'ability', 'race', 'spec',
+         function(Character, ability, race, spec) {
+            'use strict';
+
+            return function(name) {
+                angular.extend(this,new Character(name));
+
+                this.character.identity.race = race.elf.name;
+                this.character.identity.spec = spec.priestess.name;
+                this.character.abilities.small = ability.heal;
+                this.character.abilities.medium = ability.bolt;
+                this.character.abilities.large = ability.restoration;
+                this.character.abilities.super = ability.prayer;
+                this.character.spell.power = 10;
+                this.character.spell.regen = 2;
+                this.character.stats.health = 10;
+                this.character.stats.maxhealth = 10;
+                this.character.stats.energy = 30;
+                this.character.stats.maxenergy = 30;
+                this.character.stats.strength = 3;
+                this.character.stats.agility = 4;
+                this.character.stats.intelligence = 17;
+                this.character.stats.wisdom = 19;
+                this.character.stats.stamina = 9;
+                this.character.stats.movement = 1;
+                this.character.defense.armor = 1;
+
+                this.character.savingThrows = [
+                    'intellect', 'wisdom'  
+                ];
+
             };
         }
     ]);

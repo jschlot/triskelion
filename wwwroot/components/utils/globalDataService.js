@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module('triskelion.utils.globalData.service', [
-        'triskelion.character.factory', 'triskelion.character.service'
+        'triskelion.character.factory',
     ])
     .service('gameModules', [ 
         function(tileService) {
@@ -48,10 +48,10 @@ angular
                         }
                     ],
                     tileActions: [
-                        {                                
+                        {
                             actionType: "damage",
                             description: "A spray of lava splashes on the party!",
-                            savingThrow: 15,
+                            savingThrow: 15, // should not be attached to an ability, but to a player
                             numberOfDice: 1,
                             diceSides: 10
                         },
@@ -98,14 +98,13 @@ angular
             return tellsList;
         }
     ])
-    .service('playerDB',['Character', 'ability', 'race', 'classType',
-        function(Character, ability, race, classType) {
+    .service('playerDB',['Priest',
+        function(Priest) {
             'use strict';
             var playerDB = {};
             playerDB.dungeon = [];
             
-            var devonellah = new Character("Devonellah");
-                devonellah.character.abilities.small = ability.quickheal;
+            var devonellah = new Priest("Devonellah");
                         
             playerDB.dungeon.push(devonellah);
             
