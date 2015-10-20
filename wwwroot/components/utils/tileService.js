@@ -70,9 +70,8 @@ angular
                 angular.forEach(obj.party, function(player, key) {
                     var message = "";
                     var health = diceService.roll(aura.numberOfDice,aura.diceSides);
+
                     var newhp = player.character.stats.health + health;
-
-
                     if (newhp >= player.character.stats.maxhealth) {
                         return;
                     }
