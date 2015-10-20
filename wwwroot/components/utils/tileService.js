@@ -8,9 +8,12 @@ angular
             this.action = function(value) {
                 var actionsList = [];
                 actionsList = userData.gameModuleSelected.tileActions;
+                
+                if (value._self < 32) { return; }
+                
                 var lookup = value._self - 32;
                 var event = actionsList[lookup];
-
+                
                 switch (event.actionType) {
                     case 'damage':
                         this.damage(value, event);
@@ -37,17 +40,17 @@ angular
                     var damage = diceService.roll(aura.numberOfDice,aura.diceSides);
                     var savingThrow = diceService.roll(1,20);
 
-                    if (player.health < 1) {
+                    if (player.character.stats.health < 1) {
                         return;
                     }
 
                     if (savingThrow < aura.savingThrow) {
-                        player.health = player.health - damage;
+                        player.character.stats.health = player.character.stats.health - damage;
 
                         message = infoText.auraDamage
-                            .replace(/PLAYER/, player.name)
+                            .replace(/PLAYER/, player.character.identity.name)
                             .replace(/DAMAGE/, damage)
-                            .replace(/AURA/, aura.type);
+                            .replace(/AURA/, aura.actionType);
 
                         if (player.health < 1) { 
                             player.health = 0;
@@ -56,7 +59,7 @@ angular
 
                         obj.tells.push(message);
                     } else {
-                        obj.tells.push(infoText.auraMissed.replace(/PLAYER/, player.name));                                    
+                        obj.tells.push(infoText.auraMissed.replace(/PLAYER/, player.character.identity.name));                                    
                     } 
                 });
             };
@@ -77,7 +80,7 @@ angular
                     message = infoText.auraHeal
                         .replace(/PLAYER/, player.name)
                         .replace(/HEALTH/, health)
-                        .replace(/AURA/, aura.type);
+                        .replace(/AURA/, aura.actionType);
 
                     obj.tells.push(message);
                 });
