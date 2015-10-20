@@ -70,15 +70,17 @@ angular
                 angular.forEach(obj.party, function(player, key) {
                     var message = "";
                     var health = diceService.roll(aura.numberOfDice,aura.diceSides);
+                    var newhp = player.character.stats.health + health;
 
-                    if (player.health >= player.maxhealth) {
+
+                    if (newhp >= player.character.stats.maxhealth) {
                         return;
                     }
 
-                    player.health = player.health + health;
+                    player.character.stats.health = newhp;
 
                     message = infoText.auraHeal
-                        .replace(/PLAYER/, player.name)
+                        .replace(/PLAYER/, player.character.identity.name)
                         .replace(/HEALTH/, health)
                         .replace(/AURA/, aura.actionType);
 
