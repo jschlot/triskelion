@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module('triskelion.utils.globalData.service', ['triskelion.character.factory'])
-    .service('gameModules', [ 
+    .service('gameModules', [
         function(tileService) {
             'use strict';
 
@@ -59,7 +59,7 @@ angular
                             description: "A ray of light shines upon the group!",
                             numberOfDice: 2,
                             diceSides: 8
-                        },                        
+                        },
                         {
                             actionType:  "message",
                             description: "A eerie wailing sound comes from down the hallway...",
@@ -100,17 +100,16 @@ angular
             return tellsList;
         }
     ])
-    .service('playerDB',['Priest',
-        function(Priest) {
+    .service('playerDB',['Priestess',
+        function(Priestess) {
             'use strict';
 
             var playerDB = {};
             playerDB.dungeon = [];
-            
-            var devonellah = new Priest("Devonellah");
+
+            var devonellah = new Priestess("Devonellah");
             playerDB.dungeon.push(devonellah);
-            
+
             return playerDB;
         }]
     );
-    

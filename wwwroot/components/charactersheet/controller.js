@@ -1,6 +1,8 @@
 /* global angular */
 angular
-    .module('triskelion.characterSheet.controller',['triskelion.charactersheet.menuOptions.service'])
+    .module('triskelion.characterSheet.controller',[
+        'triskelion.charactersheet.menuOptions.service'
+    ])
     .controller('characterSheetController', [
         '$scope', '$location', '$routeParams', 'infoText', 'playerDB', 'hotkeyAction',
         'characterSheetMenuOptions', 'actionDispatcher',
@@ -9,14 +11,7 @@ angular
 
             'use strict';
 
-            /*
-                Developer's Note:
-                This is, by far, the simplest of controller modules
-                It also happens to be a good starting point for creating new modules
-                One principal shown here is using functional programming to dispatch events
-                with our actionDispatch service
-            */
-
+            // the actions list might need to know context or be dynamic
             $scope.saveAndNext = function(value) {
                 var actionsList = {
                     confirm: function(actionSelected) {

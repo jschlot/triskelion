@@ -1,7 +1,7 @@
 /* global angular */
 angular
-    .module('triskelion.characterSheet.directive',[])
-    .directive('characterSheetDirective', [
+    .module('triskelion.statsCard.directive',[])
+    .directive('statsCardDirective', [
         function(){
           'use strict';
 
@@ -26,7 +26,7 @@ angular
             scope: {
                 character: "="
             },
-            templateUrl: 'components/charactersheet/partial.html',
+            templateUrl: 'components/statscard/partial.html',
             link: linkingFunction
           };
     }]);

@@ -63,8 +63,8 @@ angular
             'use strict';
             var spec = {
                 priestess: {
-                    name: "Healer",
-                    hotkey: "H",
+                    name: "Priestess",
+                    hotkey: "P",
                     _self: "priestess"
                 },
                 fighter: {
@@ -110,4 +110,18 @@ angular
 
             return armor;
         }
-    );    
+    )
+    .service('weapon',
+        function() {
+            'use strict';
+            var weapon = {
+                bow: {
+                    name: "Bow of the Moon",
+                    hotkey: "B",
+                    _self: "bow"
+                }
+            };
+
+            return weapon;
+        }
+    );

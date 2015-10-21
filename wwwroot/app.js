@@ -13,8 +13,8 @@ angular
         'triskelion.partyList.directive',
         'triskelion.locationBar.directive',
         'triskelion.aurasList.directive',
-        'triskelion.characterSheet.directive',
-
+        'triskelion.statsCard.directive',
+        
         'triskelion.utils.actionDispatcher.service',
         'triskelion.utils.aiSpeech.service',
         'triskelion.utils.dice.service',
