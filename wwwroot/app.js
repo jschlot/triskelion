@@ -6,12 +6,14 @@ angular
         'triskelion.startScreen.controller',
         'triskelion.camp.controller',
         'triskelion.mapScreen.controller',
+        'triskelion.characterSheet.controller',
 
         'triskelion.actionsList.directive',
         'triskelion.saytell.directive',
         'triskelion.partyList.directive',
         'triskelion.locationBar.directive',
         'triskelion.aurasList.directive',
+        'triskelion.characterSheet.directive',
 
         'triskelion.utils.actionDispatcher.service',
         'triskelion.utils.aiSpeech.service',
@@ -27,7 +29,7 @@ angular
         '$routeProvider', '$compileProvider',
         function($routeProvider, $compileProvider) {
             'use strict';
-            
+
             $compileProvider.debugInfoEnabled(false);
             $routeProvider
                 .when('/startscreen', {
@@ -37,6 +39,10 @@ angular
                 .when('/camp', {
                     templateUrl: "components/camp/layout.html",
                     controller: 'campController'
+                })
+                .when('/charactersheet/:characterkey', {
+                    templateUrl: "components/charactersheet/layout.html",
+                    controller: 'characterSheetController'
                 })
                 .when('/gamegrid', {
                     templateUrl: "components/gamegrid/layout.html",

@@ -4,11 +4,11 @@ angular
         'triskelion.mapscreen.miniMap.service', 'triskelion.mapscreen.menuOptions.service', 'triskelion.utils.levelMap.service'
     ])
     .controller('mapScreenController', [
-            '$scope', '$location', 'infoText', 'userData', 'partyData', 'tellsList', 'mapScreenMenuOptions', 
-            'actionDispatcher', 'levelMap', 'miniMap', 'hotkeyAction',  
-        function($scope, $location, infoText, userData, partyData, tellsList, mapScreenMenuOptions, 
+            '$scope', '$location', 'infoText', 'userData', 'partyData', 'tellsList', 'mapScreenMenuOptions',
+            'actionDispatcher', 'levelMap', 'miniMap', 'hotkeyAction',
+        function($scope, $location, infoText, userData, partyData, tellsList, mapScreenMenuOptions,
             actionDispatcher, levelMap, miniMap, hotkeyAction) {
-            
+
             'use strict';
 
             if (!userData.gameModuleSelected || partyData.length === 0) {
@@ -21,7 +21,7 @@ angular
                 coordinates = userData.currentMap.coordinates,
                 startingActionTells,
                 menuOptions = mapScreenMenuOptions;
-                
+
             startingActionTells = function() {
                 $scope.tells = [];
                 for (var i=0; i<$scope.availableActions.length; i++) {
@@ -33,7 +33,7 @@ angular
             levelMap.init(currentLevelMap.layout);
 
             miniMap(levelMap.getMap());
-          
+
             $scope.saveAndNext = function(value) {
                 var actionsList = {
                     returntogame: function(actionSelected) {
@@ -44,7 +44,7 @@ angular
                         userData.currentMap.coordinates = userData.gameModuleSelected.startingCoordinates;
                         userData.currentMap.direction = userData.gameModuleSelected.defaultCompassDirection;
                         $location.path( "/gamegrid" );
-                    },
+                    }
                 };
 
                 actionDispatcher(actionsList[value._self], value);
@@ -52,7 +52,7 @@ angular
 
             $scope.page = {
                 name: infoText.mapscreen
-            };                      
+            };
 
             $scope.page = {
                 zone: { name: userData.gameModuleSelected.name + ": " + currentLevelMap.name },
@@ -66,9 +66,9 @@ angular
                 menuOptions.returntogame,
                 menuOptions.teleport
             ];
-            
+
             $scope.tells = [];
             startingActionTells();
-                        
+
         }
     ]);

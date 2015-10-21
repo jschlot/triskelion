@@ -44,6 +44,7 @@ angular
                 closeminimap: "R)eturn to Game",
                 campingislovely: "Your team kicks it's collective shoes off, leans back, and smokes the halfling leaf for 2 turns...",
                 deathNote: "and died",
+                charactersheet: "Character Sheet: CHARACTER",
                 describeCharacter: "NAME, lvl LEVEL RACE SPEC",
                 keys: {
                     name: "Name: VALUE",

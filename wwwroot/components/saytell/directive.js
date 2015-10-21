@@ -33,9 +33,9 @@ angular
                 $scope.callback(lookup);
               } else {
                 if ($scope.tells.length > 3) {
-                  $scope.tells.shift();
-                }               
-                $scope.tells.push(actionNotFound());              
+//                  $scope.tells.shift();
+                }
+                $scope.tells.push(actionNotFound());
               }
 
               $scope.prompt = null;

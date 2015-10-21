@@ -2,9 +2,9 @@
 angular
     .module('triskelion.camp.controller',['triskelion.camp.service'])
     .controller('campController', [
-            '$scope', '$location', 'campActions', 'infoText', 'userData', 
+            '$scope', '$location', 'campActions', 'infoText', 'userData',
             'playerDB', 'partyData', 'tellsList', 'objectFindByKey', 'actionDispatcher',
-        function($scope, $location, campActions, infoText, userData, 
+        function($scope, $location, campActions, infoText, userData,
             playerDB, partyData, tellsList, objectFindByKey, actionDispatcher) {
 
             'use strict';
@@ -24,10 +24,10 @@ angular
                 var lookup = objectFindByKey(partyData, 'hotkey', el.hotkey);
                 return lookup ? false : el;
             });
-            
+
             actionsList = {
                 'add': function() {
-                    $scope.tells = [infoText.whowilljoin];                   
+                    $scope.tells = [infoText.whowilljoin];
                     $scope.availableActions = angular.copy(cast);
                     $scope.availableActions.push(campActions.back);
                     context = 'add';
@@ -49,6 +49,7 @@ angular
                  'mainActions': function() {
                     if (partyData.length === userData.gameModuleSelected.maxparty) {
                         $scope.availableActions = [
+                            campActions.inspect,
                             campActions.remove,
                             campActions.start,
                             campActions.quit
@@ -78,12 +79,11 @@ angular
 
                     angular.forEach(character.abilities, function(ability, key) {
                         if (!angular.equals({}, ability)) {
-                            this.push(ability.name);                            
+                            this.push(ability.name);
                         }
                     }, abilityList);
 
                     $scope.tells = [
-                        //NAME, lvl LEVEL RACE SPEC
                         infoText.describeCharacter
                             .replace(/NAME/, character.identity.name)
                             .replace(/LEVEL/, character.experience.level)
@@ -94,7 +94,7 @@ angular
                         infoText.keys.energy.replace(/VALUE/, character.stats.energy),
                         infoText.keys.abilities.replace(/VALUE/, abilityList.join(", "))
                     ];
-                    
+
                     $scope.availableActions = [
                         campActions.confirmAdd,
                         campActions.backtoselect
@@ -106,7 +106,7 @@ angular
                         var index = cast.indexOf(lookup);
                         if (index > -1) {
                             cast.splice(index,1);
-                        }                        
+                        }
                     }
 
                     if (partyData.length < userData.gameModuleSelected.maxparty) {
@@ -114,9 +114,9 @@ angular
                         partyData.push(currentPick);
                         $scope.partyData = partyData;
                     }
-                    
+
                     $scope.availableActions.length = 0;
-                    
+
                     actionsList.mainActions();
                  },
                  'confirmRemove': function() {
@@ -131,7 +131,7 @@ angular
 
                     $scope.tells = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
                     cast.push(currentPick);
- 
+
                     $scope.partyData = partyData;
 
                     actionsList.mainActions();
@@ -147,8 +147,8 @@ angular
 
                     if (context === 'remove') {
                         actionsList.confirmRemove();
-                    } else { 
-                        actionsList.describePlayer(value);                    
+                    } else {
+                        actionsList.describePlayer(value);
                     }
                 }
             };
@@ -156,11 +156,11 @@ angular
             $scope.page = {
                 name: infoText.camp
             };
-            
+
             $scope.tells = tellsList;
 
             $scope.partyData = partyData;
 
-            actionsList.mainActions();            
+            actionsList.mainActions();
         }
     ]);
