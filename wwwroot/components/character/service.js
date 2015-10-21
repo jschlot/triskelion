@@ -62,10 +62,10 @@ angular
         function() {
             'use strict';
             var spec = {
-                priestess: {
-                    name: "Priestess",
-                    hotkey: "P",
-                    _self: "priestess"
+                healer: {
+                    name: "Healer",
+                    hotkey: "H",
+                    _self: "healer"
                 },
                 fighter: {
                     name: "Fighter",

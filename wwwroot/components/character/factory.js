@@ -106,7 +106,7 @@ angular
                 var self = this;
 
                 this.character.identity.race = race.elf.name;
-                this.character.identity.spec = spec.priestess.name;
+                this.character.identity.spec = spec.healer.name;
                 this.character.alignment.adjust('ethics',  diceService.roll(2,20));
                 this.character.alignment.adjust('morals', diceService.roll(2,20));
 
@@ -125,8 +125,8 @@ angular
 
                 this.character.stats.strength = diceService.roll(3,6);
                 this.character.stats.agility = diceService.roll(3,6) + 2; // elf agi
-                this.character.stats.intelligence = diceService.roll(2,6) + 8; // priest int
-                this.character.stats.wisdom = diceService.roll(3,3) + 10; // priest int
+                this.character.stats.intelligence = diceService.roll(2,6) + 8; // healer int
+                this.character.stats.wisdom = diceService.roll(3,3) + 10; // healer int
                 this.character.stats.stamina = diceService.roll(3,6);
                 this.character.stats.charisma = diceService.roll(3,5) + 5; // elf cha
 

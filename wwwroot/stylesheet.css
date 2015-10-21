@@ -1,6 +1,7 @@
 body {
     background-color: black;
     font-family: "Courier New", Courier, monospace;
+    text-transform: uppercase;
 }
 
 section {
@@ -20,20 +21,20 @@ svg polygon {
     shape-rendering:crispEdges;
 }
 
-svg rect { 
-    stroke: black; 
+svg rect {
+    stroke: black;
     stroke-width: 1px;
-    shape-rendering:crispEdges; 
+    shape-rendering:crispEdges;
 }
 
-svg line { 
-    stroke: black; 
+svg line {
+    stroke: black;
     stroke-width: 2px;
-    shape-rendering:crispEdges; 
+    shape-rendering:crispEdges;
 }
 
-svg text { 
-    fill: white; 
+svg text {
+    fill: white;
 }
 
 .outline {
@@ -47,16 +48,12 @@ svg text {
 }
 
 .shim {
-    min-height: 150px;
+    min-height: 5em;
     padding: 0.5em;
 }
 
 .location {
     padding: 0.5em;
-}
-
-.navigator {
-    text-transform: uppercase;
 }
 
 #commandPrompt {
@@ -76,8 +73,8 @@ label::before {
     content: "$:";
 }
 
-.selected { 
-    background-color: white; 
+.selected {
+    background-color: white;
 }
 
 ul.flex-list {
