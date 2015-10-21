@@ -53,9 +53,14 @@ angular
                 this.character.experience.points = 0;
                 this.character.experience.bonus = 1;
                 this.character.experience.add = function(xp) {
+                    var currentLevel = this.level;
                     var earned = xp + (xp * this.bonus);
                     this.points = this.points + earned;
                     this.level = Math.floor(this.points / 1000) + 1;
+                    if (this.level > currentLevel) {
+                        this.character.levelUp();
+                    }
+                    // should emit up a signal
                     return earned;
                 };
 
@@ -69,22 +74,11 @@ angular
                 this.character.stats.intelligence = 1;
                 this.character.stats.wisdom = 1;
                 this.character.stats.stamina = 1;
+                this.character.stats.charisma = 1;
                 this.character.stats.movement = 1;
-
-                this.character.attack = {};
-                this.character.attack.damage = 1;
-                this.character.attack.power = 1;
-                this.character.attack.speed = 1;
-
-                this.character.spell = {};
-                this.character.spell.power = 0;
-                this.character.spell.regen = 0;
 
                 this.character.defense = {};
                 this.character.defense.armor = 0;
-                this.character.defense.dodge = 0;
-                this.character.defense.parry = 0;
-                this.character.defense.block = 0;
 
                 this.character.abilities = {};
                 this.character.abilities.small = {};
@@ -93,9 +87,13 @@ angular
                 this.character.abilities.super = {};
 
                 this.character.savingThrows = [];
-                this.character.inventory = [];
+                this.character.inventory = {};
                 this.character.quips = [];
                 this.character.tags = [];
+
+                this.character.levelUp = function() {
+                    console.debug("ding!");
+                };
             };
         }
     ])
@@ -105,6 +103,7 @@ angular
 
             return function(name) {
                 angular.extend(this, new Character(name));
+                var self = this;
 
                 this.character.identity.race = race.elf.name;
                 this.character.identity.spec = spec.priestess.name;
@@ -116,31 +115,46 @@ angular
                 this.character.abilities.large = ability.restoration;
                 this.character.abilities.super = ability.prayer;
 
-                this.character.spell.power = 10;
-                this.character.spell.regen = 2;
+                var initialHealth = diceService.roll(1,8);
+                this.character.stats.health = initialHealth;
+                this.character.stats.maxhealth = initialHealth;
 
-                this.character.stats.health = 10;
-                this.character.stats.maxhealth = 10;
-
-                this.character.stats.energy = 30;
-                this.character.stats.maxenergy = 30;
-
-                this.character.stats.movement = 1;
-                this.character.defense.armor = 1;
+                var initialEnergy = diceService.roll(1,16) + 22; // caster
+                this.character.stats.energy = initialEnergy;
+                this.character.stats.maxenergy = initialEnergy;
 
                 this.character.stats.strength = diceService.roll(3,6);
-                this.character.stats.agility = diceService.roll(3,6);
-                this.character.stats.intelligence = diceService.roll(2,5) + 10;
-                this.character.stats.wisdom = diceService.roll(2,5) + 10;
+                this.character.stats.agility = diceService.roll(3,6) + 2; // elf agi
+                this.character.stats.intelligence = diceService.roll(2,6) + 8; // priest int
+                this.character.stats.wisdom = diceService.roll(3,3) + 10; // priest int
                 this.character.stats.stamina = diceService.roll(3,6);
+                this.character.stats.charisma = diceService.roll(3,5) + 5; // elf cha
 
                 this.character.savingThrows = [
-                    'intellect', 'wisdom'
+                    'charisma', 'wisdom'
                 ];
-                this.character.inventory = [
-                    armor.cloth.name,
-                    weapon.bow.name
-                ];
+
+                this.character.inventory = {
+                    armor: armor.cloth,
+                    weapon: weapon.staff
+                };
+
+                this.character.defense.armor = armor.cloth.modifier;
+
+                this.character.levelUp = function() {
+                    var level = self.character.experience.level;
+
+                    var initialHealth = diceService.roll(level,8);
+                    self.character.stats.health = initialHealth;
+                    self.character.stats.maxhealth = initialHealth;
+
+                    var initialEnergy = diceService.roll(level,16) + 22;
+                    self.character.stats.energy = initialEnergy;
+                    self.character.stats.maxenergy = initialEnergy;
+
+                    return "ding";
+                };
+
             };
         }
     ]);

@@ -2,29 +2,27 @@
 	Character Sheet
 	<table width="100%">
 		<tr valign="top">
-			<td width="33%">
+			<td width="25%">
 				<h3>IDENTITY</h3>
 				<pre>{{ character.character.identity | json }}</pre>
 				<h3>ALIGNMENT</h3>
 				<pre>{{ character.character.alignment | json }}</pre>
 				<h3>EXPERIENCE</h3>
 				<pre>{{ character.character.experience | json }}</pre>
+			</td>
+			<td width="25%">
 				<h3>STATS</h3>
 				<pre>{{ character.character.stats | json }}</pre>
-			</td>
-			<td>
-				<h3>ATTACK</h3>
-				<pre>{{ character.character.attack | json }}</pre>
-				<h3>SPELL</h3>
-				<pre>{{ character.character.spell | json }}</pre>
 				<h3>DEFENSE</h3>
 				<pre>{{ character.character.defense | json }}</pre>
 				<h3>SAVING THROWS</h3>
 				<pre>{{ character.character.savingThrows | json }}</pre>
 			</td>
-			<td width="33%">
+			<td width="25%">
 				<h3>ABILITIES</h3>
 				<pre>{{ character.character.abilities | json }}</pre>
+			</td>
+			<td width="25%">
 				<h3>INVENTORY</h3>
 				<pre>{{ character.character.inventory | json }}</pre>
 			</td>

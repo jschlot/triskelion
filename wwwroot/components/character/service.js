@@ -39,18 +39,18 @@ angular
             'use strict';
             var race = {
                 human: {
-                    name: "Human",
-                    hotkey: "H",
+                    name: "Lakeland Human",
+                    hotkey: "L",
                     _self: "human"
                 },
                 elf: {
-                    name: "Elf",
-                    hotkey: "e",
+                    name: "Wood Elf",
+                    hotkey: "w",
                     _self: "elf"
                 },
                 dwarf: {
-                    name: "Dwarf",
-                    hotkey: "D",
+                    name: "Mountain Dwarf",
+                    hotkey: "M",
                     _self: "dwarf"
                 }
             };
@@ -94,17 +94,20 @@ angular
                 cloth: {
                     name: "Cloth Robes",
                     hotkey: "C",
-                    _self: "cloth"
+                    _self: "cloth",
+                    modifier: 10
                 },
                 leather: {
                     name: "Leather Vestments",
                     hotkey: "L",
-                    _self: "leather"
+                    _self: "leather",
+                    modifier: 25
                 },
                 plate: {
                     name: "Plate Armor",
                     hotkey: "P",
-                    _self: "plate"
+                    _self: "plate",
+                    modifier: 50
                 }
             };
 
@@ -115,10 +118,11 @@ angular
         function() {
             'use strict';
             var weapon = {
-                bow: {
-                    name: "Bow of the Moon",
-                    hotkey: "B",
-                    _self: "bow"
+                staff: {
+                    name: "Glowing Wooden Staff",
+                    hotkey: "G",
+                    _self: "staff",
+                    modifier: 10
                 }
             };
 
