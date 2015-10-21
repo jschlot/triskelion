@@ -39,18 +39,18 @@ angular
             'use strict';
             var race = {
                 human: {
-                    name: "Lakeland Human",
-                    hotkey: "L",
+                    name: "Human",
+                    hotkey: "H",
                     _self: "human"
                 },
                 elf: {
-                    name: "Wood Elf",
-                    hotkey: "w",
+                    name: "Elf",
+                    hotkey: "e",
                     _self: "elf"
                 },
                 dwarf: {
-                    name: "Mountain Dwarf",
-                    hotkey: "M",
+                    name: "Dwarf",
+                    hotkey: "D",
                     _self: "dwarf"
                 }
             };
@@ -122,7 +122,7 @@ angular
                     name: "Glowing Wooden Staff",
                     hotkey: "G",
                     _self: "staff",
-                    modifier: 10
+                    modifier: 1
                 }
             };
 
