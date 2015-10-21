@@ -77,9 +77,6 @@ angular
                 this.character.stats.charisma = 1;
                 this.character.stats.movement = 1;
 
-                this.character.defense = {};
-                this.character.defense.armor = 0;
-
                 this.character.abilities = {};
                 this.character.abilities.small = {};
                 this.character.abilities.medium = {};
@@ -138,8 +135,6 @@ angular
                     armor: armor.cloth,
                     weapon: weapon.staff
                 };
-
-                this.character.defense.armor = armor.cloth.modifier;
 
                 this.character.levelUp = function() {
                     var level = self.character.experience.level;
