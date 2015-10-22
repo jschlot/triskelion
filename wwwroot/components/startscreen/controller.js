@@ -1,9 +1,9 @@
 /* global angular */
 angular
-    .module('triskelion.startScreen.controller',[])
+    .module('triskelion.startScreen.controller',['triskelion.startscreen.service'])
     .controller('startScreenController', [
-        '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher', 'campActions',
-        function($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher, campActions) {
+        '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher', 'startScreenMenuOptions',
+        function($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher, startScreenMenuOptions) {
             'use strict';
 
             /*
@@ -48,7 +48,7 @@ angular
             };
 
             $scope.availableActions = [
-                campActions.newgame
+                startScreenMenuOptions.newgame
             ];
 
             $scope.tells = tellsList;

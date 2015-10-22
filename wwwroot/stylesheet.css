@@ -48,7 +48,7 @@ svg text {
 }
 
 .shim {
-    min-height: 5em;
+    min-height: 8em;
     padding: 0.5em;
 }
 
@@ -70,7 +70,7 @@ label {
 }
 
 label::before {
-    content: "$:";
+    content: "$:>";
 }
 
 .selected {

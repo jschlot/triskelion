@@ -1,7 +1,7 @@
 /* global angular */
 angular
     .module('triskelion.characterSheet.controller',[
-        'triskelion.charactersheet.menuOptions.service'
+        'triskelion.charactersheet.service'
     ])
     .controller('characterSheetController', [
         '$scope', '$location', '$routeParams', 'infoText', 'playerDB', 'hotkeyAction',
@@ -39,7 +39,6 @@ angular
             };
 
             $scope.availableActions = [
-                characterSheetMenuOptions.confirm,
                 characterSheetMenuOptions.backtoselect
             ];
 

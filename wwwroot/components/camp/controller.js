@@ -38,7 +38,12 @@ angular
                     $scope.availableActions.push(campActions.back);
                     context = 'remove';
                  },
-                 'start': function() {
+                 'viewplayer': function(value) {
+                    var lookup = partyData[value-1];
+                    $location.path( "/charactersheet/" + lookup._this );
+                    return;
+                 },
+                 'enter': function() {
                     $location.path( "/gamegrid" );
                     return;
                  },
@@ -49,9 +54,9 @@ angular
                  'mainActions': function() {
                     if (partyData.length === userData.gameModuleSelected.maxparty) {
                         $scope.availableActions = [
-                            campActions.inspect,
+                            campActions.viewplayer,
                             campActions.remove,
-                            campActions.start,
+                            campActions.enter,
                             campActions.quit
                         ];
                     } else if (partyData.length === 0) {
@@ -61,9 +66,10 @@ angular
                         ];
                     } else {
                         $scope.availableActions = [
+                            campActions.viewplayer,
                             campActions.add,
                             campActions.remove,
-                            campActions.start,
+                            campActions.enter,
                             campActions.quit
                         ];
                     }
@@ -137,7 +143,10 @@ angular
             $scope.saveAndNext = function(value) {
                 if (actionsList[value._self]) {
                     actionDispatcher(actionsList[value._self], value);
+                } else if (angular.isNumber(value)) {
+                    actionsList.viewplayer(value);
                 } else {
+                    //// TO-DO: currentPick being used like this feels bad (it's a global)
                     currentPick = {};
                     angular.copy(value, currentPick);
 
