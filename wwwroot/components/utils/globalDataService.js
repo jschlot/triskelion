@@ -1,6 +1,6 @@
 /* global angular */
 angular
-    .module('triskelion.utils.globalData.service', ['triskelion.character.priestess.factory'])
+    .module('triskelion.utils.globalData.service', ['triskelion.character.elf.factory'])
     .service('gameModules', [
         function(tileService) {
             'use strict';
@@ -100,15 +100,18 @@ angular
             return tellsList;
         }
     ])
-    .service('playerDB',['Priestess',
-        function(Priestess) {
+    .service('playerDB',['Priest', 'Ranger',
+        function(Priest, Ranger) {
             'use strict';
 
             var playerDB = {};
             playerDB.dungeon = [];
 
-            var devonellah = new Priestess("Devonellah");
+            var devonellah = new Priest("Devonellah");
             playerDB.dungeon.push(devonellah);
+
+            var celadior = new Ranger("Celadior");
+            playerDB.dungeon.push(celadior);
 
             return playerDB;
         }]
