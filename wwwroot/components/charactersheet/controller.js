@@ -39,7 +39,6 @@ angular
             };
 
             $scope.availableActions = [
-                characterSheetMenuOptions.confirm,
                 characterSheetMenuOptions.backtoselect
             ];
 

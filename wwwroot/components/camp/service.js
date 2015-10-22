@@ -44,6 +44,11 @@ angular
                     name: "Create new Game",
                     hotkey: "C",
                     _self: "newgame"
+                },
+                viewplayer: {
+                    name: "#View Player",
+                    hotkey: "#",
+                    _self: "viewplayer"
                 }
             };
 

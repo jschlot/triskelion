@@ -5,11 +5,6 @@ angular
         function() {
             'use strict';
             var characterSheetMenuOptions = {
-                confirm: {
-                    name: "Confirm",
-                    hotkey: "C",
-                    _self: "confirm"
-                },
                 backtoselect: {
                     name: "Back to Select",
                     hotkey: "B",

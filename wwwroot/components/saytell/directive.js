@@ -31,10 +31,9 @@ angular
               if (lookup) {
                 $scope.tells = [];
                 $scope.callback(lookup);
+              } else if (isFinite(parseInt($scope.prompt))) {
+                $scope.callback(parseInt($scope.prompt));
               } else {
-                if ($scope.tells.length > 3) {
-//                  $scope.tells.shift();
-                }
                 $scope.tells.push(actionNotFound());
               }
 
