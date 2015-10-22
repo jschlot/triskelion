@@ -76,6 +76,30 @@ angular
                     hotkey: "M",
                     _self: "meteor",
                     actionType: "damage"
+                },
+                cheapshot: {
+                    name: "Cheap Shot",
+                    hotkey: "C",
+                    _self: "cheapshot",
+                    actionType: "damage"
+                },
+                stab: {
+                    name: "stab",
+                    hotkey: "S",
+                    _self: "stab",
+                    actionType: "damage"
+                },
+                wound: {
+                    name: "wound",
+                    hotkey: "W",
+                    _self: "wound",
+                    actionType: "damage"
+                },
+                bloodlet: {
+                    name: "Bloodlet",
+                    hotkey: "B",
+                    _self: "bloodlet",
+                    actionType: "damage"
                 }
             };
 

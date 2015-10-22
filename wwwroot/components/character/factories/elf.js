@@ -85,10 +85,10 @@ angular
                 this.character.alignment.adjust('ethics', -1 * diceService.roll(2,20));
                 this.character.alignment.adjust('morals', -1 * diceService.roll(2,20));
 
-                this.character.abilities.small = ability.fireball;
-                this.character.abilities.medium = ability.inferno;
-                this.character.abilities.large = ability.dragonbreath;
-                this.character.abilities.super = ability.meteor;
+                this.character.abilities.small = ability.cheapshot;
+                this.character.abilities.medium = ability.stab;
+                this.character.abilities.large = ability.wound;
+                this.character.abilities.super = ability.bloodlet;
 
                 this.character.inventory = {
                     armor: armor.leather,
