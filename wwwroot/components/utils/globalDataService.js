@@ -1,6 +1,6 @@
 /* global angular */
 angular
-    .module('triskelion.utils.globalData.service', ['triskelion.character.factory'])
+    .module('triskelion.utils.globalData.service', ['triskelion.character.priestess.factory'])
     .service('gameModules', [
         function(tileService) {
             'use strict';
