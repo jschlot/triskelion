@@ -100,8 +100,8 @@ angular
             return tellsList;
         }
     ])
-    .service('playerDB',['Priest', 'Ranger',
-        function(Priest, Ranger) {
+    .service('playerDB',['Priest', 'Ranger', 'Wizard', 'Scout',
+        function(Priest, Ranger, Wizard, Scout) {
             'use strict';
 
             var playerDB = {};
@@ -112,6 +112,12 @@ angular
 
             var celadior = new Ranger("Celadior");
             playerDB.dungeon.push(celadior);
+
+            var beladriel = new Wizard("Beladriel");
+            playerDB.dungeon.push(beladriel);
+
+            var hedroxx = new Scout("Hedroxx");
+            playerDB.dungeon.push(hedroxx);
 
             return playerDB;
         }]

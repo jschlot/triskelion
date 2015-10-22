@@ -1,5 +1,4 @@
-<table width="100%">
-    <thead>
+<table width="100%" cellpadding="0" cellspacing="0">
         <tr align="center">
             <td width="15">#</td>
             <td align="left" width="">NAME</td>
@@ -9,8 +8,6 @@
             <td width="80">ENERGY</td>
             <td width="80">HEALTH</td>
         </tr>
-    </thead>
-    <tbody>
         <tr ng-repeat="player in partydata" align="center">
             <td ng-bind="$index + 1"></td>
             <td align="left" ng-bind="player.character.identity.name"></td>
@@ -20,5 +17,4 @@
             <td ng-bind="player.character.stats.energy"></td>
             <td ng-bind="player.character.stats.health"></td>
         </tr>
-    </tbody>
 </table>

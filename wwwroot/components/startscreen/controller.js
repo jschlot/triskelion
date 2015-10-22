@@ -1,9 +1,9 @@
 /* global angular */
 angular
-    .module('triskelion.startScreen.controller',[])
+    .module('triskelion.startScreen.controller',['triskelion.startscreen.service'])
     .controller('startScreenController', [
-        '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher', 'campActions',
-        function($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher, campActions) {
+        '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher', 'startScreenMenuOptions',
+        function($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher, startScreenMenuOptions) {
             'use strict';
 
             /*
@@ -13,7 +13,7 @@ angular
                 One principal shown here is using functional programming to dispatch events
                 with our actionDispatch service
             */
-            
+
             tellsList = [];
 
             var actionsList = {
@@ -21,14 +21,14 @@ angular
                     $scope.tells = [ infoText.choosemodule ];
                     $scope.availableActions = [
                         gameModules.dungeon
-                    ];                    
+                    ];
                 },
                 createNewGame: function(actionSelected) {
                     userData.gameModuleSelected = actionSelected;
                     userData.currentMap.level = actionSelected.defaultLevel;
                     userData.currentMap.direction = actionSelected.defaultCompassDirection;
                     userData.currentMap.coordinates = actionSelected.startingCoordinates;
-    
+
                     $scope.tells.length = 0;
                     $location.path( "/camp" );
                 }
@@ -37,21 +37,21 @@ angular
 
             $scope.saveAndNext = function(value) {
 
-                if (actionsList[value._self]) { 
-                    actionDispatcher(actionsList[value._self], value);                    
+                if (actionsList[value._self]) {
+                    actionDispatcher(actionsList[value._self], value);
                 } else {
-                    actionDispatcher(actionsList.createNewGame, value);                    
+                    actionDispatcher(actionsList.createNewGame, value);
                 }
             };
 
             $scope.page = {
                 name: infoText.startscreen
-            };                      
+            };
 
             $scope.availableActions = [
-                campActions.newgame
+                startScreenMenuOptions.newgame
             ];
 
-            $scope.tells = tellsList;                     
+            $scope.tells = tellsList;
         }
     ]);

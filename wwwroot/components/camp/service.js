@@ -30,20 +30,15 @@ angular
                     hotkey: "C",
                     _self: "confirmAdd"
                 },
-                start: {
-                    name: "Start Game",
-                    hotkey: "S",
-                    _self: "start"
+                enter: {
+                    name: "Enter Game",
+                    hotkey: "E",
+                    _self: "enter"
                 },
                 quit: {
                     name: "Quit Game",
                     hotkey: "Q",
                     _self: "quit"
-                },
-                newgame: {
-                    name: "Create new Game",
-                    hotkey: "C",
-                    _self: "newgame"
                 },
                 viewplayer: {
                     name: "#View Player",

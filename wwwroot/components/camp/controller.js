@@ -43,7 +43,7 @@ angular
                     $location.path( "/charactersheet/" + lookup._this );
                     return;
                  },
-                 'start': function() {
+                 'enter': function() {
                     $location.path( "/gamegrid" );
                     return;
                  },
@@ -56,7 +56,7 @@ angular
                         $scope.availableActions = [
                             campActions.viewplayer,
                             campActions.remove,
-                            campActions.start,
+                            campActions.enter,
                             campActions.quit
                         ];
                     } else if (partyData.length === 0) {
@@ -69,7 +69,7 @@ angular
                             campActions.viewplayer,
                             campActions.add,
                             campActions.remove,
-                            campActions.start,
+                            campActions.enter,
                             campActions.quit
                         ];
                     }
