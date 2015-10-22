@@ -45,8 +45,14 @@ module.exports = function(grunt) {
 				options: {
 					port: 8000,
 					base: 'wwwroot',
-					keepalive: true
+					keepalive: true,
+					livereload: true
 				}
+			}
+		},
+		open: {
+			all: {
+				path: 'http://localhost:8000/'
 			}
 		},
     	watch: {
@@ -54,20 +60,22 @@ module.exports = function(grunt) {
 				files: ['wwwroot/components/**/*.js'],
 				tasks: ['jshint', 'concat'],
 				options: {
-					spawn: false,
+					livereload: true,
+					spawn: false
 				},
 			}
-		}		
+		}
 	});
 
 
-	
+
 	// Plugins
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-contrib-connect');
-	
+	grunt.loadNpmTasks('grunt-open');
+
 	// Task(s).
 	grunt.registerTask('default', ['jshint', 'concat']);
 
