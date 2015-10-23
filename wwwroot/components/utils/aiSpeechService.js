@@ -1,27 +1,27 @@
 /* global angular */
 angular
     .module('triskelion.utils.aiSpeech.service', [])
-    .service('actionNotFound', [ 'sarcasticQuips',
+    .service('actionNotFound', ['sarcasticQuips',
         function(sarcasticQuips) {
-            'use strict';
-            var actionNotFound = function() {
-                // This service returns a random quip
-                var i = Math.floor(Math.random() * sarcasticQuips.length);
+          'use strict';
+          var actionNotFound = function() {
+            // This service returns a random quip
+            var i = Math.floor(Math.random() * sarcasticQuips.length);
 
-                return sarcasticQuips[i];
-            };
-            return actionNotFound;
+            return sarcasticQuips[i];
+          };
+          return actionNotFound;
         }
     ])
-    .service('ouchHappened', [ 'sarcasticOuches',
+    .service('ouchHappened', ['sarcasticOuches',
         function(sarcasticOuches) {
-            'use strict';
-            var ouchHappened = function() {
-                // This service returns a random quip
-                var i = Math.floor(Math.random() * sarcasticOuches.length);
+          'use strict';
+          var ouchHappened = function() {
+            // This service returns a random quip
+            var i = Math.floor(Math.random() * sarcasticOuches.length);
 
-                return sarcasticOuches[i];
-            };
-            return ouchHappened;
+            return sarcasticOuches[i];
+          };
+          return ouchHappened;
         }
     ]);

@@ -2,16 +2,16 @@
 angular
     .module('triskelion.aurasList.directive',[])
     .directive('aurasListDirective', [
-        function(){
+        function() {
           'use strict';
 
-          function linkingFunction(scope, element){
+          function linkingFunction(scope, element) {
             scope.element = element;
           }
 
-          function controller($scope){
+          function controller($scope) {
 
-            $scope.$on('$destroy', function(){
+            $scope.$on('$destroy', function() {
               $scope.element = null;
             });
           }
@@ -24,9 +24,9 @@ angular
             transclude: false,
             controller: controller,
             scope: {
-                auras: "="
+              auras: '='
             },
             templateUrl: 'components/auraslist/partial.html',
             link: linkingFunction
           };
-    }]);
+        }]);

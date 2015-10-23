@@ -1,19 +1,19 @@
 /* global angular */
 angular
     .module('triskelion.actionsList.directive',[])
-    .directive('actionsListDirective', ['$location', 'objectFindByKey', 'actionNotFound', 'infoText', 
+    .directive('actionsListDirective', ['$location', 'objectFindByKey', 'actionNotFound', 'infoText',
         'hotkeyAction',
-        function($location, objectFindByKey, actionNotFound, infoText, hotkeyAction){
+        function($location, objectFindByKey, actionNotFound, infoText, hotkeyAction) {
           'use strict';
 
-          function linkingFunction(scope, element){
+          function linkingFunction(scope, element) {
             scope.element = element;
           }
 
-          function controller($scope){
+          function controller($scope) {
             $scope.formatAction = hotkeyAction;
 
-            $scope.$on('$destroy', function(){
+            $scope.$on('$destroy', function() {
               $scope.element = null;
             });
           }
@@ -26,9 +26,9 @@ angular
             transclude: false,
             controller: controller,
             scope: {
-                actions: "="
+              actions: '='
             },
             templateUrl: 'components/actionslist/partial.html',
             link: linkingFunction
           };
-    }]);
+        }]);

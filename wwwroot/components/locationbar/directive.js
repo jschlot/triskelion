@@ -2,16 +2,16 @@
 angular
     .module('triskelion.locationBar.directive',[])
     .directive('locationBarDirective', [
-        function(){
+        function() {
           'use strict';
 
-          function linkingFunction(scope, element){
+          function linkingFunction(scope, element) {
             scope.element = element;
           }
 
-          function controller($scope){
+          function controller($scope) {
 
-            $scope.$on('$destroy', function(){
+            $scope.$on('$destroy', function() {
               $scope.element = null;
             });
           }
@@ -24,9 +24,9 @@ angular
             transclude: false,
             controller: controller,
             scope: {
-                page: "="
+              page: '='
             },
             templateUrl: 'components/locationbar/partial.html',
             link: linkingFunction
           };
-    }]);
+        }]);
