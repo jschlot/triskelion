@@ -57,13 +57,12 @@ ul {
 }
 
 .shim {
-    min-height: 8em;
-    padding: 0.5em;
+    min-height: 6em;
+    padding: 1em;
 }
 
 .location {
     padding: 0.5em;
-    font-size: 1.5em;
     font-weight: bold;
 }
 
