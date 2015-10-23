@@ -77,7 +77,7 @@ angular
                 'camp': function () {
                     $location.path('/camp');
                 },
-                'describe': function () {
+                'look': function () {
                     //// describe gets any metadata abount the current cell
                 },
                 'map': function () {
@@ -117,7 +117,7 @@ angular
                 menuOptions.goleft,
                 menuOptions.goright,
                 menuOptions.camp,
-                menuOptions.describe,
+                menuOptions.look,
                 menuOptions.map
             ];
 
