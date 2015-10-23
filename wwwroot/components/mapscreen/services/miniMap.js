@@ -36,17 +36,17 @@ angular
                 cellFactory = function (plotCoords, className, tile) {
                     var isDoor = tileService.isDoor(tile),
                         fill = tileService.mapClass(tile),
+                        xPadding,
+                        yPadding,
                         cell,
                         dir,
                         doorType,
-                        rectWidth = (dir === 'ew') ? 0.20 : 0.50,
-                        rectHeight = (dir === 'ew') ? 0.50 : 0.20,
-                        lineCenter = (dir === 'ew') ? rectHeight : 0,
-                        lineMid = (dir === 'ew') ? 0 : rectWidth,
-                        idxA = (dir === 'ew') ? 1 : 2,
-                        idxB = (dir === 'ew') ? 1 : 0,
-                        xPadding = (1 - rectWidth) / 2,
-                        yPadding = (1 - rectHeight) / 2;
+                        rectWidth,
+                        rectHeight,
+                        lineCenter,
+                        lineMid,
+                        idxA,
+                        idxB;
 
                     cell = vis.append('svg:g')
                             .attr('class', className);
@@ -64,7 +64,17 @@ angular
 
                     if (isDoor) {
                         dir = isDoor.substr(0,2);
+                        rectWidth = (dir === 'ew') ? 0.20 : 0.50;
+                        rectHeight = (dir === 'ew') ? 0.50 : 0.20;
+                        lineCenter = (dir === 'ew') ? rectHeight : 0;
+                        lineMid = (dir === 'ew') ? 0 : rectWidth;
+                        idxA = (dir === 'ew') ? 1 : 2;
+                        idxB = (dir === 'ew') ? 1 : 0;
                         doorType = isDoor.substr(3, isDoor.length);
+                        xPadding = (1 - rectWidth) / 2;
+                        yPadding = (1 - rectHeight) / 2;
+
+
                         cell.selectAll('line.' + className)
                             .data([plotCoords])
                             .enter()
