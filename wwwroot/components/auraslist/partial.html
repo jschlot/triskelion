@@ -1,14 +1,11 @@
-<table width="100%" height="150" cellpadding="0" cellspacing="0"">
-	<tbody>
-		<tr valign="top">
-			<td class="shim">
-				AURAS:
-				<ul class="flex-list">
-					<li ng-repeat="aura in auras track by $index">
-						{{ aura.aura }} ({{ aura.remaining }})
-					</li>
-				</ul>
-			</td>
-		</tr>
-	</tbody>
+<table width="100%" cellpadding="0" cellspacing="0">
+	<tr valign="top">
+		<td>
+			<ul>
+				<li ng-repeat="aura in auras track by $index">
+					{{ aura.aura }} ({{ aura.remaining }})
+				</li>
+			</ul>
+		</td>
+	</tr>
 </table>

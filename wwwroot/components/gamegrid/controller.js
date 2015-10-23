@@ -123,6 +123,5 @@ angular
           ];
 
           actionsList.updateMazeRunner();
-
         }
     ]);
