@@ -2,9 +2,9 @@
 angular
     .module('triskelion.utils.aiSpeech.service', [])
     .service('actionNotFound', ['sarcasticQuips',
-        function(sarcasticQuips) {
+        function (sarcasticQuips) {
             'use strict';
-            var actionNotFound = function() {
+            var actionNotFound = function () {
                 // This service returns a random quip
                 var i = Math.floor(Math.random() * sarcasticQuips.length);
 
@@ -14,9 +14,9 @@ angular
         }
     ])
     .service('ouchHappened', ['sarcasticOuches',
-        function(sarcasticOuches) {
+        function (sarcasticOuches) {
             'use strict';
-            var ouchHappened = function() {
+            var ouchHappened = function () {
                 // This service returns a random quip
                 var i = Math.floor(Math.random() * sarcasticOuches.length);
 

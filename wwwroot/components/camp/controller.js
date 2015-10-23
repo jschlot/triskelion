@@ -4,7 +4,7 @@ angular
     .controller('campController', [
             '$scope', '$location', 'campActions', 'infoText', 'userData',
             'playerDB', 'partyData', 'tellsList', 'objectFindByKey', 'actionDispatcher',
-        function($scope, $location, campActions, infoText, userData,
+        function ($scope, $location, campActions, infoText, userData,
             playerDB, partyData, tellsList, objectFindByKey, actionDispatcher) {
             'use strict';
 
@@ -19,38 +19,38 @@ angular
                 actionsList = {},
                 cast = [];
 
-            cast = allPlayers.filter(function(el) {
+            cast = allPlayers.filter(function (el) {
                 var lookup = objectFindByKey(partyData, 'hotkey', el.hotkey);
                 return lookup ? false : el;
             });
 
             actionsList = {
-                'add': function() {
+                'add': function () {
                     $scope.tells = [infoText.whowilljoin];
                     $scope.availableActions = angular.copy(cast);
                     $scope.availableActions.push(campActions.back);
                     context = 'add';
                 },
-                'remove': function() {
+                'remove': function () {
                     $scope.tells = [infoText.removePlayer];
                     $scope.availableActions = angular.copy(partyData);
                     $scope.availableActions.push(campActions.back);
                     context = 'remove';
                 },
-                'viewplayer': function(value) {
+                'viewplayer': function (value) {
                     var lookup = partyData[value - 1];
                     $location.path('/charactersheet/' + lookup._this);
                     return;
                 },
-                'enter': function() {
+                'enter': function () {
                     $location.path('/gamegrid');
                     return;
                 },
-                'quit': function() {
+                'quit': function () {
                     $location.path('/startscreen');
                     return;
                 },
-                'mainActions': function() {
+                'mainActions': function () {
                     if (partyData.length === userData.gameModuleSelected.maxparty) {
                         $scope.availableActions = [
                             campActions.viewplayer,
@@ -73,16 +73,16 @@ angular
                         ];
                     }
                 },
-                'back': function() {
+                'back': function () {
                     actionsList.mainActions();
                 },
-                'backtoselect': function() {
+                'backtoselect': function () {
                     actionsList.add();
                 },
-                'describePlayer': function(player) {
+                'describePlayer': function (player) {
                     var abilityList = [], character = player.character;
 
-                    angular.forEach(character.abilities, function(ability, key) {
+                    angular.forEach(character.abilities, function (ability, key) {
                         if (!angular.equals({}, ability)) {
                             this.push(ability.name);
                         }
@@ -101,7 +101,7 @@ angular
                         campActions.backtoselect
                     ];
                 },
-                'confirmAdd': function() {
+                'confirmAdd': function () {
                     var lookup = objectFindByKey(cast, 'hotkey', currentPick.hotkey);
                     if (lookup) {
                         var index = cast.indexOf(lookup);
@@ -120,7 +120,7 @@ angular
 
                     actionsList.mainActions();
                 },
-                'confirmRemove': function() {
+                'confirmRemove': function () {
                     var lookup = objectFindByKey(partyData, 'hotkey', currentPick.hotkey);
                     if (lookup) {
                         var index = partyData.indexOf(lookup);
@@ -139,7 +139,7 @@ angular
                 }
             };
 
-            $scope.saveAndNext = function(value) {
+            $scope.saveAndNext = function (value) {
                 if (actionsList[value._self]) {
                     actionDispatcher(actionsList[value._self], value);
                 } else if (angular.isNumber(value)) {

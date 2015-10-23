@@ -7,7 +7,7 @@ angular
     .controller('gameGridController', ['$scope', '$location',
             'userData', 'partyData', 'levelMap', 'mazeRunner', 'gameGridMenuOptions', 'ouchHappened', 'infoText',
             'tileService', 'tellsList', 'mapModal', 'actionDispatcher',
-        function($scope, $location,
+        function ($scope, $location,
             userData, partyData, levelMap, mazeRunner, gameGridMenuOptions, ouchHappened, infoText,
             tileService, tellsList, mapModal, actionDispatcher) {
             'use strict';
@@ -30,7 +30,7 @@ angular
             levelMap.init(currentLevelMap.layout);
 
             actionsList = {
-                'forward': function() {
+                'forward': function () {
                     var nextTileIndex = $scope.view.length - 2;
                     var next = $scope.view[nextTileIndex][1];
                     if (tileService.canGoForward(next)) {
@@ -56,7 +56,7 @@ angular
                         return 'stop mazerunner';
                     }
                 },
-                'left': function() {
+                'left': function () {
                     currentCompassIndex = compassOptions.indexOf(compassDirection);
                     currentCompassIndex--;
                     if (currentCompassIndex < 0) {
@@ -65,7 +65,7 @@ angular
                     compassDirection = compassOptions[currentCompassIndex];
                     userData.currentMap.direction = compassDirection;
                 },
-                'right': function() {
+                'right': function () {
                     currentCompassIndex = compassOptions.indexOf(compassDirection);
                     currentCompassIndex++;
                     if (currentCompassIndex === compassOptions.length) {
@@ -74,16 +74,16 @@ angular
                     compassDirection = compassOptions[currentCompassIndex];
                     userData.currentMap.direction = compassDirection;
                 },
-                'camp': function() {
+                'camp': function () {
                     $location.path('/camp');
                 },
-                'describe': function() {
+                'describe': function () {
                     //// describe gets any metadata abount the current cell
                 },
-                'map': function() {
+                'map': function () {
                     $location.path('/mapscreen');
                 },
-                'updateMazeRunner': function() {
+                'updateMazeRunner': function () {
                     $scope.view = levelMap.getView(coordinates[0],coordinates[1], compassDirection);
 
                     $scope.page = {
@@ -99,7 +99,7 @@ angular
                 }
             };
 
-            $scope.saveAndNext = function(value) {
+            $scope.saveAndNext = function (value) {
                 $scope.tells = [];
 
                 var returnValue = actionDispatcher(actionsList[value._self], value);

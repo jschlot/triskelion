@@ -2,9 +2,9 @@
 angular
     .module('triskelion.utils.stringManipulations.service', [])
     .factory('objectFindByKey',
-        function() {
+        function () {
             'use strict';
-            var objectFindByKey = function(array, key, value) {
+            var objectFindByKey = function (array, key, value) {
                 for (var i = 0; i < array.length; i++) {
                     if (array[i][key].toLowerCase() === value.toLowerCase()) {
                         return array[i];
@@ -16,9 +16,9 @@ angular
         }
     )
     .factory('hotkeyAction',
-        function() {
+        function () {
             'use strict';
-            var hotkeyAction = function(action) {
+            var hotkeyAction = function (action) {
                 var hotkey = action.hotkey;
 
                 if (action.name) {

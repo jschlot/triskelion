@@ -2,7 +2,7 @@
 angular
     .module('triskelion.mapscreen.menuOptions.service', [])
     .service('mapScreenMenuOptions',
-        function() {
+        function () {
             'use strict';
             var partyActions = {
                 returntogame: {

@@ -2,7 +2,7 @@
 angular
     .module('triskelion.camp.service', [])
     .service('campActions',
-        function() {
+        function () {
             'use strict';
             var campActions = {
                 add: {

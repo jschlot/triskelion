@@ -1,18 +1,18 @@
 /* global angular */
 angular
   .module('triskelion.saytell.directive',[])
-  .directive('autofocus', ['$timeout', function($timeout) {
+  .directive('autofocus', ['$timeout', function ($timeout) {
       return {
           restrict: 'A',
-          link: function($scope, $element) {
-              $timeout(function() {
+          link: function ($scope, $element) {
+              $timeout(function () {
                   $element[0].focus();
               });
           }
       };
   }])
   .directive('saytellDirective', ['objectFindByKey', 'actionNotFound', 'infoText',
-      function(objectFindByKey, actionNotFound, infoText) {
+      function (objectFindByKey, actionNotFound, infoText) {
           'use strict';
 
           function linkingFunction(scope, element) {
@@ -20,7 +20,7 @@ angular
           }
 
           function controller($scope) {
-              $scope.say = function() {
+              $scope.say = function () {
                   var lookup;
 
                   if ($scope.prompt) {
@@ -39,7 +39,7 @@ angular
                   $scope.prompt = null;
               };
 
-              $scope.$on('$destroy', function() {
+              $scope.$on('$destroy', function () {
                   $scope.element = null;
               });
           }

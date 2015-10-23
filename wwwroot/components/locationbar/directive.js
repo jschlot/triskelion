@@ -2,7 +2,7 @@
 angular
     .module('triskelion.locationBar.directive',[])
     .directive('locationBarDirective', [
-        function() {
+        function () {
             'use strict';
 
             function linkingFunction(scope, element) {
@@ -10,7 +10,7 @@ angular
             }
 
             function controller($scope) {
-                $scope.$on('$destroy', function() {
+                $scope.$on('$destroy', function () {
                     $scope.element = null;
                 });
             }

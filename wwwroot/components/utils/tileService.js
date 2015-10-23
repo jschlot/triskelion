@@ -2,10 +2,10 @@
 angular
     .module('triskelion.utils.tileService.service', [])
     .service('tileService', ['actionDispatcher', 'userData', 'infoText', 'diceService',
-        function(actionDispatcher, userData, infoText, diceService) {
+        function (actionDispatcher, userData, infoText, diceService) {
             'use strict';
 
-            this.action = function(value) {
+            this.action = function (value) {
                 var actionsList = [];
                 actionsList = userData.gameModuleSelected.tileActions;
 
@@ -29,14 +29,14 @@ angular
                 }
             };
 
-            this.message = function(obj, aura) {
+            this.message = function (obj, aura) {
                 obj.tells.push(aura.description);
             };
 
-            this.damage = function(obj, aura) {
+            this.damage = function (obj, aura) {
                 obj.tells.push(aura.description);
 
-                angular.forEach(obj.party, function(player, key) {
+                angular.forEach(obj.party, function (player, key) {
                     var message = '';
                     var damage = diceService.roll(aura.numberOfDice,aura.diceSides);
                     var savingThrow = diceService.roll(1,20);
@@ -65,10 +65,10 @@ angular
                 });
             };
 
-            this.heal = function(obj, aura) {
+            this.heal = function (obj, aura) {
                 obj.tells.push(aura.description);
 
-                angular.forEach(obj.party, function(player, key) {
+                angular.forEach(obj.party, function (player, key) {
                     var message = '';
                     var health = diceService.roll(aura.numberOfDice,aura.diceSides);
 
@@ -88,11 +88,11 @@ angular
                 });
             };
 
-            this.isBlock = function(tile) {
+            this.isBlock = function (tile) {
                 return (tile < 18) ? true : false;
             };
 
-            this.isDoor = function(tile) {
+            this.isDoor = function (tile) {
                 var isDoor;
                 if (tile === 26) {
                     isDoor = 'ns-unlocked';
@@ -110,11 +110,11 @@ angular
                 return isDoor;
             };
 
-            this.canGoForward = function(tile) {
+            this.canGoForward = function (tile) {
                 return (tile > 23) ? true : false;
             };
 
-            this.mapClass = function(tile) {
+            this.mapClass = function (tile) {
                 var mapClass = 'wall';
                 if (tile > 23) {
                     mapClass = 'floor';

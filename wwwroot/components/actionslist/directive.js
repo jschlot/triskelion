@@ -3,7 +3,7 @@ angular
     .module('triskelion.actionsList.directive',[])
     .directive('actionsListDirective', ['$location', 'objectFindByKey', 'actionNotFound', 'infoText',
         'hotkeyAction',
-        function($location, objectFindByKey, actionNotFound, infoText, hotkeyAction) {
+        function ($location, objectFindByKey, actionNotFound, infoText, hotkeyAction) {
             'use strict';
 
             function linkingFunction(scope, element) {
@@ -13,7 +13,7 @@ angular
             function controller($scope) {
                 $scope.formatAction = hotkeyAction;
 
-                $scope.$on('$destroy', function() {
+                $scope.$on('$destroy', function () {
                     $scope.element = null;
                 });
             }

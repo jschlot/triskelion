@@ -3,7 +3,7 @@ angular
     .module('triskelion.startScreen.controller',['triskelion.startscreen.service'])
     .controller('startScreenController', [
         '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher', 'startScreenMenuOptions',
-        function($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher, startScreenMenuOptions) {
+        function ($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher, startScreenMenuOptions) {
             'use strict';
 
             /*
@@ -17,13 +17,13 @@ angular
             tellsList = [];
 
             var actionsList = {
-                newgame: function(actionSelected) {
+                newgame: function (actionSelected) {
                     $scope.tells = [infoText.choosemodule];
                     $scope.availableActions = [
                         gameModules.dungeon
                     ];
                 },
-                createNewGame: function(actionSelected) {
+                createNewGame: function (actionSelected) {
                     userData.gameModuleSelected = actionSelected;
                     userData.currentMap.level = actionSelected.defaultLevel;
                     userData.currentMap.direction = actionSelected.defaultCompassDirection;
@@ -34,7 +34,7 @@ angular
                 }
             };
 
-            $scope.saveAndNext = function(value) {
+            $scope.saveAndNext = function (value) {
                 if (actionsList[value._self]) {
                     actionDispatcher(actionsList[value._self], value);
                 } else {

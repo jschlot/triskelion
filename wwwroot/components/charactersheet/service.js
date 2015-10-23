@@ -2,7 +2,7 @@
 angular
     .module('triskelion.charactersheet.service', [])
     .service('characterSheetMenuOptions',
-        function() {
+        function () {
             'use strict';
             var characterSheetMenuOptions = {
                 backtoselect: {

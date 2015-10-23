@@ -2,7 +2,7 @@
 angular
     .module('triskelion.character.service', [])
     .service('ability',
-        function() {
+        function () {
             'use strict';
             var ability = {
                 heal: {
@@ -107,7 +107,7 @@ angular
         }
     )
     .service('race',
-        function() {
+        function () {
             'use strict';
             var race = {
                 human: {
@@ -131,7 +131,7 @@ angular
         }
     )
     .service('spec',
-        function() {
+        function () {
             'use strict';
             var spec = {
                 priest: {
@@ -212,7 +212,7 @@ angular
         }
     )
     .service('armor',
-        function() {
+        function () {
             'use strict';
             var armor = {
                 cloth: {
@@ -239,7 +239,7 @@ angular
         }
     )
     .service('weapon',
-        function() {
+        function () {
             'use strict';
             var weapon = {
                 staff: {
