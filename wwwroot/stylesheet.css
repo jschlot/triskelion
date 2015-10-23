@@ -47,6 +47,10 @@ svg text {
     border-top: 1px solid white;
 }
 
+.table-header {
+    font-weight: bold;
+}
+
 .shim {
     min-height: 8em;
     padding: 0.5em;
