@@ -7,121 +7,120 @@ angular
     .controller('gameGridController', ['$scope', '$location',
             'userData', 'partyData', 'levelMap', 'mazeRunner', 'gameGridMenuOptions', 'ouchHappened', 'infoText',
             'tileService', 'tellsList', 'mapModal', 'actionDispatcher',
-        function($scope, $location,
+        function ($scope, $location,
             userData, partyData, levelMap, mazeRunner, gameGridMenuOptions, ouchHappened, infoText,
             tileService, tellsList, mapModal, actionDispatcher) {
+            'use strict';
 
-          'use strict';
+            if (!userData.gameModuleSelected || partyData.length === 0) {
+                $location.path('/startscreen');
+                return;
+            }
 
-          if (!userData.gameModuleSelected || partyData.length === 0) {
-            $location.path('/startscreen');
-            return;
-          }
+            var currentLevel = userData.currentMap.level,
+                currentLevelMap = userData.gameModuleSelected.map[currentLevel],
+                currentCompassIndex,
+                compassOptions = ['north','east', 'south', 'west'],
+                coordinates = userData.currentMap.coordinates,
+                compassDirection = userData.currentMap.direction,
+                actionsList = {},
+                menuOptions = gameGridMenuOptions;
 
-          var currentLevel = userData.currentMap.level,
-              currentLevelMap = userData.gameModuleSelected.map[currentLevel],
-              currentCompassIndex,
-              compassOptions = ['north','east', 'south', 'west'],
-              coordinates = userData.currentMap.coordinates,
-              compassDirection = userData.currentMap.direction,
-              actionsList = {},
-              menuOptions = gameGridMenuOptions;
+            levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols);
+            levelMap.init(currentLevelMap.layout);
 
-          levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols);
-          levelMap.init(currentLevelMap.layout);
+            actionsList = {
+                'forward': function () {
+                    var nextTileIndex = $scope.view.length - 2;
+                    var next = $scope.view[nextTileIndex][1];
+                    if (tileService.canGoForward(next)) {
+                        switch (compassDirection) {
+                            case 'east':
+                                coordinates[0] = coordinates[0] + 1;
+                                break;
+                            case 'west':
+                                coordinates[0] = coordinates[0] - 1;
+                                break;
+                            case 'north':
+                                coordinates[1] = coordinates[1] - 1;
+                                break;
+                            case 'south':
+                                coordinates[1] = coordinates[1] + 1;
+                                break;
+                        }
 
-          actionsList = {
-            'forward': function() {
-              var nextTileIndex = $scope.view.length - 2;
-              var next = $scope.view[nextTileIndex][1];
-              if (tileService.canGoForward(next)) {
-                switch (compassDirection) {
-                  case 'east':
-                    coordinates[0] = coordinates[0] + 1;
-                    break;
-                  case 'west':
-                    coordinates[0] = coordinates[0] - 1;
-                    break;
-                  case 'north':
-                    coordinates[1] = coordinates[1] - 1;
-                    break;
-                  case 'south':
-                    coordinates[1] = coordinates[1] + 1;
-                    break;
-                }
-
-                $scope.tells = [];
-                tileService.action({_self: next, party: partyData, tells: $scope.tells});
-              } else {
-                mapModal(ouchHappened());
-                return 'stop mazerunner';
-              }
-            },
-            'left': function() {
-              currentCompassIndex = compassOptions.indexOf(compassDirection);
-              currentCompassIndex--;
-              if (currentCompassIndex < 0) {
-                currentCompassIndex = compassOptions.length - 1;
-              }
-              compassDirection = compassOptions[currentCompassIndex];
-              userData.currentMap.direction = compassDirection;
-            },
-            'right': function() {
-              currentCompassIndex = compassOptions.indexOf(compassDirection);
-              currentCompassIndex++;
-              if (currentCompassIndex === compassOptions.length) {
-                currentCompassIndex = 0;
-              }
-              compassDirection = compassOptions[currentCompassIndex];
-              userData.currentMap.direction = compassDirection;
-            },
-            'camp': function() {
-              $location.path('/camp');
-            },
-            'describe': function() {
-              //// describe gets any metadata abount the current cell
-            },
-            'map': function() {
-              $location.path('/mapscreen');
-            },
-            'updateMazeRunner': function() {
-              $scope.view = levelMap.getView(coordinates[0],coordinates[1], compassDirection);
-
-              $scope.page = {
-                zone: {name: userData.gameModuleSelected.name + ': ' + currentLevelMap.name},
-                location: {
-                  coordinates: {x: coordinates[0], y: coordinates[1]},
-                  compass: compassDirection
+                        $scope.tells = [];
+                        tileService.action({_self: next, party: partyData, tells: $scope.tells});
+                    } else {
+                        mapModal(ouchHappened());
+                        return 'stop mazerunner';
+                    }
                 },
-                data: levelMap.getMap()
-              };
+                'left': function () {
+                    currentCompassIndex = compassOptions.indexOf(compassDirection);
+                    currentCompassIndex--;
+                    if (currentCompassIndex < 0) {
+                        currentCompassIndex = compassOptions.length - 1;
+                    }
+                    compassDirection = compassOptions[currentCompassIndex];
+                    userData.currentMap.direction = compassDirection;
+                },
+                'right': function () {
+                    currentCompassIndex = compassOptions.indexOf(compassDirection);
+                    currentCompassIndex++;
+                    if (currentCompassIndex === compassOptions.length) {
+                        currentCompassIndex = 0;
+                    }
+                    compassDirection = compassOptions[currentCompassIndex];
+                    userData.currentMap.direction = compassDirection;
+                },
+                'camp': function () {
+                    $location.path('/camp');
+                },
+                'describe': function () {
+                    //// describe gets any metadata abount the current cell
+                },
+                'map': function () {
+                    $location.path('/mapscreen');
+                },
+                'updateMazeRunner': function () {
+                    $scope.view = levelMap.getView(coordinates[0],coordinates[1], compassDirection);
 
-              mazeRunner($scope.view);
-            }
-          };
+                    $scope.page = {
+                        zone: {name: userData.gameModuleSelected.name + ': ' + currentLevelMap.name},
+                        location: {
+                            coordinates: {x: coordinates[0], y: coordinates[1]},
+                            compass: compassDirection
+                        },
+                        data: levelMap.getMap()
+                    };
 
-          $scope.saveAndNext = function(value) {
-            $scope.tells = [];
+                    mazeRunner($scope.view);
+                }
+            };
 
-            var returnValue = actionDispatcher(actionsList[value._self], value);
-            if (returnValue !== 'stop mazerunner') {
-              actionsList.updateMazeRunner();
-            }
-          };
+            $scope.saveAndNext = function (value) {
+                $scope.tells = [];
 
-          $scope.tells = tellsList;
-          $scope.partyData = partyData;
-          $scope.auras = []; // is this right? maybe we don't want to always reset auras???
+                var returnValue = actionDispatcher(actionsList[value._self], value);
+                if (returnValue !== 'stop mazerunner') {
+                    actionsList.updateMazeRunner();
+                }
+            };
 
-          $scope.availableActions = [
-              menuOptions.forward,
-              menuOptions.goleft,
-              menuOptions.goright,
-              menuOptions.camp,
-              menuOptions.describe,
-              menuOptions.map
-          ];
+            $scope.tells = tellsList;
+            $scope.partyData = partyData;
+            $scope.auras = []; // is this right? maybe we don't want to always reset auras???
 
-          actionsList.updateMazeRunner();
+            $scope.availableActions = [
+                menuOptions.forward,
+                menuOptions.goleft,
+                menuOptions.goright,
+                menuOptions.camp,
+                menuOptions.describe,
+                menuOptions.map
+            ];
+
+            actionsList.updateMazeRunner();
         }
     ]);
