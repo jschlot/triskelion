@@ -37,6 +37,11 @@ svg text {
     fill: white;
 }
 
+ul {
+    padding: 0;
+    margin: 0;
+}
+
 .outline {
     color: white;
     border: 1px solid white;
@@ -58,6 +63,8 @@ svg text {
 
 .location {
     padding: 0.5em;
+    font-size: 1.5em;
+    font-weight: bold;
 }
 
 #commandPrompt {
@@ -81,27 +88,27 @@ label::before {
     background-color: white;
 }
 
-ul.flex-list {
+.flex-list {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-ul.flex-list li
+.flex-list li
 {
     display: inline-block;
     padding: 0 2em 1em 0;
     width: 25%;
 }
 
-ul.vert-list {
+.vert-list {
     list-style-type: none;
     display: inline;
     margin: 0;
     padding: 0;
 }
 
-ul.vert-list li {
+.vert-list li {
     padding: 0 2em 1em 0;
 }
 
