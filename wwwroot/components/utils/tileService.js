@@ -6,15 +6,17 @@ angular
             'use strict';
 
             this.action = function (value) {
-                var actionsList = [];
+                var actionsList = [],
+                    lookup,
+                    event;
                 actionsList = userData.gameModuleSelected.tileActions;
 
                 if (value._self < 32) {
                     return;
                 }
 
-                var lookup = value._self - 32;
-                var event = actionsList[lookup];
+                lookup = value._self - 32;
+                event = actionsList[lookup];
 
                 switch (event.actionType) {
                     case 'damage':
@@ -37,9 +39,9 @@ angular
                 obj.tells.push(aura.description);
 
                 angular.forEach(obj.party, function (player, key) {
-                    var message = '';
-                    var damage = diceService.roll(aura.numberOfDice,aura.diceSides);
-                    var savingThrow = diceService.roll(1,20);
+                    var message = '',
+                        damage = diceService.roll(aura.numberOfDice,aura.diceSides),
+                        savingThrow = diceService.roll(1,20);
 
                     if (player.character.stats.health < 1) {
                         return;
@@ -69,10 +71,10 @@ angular
                 obj.tells.push(aura.description);
 
                 angular.forEach(obj.party, function (player, key) {
-                    var message = '';
-                    var health = diceService.roll(aura.numberOfDice,aura.diceSides);
+                    var message = '',
+                        health = diceService.roll(aura.numberOfDice,aura.diceSides),
+                        newhp = player.character.stats.health + health;
 
-                    var newhp = player.character.stats.health + health;
                     if (newhp >= player.character.stats.maxhealth) {
                         return;
                     }

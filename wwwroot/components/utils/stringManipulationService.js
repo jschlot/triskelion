@@ -19,10 +19,10 @@ angular
         function () {
             'use strict';
             var hotkeyAction = function (action) {
-                var hotkey = action.hotkey;
+                var hotkey = action.hotkey, remainder;
 
                 if (action.name) {
-                    var remainder = action.name.substr(1,action.name.length);
+                    remainder = action.name.substr(1,action.name.length);
                     return hotkey + ')' + remainder;
                 } else {
                     return null;

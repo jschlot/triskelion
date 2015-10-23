@@ -1,5 +1,4 @@
 {
-	"preset": "google",
     "requireCurlyBraces": [
         "if",
         "else",
