@@ -6,7 +6,7 @@ angular
             'use strict';
             var miniMap = function (map) {
                 var vis,
-                    width = map[0].length, // BUG
+                    width = map[0].length, // assumes all map levels have equal dimensions
                     height = map.length,
                     canvas = {width: 940, height: 570},
                     scaleX,
