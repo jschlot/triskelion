@@ -1,12 +1,12 @@
 /* global angular */
 angular
     .module('triskelion.gameGrid.controller',[
-        'triskelion.gamegrid.mapModal.service', 'triskelion.gamegrid.menuOptions.service', 
+        'triskelion.gamegrid.mapModal.service', 'triskelion.gamegrid.menuOptions.service',
         'triskelion.gamegrid.mazeRunner.service', 'triskelion.utils.levelMap.service'
     ])
     .controller('gameGridController', ['$scope', '$location',
             'userData', 'partyData', 'levelMap', 'mazeRunner', 'gameGridMenuOptions', 'ouchHappened', 'infoText',
-            'tileService', 'tellsList', 'mapModal', 'actionDispatcher', 
+            'tileService', 'tellsList', 'mapModal', 'actionDispatcher',
         function($scope, $location,
             userData, partyData, levelMap, mazeRunner, gameGridMenuOptions, ouchHappened, infoText,
             tileService, tellsList, mapModal, actionDispatcher) {
@@ -86,7 +86,7 @@ angular
                 },
                 'updateMazeRunner': function() {
                     $scope.view = levelMap.getView(coordinates[0],coordinates[1], compassDirection);
-                
+
                     $scope.page = {
                         zone: { name: userData.gameModuleSelected.name + ": " + currentLevelMap.name },
                         location: {
@@ -95,9 +95,9 @@ angular
                         },
                         data: levelMap.getMap()
                     };
-    
+
                     mazeRunner($scope.view);
-                }                
+                }
             };
 
             $scope.saveAndNext = function(value) {
@@ -123,6 +123,5 @@ angular
             ];
 
             actionsList.updateMazeRunner();
-
         }
     ]);
