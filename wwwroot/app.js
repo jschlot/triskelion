@@ -27,33 +27,33 @@ angular
     ])
     .config([
         '$routeProvider', '$compileProvider',
-        function($routeProvider, $compileProvider) {
-          'use strict';
+        function ($routeProvider, $compileProvider) {
+            'use strict';
 
-          $compileProvider.debugInfoEnabled(false);
-          $routeProvider
+            $compileProvider.debugInfoEnabled(false);
+            $routeProvider
                 .when('/startscreen', {
-                  templateUrl: 'components/startscreen/layout.html',
-                  controller: 'startScreenController'
+                    templateUrl: 'components/startscreen/layout.html',
+                    controller: 'startScreenController'
                 })
                 .when('/camp', {
-                  templateUrl: 'components/camp/layout.html',
-                  controller: 'campController'
+                    templateUrl: 'components/camp/layout.html',
+                    controller: 'campController'
                 })
                 .when('/charactersheet/:characterkey', {
-                  templateUrl: 'components/charactersheet/layout.html',
-                  controller: 'characterSheetController'
+                    templateUrl: 'components/charactersheet/layout.html',
+                    controller: 'characterSheetController'
                 })
                 .when('/gamegrid', {
-                  templateUrl: 'components/gamegrid/layout.html',
-                  controller: 'gameGridController'
+                    templateUrl: 'components/gamegrid/layout.html',
+                    controller: 'gameGridController'
                 })
                 .when('/mapscreen', {
-                  templateUrl: 'components/mapscreen/layout.html',
-                  controller: 'mapScreenController'
+                    templateUrl: 'components/mapscreen/layout.html',
+                    controller: 'mapScreenController'
                 })
                 .otherwise({
-                  redirectTo: '/startscreen'
+                    redirectTo: '/startscreen'
                 });
         }
     ]);

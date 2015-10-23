@@ -2,14 +2,14 @@
 angular
     .module('triskelion.utils.levelMap.service', [])
     .service('levelMap', ['tileService',
-        function (tileService) {
+        function(tileService) {
             'use strict';
             var map = [],
                 width = 9,
                 height = 9,
                 depth = 4;
 
-            this.init = function (config) {
+            this.init = function(config) {
                 for (var i = 0; i < width; i++) {
                     map[i] = new Array(height);
                     for (var j = 0; j < height; j++) {
@@ -22,20 +22,20 @@ angular
                 }
             };
 
-            this.setDimensions = function (w, h) {
+            this.setDimensions = function(w, h) {
                 width = w;
                 height = h;
             };
 
-            this.setDepth = function (d) {
+            this.setDepth = function(d) {
                 depth = d;
             };
 
-            this.getMap = function () {
+            this.getMap = function() {
                 return map;
             };
 
-            this.debugMap = function (orientation) {
+            this.debugMap = function(orientation) {
                 var header = [];
                 header[0] = orientation[0];
                 for (var i = 0; i < height; i++) {
@@ -48,7 +48,7 @@ angular
                 }
             };
 
-            this.debugView = function (view, orientation) {
+            this.debugView = function(view, orientation) {
                 var header = [];
                 header[0] = orientation[0];
                 for (var i = 0; i < 3; i++) {
@@ -61,7 +61,7 @@ angular
                 }
             };
 
-            this.getView = function (xCoord, yCoord, orientation) {
+            this.getView = function(xCoord, yCoord, orientation) {
                 if (!orientation) {
                     orientation = 'north';
                 }
@@ -115,7 +115,7 @@ angular
                 return currentTile;
             };
 
-            this.updateTile = function (xCoord, yCoord, tileBit) {
+            this.updateTile = function(xCoord, yCoord, tileBit) {
                 map[yCoord][xCoord] = tileBit;
             };
         }

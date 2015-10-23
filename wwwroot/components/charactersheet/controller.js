@@ -6,18 +6,18 @@ angular
     .controller('characterSheetController', [
         '$scope', '$location', '$routeParams', 'infoText', 'playerDB', 'hotkeyAction',
         'characterSheetMenuOptions', 'actionDispatcher',
-        function ($scope, $location, $routeParams, infoText, playerDB, hotkeyAction,
+        function($scope, $location, $routeParams, infoText, playerDB, hotkeyAction,
             characterSheetMenuOptions, actionDispatcher) {
             'use strict';
 
             // the actions list might need to know context or be dynamic
-            $scope.saveAndNext = function (value) {
+            $scope.saveAndNext = function(value) {
                 var actionsList = {
-                    confirm: function (actionSelected) {
+                    confirm: function(actionSelected) {
                         $scope.tells = [];
                         $location.path('/camp');
                     },
-                    backtoselect: function (actionSelected) {
+                    backtoselect: function(actionSelected) {
                         $scope.tells = [];
                         $location.path('/camp');
                     }
@@ -27,7 +27,7 @@ angular
             };
 
             $scope.loadedCharacter = {};
-            angular.forEach(playerDB.dungeon, function (value, key) {
+            angular.forEach(playerDB.dungeon, function(value, key) {
                 if (value._this === $routeParams.characterkey) {
                     $scope.loadedCharacter = value;
                 }

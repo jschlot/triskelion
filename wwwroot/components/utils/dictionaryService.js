@@ -2,7 +2,7 @@
 angular
     .module('triskelion.utils.dictionary.service', [])
     .service('sarcasticQuips',
-        function () {
+        function() {
             'use strict';
             var sarcasticQuips = [
                 'Huh? What was that?',
@@ -16,7 +16,7 @@ angular
         }
     )
     .service('sarcasticOuches',
-        function () {
+        function() {
             'use strict';
             var sarcasticOuches = [
                 'Ouch!',
@@ -27,7 +27,7 @@ angular
         }
     )
     .service('infoText',
-        function () {
+        function() {
             'use strict';
             var infoText = {
                 startscreen: 'Welcome to Triskelion.',

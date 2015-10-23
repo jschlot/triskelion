@@ -2,7 +2,7 @@
 angular
     .module('triskelion.utils.globalData.service', ['triskelion.character.elf.factory'])
     .service('gameModules', [
-        function (tileService) {
+        function(tileService) {
             'use strict';
 
             var gameModules = {
@@ -74,7 +74,7 @@ angular
         }
     ])
     .service('userData', [
-        function () {
+        function() {
             'use strict';
 
             var userData = {
@@ -85,7 +85,7 @@ angular
         }
     ])
     .service('partyData', [
-        function () {
+        function() {
             'use strict';
 
             var partyData = [];
@@ -93,7 +93,7 @@ angular
         }
     ])
     .service('tellsList', [
-        function () {
+        function() {
             'use strict';
 
             var tellsList = [];
@@ -101,7 +101,7 @@ angular
         }
     ])
     .service('playerDB',['Priest', 'Ranger', 'Wizard', 'Scout',
-        function (Priest, Ranger, Wizard, Scout) {
+        function(Priest, Ranger, Wizard, Scout) {
             'use strict';
 
             var playerDB = {};

@@ -2,10 +2,10 @@
 angular
     .module('triskelion.character.factory', ['triskelion.character.service'])
     .factory('Character', ['ability', 'race', 'spec', 'diceService',
-        function (ability, race, spec, diceService) {
+        function(ability, race, spec, diceService) {
             'use strict';
 
-            var Character = function (name) {
+            var Character = function(name) {
                 this.name = (name) ? name : 'Grunt';
                 this.created = new Date();
                 this.hotkey = this.name.substr(0,1);
@@ -24,7 +24,7 @@ angular
                 this.character.alignment.rating = 'neutral neutral';
                 this.character.alignment.ethics = 0;
                 this.character.alignment.morals = 0;
-                this.character.alignment.adjust = function (polarity, amount) {
+                this.character.alignment.adjust = function(polarity, amount) {
                     var rating, morals = 'neutral', ethics = 'neutral';
 
                     if (polarity === 'morals') {
@@ -54,7 +54,7 @@ angular
                 this.character.experience.level = 1;
                 this.character.experience.points = 0;
                 this.character.experience.bonus = 1;
-                this.character.experience.add = function (xp) {
+                this.character.experience.add = function(xp) {
                     var currentLevel = this.level;
                     var earned = xp + (xp * this.bonus);
                     this.points = this.points + earned;
@@ -72,7 +72,7 @@ angular
                 this.character.stats.energy = 1;
                 this.character.stats.maxenergy = 1;
 
-                this.character.stats.updateHealth = function (level, hpDice, nrgDice) {
+                this.character.stats.updateHealth = function(level, hpDice, nrgDice) {
                     var initialHealth = diceService.roll(level, hpDice) + hpDice;
                     this.health = initialHealth;
                     this.maxhealth = initialHealth;
@@ -101,7 +101,7 @@ angular
                 this.character.quips = [];
                 this.character.tags = [];
 
-                this.character.levelUp = function () {
+                this.character.levelUp = function() {
                     this.character.stats.updateHealth(this.experience.level, this.hpDice, this.nrgDice);
                     return 'ding';
                 };
@@ -110,10 +110,10 @@ angular
         }
     ])
     .factory('Caster', ['Character', 'diceService',
-         function (Character, diceService) {
+         function(Character, diceService) {
              'use strict';
 
-             return function (name) {
+             return function(name) {
                  angular.extend(this, new Character(name));
 
                  this.character.hpDice = 6;
@@ -130,10 +130,10 @@ angular
          }
      ])
      .factory('Fighter', ['Character', 'diceService',
-         function (Character, diceService) {
+         function(Character, diceService) {
              'use strict';
 
-             return function (name) {
+             return function(name) {
                  angular.extend(this, new Character(name));
 
                  this.character.hpDice = 10;
@@ -150,10 +150,10 @@ angular
          }
      ])
      .factory('Healer', ['Character', 'diceService',
-         function (Character, diceService) {
+         function(Character, diceService) {
              'use strict';
 
-             return function (name) {
+             return function(name) {
                  angular.extend(this, new Character(name));
 
                  this.character.hpDice = 8;
@@ -171,10 +171,10 @@ angular
          }
      ])
      .factory('Rogue', ['Character', 'diceService',
-         function (Character, diceService) {
+         function(Character, diceService) {
              'use strict';
 
-             return function (name) {
+             return function(name) {
                  angular.extend(this, new Character(name));
 
                  this.character.hpDice = 8;

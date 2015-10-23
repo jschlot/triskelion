@@ -6,7 +6,7 @@ angular
     .controller('mapScreenController', [
             '$scope', '$location', 'infoText', 'userData', 'partyData', 'tellsList', 'mapScreenMenuOptions',
             'actionDispatcher', 'levelMap', 'miniMap', 'hotkeyAction',
-        function ($scope, $location, infoText, userData, partyData, tellsList, mapScreenMenuOptions,
+        function($scope, $location, infoText, userData, partyData, tellsList, mapScreenMenuOptions,
             actionDispatcher, levelMap, miniMap, hotkeyAction) {
             'use strict';
 
@@ -21,7 +21,7 @@ angular
                 startingActionTells,
                 menuOptions = mapScreenMenuOptions;
 
-            startingActionTells = function () {
+            startingActionTells = function() {
                 $scope.tells = [];
                 for (var i = 0; i < $scope.availableActions.length; i++) {
                     $scope.tells.push(hotkeyAction($scope.availableActions[i]));
@@ -33,13 +33,13 @@ angular
 
             miniMap(levelMap.getMap());
 
-            $scope.saveAndNext = function (value) {
+            $scope.saveAndNext = function(value) {
                 var actionsList = {
-                    returntogame: function (actionSelected) {
+                    returntogame: function(actionSelected) {
                         $scope.tells = [];
                         $location.path('/gamegrid');
                     },
-                    teleport: function (actionSelected) {
+                    teleport: function(actionSelected) {
                         userData.currentMap.coordinates = userData.gameModuleSelected.startingCoordinates;
                         userData.currentMap.direction = userData.gameModuleSelected.defaultCompassDirection;
                         $location.path('/gamegrid');

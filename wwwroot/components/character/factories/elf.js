@@ -2,10 +2,10 @@
 angular
     .module('triskelion.character.elf.factory', ['triskelion.character.factory', 'triskelion.character.service'])
     .factory('Priest', ['Healer', 'diceService', 'ability', 'race', 'spec', 'armor', 'weapon',
-         function (Healer, diceService, ability, race, spec, armor, weapon) {
+         function(Healer, diceService, ability, race, spec, armor, weapon) {
              'use strict';
 
-             return function (name) {
+             return function(name) {
                  angular.extend(this, new Healer(name));
 
                  this.character.identity.race = race.elf.name;
@@ -26,10 +26,10 @@ angular
          }
      ])
      .factory('Ranger', ['Fighter', 'diceService', 'ability', 'race', 'spec', 'armor', 'weapon',
-         function (Fighter, diceService, ability, race, spec, armor, weapon) {
+         function(Fighter, diceService, ability, race, spec, armor, weapon) {
              'use strict';
 
-             return function (name) {
+             return function(name) {
                  angular.extend(this, new Fighter(name));
 
                  this.character.identity.race = race.elf.name;
@@ -50,10 +50,10 @@ angular
          }
      ])
      .factory('Wizard', ['Caster', 'diceService', 'ability', 'race', 'spec', 'armor', 'weapon',
-         function (Caster, diceService, ability, race, spec, armor, weapon) {
+         function(Caster, diceService, ability, race, spec, armor, weapon) {
              'use strict';
 
-             return function (name) {
+             return function(name) {
                  angular.extend(this, new Caster(name));
 
                  this.character.identity.race = race.elf.name;
@@ -74,10 +74,10 @@ angular
          }
      ])
      .factory('Scout', ['Rogue', 'diceService', 'ability', 'race', 'spec', 'armor', 'weapon',
-         function (Rogue, diceService, ability, race, spec, armor, weapon) {
+         function(Rogue, diceService, ability, race, spec, armor, weapon) {
              'use strict';
 
-             return function (name) {
+             return function(name) {
                  angular.extend(this, new Rogue(name));
 
                  this.character.identity.race = race.elf.name;

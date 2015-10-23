@@ -2,7 +2,7 @@
 angular
     .module('triskelion.startscreen.service', [])
     .service('startScreenMenuOptions',
-        function () {
+        function() {
             'use strict';
             var startScreenMenuOptions = {
                 newgame: {

@@ -2,10 +2,10 @@
 angular
     .module('triskelion.gamegrid.mazeRunner.service', [])
     .service('mazeRunner', ['tileService',
-        function (tileService) {
+        function(tileService) {
             'use strict';
 
-            var mazeRunner = function (levelmap) {
+            var mazeRunner = function(levelmap) {
                 var check;
                 var view = levelmap.reverse();
 
@@ -17,25 +17,25 @@ angular
                 var scaleX = d3.scale.linear();
                 var scaleY = d3.scale.linear();
 
-                var wallFactory = function (data, className, cellValue) {
+                var wallFactory = function(data, className, cellValue) {
                     vis.selectAll('polygon.' + className)
                         .data([data])
                         .enter().append('polygon')
                         .attr('class', className)
-                        .attr('points',function (d) {
-                            return d.map(function (d) {
+                        .attr('points',function(d) {
+                            return d.map(function(d) {
                                 return [scaleX(d.x),scaleY(d.y)].join(',');
                             }).join(' ');
                         });
                 };
 
-                var doorFactory = function (data, className, cellValue) {
+                var doorFactory = function(data, className, cellValue) {
                     vis.selectAll('polygon.' + className)
                         .data([data])
                         .enter().append('polygon')
                         .attr('class', className)
-                        .attr('points',function (d) {
-                            return d.map(function (d) {
+                        .attr('points',function(d) {
+                            return d.map(function(d) {
                                 return [scaleX(d.x),scaleY(d.y)].join(',');
                             }).join(' ');
                         });

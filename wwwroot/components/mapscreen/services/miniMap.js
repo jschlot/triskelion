@@ -2,9 +2,9 @@
 angular
     .module('triskelion.mapscreen.miniMap.service', [])
     .service('miniMap', ['tileService',
-        function (tileService) {
+        function(tileService) {
             'use strict';
-            var miniMap = function (map) {
+            var miniMap = function(map) {
                 var vis = d3.select('#minimap')
                     .attr('viewBox', '0 0 940 570');
 
@@ -22,7 +22,7 @@ angular
                     .domain([0, height])
                     .range([0, canvas.height]);
 
-                var cellFactory = function (plotCoords, className, tile) {
+                var cellFactory = function(plotCoords, className, tile) {
                     var isDoor = tileService.isDoor(tile);
                     var fill = tileService.mapClass(tile);
                     var cell = vis.append('svg:g')
@@ -33,8 +33,8 @@ angular
                   .enter().append('polygon')
                   .attr('class', className)
                   .attr('class', fill)
-                        .attr('points', function (d) {
-                            return d.map(function (d) {
+                        .attr('points', function(d) {
+                            return d.map(function(d) {
                                 return [scaleX(d.x), scaleY(d.y)].join(',');
                             }).join(' ');
                         });
@@ -55,16 +55,16 @@ angular
                     .append('svg:line')
                     .attr('class', className)
         //        	.attr("stroke-dasharray", "5,5") // portcullis
-                    .attr('x1', function (d, i) {
+                    .attr('x1', function(d, i) {
                         return scaleX(d[0].x + lineCenter);
                     })
-                    .attr('y1', function (d, i) {
+                    .attr('y1', function(d, i) {
                         return scaleY(d[0].y + lineMid);
                     })
-                    .attr('x2', function (d, i) {
+                    .attr('x2', function(d, i) {
                         return scaleX(d[idxA].x + lineCenter);
                     })
-                    .attr('y2', function (d, i) {
+                    .attr('y2', function(d, i) {
                         return scaleY(d[idxB].y + lineMid);
                     });
 
@@ -76,13 +76,13 @@ angular
                     .enter()
                     .append('svg:rect')
                     .attr('class', className + ' ' + doorType)
-                            .attr('fill', function () {
+                            .attr('fill', function() {
                                 return (doorType === 'unlocked' || doorType === 'arch') ? 'white' : 'black';
                             })
-                            .attr('x', function (d, i) {
+                            .attr('x', function(d, i) {
                                 return scaleX(d[0].x) + scaleX(xPadding);
                             })
-                            .attr('y', function (d, i) {
+                            .attr('y', function(d, i) {
                                 return scaleY(d[0].y) + scaleY(yPadding);
                             })
                                                        .attr('width', scaleX(rectWidth))

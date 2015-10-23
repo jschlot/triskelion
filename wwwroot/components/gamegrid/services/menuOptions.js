@@ -2,7 +2,7 @@
 angular
     .module('triskelion.gamegrid.menuOptions.service', [])
     .service('gameGridMenuOptions',
-        function () {
+        function() {
             'use strict';
             var menuOptions = {
                 forward: {
