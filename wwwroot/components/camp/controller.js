@@ -102,9 +102,9 @@ angular
                     ];
                 },
                 'confirmAdd': function () {
-                    var lookup = objectFindByKey(cast, 'hotkey', currentPick.hotkey);
+                    var index, lookup = objectFindByKey(cast, 'hotkey', currentPick.hotkey);
                     if (lookup) {
-                        var index = cast.indexOf(lookup);
+                        index = cast.indexOf(lookup);
                         if (index > -1) {
                             cast.splice(index,1);
                         }
@@ -121,9 +121,9 @@ angular
                     actionsList.mainActions();
                 },
                 'confirmRemove': function () {
-                    var lookup = objectFindByKey(partyData, 'hotkey', currentPick.hotkey);
+                    var index, lookup = objectFindByKey(partyData, 'hotkey', currentPick.hotkey);
                     if (lookup) {
-                        var index = partyData.indexOf(lookup);
+                        index = partyData.indexOf(lookup);
                         if (index > -1) {
                             partyData.splice(index,1);
                             $scope.availableActions.splice(index,1);
