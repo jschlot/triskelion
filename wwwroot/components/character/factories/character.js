@@ -55,8 +55,8 @@ angular
                 this.character.experience.points = 0;
                 this.character.experience.bonus = 1;
                 this.character.experience.add = function (xp) {
-                    var currentLevel = this.level;
-                    var earned = xp + (xp * this.bonus);
+                    var currentLevel = this.level,
+                        earned = xp + (xp * this.bonus);
                     this.points = this.points + earned;
                     this.level = Math.floor(this.points / 1000) + 1;
                     if (this.level > currentLevel) {
@@ -73,11 +73,11 @@ angular
                 this.character.stats.maxenergy = 1;
 
                 this.character.stats.updateHealth = function (level, hpDice, nrgDice) {
-                    var initialHealth = diceService.roll(level, hpDice) + hpDice;
+                    var initialHealth = diceService.roll(level, hpDice) + hpDice,
+                        initialEnergy = diceService.roll(level, nrgDice) + nrgDice;
                     this.health = initialHealth;
                     this.maxhealth = initialHealth;
 
-                    var initialEnergy = diceService.roll(level, nrgDice) + nrgDice;
                     this.energy = initialEnergy;
                     this.maxenergy = initialEnergy;
                 };

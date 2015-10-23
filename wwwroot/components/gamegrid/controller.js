@@ -31,8 +31,8 @@ angular
 
             actionsList = {
                 'forward': function () {
-                    var nextTileIndex = $scope.view.length - 2;
-                    var next = $scope.view[nextTileIndex][1];
+                    var nextTileIndex = $scope.view.length - 2,
+                        next = $scope.view[nextTileIndex][1];
                     if (tileService.canGoForward(next)) {
                         switch (compassDirection) {
                             case 'east':

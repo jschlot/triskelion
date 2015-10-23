@@ -5,11 +5,11 @@ angular
         function () {
             'use strict';
             var mapModal = function (message) {
-                var scaleX = d3.scale.linear();
-                var scaleY = d3.scale.linear();
+                var scaleX = d3.scale.linear(),
+                    scaleY = d3.scale.linear(),
+                    vis = d3.select('#mazeRunner');
 
                 // requires that the mazerunner has been loaded
-                var vis = d3.select('#mazeRunner');
                 vis.selectAll('polygon.modal')
                     .data([[{'x': 200, 'y': 130}, {'x': 200,'y': 170}, {'x': 300,'y': 170}, {'x': 300,'y': 130}]])
                     .enter().append('polygon')
