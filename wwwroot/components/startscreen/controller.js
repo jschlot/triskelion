@@ -2,8 +2,11 @@
 angular
     .module('triskelion.startScreen.controller',['triskelion.startscreen.service'])
     .controller('startScreenController', [
-        '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher', 'startScreenMenuOptions',
-        function ($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher, startScreenMenuOptions) {
+        '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher',
+        'startScreenMenuOptions', 'objectFindByKey',
+        function ($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher,
+        startScreenMenuOptions, objectFindByKey) {
+
             'use strict';
 
             /*

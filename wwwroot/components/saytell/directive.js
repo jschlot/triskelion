@@ -31,10 +31,11 @@ angular
                       lookup = objectFindByKey($scope.actions, 'hotkey', hotkey);
                   }
 
+                  $scope.tells = [];
+
                   if (lookup) {
-                      $scope.tells = [];
                       $scope.callback(lookup);
-                  } else if (isFinite(parseInt(hotkey))) {
+                  } else if (isFinite(parseInt(hotkey)) && objectFindByKey($scope.actions, 'hotkey', "#")) {
                       $scope.callback(parseInt(hotkey));
                   } else {
                       $scope.tells.push(actionNotFound());

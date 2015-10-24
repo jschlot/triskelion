@@ -39,7 +39,9 @@ angular
                 },
                 'viewplayer': function (value) {
                     var lookup = partyData[value - 1];
-                    $location.path('/charactersheet/' + lookup._this);
+                    if (lookup) {
+                        $location.path('/charactersheet/' + lookup._this);
+                    }
                     return;
                 },
                 'enter': function () {
