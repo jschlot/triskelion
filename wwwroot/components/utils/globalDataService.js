@@ -46,25 +46,40 @@ angular
                             ]
                         }
                     ],
+                    // ** AURA TYPES ** acid, blunt, cold, fire, lightning, necrotic, piercing, poison, psychic, slashing, thunder, light
                     tileActions: [
                         {
-                            actionType: 'damage',
                             description: 'A spray of lava splashes on the party!',
-                            savingThrow: 15, // should not be attached to an ability, but to a player
-                            numberOfDice: 1,
-                            diceSides: 10
+                            actionType: 'damage',
+                            aura: 'fire',
+                            save: 'dexterity',
+                            check: 6,
+                            modifier: 1,
+                            success: {
+                                numberOfDice: 1,
+                                diceSides: 10
+                            },
+                            failure: {
+                                numberOfDice: 1,
+                                diceSides: 1
+                            }
                         },
                         {
-                            actionType:  'heal',
                             description: 'A ray of light shines upon the group!',
-                            numberOfDice: 2,
-                            diceSides: 8
+                            actionType:  'heal',
+                            aura: 'light',
+                            save: null,
+                            check: 0,
+                            modifier: 0,
+                            success: {
+                                numberOfDice: 2,
+                                diceSides: 8
+                            },
+                            failure: null
                         },
                         {
                             actionType:  'message',
-                            description: 'A eerie wailing sound comes from down the hallway...',
-                            numberOfDice: 2,
-                            diceSides: 8
+                            description: 'A eerie wailing sound comes from down the hallway...'
                         }
                     ]
                 }

@@ -7,6 +7,7 @@
             <th width="120">CLASS</th>
             <th width="80">ENERGY</th>
             <th width="80">HEALTH</th>
+            <th width="80">STATUS</th>
         </tr>
         <tr ng-repeat="player in partydata" align="center">
             <td ng-bind="$index + 1"></td>
@@ -14,7 +15,8 @@
             <td ng-bind="player.character.experience.level"></td>
             <td ng-bind="player.character.identity.race"></td>
             <td ng-bind="player.character.identity.spec"></td>
-            <td ng-bind="player.character.stats.energy"></td>
-            <td ng-bind="player.character.stats.health"></td>
+            <td>{{ player.character.stats.energy }} / {{ player.character.stats.maxenergy }}</td>
+            <td>{{ player.character.stats.health }} / {{ player.character.stats.maxhealth }}</td>
+            <td ng-bind="player.character.status" ng-class="{deadplayer: player.character.status ==='dead'}"></td>
         </tr>
 </table>

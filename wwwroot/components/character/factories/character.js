@@ -12,6 +12,7 @@ angular
                 this._this = this.name.toLowerCase();
 
                 this.character = {};
+                this.character.status = 'alive';
                 this.character.hpDice = 3;
                 this.character.nrgDice = 4;
 
@@ -62,8 +63,7 @@ angular
                     if (this.level > currentLevel) {
                         this.character.levelUp();
                     }
-                    // should emit up a signal
-                    return earned;
+                    return { amount: earned };
                 };
 
                 this.character.stats = {};
@@ -72,14 +72,71 @@ angular
                 this.character.stats.energy = 1;
                 this.character.stats.maxenergy = 1;
 
-                this.character.stats.updateHealth = function (level, hpDice, nrgDice) {
-                    var initialHealth = diceService.roll(level, hpDice) + hpDice,
-                        initialEnergy = diceService.roll(level, nrgDice) + nrgDice;
-                    this.health = initialHealth;
-                    this.maxhealth = initialHealth;
+                //// HEALTH OR ENERGY ADJUSTERS
+                // These are not attached directly to stats, because they use the parent
+                this.character.damage = function (event) {
+                    var savingThrow = 0,
+                        modifier = 0,
+                        bonus = 0,
+                        damage = 0,
+                        isSuccess = false,
+                        isDead = false;
 
-                    this.energy = initialEnergy;
-                    this.maxenergy = initialEnergy;
+                    //// PLAYER SAVING THROW
+                    // roll a d20 and add a modifier based on the rating to the d20 rolled above
+                    savingThrow = diceService.roll( 1, 20 );
+                    modifier = Math.floor( this.stats[event.save] / 2 ) - 5;
+
+                    // if the player has a saving throw bonus add a profiency bonus based on their level
+                    if (this.savingThrows.indexOf(event.save) > -1) {
+                        bonus = Math.floor( this.experience.level / 2 ) - 5;
+                    }
+
+                    //// compare the event's difficulty check to the player's saving throw
+                    // if our roll is higher - we are SUCCESSFUL, and the enemy is FAILURE
+                    if ((savingThrow + modifier + bonus) >= (event.check + event.modifier)) {
+                        isSuccess = true;
+                        damage = diceService.roll( event.failure.numberOfDice, event.failure.diceSides );
+                        this.stats.health = this.stats.health - damage;
+                    } else {
+                        damage = diceService.roll( event.success.numberOfDice, event.success.diceSides );
+                        this.stats.health = this.stats.health - damage;
+                    }
+
+                    if (this.stats.health < 1) {
+                        isDead = true;
+                        this.stats.health = 0;
+                        this.status = 'dead';
+                    }
+
+                    return { success: isSuccess, amount: damage, death: isDead };
+
+                };
+
+                this.character.healing = function (event) {
+                    var healing = 0, updatedHealth = 0 + this.stats.health;
+
+                    healing = diceService.roll( event.success.numberOfDice, event.success.diceSides );
+                    updatedHealth += healing;
+
+                    if (updatedHealth <= this.stats.maxhealth) {
+                        this.stats.health = updatedHealth;
+                    } else {
+                        this.stats.health = 0 + this.stats.maxhealth;
+                    }
+
+                    return { success: true, amount: healing };
+                };
+
+                this.character.updateHealth = function () {
+                    var initialHealth = diceService.roll(this.experience.level, this.hpDice) + this.hpDice,
+                        initialEnergy = diceService.roll(this.experience.level, this.nrgDice) + this.nrgDice;
+
+                    this.stats.health = initialHealth;
+                    this.stats.maxhealth = initialHealth;
+
+                    this.stats.energy = initialEnergy;
+                    this.stats.maxenergy = initialEnergy;
                 };
 
                 this.character.stats.strength = diceService.roll(3,6);
@@ -102,7 +159,7 @@ angular
                 this.character.tags = [];
 
                 this.character.levelUp = function () {
-                    this.character.stats.updateHealth(this.experience.level, this.hpDice, this.nrgDice);
+                    this.character.updateHealth();
                     return 'ding';
                 };
             };
@@ -118,7 +175,7 @@ angular
 
                  this.character.hpDice = 6;
                  this.character.nrgDice = 12;
-                 this.character.stats.updateHealth(this.character.experience.level, this.character.hpDice, this.character.nrgDice);
+                 this.character.updateHealth();
 
                  this.character.stats.intelligence = this.character.stats.intelligence + 5;
                  this.character.stats.wisdom = this.character.stats.wisdom + 5;
@@ -138,7 +195,7 @@ angular
 
                  this.character.hpDice = 10;
                  this.character.nrgDice = 10;
-                 this.character.stats.updateHealth(this.character.experience.level, this.character.hpDice, this.character.nrgDice);
+                 this.character.updateHealth();
 
                  this.character.stats.strength = this.character.stats.strength + 6;
                  this.character.stats.stamina = this.character.stats.stamina + 4;
@@ -159,7 +216,7 @@ angular
                  this.character.hpDice = 8;
                  this.character.nrgDice = 16;
 
-                 this.character.stats.updateHealth(this.character.experience.level, this.character.hpDice, this.character.nrgDice);
+                 this.character.updateHealth();
 
                  this.character.stats.wisdom = this.character.stats.wisdom + 7;
                  this.character.stats.charisma = this.character.stats.charisma + 3;
@@ -179,7 +236,7 @@ angular
 
                  this.character.hpDice = 8;
                  this.character.nrgDice = 12;
-                 this.character.stats.updateHealth(this.character.experience.level, this.character.hpDice, this.character.nrgDice);
+                 this.character.updateHealth();
 
                  this.character.stats.wisdom = this.character.stats.dexterity + 7;
                  this.character.stats.charisma = this.character.stats.intelligence + 3;

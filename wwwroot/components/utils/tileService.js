@@ -8,7 +8,10 @@ angular
             this.action = function (value) {
                 var actionsList = [],
                     lookup,
-                    event;
+                    event,
+                    party,
+                    tells;
+
                 actionsList = userData.gameModuleSelected.tileActions;
 
                 if (value._self < 32) {
@@ -16,77 +19,61 @@ angular
                 }
 
                 lookup = value._self - 32;
+
                 event = actionsList[lookup];
+                party = value.party;
+                tells = value.tells;
 
                 switch (event.actionType) {
                     case 'damage':
-                        this.damage(value, event);
+                        this.aoeDamage(tells, event, party);
                         break;
                     case 'heal':
-                        this.heal(value, event);
+                        this.aoeHeal(tells, event, party);
                         break;
-                    case 'message':
-                        this.message(value, event);
-                        break;
+                    default:
+                        this.message(tells, event);
                 }
             };
 
-            this.message = function (obj, aura) {
-                obj.tells.push(aura.description);
+            this.message = function (tells, event) {
+                tells.push(event.description);
             };
 
-            this.damage = function (obj, aura) {
-                obj.tells.push(aura.description);
+            this.aoeDamage = function (tells, event, party) {
+                tells.push(event.description);
+                angular.forEach(party, function (player) {
+                    var result = player.character.damage(event), message = '';
 
-                angular.forEach(obj.party, function (player, key) {
-                    var message = '',
-                        damage = diceService.roll(aura.numberOfDice,aura.diceSides),
-                        savingThrow = diceService.roll(1,20);
-
-                    if (player.character.stats.health < 1) {
-                        return;
-                    }
-
-                    if (savingThrow < aura.savingThrow) {
-                        player.character.stats.health = player.character.stats.health - damage;
-
+                    if (result.amount) {
                         message = infoText.auraDamage
                             .replace(/PLAYER/, player.character.identity.name)
-                            .replace(/DAMAGE/, damage)
-                            .replace(/AURA/, aura.actionType);
-
-                        if (player.character.stats.health < 1) {
-                            player.character.stats.health = 0;
-                            message = message + infoText.deathNote;
-                        }
-
-                        obj.tells.push(message);
+                            .replace(/DAMAGE/, result.amount)
+                            .replace(/AURA/, event.aura);
+                        tells.push(message);
                     } else {
-                        obj.tells.push(infoText.auraMissed.replace(/PLAYER/, player.character.identity.name));
+                        tells.push(infoText.auraMissed.replace(/PLAYER/, player.character.identity.name));
+                    }
+
+                    if (result.death) {
+                        tells.push(infoText.deathNote.replace(/PLAYER/, player.character.identity.name));
                     }
                 });
             };
 
-            this.heal = function (obj, aura) {
-                obj.tells.push(aura.description);
-
-                angular.forEach(obj.party, function (player, key) {
-                    var message = '',
-                        health = diceService.roll(aura.numberOfDice,aura.diceSides),
-                        newhp = player.character.stats.health + health;
-
-                    if (newhp >= player.character.stats.maxhealth) {
-                        return;
+            this.aoeHeal = function (tells, event, party) {
+                tells.push(event.description);
+                angular.forEach(party, function (player) {
+                    var result =  player.character.healing(event), message = '';
+                    if (result.success) {
+                        message = infoText.auraHeal
+                            .replace(/PLAYER/, player.character.identity.name)
+                            .replace(/HEALTH/, result.amount)
+                            .replace(/AURA/, event.aura);
+                        tells.push(message);
+                    } else {
+                        tells.push(infoText.auraMissed.replace(/PLAYER/, player.character.identity.name));
                     }
-
-                    player.character.stats.health = newhp;
-
-                    message = infoText.auraHeal
-                        .replace(/PLAYER/, player.character.identity.name)
-                        .replace(/HEALTH/, health)
-                        .replace(/AURA/, aura.actionType);
-
-                    obj.tells.push(message);
                 });
             };
 
