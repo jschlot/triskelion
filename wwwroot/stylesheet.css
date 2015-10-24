@@ -57,8 +57,9 @@ ul {
 }
 
 .deadplayer {
-    background-color: white;
+    background-color: dimgray;
     color: black;
+    font-weight: bold;
 }
 
 .shim {
