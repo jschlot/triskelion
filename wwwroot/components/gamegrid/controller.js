@@ -15,7 +15,6 @@ angular
 
             var check = accessControl.check('exploration', userData.gameMode, partyDB.members.length)();
             if (!check) {
-                console.log("redirect because game mode is now " + userData.gameMode);
                 if (userData.gameMode === 'combat') {
                     $location.path('/combat');
                 } else {
@@ -60,7 +59,6 @@ angular
                         $scope.tells = [];
                         mode = tileService.action({_self: next, party: $scope.partyData, tells: $scope.tells});
                         if (mode !== 'exploration') {
-                            console.log("forward will cause a redirect because game mode is now " + mode);
                             userData.gameMode = mode;
                             $location.path('/' + mode);
                         }
@@ -112,18 +110,13 @@ angular
                     mazeRunner($scope.view);
 
                     // check to see if everyone is dead
-                    var partyHP = 0;
-                    angular.forEach(partyDB.members, function(player) {
-                        if (player.character.status === 'alive') {
-                            partyHP += player.character.stats.health;
-                        }
-                    });
-
-                    if (partyHP < 1) {
+                    if (partyDB.partyHP() < 1) {
                         $scope.availableActions = [
                             menuOptions.camp
                         ];
-                        $scope.tells = [infoText.alldead];
+                        $scope.tells = [
+                            infoText.alldead
+                        ];
                     }
                 }
             };

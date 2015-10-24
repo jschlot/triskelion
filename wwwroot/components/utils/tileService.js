@@ -1,13 +1,13 @@
 /* global angular */
 angular
     .module('triskelion.utils.tileService.service', [])
-    .service('tileService', ['actionDispatcher', 'userData', 'infoText', 'diceService',
-        function (actionDispatcher, userData, infoText, diceService) {
+    .service('tileService', ['actionDispatcher', 'userData', 'infoText', 'diceService', 'partyDB',
+        function (actionDispatcher, userData, infoText, diceService, partyDB) {
             'use strict';
 
             this.action = function (value) {
                 var actionsList = [],
-                    lookup, event, party, tells, gameMode = 'exploration';
+                    lookup, event, messages = [], tells = value.tells, gameMode = 'exploration';
 
                 if (value._self < 32) {
                     return gameMode;
@@ -16,15 +16,15 @@ angular
                 actionsList = userData.gameModuleSelected.tileActions;
                 lookup = value._self - 32;
                 event = actionsList[lookup];
-                party = value.party;
-                tells = value.tells;
 
                 switch (event.actionType) {
                     case 'damage':
-                        this.aoeDamage(tells, event, party);
+                        messages = partyDB.aoeDamage(event);
+                        this.spoolMessages(tells, messages);
                         break;
                     case 'heal':
-                        this.aoeHeal(tells, event, party);
+                        messages = partyDB.aoeHeal(event);
+                        this.spoolMessages(tells, messages);
                         break;
                     case 'combat':
                         gameMode = 'combat';
@@ -36,51 +36,14 @@ angular
                         gameMode = 'container';
                         break;
                     default:
-                        this.message(tells, event);
+                        this.spoolMessages(tells, [event.description]);
                 }
                 return gameMode;
             };
 
-            this.message = function (tells, event) {
-                tells.push(event.description);
-            };
-
-            this.aoeDamage = function (tells, event, party) {
-                tells.push(event.description);
-                angular.forEach(party, function (player) {
-                    if (player.character.stats.health > 0) {
-                        var result = player.character.damage(event), message = '';
-
-                        if (result.amount) {
-                            message = infoText.auraDamage
-                                .replace(/PLAYER/, player.character.identity.name)
-                                .replace(/DAMAGE/, result.amount)
-                                .replace(/AURA/, event.aura);
-                            tells.push(message);
-                        } else {
-                            tells.push(infoText.auraMissed.replace(/PLAYER/, player.character.identity.name));
-                        }
-
-                        if (result.death) {
-                            tells.push(infoText.deathNote.replace(/PLAYER/, player.character.identity.name));
-                        }
-                    }
-                });
-            };
-
-            this.aoeHeal = function (tells, event, party) {
-                tells.push(event.description);
-                angular.forEach(party, function (player) {
-                    var result =  player.character.healing(event), message = '';
-                    if (result.success) {
-                        message = infoText.auraHeal
-                            .replace(/PLAYER/, player.character.identity.name)
-                            .replace(/HEALTH/, result.amount)
-                            .replace(/AURA/, event.aura);
-                        tells.push(message);
-                    } else {
-                        tells.push(infoText.auraOverheal.replace(/PLAYER/, player.character.identity.name).replace(/OVERHEAL/, result.amount));
-                    }
+            this.spoolMessages = function(tells, messages) {
+                angular.forEach(messages, function(value) {
+                    tells.push(value);
                 });
             };
 

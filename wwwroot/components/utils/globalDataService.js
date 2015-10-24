@@ -1,6 +1,6 @@
 /* global angular */
 angular
-    .module('triskelion.utils.globalData.service', ['triskelion.character.elf.factory'])
+    .module('triskelion.utils.globalData.service', ['triskelion.party.factory', 'triskelion.character.elf.factory'])
     .service('gameModules', [
         function () {
             'use strict';
@@ -102,17 +102,11 @@ angular
             return userData;
         }
     ])
-    .service('partyDB', ['objectFindByKey',
-        function (objectFindByKey) {
+    .service('partyDB', ['Party', 'objectFindByKey',
+        function (Party, objectFindByKey) {
             'use strict';
 
-            var partyDB = {};
-            partyDB.members = [];
-            partyDB.get = function(key, value) {
-                var lookup = objectFindByKey(this.members, key, value);
-                return (lookup) ? lookup : false;
-
-            };
+            var partyDB = new Party();
             return partyDB;
         }
     ])
