@@ -6,15 +6,16 @@ angular
         'triskelion.gamegrid.mazeRunner.service', 'triskelion.utils.levelMap.service'
     ])
     .controller('gameGridController', ['$scope', '$location',
-            'userData', 'partyData', 'levelMap', 'mazeRunner', 'gameGridMenuOptions', 'ouchHappened', 'infoText',
+            'userData', 'partyDB', 'levelMap', 'mazeRunner', 'gameGridMenuOptions', 'ouchHappened', 'infoText',
             'tileService', 'tellsList', 'aurasList', 'mapModal', 'actionDispatcher', 'accessControl',
         function ($scope, $location,
-            userData, partyData, levelMap, mazeRunner, gameGridMenuOptions, ouchHappened, infoText,
+            userData, partyDB, levelMap, mazeRunner, gameGridMenuOptions, ouchHappened, infoText,
             tileService, tellsList, aurasList, mapModal, actionDispatcher, accessControl) {
             'use strict';
 
-            var check = accessControl.check('exploration', userData.gameMode, partyData.length)();
+            var check = accessControl.check('exploration', userData.gameMode, partyDB.members.length)();
             if (!check) {
+                console.log("redirect because game mode is now " + userData.gameMode);
                 if (userData.gameMode === 'combat') {
                     $location.path('/combat');
                 } else {
@@ -57,8 +58,9 @@ angular
                         }
 
                         $scope.tells = [];
-                        mode = tileService.action({_self: next, party: partyData, tells: $scope.tells});
-                        if (mode !== 'explore') {
+                        mode = tileService.action({_self: next, party: $scope.partyData, tells: $scope.tells});
+                        if (mode !== 'exploration') {
+                            console.log("forward will cause a redirect because game mode is now " + mode);
                             userData.gameMode = mode;
                             $location.path('/' + mode);
                         }
@@ -111,7 +113,7 @@ angular
 
                     // check to see if everyone is dead
                     var partyHP = 0;
-                    angular.forEach(partyData, function(player) {
+                    angular.forEach(partyDB.members, function(player) {
                         if (player.character.status === 'alive') {
                             partyHP += player.character.stats.health;
                         }
@@ -136,7 +138,7 @@ angular
             };
 
             $scope.tells = tellsList;
-            $scope.partyData = partyData;
+            $scope.partyData = partyDB.members;
             $scope.auras = aurasList; // is this right? maybe we don't want to always reset auras???
 
             $scope.availableActions = [

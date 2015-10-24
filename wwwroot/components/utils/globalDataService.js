@@ -102,12 +102,18 @@ angular
             return userData;
         }
     ])
-    .service('partyData', [
-        function () {
+    .service('partyDB', ['objectFindByKey',
+        function (objectFindByKey) {
             'use strict';
 
-            var partyData = [];
-            return partyData;
+            var partyDB = {};
+            partyDB.members = [];
+            partyDB.get = function(key, value) {
+                var lookup = objectFindByKey(this.members, key, value);
+                return (lookup) ? lookup : false;
+
+            };
+            return partyDB;
         }
     ])
     .service('tellsList', [

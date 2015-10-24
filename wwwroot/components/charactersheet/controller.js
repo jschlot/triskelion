@@ -4,13 +4,13 @@ angular
         'triskelion.charactersheet.service'
     ])
     .controller('characterSheetController', [
-        '$scope', '$location', '$routeParams', 'infoText', 'partyData', 'userData', 'hotkeyAction',
+        '$scope', '$location', '$routeParams', 'infoText', 'partyDB', 'userData', 'hotkeyAction',
         'characterSheetMenuOptions', 'actionDispatcher', 'accessControl',
-        function ($scope, $location, $routeParams, infoText, partyData, userData, hotkeyAction,
+        function ($scope, $location, $routeParams, infoText, partyDB, userData, hotkeyAction,
             characterSheetMenuOptions, actionDispatcher, accessControl) {
             'use strict';
 
-            var check = accessControl.check('exploration', userData.gameMode, partyData.length)();
+            var check = accessControl.check('exploration', userData.gameMode, partyDB.members.length)();
             if (!check) {
                 $location.path('/startscreen');
                 return;
@@ -28,12 +28,7 @@ angular
                 actionDispatcher(actionsList[value._self], value);
             };
 
-            $scope.loadedCharacter = {};
-            angular.forEach(partyData, function (value, key) {
-                if (value._this === $routeParams.characterkey) {
-                    $scope.loadedCharacter = value;
-                }
-            });
+            $scope.loadedCharacter = partyDB.get("_this", $routeParams.characterkey);
 
             $scope.page = {
                 name: infoText.charactersheet.replace(/CHARACTER/, $scope.loadedCharacter.name)

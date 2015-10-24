@@ -4,10 +4,10 @@ angular
     .service('accessControl', [
         function () {
             'use strict';
-            this.check = function (test, gameMode, partySize) {
+            this.check = function (test, gameMode, partySize, gameModuleSelected) {
                 var obj = {
                     'downtime': function() {
-                        return (gameMode === 'downtime') ? true : false;
+                        return (gameMode === 'downtime' && gameModuleSelected) ? true : false;
                     },
                     'exploration': function() {
                         return (gameMode === 'exploration' && partySize) ? true : false;

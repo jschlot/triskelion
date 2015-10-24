@@ -3,12 +3,12 @@ angular
     .module('triskelion.camp.controller',['triskelion.camp.service'])
     .controller('campController', [
             '$scope', '$location', '$window', 'campActions', 'infoText', 'userData',
-            'playerDB', 'partyData', 'tellsList', 'objectFindByKey', 'actionDispatcher', 'accessControl',
+            'playerDB', 'partyDB', 'tellsList', 'objectFindByKey', 'actionDispatcher', 'accessControl',
         function ($scope, $location, $window, campActions, infoText, userData,
-            playerDB, partyData, tellsList, objectFindByKey, actionDispatcher, accessControl) {
+            playerDB, partyDB, tellsList, objectFindByKey, actionDispatcher, accessControl) {
             'use strict';
 
-            var check = accessControl.check('downtime', userData.gameMode, partyData.length)();
+            var check = accessControl.check('downtime', userData.gameMode, partyDB.members.length, userData.gameModuleSelected)();
             if (!check) {
                 $location.path('/startscreen');
                 return;
@@ -20,9 +20,9 @@ angular
                 actionsList = {},
                 cast = [];
 
-            cast = allPlayers.filter(function (el) {
-                var lookup = objectFindByKey(partyData, 'hotkey', el.hotkey);
-                return lookup ? false : el;
+            cast = allPlayers.filter(function (player) {
+                var lookup = objectFindByKey(partyDB.members, 'hotkey', player.hotkey);
+                return lookup ? false : player;
             });
 
             actionsList = {
@@ -34,12 +34,12 @@ angular
                 },
                 'remove': function () {
                     $scope.tells = [infoText.removePlayer];
-                    $scope.availableActions = angular.copy(partyData);
+                    $scope.availableActions = angular.copy(partyDB.members);
                     $scope.availableActions.push(campActions.back);
                     context = 'remove';
                 },
                 'viewplayer': function (value) {
-                    var lookup = partyData[value - 1];
+                    var lookup = partyDB.members[value - 1];
                     if (lookup) {
                         $location.path('/charactersheet/' + lookup._this);
                     }
@@ -56,14 +56,14 @@ angular
                     return;
                 },
                 'mainActions': function () {
-                    if (partyData.length === userData.gameModuleSelected.maxparty) {
+                    if (partyDB.members.length === userData.gameModuleSelected.maxparty) {
                         $scope.availableActions = [
                             campActions.viewplayer,
                             campActions.remove,
                             campActions.enter,
                             campActions.quit
                         ];
-                    } else if (partyData.length === 0) {
+                    } else if (partyDB.members.length === 0) {
                         $scope.availableActions = [
                             campActions.add,
                             campActions.quit
@@ -115,10 +115,10 @@ angular
                         }
                     }
 
-                    if (partyData.length < userData.gameModuleSelected.maxparty) {
+                    if (partyDB.members.length < userData.gameModuleSelected.maxparty) {
                         $scope.tells = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
-                        partyData.push(currentPick);
-                        $scope.partyData = partyData;
+                        partyDB.members.push(currentPick);
+                        $scope.partyData = partyDB.members;
                     }
 
                     $scope.availableActions.length = 0;
@@ -126,11 +126,11 @@ angular
                     actionsList.mainActions();
                 },
                 'confirmRemove': function () {
-                    var index, lookup = objectFindByKey(partyData, 'hotkey', currentPick.hotkey);
+                    var index, lookup = partyDB.get('hotkey', currentPick.hotkey);
                     if (lookup) {
-                        index = partyData.indexOf(lookup);
+                        index = partyDB.members.indexOf(lookup);
                         if (index > -1) {
-                            partyData.splice(index,1);
+                            partyDB.members.splice(index,1);
                             $scope.availableActions.splice(index,1);
                         }
                     }
@@ -138,7 +138,7 @@ angular
                     $scope.tells = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
                     cast.push(currentPick);
 
-                    $scope.partyData = partyData;
+                    $scope.partyData = partyDB.members;
 
                     actionsList.mainActions();
                 }
@@ -168,7 +168,7 @@ angular
 
             $scope.tells = tellsList;
 
-            $scope.partyData = partyData;
+            $scope.partyData = partyDB.members;
 
             actionsList.mainActions();
         }

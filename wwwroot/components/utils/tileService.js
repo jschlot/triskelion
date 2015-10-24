@@ -10,7 +10,7 @@ angular
                     lookup, event, party, tells, gameMode = 'exploration';
 
                 if (value._self < 32) {
-                    return;
+                    return gameMode;
                 }
 
                 actionsList = userData.gameModuleSelected.tileActions;

@@ -2,14 +2,14 @@
 angular
     .module('triskelion.combatScreen.controller',['triskelion.combatScreen.service'])
     .controller('combatScreenController', [
-        '$scope', '$location', 'accessControl', 'userData', 'partyData', 'infoText', 'hotkeyAction',
+        '$scope', '$location', 'accessControl', 'userData', 'partyDB', 'infoText', 'hotkeyAction',
         'combatScreenMenuOptions', 'tellsList',
-        function ($scope, $location, accessControl, userData, partyData, infoText, hotkeyAction,
+        function ($scope, $location, accessControl, userData, partyDB, infoText, hotkeyAction,
             combatScreenMenuOptions, tellsList) {
 
             'use strict';
 
-            var check = accessControl.check('combat', userData.gameMode, partyData.length)();
+            var check = accessControl.check('combat', userData.gameMode, partyDB.members.length)();
             if (!check) {
                 //$location.path('/gamegrid');
                 //return;
@@ -23,7 +23,7 @@ angular
             ];
 
             $scope.tells = tellsList;
-            $scope.partyData = partyData;
+            $scope.partyData = partyDB.members;
 
         }
     ]);

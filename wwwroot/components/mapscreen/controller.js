@@ -4,13 +4,13 @@ angular
         'triskelion.mapscreen.miniMap.service', 'triskelion.mapscreen.menuOptions.service', 'triskelion.utils.levelMap.service'
     ])
     .controller('mapScreenController', [
-            '$scope', '$location', 'infoText', 'userData', 'partyData', 'tellsList', 'mapScreenMenuOptions',
+            '$scope', '$location', 'infoText', 'userData', 'partyDB', 'tellsList', 'mapScreenMenuOptions',
             'actionDispatcher', 'levelMap', 'miniMap', 'hotkeyAction', 'accessControl',
-        function ($scope, $location, infoText, userData, partyData, tellsList, mapScreenMenuOptions,
+        function ($scope, $location, infoText, userData, partyDB, tellsList, mapScreenMenuOptions,
             actionDispatcher, levelMap, miniMap, hotkeyAction, accessControl) {
             'use strict';
 
-            var check = accessControl.check('exploration', userData.gameMode, partyData.length)();
+            var check = accessControl.check('exploration', userData.gameMode, partyDB.members.length)();
             if (!check) {
                 $location.path('/startscreen');
                 return;
