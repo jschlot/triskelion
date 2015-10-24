@@ -53,11 +53,11 @@ angular
                             actionType: 'damage',
                             aura: 'fire',
                             save: 'agility',
-                            check: 6,
+                            check: 19,
                             modifier: 1,
                             success: {
                                 numberOfDice: 1,
-                                diceSides: 10
+                                diceSides: 20
                             },
                             failure: null
                         },

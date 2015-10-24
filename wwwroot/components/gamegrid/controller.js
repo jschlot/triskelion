@@ -96,6 +96,21 @@ angular
                     };
 
                     mazeRunner($scope.view);
+
+                    // check to see if everyone is dead
+                    var partyHP = 0;
+                    angular.forEach(partyData, function(player) {
+                        if (player.character.status === 'alive') {
+                            partyHP += player.character.stats.health;
+                        }
+                    });
+
+                    if (partyHP < 1) {
+                        $scope.availableActions = [
+                            menuOptions.camp
+                        ];
+                        $scope.tells = [infoText.alldead];
+                    }
                 }
             };
 
