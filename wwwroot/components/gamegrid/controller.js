@@ -13,7 +13,7 @@ angular
             tileService, tellsList, aurasList, mapModal, actionDispatcher, accessControl) {
             'use strict';
 
-            var check = accessControl.check('exploration', userData.gameMode, partyDB.members.length)();
+            var check = accessControl.check('exploration')();
             if (!check) {
                 if (userData.gameMode === 'combat') {
                     $location.path('/combat');

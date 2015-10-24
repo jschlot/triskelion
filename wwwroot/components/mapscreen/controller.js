@@ -10,7 +10,7 @@ angular
             actionDispatcher, levelMap, miniMap, hotkeyAction, accessControl) {
             'use strict';
 
-            var check = accessControl.check('exploration', userData.gameMode, partyDB.members.length)();
+            var check = accessControl.check('exploration')();
             if (!check) {
                 $location.path('/startscreen');
                 return;

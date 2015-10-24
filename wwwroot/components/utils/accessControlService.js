@@ -1,11 +1,19 @@
 /* global angular */
 angular
     .module('triskelion.utils.accessControl.service', [])
-    .service('accessControl', [
-        function () {
+    .service('accessControl', ['userData', 'partyDB',
+        function (userData, partyDB) {
+
             'use strict';
-            this.check = function (test, gameMode, partySize, gameModuleSelected) {
-                var obj = {
+
+            // userData.gameMode, partyDB.members.length, userData.gameModuleSelected
+            this.check = function (test) {
+                var obj,
+                    gameMode = userData.gameMode,
+                    partySize = partyDB.members.length,
+                    gameModuleSelected = userData.gameModuleSelected;
+
+                obj = {
                     'downtime': function() {
                         return (gameMode === 'downtime' && gameModuleSelected) ? true : false;
                     },

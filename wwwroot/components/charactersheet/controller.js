@@ -10,7 +10,7 @@ angular
             characterSheetMenuOptions, actionDispatcher, accessControl) {
             'use strict';
 
-            var check = accessControl.check('downtime', userData.gameMode, partyDB.members.length, userData.gameModuleSelected)();
+            var check = accessControl.check('downtime')();
             if (!check) {
                 $location.path('/startscreen');
                 return;

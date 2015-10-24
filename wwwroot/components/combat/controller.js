@@ -9,7 +9,7 @@ angular
 
             'use strict';
 
-            var check = accessControl.check('combat', userData.gameMode, partyDB.members.length)();
+            var check = accessControl.check('combat')();
             if (!check) {
                 //$location.path('/gamegrid');
                 //return;
