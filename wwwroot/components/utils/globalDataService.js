@@ -81,7 +81,7 @@ angular
                         },
                         {
                             actionType:  'combat',
-                            description: 'Your party enters combat mode'
+                            description: 'You stumble upon a group of Elvish Fiends!'
                         }
                     ]
                 }
@@ -102,12 +102,25 @@ angular
             return userData;
         }
     ])
-    .service('partyDB', ['Party', 'objectFindByKey',
-        function (Party, objectFindByKey) {
+    .service('partyDB', ['Party',
+        function (Party) {
             'use strict';
 
             var partyDB = new Party();
             return partyDB;
+        }
+    ])
+    .service('mobDB', ['Party', 'Priest', 'Ranger', 'Wizard', 'Scout',
+        function (Party,Priest, Ranger, Wizard, Scout) {
+            'use strict';
+
+            var mobDB = new Party();
+            mobDB.members.push(new Scout('Fiend'));
+            mobDB.members.push(new Scout('Fiend'));
+            mobDB.members.push(new Scout('Fiend'));
+            mobDB.members.push(new Scout('Fiend'));
+            mobDB.members.push(new Scout('Fiend'));
+            return mobDB;
         }
     ])
     .service('tellsList', [

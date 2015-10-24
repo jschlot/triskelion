@@ -57,6 +57,7 @@ angular
                         }
 
                         $scope.tells = [];
+                        userData.cursor.tile = next;
                         mode = tileService.action({_self: next, party: $scope.partyData, tells: $scope.tells});
                         if (mode !== 'exploration') {
                             userData.gameMode = mode;

@@ -2,18 +2,21 @@
 angular
     .module('triskelion.combatScreen.controller',['triskelion.combatScreen.service'])
     .controller('combatScreenController', [
-        '$scope', '$location', 'accessControl', 'userData', 'partyDB', 'infoText', 'hotkeyAction',
+        '$scope', '$location', 'accessControl', 'userData', 'partyDB', 'mobDB', 'infoText', 'hotkeyAction',
         'combatScreenMenuOptions', 'tellsList',
-        function ($scope, $location, accessControl, userData, partyDB, infoText, hotkeyAction,
+        function ($scope, $location, accessControl, userData, partyDB, mobDB, infoText, hotkeyAction,
             combatScreenMenuOptions, tellsList) {
 
             'use strict';
 
             var check = accessControl.check('combat')();
             if (!check) {
-                //$location.path('/gamegrid');
-                //return;
+                $location.path('/gamegrid');
+                return;
             }
+
+            var tileOffset = userData.cursor.tile - 32,
+                tileAction = userData.gameModuleSelected.tileActions[tileOffset];
 
             $scope.page = {
                 name: infoText.combatscreen
@@ -24,6 +27,9 @@ angular
 
             $scope.tells = tellsList;
             $scope.partyData = partyDB.members;
+            $scope.mobData = mobDB.members;
+
+            console.log(tileAction);
 
         }
     ]);
