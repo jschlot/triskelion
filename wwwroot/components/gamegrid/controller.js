@@ -6,10 +6,10 @@ angular
     ])
     .controller('gameGridController', ['$scope', '$location',
             'userData', 'partyData', 'levelMap', 'mazeRunner', 'gameGridMenuOptions', 'ouchHappened', 'infoText',
-            'tileService', 'tellsList', 'mapModal', 'actionDispatcher',
+            'tileService', 'tellsList', 'aurasList', 'mapModal', 'actionDispatcher',
         function ($scope, $location,
             userData, partyData, levelMap, mazeRunner, gameGridMenuOptions, ouchHappened, infoText,
-            tileService, tellsList, mapModal, actionDispatcher) {
+            tileService, tellsList, aurasList, mapModal, actionDispatcher) {
             'use strict';
 
             if (!userData.gameModuleSelected || partyData.length === 0) {
@@ -110,7 +110,7 @@ angular
 
             $scope.tells = tellsList;
             $scope.partyData = partyData;
-            $scope.auras = []; // is this right? maybe we don't want to always reset auras???
+            $scope.auras = aurasList; // is this right? maybe we don't want to always reset auras???
 
             $scope.availableActions = [
                 menuOptions.forward,

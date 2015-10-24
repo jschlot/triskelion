@@ -55,8 +55,8 @@ angular
                             .replace(/DAMAGE/, damage)
                             .replace(/AURA/, aura.actionType);
 
-                        if (player.health < 1) {
-                            player.health = 0;
+                        if (player.character.stats.health < 1) {
+                            player.character.stats.health = 0;
                             message = message + infoText.deathNote;
                         }
 

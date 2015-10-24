@@ -100,6 +100,14 @@ angular
             return tellsList;
         }
     ])
+    .service('aurasList', [
+        function () {
+            'use strict';
+
+            var aurasList = [];
+            return aurasList;
+        }
+    ])
     .service('playerDB',['Priest', 'Ranger', 'Wizard', 'Scout',
         function (Priest, Ranger, Wizard, Scout) {
             'use strict';
