@@ -18,6 +18,8 @@ angular
             var tileOffset = userData.cursor.tile - 32,
                 tileAction = userData.gameModuleSelected.tileActions[tileOffset];
 
+            mobDB.add(tileAction.mobMembers);
+
             $scope.page = {
                 name: infoText.combatscreen
             };
@@ -29,7 +31,7 @@ angular
             $scope.partyData = partyDB.members;
             $scope.mobData = mobDB.members;
 
-            console.log(tileAction);
+            $scope.tells = [tileAction.description];
 
         }
     ]);

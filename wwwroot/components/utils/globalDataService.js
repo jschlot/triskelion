@@ -1,6 +1,6 @@
 /* global angular */
 angular
-    .module('triskelion.utils.globalData.service', ['triskelion.party.factory', 'triskelion.character.elf.factory'])
+    .module('triskelion.utils.globalData.service', ['triskelion.party.factory', 'triskelion.character.elf.factory', 'triskelion.monster.factory'])
     .service('gameModules', [
         function () {
             'use strict';
@@ -76,12 +76,17 @@ angular
                             failure: null
                         },
                         {
-                            actionType:  'message',
-                            description: 'A eerie wailing sound comes from down the hallway...'
+                            description: 'A eerie wailing sound comes from down the hallway...',
+                            actionType:  'message'
                         },
                         {
+                            description: 'You stumble upon a group of Elvish Fiends!',
                             actionType:  'combat',
-                            description: 'You stumble upon a group of Elvish Fiends!'
+                            mobMembers: [
+                                { spec: 'fiend', level: 1 },
+                                { spec: 'fiend', level: 1 },
+                                { spec: 'fiend', level: 1 }
+                            ]
                         }
                     ]
                 }
@@ -110,16 +115,18 @@ angular
             return partyDB;
         }
     ])
-    .service('mobDB', ['Party', 'Priest', 'Ranger', 'Wizard', 'Scout',
-        function (Party,Priest, Ranger, Wizard, Scout) {
+    .service('mobDB', ['Party', 'monsterMaker',
+        function (Party, monsterMaker) {
             'use strict';
 
             var mobDB = new Party();
-            mobDB.members.push(new Scout('Fiend'));
-            mobDB.members.push(new Scout('Fiend'));
-            mobDB.members.push(new Scout('Fiend'));
-            mobDB.members.push(new Scout('Fiend'));
-            mobDB.members.push(new Scout('Fiend'));
+
+            mobDB.add = function(mob) {
+                angular.forEach(mob, function (player) {
+                    mobDB.members.push(monsterMaker.spawn(player));
+                });
+            };
+
             return mobDB;
         }
     ])
