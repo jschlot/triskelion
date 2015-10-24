@@ -126,19 +126,12 @@ angular
             'use strict';
 
             var playerDB = {};
-            playerDB.dungeon = [];
-
-            var devonellah = new Priest('Devonellah');
-            playerDB.dungeon.push(devonellah);
-
-            var celadior = new Ranger('Celadior');
-            playerDB.dungeon.push(celadior);
-
-            var beladriel = new Wizard('Beladriel');
-            playerDB.dungeon.push(beladriel);
-
-            var hedroxx = new Scout('Hedroxx');
-            playerDB.dungeon.push(hedroxx);
+            playerDB.dungeon = [
+                new Priest('Devonellah'),
+                new Ranger('Celadior'),
+                new Wizard('Beladriel'),
+                new Scout('Hedroxx')
+            ];
 
             return playerDB;
         }]

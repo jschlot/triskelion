@@ -42,12 +42,16 @@ ul {
     margin: 0;
 }
 
+label {
+    padding-left: 0.5em;
+}
+
 .outline {
     color: white;
     border: 1px solid white;
 }
 
-.topline {
+.prompt {
     color: white;
     border-top: 1px solid white;
 }
@@ -72,41 +76,19 @@ ul {
     font-weight: bold;
 }
 
-#commandPrompt {
-    background-color: black;
-    color: white;
-    width: 90%;
-    line-height: 2em;
-    margin-top: 0.4em;
-    margin: 1em 0.5em;
-}
-
-label {
-    padding-left: 0.5em;
-}
-
-label::before {
-    content: "$:>";
-}
-
-.selected {
-    background-color: white;
-}
-
-.flex-list {
+.flex-list ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-.flex-list li
-{
+.flex-list li {
     display: inline-block;
     padding: 0 2em 1em 0;
     width: 25%;
 }
 
-.vert-list {
+.vert-list ul {
     list-style-type: none;
     display: inline;
     margin: 0;
