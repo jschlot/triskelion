@@ -35,7 +35,7 @@ angular
 
                                 [0x01, 0x18, 0x18, 0x18, 0x01, 0x01, 0x01, 0x18, 0x18, 0x01, 0x18, 0x01],  // 6
 
-                                [0x01, 0x18, 0x18, 0x18, 0x01, 0x01, 0x01, 0x01, 0x18, 0x01, 0x18, 0x01],  // 7
+                                [0x01, 0x18, 0x23, 0x18, 0x01, 0x01, 0x01, 0x01, 0x18, 0x01, 0x18, 0x01],  // 7
 
                                 [0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x18, 0x01, 0x18, 0x01],  // 8
 
@@ -78,6 +78,10 @@ angular
                         {
                             actionType:  'message',
                             description: 'A eerie wailing sound comes from down the hallway...'
+                        },
+                        {
+                            actionType:  'combat',
+                            description: 'Your party enters combat mode'
                         }
                     ]
                 }
@@ -92,7 +96,8 @@ angular
 
             var userData = {
                 gameModuleSelected: null,
-                cursor: {}
+                cursor: {},
+                gameMode: 'exploration'
             };
             return userData;
         }

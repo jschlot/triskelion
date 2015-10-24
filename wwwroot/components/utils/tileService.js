@@ -7,7 +7,7 @@ angular
 
             this.action = function (value) {
                 var actionsList = [],
-                    lookup, event, party, tells;
+                    lookup, event, party, tells, gameMode = 'exploration';
 
                 actionsList = userData.gameModuleSelected.tileActions;
 
@@ -16,6 +16,8 @@ angular
                 }
 
                 lookup = value._self - 32;
+                console.log(lookup);
+                console.log(event);
 
                 event = actionsList[lookup];
                 party = value.party;
@@ -28,9 +30,16 @@ angular
                     case 'heal':
                         this.aoeHeal(tells, event, party);
                         break;
+                    case 'combat':
+                        gameMode = 'combat';
+                        break;
+                    case 'social':
+                        gameMode = 'social';
+                        break;
                     default:
                         this.message(tells, event);
                 }
+                return gameMode;
             };
 
             this.message = function (tells, event) {

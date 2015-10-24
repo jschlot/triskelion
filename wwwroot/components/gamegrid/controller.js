@@ -32,7 +32,8 @@ angular
             actionsList = {
                 'forward': function () {
                     var nextTileIndex = $scope.view.length - 2,
-                        next = $scope.view[nextTileIndex][1];
+                        next = $scope.view[nextTileIndex][1],
+                        result;
                     if (tileService.canGoForward(next)) {
                         switch (compassDirection) {
                             case 'east':
@@ -50,7 +51,11 @@ angular
                         }
 
                         $scope.tells = [];
-                        tileService.action({_self: next, party: partyData, tells: $scope.tells});
+                        result = tileService.action({_self: next, party: partyData, tells: $scope.tells});
+                        if (result === 'combat' || result === 'social') {
+                            userData.gameMode = result;
+                            alert('I am in ' + result + ' mode now');
+                        }
                     } else {
                         mapModal(ouchHappened());
                         return 'stop mazerunner';
