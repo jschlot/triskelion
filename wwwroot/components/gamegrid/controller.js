@@ -61,6 +61,7 @@ angular
                         if (mode !== 'exploration') {
                             userData.gameMode = mode;
                             $location.path('/' + mode);
+                            return 'stop mazerunner';
                         }
                     } else {
                         mapModal(ouchHappened());
