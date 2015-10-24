@@ -99,6 +99,15 @@ label {
     padding: 0 2em 1em 0;
 }
 
+#commandPrompt {
+    background-color: black;
+    color: white;
+    width: 90%;
+    line-height: 2em;
+    margin-top: 0.4em;
+    margin: 1em 0.5em;
+}
+
 #minimap .floor {
     stroke-opacity: 0.1;
     stroke-width: 1px;
