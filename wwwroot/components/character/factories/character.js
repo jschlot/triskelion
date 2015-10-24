@@ -127,6 +127,8 @@ angular
                         this.stats.health = 0 + this.stats.maxhealth;
                     }
 
+                    this.status = 'alive';
+
                     return { success: true, amount: healing };
                 };
 

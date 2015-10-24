@@ -20,23 +20,27 @@ angular
           }
 
           function controller($scope) {
-              $scope.say = function () {
-                  var lookup;
+              $scope.say = function (event) {
+                  var lookup, hotkey, keynum;
 
-                  if ($scope.prompt) {
-                      lookup = objectFindByKey($scope.actions, 'hotkey', $scope.prompt.substring(0, 1));
+                  if (!event) { return; }
+                  keynum = event.which || event.keyCode;
+                  hotkey = String.fromCharCode(keynum);
+
+                  if (hotkey) {
+                      lookup = objectFindByKey($scope.actions, 'hotkey', hotkey);
                   }
 
                   if (lookup) {
                       $scope.tells = [];
                       $scope.callback(lookup);
-                  } else if (isFinite(parseInt($scope.prompt))) {
-                      $scope.callback(parseInt($scope.prompt));
+                  } else if (isFinite(parseInt(hotkey))) {
+                      $scope.callback(parseInt(hotkey));
                   } else {
                       $scope.tells.push(actionNotFound());
                   }
 
-                  $scope.prompt = null;
+                  $scope.prompt = '';
               };
 
               $scope.$on('$destroy', function () {
