@@ -37,6 +37,10 @@ svg text {
     fill: white;
 }
 
+th {
+    padding-bottom: .5em;
+}
+
 ul {
     padding: 0;
     margin: 0;

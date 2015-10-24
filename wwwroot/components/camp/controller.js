@@ -2,9 +2,9 @@
 angular
     .module('triskelion.camp.controller',['triskelion.camp.service'])
     .controller('campController', [
-            '$scope', '$location', 'campActions', 'infoText', 'userData',
+            '$scope', '$location', '$window', 'campActions', 'infoText', 'userData',
             'playerDB', 'partyData', 'tellsList', 'objectFindByKey', 'actionDispatcher',
-        function ($scope, $location, campActions, infoText, userData,
+        function ($scope, $location, $window, campActions, infoText, userData,
             playerDB, partyData, tellsList, objectFindByKey, actionDispatcher) {
             'use strict';
 
@@ -47,7 +47,8 @@ angular
                     return;
                 },
                 'quit': function () {
-                    $location.path('/startscreen');
+                    // force a reload to completely reload state
+                    $window.location.reload();
                     return;
                 },
                 'mainActions': function () {
