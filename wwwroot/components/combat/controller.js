@@ -1,9 +1,11 @@
 /* global angular */
 angular
-    .module('triskelion.combatScreen.controller',[])
+    .module('triskelion.combatScreen.controller',['triskelion.combatScreen.service'])
     .controller('combatScreenController', [
-        '$scope', '$location', 'accessControl', 'userData', 'partyData',
-        function ($scope, $location, accessControl, userData, partyData) {
+        '$scope', '$location', 'accessControl', 'userData', 'partyData', 'infoText', 'hotkeyAction',
+        'combatScreenMenuOptions', 'tellsList',
+        function ($scope, $location, accessControl, userData, partyData, infoText, hotkeyAction,
+            combatScreenMenuOptions, tellsList) {
 
             'use strict';
 
@@ -13,7 +15,15 @@ angular
                 //return;
             }
 
+            $scope.page = {
+                name: infoText.combatscreen
+            };
 
+            $scope.availableActions = [
+            ];
+
+            $scope.tells = tellsList;
+            $scope.partyData = partyData;
 
         }
     ]);

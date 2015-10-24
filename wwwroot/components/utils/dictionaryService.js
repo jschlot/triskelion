@@ -33,6 +33,7 @@ angular
                 startscreen: 'Welcome to Triskelion.',
                 choosemodule: 'To begin, choose an adventure',
                 mapscreen: 'Map',
+                combatscreen: 'Combat',
                 actionchoice: 'You chose STRING',
                 auraDamage: 'PLAYER takes DAMAGE points of damage from the AURA',
                 auraHeal: 'PLAYER receives HEALTH points of healing from the AURA',

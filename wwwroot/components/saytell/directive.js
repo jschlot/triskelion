@@ -24,10 +24,10 @@ angular
                   var lookup, hotkey, keynum;
 
                   if (!event) { return; }
+
                   keynum = event.which || event.keyCode;
                   hotkey = String.fromCharCode(keynum);
 
-                  // TO-DO might want to detect if there are any $scope.actions before doing anything
                   if (hotkey) {
                       lookup = objectFindByKey($scope.actions, 'hotkey', hotkey);
                   }

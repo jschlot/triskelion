@@ -1,18 +1,22 @@
     <section>
         <div class="outline">
             <div class="location">
-                <location-bar-directive page="page"></location-bar-directive>
+                <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td ng-bind="page.name"></td>
+                    </tr>
+                </table>
             </div>
         </div>
         <br>
         <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
-                <td class="outline" width="500" height="300" valign="middle" rowspan="2">
-                    <svg width="500" height="300" id="portrait"></svg>
+                <td class="outline" width="500" height="300" valign="middle" align="center" rowspan="2">
+                    [ COMBAT MODE ]
                 </td>
                 <td class="outline shim" valign="top" height="120">
                     <div class="flex-list">
-                        <enemy-party-list-directive></enemy-party-list-directive>
+                        <enemy-party-list-directive enemydata="enemyData"></enemy-party-list-directive>
                     </div>
                 </td>
             </tr>
