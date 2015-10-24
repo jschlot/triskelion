@@ -1,8 +1,8 @@
 /* global angular */
 angular
     .module('triskelion.character.factory', ['triskelion.character.service'])
-    .factory('Character', ['ability', 'race', 'spec', 'diceService',
-        function (ability, race, spec, diceService) {
+    .factory('Character', ['race', 'spec', 'diceService',
+        function (race, spec, diceService) {
             'use strict';
 
             var Character = function (name) {

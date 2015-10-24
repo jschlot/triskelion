@@ -58,6 +58,22 @@ angular
 
                 combatant = turnsList[currentTurn];
 
+                if (combatant.character.npc) {
+                    console.log("NPC turn");
+                    $scope.availableActions = [];
+
+                } else {
+                    console.log("PLAYER turn");
+                    $scope.availableActions = [
+                        combatScreenMenuOptions.fight,
+                        combatScreenMenuOptions.spell,
+                        combatScreenMenuOptions.use,
+                        combatScreenMenuOptions.run,
+                        combatScreenMenuOptions.next
+                    ];
+
+                }
+
                 $scope.page = {
                     name: infoText.combatscreen,
                     turn: currentTurn,
@@ -66,15 +82,21 @@ angular
             };
 
             $scope.saveAndNext = function (value) {
-                updateTurns();
-                // var actionsList = {
-                //     backtoselect: function (actionSelected) {
-                //         $scope.tells = [];
-                //         $location.path('/camp');
-                //     }
-                // };
+                var actionsList = {
+                    fight: function (actionSelected) {
+                    },
+                    spell: function (actionSelected) {
+                    },
+                    use: function (actionSelected) {
+                    },
+                    run: function (actionSelected) {
+                    },
+                    next: function (actionSelected) {
+                    },
+                };
 
-                // actionDispatcher(actionsList[value._self], value);
+                actionDispatcher(actionsList[value._self], value);
+                updateTurns();
             };
 
 
