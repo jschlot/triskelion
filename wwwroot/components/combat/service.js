@@ -5,10 +5,10 @@ angular
         function () {
             'use strict';
             var combatScreenMenuOptions = {
-                backtoselect: {
-                    name: 'Run',
-                    hotkey: 'R',
-                    _self: 'run'
+                next: {
+                    name: 'Next',
+                    hotkey: 'N',
+                    _self: 'next'
                 }
             };
 

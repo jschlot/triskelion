@@ -15,24 +15,26 @@ angular
         }
     ])
     .factory('Fiend', ['Rogue', 'diceService', 'ability', 'race', 'spec', 'armor', 'weapon',
-         function (Healer, diceService, ability, race, spec, armor, weapon) {
+         function (Rogue, diceService, ability, race, spec, armor, weapon) {
              'use strict';
 
              return function (name) {
-                 angular.extend(this, new Healer(name));
+                 angular.extend(this, new Rogue(name));
 
                  this.character.identity.race = race.elf.name;
-                 this.character.identity.spec = spec.priest.name;
-                 this.character.alignment.adjust('ethics',  diceService.roll(2,20));
-                 this.character.alignment.adjust('morals', diceService.roll(2,20));
+                 this.character.identity.spec = spec.scout.name;
 
-                 this.character.abilities.small = ability.heal;
-                 this.character.abilities.medium = ability.bolt;
-                 this.character.abilities.large = ability.restoration;
-                 this.character.abilities.super = ability.prayer;
+                 this.character.hpDice = 4;
+                 this.character.nrgDice = 6;
+                 this.character.updateHealth();
+
+                 this.character.abilities.small = ability.cheapshot;
+                 this.character.abilities.medium = ability.stab;
+                 this.character.abilities.large = ability.wound;
+                 this.character.abilities.super = ability.bloodlet;
 
                  this.character.inventory = {
-                     armor: armor.cloth,
+                     armor: armor.leather,
                      weapon: weapon.staff
                  };
              };

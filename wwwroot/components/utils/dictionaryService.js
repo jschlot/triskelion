@@ -35,6 +35,7 @@ angular
                 mapscreen: 'Map',
                 combatscreen: 'Combat',
                 actionchoice: 'You chose STRING',
+                initiativeRolled: 'TEAM wins the advantage, and will go first',
                 auraDamage: 'PLAYER takes DAMAGE points of damage from the AURA',
                 auraHeal: 'PLAYER receives HEALTH points of healing from the AURA',
                 auraMissed: 'PLAYER was missed',
