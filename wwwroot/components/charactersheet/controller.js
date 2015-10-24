@@ -4,19 +4,21 @@ angular
         'triskelion.charactersheet.service'
     ])
     .controller('characterSheetController', [
-        '$scope', '$location', '$routeParams', 'infoText', 'playerDB', 'hotkeyAction',
+        '$scope', '$location', '$routeParams', 'infoText', 'partyData', 'userData', 'hotkeyAction',
         'characterSheetMenuOptions', 'actionDispatcher',
-        function ($scope, $location, $routeParams, infoText, playerDB, hotkeyAction,
+        function ($scope, $location, $routeParams, infoText, partyData, userData, hotkeyAction,
             characterSheetMenuOptions, actionDispatcher) {
             'use strict';
+
+            if (!userData.gameModuleSelected || partyData.length === 0) {
+                $location.path('/startscreen');
+                return;
+            }
+
 
             // the actions list might need to know context or be dynamic
             $scope.saveAndNext = function (value) {
                 var actionsList = {
-                    confirm: function (actionSelected) {
-                        $scope.tells = [];
-                        $location.path('/camp');
-                    },
                     backtoselect: function (actionSelected) {
                         $scope.tells = [];
                         $location.path('/camp');
@@ -27,7 +29,7 @@ angular
             };
 
             $scope.loadedCharacter = {};
-            angular.forEach(playerDB.dungeon, function (value, key) {
+            angular.forEach(partyData, function (value, key) {
                 if (value._this === $routeParams.characterkey) {
                     $scope.loadedCharacter = value;
                 }
