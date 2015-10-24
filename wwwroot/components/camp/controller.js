@@ -126,7 +126,7 @@ angular
                     actionsList.mainActions();
                 },
                 'confirmRemove': function () {
-                    var index, lookup = partyDB.get('hotkey', currentPick.hotkey);
+                    var index, lookup = partyDB.getMember('hotkey', currentPick.hotkey);
                     if (lookup) {
                         index = partyDB.members.indexOf(lookup);
                         if (index > -1) {

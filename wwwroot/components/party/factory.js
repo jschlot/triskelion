@@ -8,7 +8,7 @@ angular
             var Party = function (name) {
                 this.members = [];
 
-                this.get = function(key, value) {
+                this.getMember = function(key, value) {
                     var lookup = objectFindByKey(this.members, key, value);
                     return (lookup) ? lookup : false;
 
@@ -46,7 +46,7 @@ angular
                             }
                         }
                     });
-                    
+
                     return tells;
                 };
 

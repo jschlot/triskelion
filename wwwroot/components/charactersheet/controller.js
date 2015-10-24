@@ -28,7 +28,7 @@ angular
                 actionDispatcher(actionsList[value._self], value);
             };
 
-            $scope.loadedCharacter = partyDB.get("_this", $routeParams.characterkey);
+            $scope.loadedCharacter = partyDB.getMember("_this", $routeParams.characterkey);
 
             $scope.page = {
                 name: infoText.charactersheet.replace(/CHARACTER/, $scope.loadedCharacter.name)
