@@ -94,10 +94,14 @@ angular
 
                     //// compare the event's difficulty check to the player's saving throw
                     // if our roll is higher - we are SUCCESSFUL, and the enemy is FAILURE
+                    console.log("rolling st:" + savingThrow + ", mod: " + modifier + ", b: " + bonus + ", tot: " + (savingThrow+modifier+bonus));
+
                     if ((savingThrow + modifier + bonus) >= (event.check + event.modifier)) {
                         isSuccess = true;
-                        damage = diceService.roll( event.failure.numberOfDice, event.failure.diceSides );
-                        this.stats.health = this.stats.health - damage;
+                        if (event.failure) {
+                            damage = diceService.roll( event.failure.numberOfDice, event.failure.diceSides );
+                            this.stats.health = this.stats.health - damage;
+                        }
                     } else {
                         damage = diceService.roll( event.success.numberOfDice, event.success.diceSides );
                         this.stats.health = this.stats.health - damage;

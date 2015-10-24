@@ -52,17 +52,14 @@ angular
                             description: 'A spray of lava splashes on the party!',
                             actionType: 'damage',
                             aura: 'fire',
-                            save: 'dexterity',
+                            save: 'agility',
                             check: 6,
                             modifier: 1,
                             success: {
                                 numberOfDice: 1,
                                 diceSides: 10
                             },
-                            failure: {
-                                numberOfDice: 1,
-                                diceSides: 1
-                            }
+                            failure: null
                         },
                         {
                             description: 'A ray of light shines upon the group!',
