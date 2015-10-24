@@ -5,15 +5,17 @@ angular
     ])
     .controller('mapScreenController', [
             '$scope', '$location', 'infoText', 'userData', 'partyData', 'tellsList', 'mapScreenMenuOptions',
-            'actionDispatcher', 'levelMap', 'miniMap', 'hotkeyAction',
+            'actionDispatcher', 'levelMap', 'miniMap', 'hotkeyAction', 'accessControl',
         function ($scope, $location, infoText, userData, partyData, tellsList, mapScreenMenuOptions,
-            actionDispatcher, levelMap, miniMap, hotkeyAction) {
+            actionDispatcher, levelMap, miniMap, hotkeyAction, accessControl) {
             'use strict';
 
-            if (!userData.gameModuleSelected || partyData.length === 0) {
+            var check = accessControl.check('exploration', userData.gameMode, partyData.length)();
+            if (!check) {
                 $location.path('/startscreen');
                 return;
             }
+
 
             var currentLevel = userData.cursor.level,
                 currentLevelMap = userData.gameModuleSelected.map[currentLevel],

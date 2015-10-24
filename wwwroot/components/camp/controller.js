@@ -3,12 +3,13 @@ angular
     .module('triskelion.camp.controller',['triskelion.camp.service'])
     .controller('campController', [
             '$scope', '$location', '$window', 'campActions', 'infoText', 'userData',
-            'playerDB', 'partyData', 'tellsList', 'objectFindByKey', 'actionDispatcher',
+            'playerDB', 'partyData', 'tellsList', 'objectFindByKey', 'actionDispatcher', 'accessControl',
         function ($scope, $location, $window, campActions, infoText, userData,
-            playerDB, partyData, tellsList, objectFindByKey, actionDispatcher) {
+            playerDB, partyData, tellsList, objectFindByKey, actionDispatcher, accessControl) {
             'use strict';
 
-            if (!userData.gameModuleSelected) {
+            var check = accessControl.check('downtime', userData.gameMode, partyData.length)();
+            if (!check) {
                 $location.path('/startscreen');
                 return;
             }
@@ -45,6 +46,7 @@ angular
                     return;
                 },
                 'enter': function () {
+                    userData.gameMode = 'exploration';
                     $location.path('/gamegrid');
                     return;
                 },

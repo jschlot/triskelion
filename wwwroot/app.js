@@ -7,6 +7,7 @@ angular
         'triskelion.camp.controller',
         'triskelion.mapScreen.controller',
         'triskelion.characterSheet.controller',
+        'triskelion.combatScreen.controller',
 
         'triskelion.actionsList.directive',
         'triskelion.saytell.directive',
@@ -15,6 +16,7 @@ angular
         'triskelion.aurasList.directive',
         'triskelion.statsCard.directive',
 
+        'triskelion.utils.accessControl.service',
         'triskelion.utils.actionDispatcher.service',
         'triskelion.utils.aiSpeech.service',
         'triskelion.utils.dice.service',
@@ -51,6 +53,10 @@ angular
                 .when('/mapscreen', {
                     templateUrl: 'components/mapscreen/layout.html',
                     controller: 'mapScreenController'
+                })
+                .when('/combat', {
+                    templateUrl: 'components/combat/layout.html',
+                    controller: 'combatScreenController'
                 })
                 .otherwise({
                     redirectTo: '/startscreen'

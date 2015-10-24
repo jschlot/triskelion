@@ -1,0 +1,37 @@
+    <section>
+        <div class="outline">
+            <div class="location">
+                <location-bar-directive page="page"></location-bar-directive>
+            </div>
+        </div>
+        <br>
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="outline" width="500" height="300" valign="middle" rowspan="2">
+                    <svg width="500" height="300" id="portrait"></svg>
+                </td>
+                <td class="outline shim" valign="top" height="120">
+                    <div class="flex-list">
+                        <enemy-party-list-directive></enemy-party-list-directive>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="outline shim" valign="top" height="120">
+                    <div class="flex-list">
+                        <actions-list-directive actions="availableActions"></actions-list-directive>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <div class="outline">
+            <div class="shim">
+                <party-list-directive partydata="partyData"></party-list-directive>
+            </div>
+        </div>
+        <br>
+        <div class="outline">
+            <saytell-directive tells="tells" actions="availableActions" callback="saveAndNext"></saytell-directive>
+        </div>
+    </section>

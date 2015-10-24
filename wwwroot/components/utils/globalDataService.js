@@ -97,7 +97,7 @@ angular
             var userData = {
                 gameModuleSelected: null,
                 cursor: {},
-                gameMode: 'exploration'
+                gameMode: 'downtime'
             };
             return userData;
         }

@@ -16,8 +16,6 @@ angular
                 }
 
                 lookup = value._self - 32;
-                console.log(lookup);
-                console.log(event);
 
                 event = actionsList[lookup];
                 party = value.party;

@@ -9,14 +9,6 @@ angular
 
             'use strict';
 
-            /*
-                Developer's Note:
-                This is, by far, the simplest of controller modules
-                It also happens to be a good starting point for creating new modules
-                One principal shown here is using functional programming to dispatch events
-                with our actionDispatch service
-            */
-
             tellsList = [];
 
             var actionsList = {
@@ -28,6 +20,7 @@ angular
                 },
                 createNewGame: function (actionSelected) {
                     userData.gameModuleSelected = actionSelected;
+                    userData.gameMode = 'downtime';
                     userData.cursor.level = actionSelected.defaultLevel;
                     userData.cursor.direction = actionSelected.defaultCompassDirection;
                     userData.cursor.coordinates = actionSelected.startingCoordinates;

@@ -5,16 +5,16 @@ angular
     ])
     .controller('characterSheetController', [
         '$scope', '$location', '$routeParams', 'infoText', 'partyData', 'userData', 'hotkeyAction',
-        'characterSheetMenuOptions', 'actionDispatcher',
+        'characterSheetMenuOptions', 'actionDispatcher', 'accessControl',
         function ($scope, $location, $routeParams, infoText, partyData, userData, hotkeyAction,
-            characterSheetMenuOptions, actionDispatcher) {
+            characterSheetMenuOptions, actionDispatcher, accessControl) {
             'use strict';
 
-            if (!userData.gameModuleSelected || partyData.length === 0) {
+            var check = accessControl.check('exploration', userData.gameMode, partyData.length)();
+            if (!check) {
                 $location.path('/startscreen');
                 return;
             }
-
 
             // the actions list might need to know context or be dynamic
             $scope.saveAndNext = function (value) {

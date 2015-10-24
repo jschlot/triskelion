@@ -6,14 +6,19 @@ angular
     ])
     .controller('gameGridController', ['$scope', '$location',
             'userData', 'partyData', 'levelMap', 'mazeRunner', 'gameGridMenuOptions', 'ouchHappened', 'infoText',
-            'tileService', 'tellsList', 'aurasList', 'mapModal', 'actionDispatcher',
+            'tileService', 'tellsList', 'aurasList', 'mapModal', 'actionDispatcher', 'accessControl',
         function ($scope, $location,
             userData, partyData, levelMap, mazeRunner, gameGridMenuOptions, ouchHappened, infoText,
-            tileService, tellsList, aurasList, mapModal, actionDispatcher) {
+            tileService, tellsList, aurasList, mapModal, actionDispatcher, accessControl) {
             'use strict';
 
-            if (!userData.gameModuleSelected || partyData.length === 0) {
-                $location.path('/startscreen');
+            var check = accessControl.check('exploration', userData.gameMode, partyData.length)();
+            if (!check) {
+                if (userData.gameMode === 'combat') {
+                    $location.path('/combat');
+                } else {
+                    $location.path('/startscreen');
+                }
                 return;
             }
 
@@ -54,7 +59,7 @@ angular
                         result = tileService.action({_self: next, party: partyData, tells: $scope.tells});
                         if (result === 'combat' || result === 'social') {
                             userData.gameMode = result;
-                            alert('I am in ' + result + ' mode now');
+                            $location.path('/' + result);
                         }
                     } else {
                         mapModal(ouchHappened());
@@ -80,6 +85,7 @@ angular
                     userData.cursor.direction = compassDirection;
                 },
                 'camp': function () {
+                    userData.gameMode = 'downtime';
                     $location.path('/camp');
                 },
                 'look': function () {
