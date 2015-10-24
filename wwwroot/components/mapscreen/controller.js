@@ -16,12 +16,15 @@ angular
                 return;
             }
 
-
             var currentLevel = userData.cursor.level,
                 currentLevelMap = userData.gameModuleSelected.map[currentLevel],
                 coordinates = userData.cursor.coordinates,
                 startingActionTells,
                 menuOptions = mapScreenMenuOptions;
+
+            levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols);
+            levelMap.init(currentLevelMap.layout);
+            miniMap(levelMap.getMap());
 
             startingActionTells = function () {
                 $scope.tells = [];
@@ -29,11 +32,6 @@ angular
                     $scope.tells.push(hotkeyAction($scope.availableActions[i]));
                 }
             };
-
-            levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols);
-            levelMap.init(currentLevelMap.layout);
-
-            miniMap(levelMap.getMap());
 
             $scope.saveAndNext = function (value) {
                 var actionsList = {

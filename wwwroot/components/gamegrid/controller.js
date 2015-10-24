@@ -1,3 +1,4 @@
+/* global ; */
 /* global angular */
 angular
     .module('triskelion.gameGrid.controller',[
@@ -38,7 +39,7 @@ angular
                 'forward': function () {
                     var nextTileIndex = $scope.view.length - 2,
                         next = $scope.view[nextTileIndex][1],
-                        result;
+                        mode;
                     if (tileService.canGoForward(next)) {
                         switch (compassDirection) {
                             case 'east':
@@ -56,10 +57,10 @@ angular
                         }
 
                         $scope.tells = [];
-                        result = tileService.action({_self: next, party: partyData, tells: $scope.tells});
-                        if (result === 'combat' || result === 'social') {
-                            userData.gameMode = result;
-                            $location.path('/' + result);
+                        mode = tileService.action({_self: next, party: partyData, tells: $scope.tells});
+                        if (mode !== 'explore') {
+                            userData.gameMode = mode;
+                            $location.path('/' + mode);
                         }
                     } else {
                         mapModal(ouchHappened());

@@ -5,9 +5,9 @@ angular
         function (tileService) {
             'use strict';
 
-            var mazeRunner = function (levelmap) {
+            var mazeRunner = function (currentView) {
                 var check, wallFactory, doorFactory, coordinates,
-                    view = levelmap.reverse(),
+                    view = currentView.reverse(),
                     vis = d3.select('#mazeRunner')
                             .attr('viewBox', '0 0 500 300'),
                     scaleX = d3.scale.linear(),

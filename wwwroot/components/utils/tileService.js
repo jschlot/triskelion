@@ -9,14 +9,12 @@ angular
                 var actionsList = [],
                     lookup, event, party, tells, gameMode = 'exploration';
 
-                actionsList = userData.gameModuleSelected.tileActions;
-
                 if (value._self < 32) {
                     return;
                 }
 
+                actionsList = userData.gameModuleSelected.tileActions;
                 lookup = value._self - 32;
-
                 event = actionsList[lookup];
                 party = value.party;
                 tells = value.tells;
@@ -33,6 +31,9 @@ angular
                         break;
                     case 'social':
                         gameMode = 'social';
+                        break;
+                    case 'container':
+                        gameMode = 'container';
                         break;
                     default:
                         this.message(tells, event);

@@ -2,7 +2,7 @@
 angular
     .module('triskelion.utils.globalData.service', ['triskelion.character.elf.factory'])
     .service('gameModules', [
-        function (tileService) {
+        function () {
             'use strict';
 
             var gameModules = {
