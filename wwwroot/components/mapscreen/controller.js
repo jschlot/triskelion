@@ -15,9 +15,9 @@ angular
                 return;
             }
 
-            var currentLevel = userData.currentMap.level,
+            var currentLevel = userData.cursor.level,
                 currentLevelMap = userData.gameModuleSelected.map[currentLevel],
-                coordinates = userData.currentMap.coordinates,
+                coordinates = userData.cursor.coordinates,
                 startingActionTells,
                 menuOptions = mapScreenMenuOptions;
 
@@ -40,8 +40,8 @@ angular
                         $location.path('/gamegrid');
                     },
                     teleport: function (actionSelected) {
-                        userData.currentMap.coordinates = userData.gameModuleSelected.startingCoordinates;
-                        userData.currentMap.direction = userData.gameModuleSelected.defaultCompassDirection;
+                        userData.cursor.coordinates = userData.gameModuleSelected.startingCoordinates;
+                        userData.cursor.direction = userData.gameModuleSelected.defaultCompassDirection;
                         $location.path('/gamegrid');
                     }
                 };

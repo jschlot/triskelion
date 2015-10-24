@@ -92,7 +92,7 @@ angular
 
             var userData = {
                 gameModuleSelected: null,
-                currentMap: {}
+                cursor: {}
             };
             return userData;
         }

@@ -28,9 +28,9 @@ angular
                 },
                 createNewGame: function (actionSelected) {
                     userData.gameModuleSelected = actionSelected;
-                    userData.currentMap.level = actionSelected.defaultLevel;
-                    userData.currentMap.direction = actionSelected.defaultCompassDirection;
-                    userData.currentMap.coordinates = actionSelected.startingCoordinates;
+                    userData.cursor.level = actionSelected.defaultLevel;
+                    userData.cursor.direction = actionSelected.defaultCompassDirection;
+                    userData.cursor.coordinates = actionSelected.startingCoordinates;
 
                     $scope.tells.length = 0;
                     $location.path('/camp');

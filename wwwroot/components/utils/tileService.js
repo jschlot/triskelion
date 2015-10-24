@@ -7,10 +7,7 @@ angular
 
             this.action = function (value) {
                 var actionsList = [],
-                    lookup,
-                    event,
-                    party,
-                    tells;
+                    lookup, event, party, tells;
 
                 actionsList = userData.gameModuleSelected.tileActions;
 
@@ -80,7 +77,7 @@ angular
             };
 
             this.isBlock = function (tile) {
-                return (tile < 18) ? true : false;
+                return (tile < 24) ? true : false;
             };
 
             this.isDoor = function (tile) {

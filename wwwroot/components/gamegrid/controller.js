@@ -17,12 +17,12 @@ angular
                 return;
             }
 
-            var currentLevel = userData.currentMap.level,
+            var currentLevel = userData.cursor.level,
                 currentLevelMap = userData.gameModuleSelected.map[currentLevel],
                 currentCompassIndex,
                 compassOptions = ['north','east', 'south', 'west'],
-                coordinates = userData.currentMap.coordinates,
-                compassDirection = userData.currentMap.direction,
+                coordinates = userData.cursor.coordinates,
+                compassDirection = userData.cursor.direction,
                 actionsList = {},
                 menuOptions = gameGridMenuOptions;
 
@@ -63,7 +63,7 @@ angular
                         currentCompassIndex = compassOptions.length - 1;
                     }
                     compassDirection = compassOptions[currentCompassIndex];
-                    userData.currentMap.direction = compassDirection;
+                    userData.cursor.direction = compassDirection;
                 },
                 'right': function () {
                     currentCompassIndex = compassOptions.indexOf(compassDirection);
@@ -72,7 +72,7 @@ angular
                         currentCompassIndex = 0;
                     }
                     compassDirection = compassOptions[currentCompassIndex];
-                    userData.currentMap.direction = compassDirection;
+                    userData.cursor.direction = compassDirection;
                 },
                 'camp': function () {
                     $location.path('/camp');
