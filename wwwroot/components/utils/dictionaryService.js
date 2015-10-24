@@ -37,6 +37,7 @@ angular
                 auraDamage: 'PLAYER takes DAMAGE points of damage from the AURA',
                 auraHeal: 'PLAYER receives HEALTH points of healing from the AURA',
                 auraMissed: 'PLAYER was missed',
+                auraOverheal: 'PLAYER was overhealed by OVERHEAL',
                 camp: 'Camp',
                 removePlayer: 'Who will you ask to leave the party?',
                 whowilljoin: 'Who will you add to the party?',

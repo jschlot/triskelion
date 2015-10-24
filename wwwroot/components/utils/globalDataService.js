@@ -46,6 +46,7 @@ angular
                             ]
                         }
                     ],
+                    // ** ACTION TYPES ** damage, heal, buff, debuff, combat, container, conversation
                     // ** AURA TYPES ** acid, blunt, cold, fire, lightning, necrotic, piercing, poison, psychic, slashing, thunder, light
                     tileActions: [
                         {

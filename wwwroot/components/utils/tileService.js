@@ -43,20 +43,22 @@ angular
             this.aoeDamage = function (tells, event, party) {
                 tells.push(event.description);
                 angular.forEach(party, function (player) {
-                    var result = player.character.damage(event), message = '';
+                    if (player.character.stats.health > 0) {
+                        var result = player.character.damage(event), message = '';
 
-                    if (result.amount) {
-                        message = infoText.auraDamage
-                            .replace(/PLAYER/, player.character.identity.name)
-                            .replace(/DAMAGE/, result.amount)
-                            .replace(/AURA/, event.aura);
-                        tells.push(message);
-                    } else {
-                        tells.push(infoText.auraMissed.replace(/PLAYER/, player.character.identity.name));
-                    }
+                        if (result.amount) {
+                            message = infoText.auraDamage
+                                .replace(/PLAYER/, player.character.identity.name)
+                                .replace(/DAMAGE/, result.amount)
+                                .replace(/AURA/, event.aura);
+                            tells.push(message);
+                        } else {
+                            tells.push(infoText.auraMissed.replace(/PLAYER/, player.character.identity.name));
+                        }
 
-                    if (result.death) {
-                        tells.push(infoText.deathNote.replace(/PLAYER/, player.character.identity.name));
+                        if (result.death) {
+                            tells.push(infoText.deathNote.replace(/PLAYER/, player.character.identity.name));
+                        }
                     }
                 });
             };
@@ -72,7 +74,7 @@ angular
                             .replace(/AURA/, event.aura);
                         tells.push(message);
                     } else {
-                        tells.push(infoText.auraMissed.replace(/PLAYER/, player.character.identity.name));
+                        tells.push(infoText.auraOverheal.replace(/PLAYER/, player.character.identity.name).replace(/OVERHEAL/, result.amount));
                     }
                 });
             };
