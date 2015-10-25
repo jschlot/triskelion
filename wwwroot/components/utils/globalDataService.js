@@ -80,10 +80,9 @@ angular
                             actionType:  'message'
                         },
                         {
-                            description: 'You stumble upon a group of Elvish Fiends!',
+                            description: 'You stumble upon a pair of Elvish Fiends!',
                             actionType:  'combat',
                             mobMembers: [
-                                { spec: 'fiend', level: 1 },
                                 { spec: 'fiend', level: 1 },
                                 { spec: 'fiend', level: 1 }
                             ]
@@ -152,10 +151,7 @@ angular
 
             var playerDB = {};
             playerDB.dungeon = [
-                new Priest('Devonellah'),
-                new Ranger('Celadior'),
-                new Wizard('Vermandar'),
-                new Scout('Hedroxx')
+                new Priest('Devonellah')
             ];
 
             return playerDB;

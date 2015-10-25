@@ -9,13 +9,35 @@ angular
                     name: 'Healing Word',
                     hotkey: 'h',
                     _self: 'heal',
-                    actionType: 'heal'
+                    actionType: 'heal',
+                    description: '',
+                    aura: 'light',
+                    save: 'agility',
+                    level: 1,
+                    check: 20,
+                    modifier: 1,
+                    success: {
+                        numberOfDice: 1,
+                        diceSides: 4
+                    },
+                    failure: null
                 },
                 bolt: {
                     name: 'Bolt of Light',
                     hotkey: 'B',
                     _self: 'bolt',
-                    actionType: 'damage'
+                    actionType: 'damage',
+                    description: '',
+                    aura: 'light',
+                    save: 'agility',
+                    level: 1,
+                    check: 10,
+                    modifier: 1,
+                    success: {
+                        numberOfDice: 1,
+                        diceSides: 8
+                    },
+                    failure: null
                 },
                 restoration: {
                     name: 'Restoration',
