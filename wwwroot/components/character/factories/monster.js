@@ -29,10 +29,7 @@ angular
                  this.character.nrgDice = 6;
                  this.character.updateHealth();
 
-                 this.character.abilities.small = ability.cheapshot;
-                 this.character.abilities.medium = ability.stab;
-                 this.character.abilities.large = ability.wound;
-                 this.character.abilities.super = ability.bloodlet;
+                 this.character.abilities.push(ability.stab);
 
                  this.character.inventory = {
                      armor: armor.leather,

@@ -13,10 +13,10 @@ angular
                  this.character.alignment.adjust('ethics',  diceService.roll(2,20));
                  this.character.alignment.adjust('morals', diceService.roll(2,20));
 
-                 this.character.abilities.small = ability.heal;
-                 this.character.abilities.medium = ability.bolt;
-                 this.character.abilities.large = ability.restoration;
-                 this.character.abilities.super = ability.prayer;
+                 this.character.abilities.push(ability.heal);
+                 this.character.abilities.push(ability.bolt);
+                 this.character.abilities.push(ability.restoration);
+                 this.character.abilities.push(ability.prayer);
 
                  this.character.inventory = {
                      armor: armor.cloth,
@@ -37,10 +37,10 @@ angular
                  this.character.alignment.adjust('ethics',  diceService.roll(2,20));
                  // leave neutral // this.character.alignment.adjust('morals', diceService.roll(2,20));
 
-                 this.character.abilities.small = ability.shoot;
-                 this.character.abilities.medium = ability.powershot;
-                 this.character.abilities.large = ability.flurry;
-                 this.character.abilities.super = ability.focusedshot;
+                 this.character.abilities.push(ability.shoot);
+                 this.character.abilities.push(ability.powershot);
+                 this.character.abilities.push(ability.flurry);
+                 this.character.abilities.push(ability.focusedshot);
 
                  this.character.inventory = {
                      armor: armor.leather,
@@ -61,10 +61,10 @@ angular
                  this.character.alignment.adjust('ethics', -1 * diceService.roll(2,20));
                  this.character.alignment.adjust('morals', diceService.roll(2,20));
 
-                 this.character.abilities.small = ability.fireball;
-                 this.character.abilities.medium = ability.inferno;
-                 this.character.abilities.large = ability.dragonbreath;
-                 this.character.abilities.super = ability.meteor;
+                 this.character.abilities.push(ability.fireball);
+                 this.character.abilities.push(ability.inferno);
+                 this.character.abilities.push(ability.dragonbreath);
+                 this.character.abilities.push(ability.meteor);
 
                  this.character.inventory = {
                      armor: armor.cloth,
@@ -85,10 +85,10 @@ angular
                  this.character.alignment.adjust('ethics', -1 * diceService.roll(2,20));
                  this.character.alignment.adjust('morals', -1 * diceService.roll(2,20));
 
-                 this.character.abilities.small = ability.cheapshot;
-                 this.character.abilities.medium = ability.stab;
-                 this.character.abilities.large = ability.wound;
-                 this.character.abilities.super = ability.bloodlet;
+                 this.character.abilities.push(ability.cheapshot);
+                 this.character.abilities.push(ability.stab);
+                 this.character.abilities.push(ability.wound);
+                 this.character.abilities.push(ability.bloodlet);
 
                  this.character.inventory = {
                      armor: armor.leather,

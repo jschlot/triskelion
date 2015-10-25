@@ -5,7 +5,7 @@ angular
         function () {
             'use strict';
             var combatScreenMenuOptions = {
-                skip: {
+                next: {
                     name: 'Next',
                     hotkey: 'N',
                     _self: 'next'
@@ -29,6 +29,26 @@ angular
                     name: 'Run',
                     hotkey: 'R',
                     _self: 'run'
+                },
+                choosetarget: {
+                    name: '#Choose',
+                    hotkey: '#',
+                    _self: 'choosetarget'
+                },
+                choosespell: {
+                    name: '#Choose',
+                    hotkey: '#',
+                    _self: 'choosespell'
+                },
+                party: {
+                    name: 'Party',
+                    hotkey: 'P',
+                    _self: 'party'
+                },
+                mobs: {
+                    name: 'Mobs',
+                    hotkey: 'M',
+                    _self: 'mobs'
                 }
             };
 

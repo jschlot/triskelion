@@ -151,12 +151,7 @@ angular
                 this.character.stats.charisma = diceService.roll(3,6);
                 this.character.stats.movement = 1;
 
-                this.character.abilities = {};
-                this.character.abilities.small = {};
-                this.character.abilities.medium = {};
-                this.character.abilities.large = {};
-                this.character.abilities.super = {};
-
+                this.character.abilities = [];
                 this.character.savingThrows = [];
                 this.character.inventory = {};
                 this.character.quips = [];
