@@ -56,11 +56,11 @@ angular
                             save: 'agility',
                             check: 19,
                             modifier: 1,
-                            success: {
+                            hit: {
                                 numberOfDice: 1,
                                 diceSides: 20
                             },
-                            failure: null
+                            miss: null
                         },
                         {
                             description: 'A ray of light shines upon the group!',
@@ -69,11 +69,11 @@ angular
                             save: null,
                             check: 0,
                             modifier: 0,
-                            success: {
+                            hit: {
                                 numberOfDice: 2,
                                 diceSides: 8
                             },
-                            failure: null
+                            miss: null
                         },
                         {
                             description: 'A eerie wailing sound comes from down the hallway...',

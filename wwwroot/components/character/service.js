@@ -16,11 +16,11 @@ angular
                     level: 1,
                     check: 10,
                     modifier: 1,
-                    success: {
+                    hit: {
                         numberOfDice: 1,
                         diceSides: 4
                     },
-                    failure: null
+                    miss: null
                 },
                 heal: {
                     name: 'Healing Word',
@@ -33,11 +33,11 @@ angular
                     level: 1,
                     check: 0,
                     modifier: 1,
-                    success: {
+                    hit: {
                         numberOfDice: 1,
                         diceSides: 4
                     },
-                    failure: null
+                    miss: null
                 },
                 bolt: {
                     name: 'Bolt of Light',
@@ -50,11 +50,11 @@ angular
                     level: 1,
                     check: 18,
                     modifier: 1,
-                    success: {
+                    hit: {
                         numberOfDice: 1,
                         diceSides: 8
                     },
-                    failure: null
+                    miss: null
                 },
                 restoration: {
                     name: 'Restoration',

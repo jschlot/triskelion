@@ -93,15 +93,15 @@ angular
                     }
 
                     //// compare the event's difficulty check to the player's saving throw
-                    // if our roll is higher - we are SUCCESSFUL, and the enemy is FAILURE
+                    // if our roll is higher - we HIT, and the enemy is MISS
                     if ((savingThrow + modifier + bonus) >= (event.check + event.modifier)) {
                         isSuccess = true;
-                        if (event.failure) {
-                            damage = diceService.roll( event.failure.numberOfDice, event.failure.diceSides );
+                        if (event.miss) {
+                            damage = diceService.roll( event.miss.numberOfDice, event.miss.diceSides );
                             this.stats.health = this.stats.health - damage;
                         }
                     } else {
-                        damage = diceService.roll( event.success.numberOfDice, event.success.diceSides );
+                        damage = diceService.roll( event.hit.numberOfDice, event.hit.diceSides );
                         this.stats.health = this.stats.health - damage;
                     }
 
@@ -111,14 +111,14 @@ angular
                         this.status = 'dead';
                     }
 
-                    return { success: isSuccess, amount: damage, death: isDead };
+                    return { hit: isSuccess, amount: damage, death: isDead };
 
                 };
 
                 this.character.healing = function (event) {
                     var healing = 0, updatedHealth = 0 + this.stats.health;
 
-                    healing = diceService.roll( event.success.numberOfDice, event.success.diceSides );
+                    healing = diceService.roll( event.hit.numberOfDice, event.hit.diceSides );
                     updatedHealth += healing;
 
                     if (updatedHealth <= this.stats.maxhealth) {
@@ -129,7 +129,7 @@ angular
 
                     this.status = 'alive';
 
-                    return { success: true, amount: healing };
+                    return { hit: true, amount: healing };
                 };
 
                 this.character.updateHealth = function () {

@@ -72,7 +72,7 @@ angular
             var heal = function(player, event) {
                 var tells = [];
                 var result =  player.character.healing(event), message = '';
-                if (result.success) {
+                if (result.hit) {
                     message = infoText.auraHeal
                         .replace(/PLAYER/, player.character.identity.name)
                         .replace(/HEALTH/, result.amount)
@@ -190,11 +190,11 @@ angular
                                 level: 1,
                                 check: 10,
                                 modifier: 1,
-                                success: {
+                                hit: {
                                     numberOfDice: 1,
                                     diceSides: 4
                                 },
-                                failure: null
+                                miss: null
                             });
 
                             $scope.availableActions = [

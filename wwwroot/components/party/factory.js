@@ -55,7 +55,7 @@ angular
                     tells.push(event.description);
                     angular.forEach(this.members, function (player) {
                         var result =  player.character.healing(event), message = '';
-                        if (result.success) {
+                        if (result.hit) {
                             message = infoText.auraHeal
                                 .replace(/PLAYER/, player.character.identity.name)
                                 .replace(/HEALTH/, result.amount)
