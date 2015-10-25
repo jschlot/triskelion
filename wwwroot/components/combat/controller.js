@@ -47,6 +47,43 @@ angular
                 });
             }
 
+            var attack = function(player, event) {
+                var tells = [];
+                if (player.character.stats.health > 0) {
+                    var result = player.character.damage(event), message = '';
+
+                    if (result.amount) {
+                        message = infoText.auraDamage
+                            .replace(/PLAYER/, player.character.identity.name)
+                            .replace(/DAMAGE/, result.amount)
+                            .replace(/AURA/, event.aura);
+                        tells.push(message);
+                    } else {
+                        tells.push(infoText.auraMissed.replace(/PLAYER/, player.character.identity.name));
+                    }
+
+                    if (result.death) {
+                        tells.push(infoText.deathNote.replace(/PLAYER/, player.character.identity.name));
+                    }
+                }
+                return tells;
+            };
+
+            var heal = function(player, event) {
+                var tells = [];
+                var result =  player.character.healing(event), message = '';
+                if (result.success) {
+                    message = infoText.auraHeal
+                        .replace(/PLAYER/, player.character.identity.name)
+                        .replace(/HEALTH/, result.amount)
+                        .replace(/AURA/, event.aura);
+                    tells.push(message);
+                } else {
+                    tells.push(infoText.auraOverheal.replace(/PLAYER/, player.character.identity.name).replace(/OVERHEAL/, result.amount));
+                }
+                return tells;
+            };
+
             var updateTurns = function() {
                 var combatant;
 
@@ -58,8 +95,20 @@ angular
 
                 combatant = turnsList[currentTurn];
 
+                if (partyDB.partyHP() === 0) {
+                    alert("Party all dead; Time to go back to camp");
+                }
+
+                if (mobDB.partyHP() === 0) {
+                    alert("Mobs all dead; Time for the loot screen");
+                }
+
                 if (combatant.character.npc) {
-                    $scope.tells = [infoText.npcTurn.replace(/NPC/, combatant.character.identity.name)];
+
+                    if (combatant.character.stats.health !== 0) {
+                        var randomPlayer = partyDB.members[Math.floor(Math.random()  *partyDB.members.length)];
+                        $scope.tells = attack(randomPlayer, combatant.character.abilities[0]);
+                     }
 
                     $scope.availableActions = [
                         combatScreenMenuOptions.next
@@ -130,11 +179,23 @@ angular
                     confirmFight: function (index) {
                         var lookup = $scope.mobData[index - 1];
                         if (lookup) {
-// TO-DO: Make happen
-                            $scope.tells = [
-                                infoText.playerDoesDamage
-                                .replace(/TARGET/, lookup.character.identity.name)
-                            ];
+                            $scope.tells = attack(lookup, {
+                                name: 'Melee',
+                                hotkey: 'M',
+                                _self: 'melee',
+                                actionType: 'damage',
+                                description: '',
+                                aura: 'blunt',
+                                save: 'agility',
+                                level: 1,
+                                check: 10,
+                                modifier: 1,
+                                success: {
+                                    numberOfDice: 1,
+                                    diceSides: 4
+                                },
+                                failure: null
+                            });
 
                             $scope.availableActions = [
                                 combatScreenMenuOptions.next
@@ -164,20 +225,16 @@ angular
                         $scope.context = "confirmSpell";
                     },
                     confirmSpell: function (value) {
-// TO-DO: Make happen
-
                         if ($scope.subcontext === 'mobs') {
-                            $scope.tells = [
-                                infoText.playerCastsSpell
-                                .replace(/TARGET/, mobDB.members[value-1].character.identity.name)
-                                .replace(/SPELL/, $scope.abilitySelected.name)
-                            ];
+                            $scope.tells = attack(mobDB.members[value-1], $scope.abilitySelected);
                         } else {
-                            $scope.tells = [
-                                infoText.playerCastsSpell
-                                .replace(/TARGET/, partyDB.members[value-1].character.identity.name)
-                                .replace(/SPELL/, $scope.abilitySelected.name)
-                            ];
+
+                            // check to see what the spell type is
+                            if ($scope.abilitySelected.actionType === 'damage') {
+                                $scope.tells = attack(partyDB.members[value-1], $scope.abilitySelected);
+                            } else {
+                                $scope.tells = heal(partyDB.members[value-1], $scope.abilitySelected);
+                            }
                         }
 
                         $scope.availableActions = [
@@ -187,7 +244,7 @@ angular
                         $scope.context = null;
                     },
                     confirmUse: function (index) {
-// TO-DO: this is spoofed
+                        // TO-DO: this is spoofed
                         $scope.tells = [infoText.chosenThing];
 
                         $scope.availableActions = [

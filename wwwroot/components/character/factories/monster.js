@@ -29,7 +29,7 @@ angular
                  this.character.nrgDice = 6;
                  this.character.updateHealth();
 
-                 this.character.abilities.push(ability.stab);
+                 this.character.abilities.push(ability.fight);
 
                  this.character.inventory = {
                      armor: armor.leather,
