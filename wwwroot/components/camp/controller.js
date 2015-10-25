@@ -29,25 +29,20 @@ angular
                 'add': function () {
                     $scope.tells = [infoText.whowilljoin];
 
-                    // TO-DO might be able to avoid a copy here
-                    // angular.forEach(combatant.character.abilities, function(ability) {
-                    //     $scope.availableActions.push(ability);
-                    // });
-
-                    $scope.availableActions = angular.copy(cast);
+                    $scope.availableActions = [];
+                    angular.forEach(cast, function(player) {
+                         $scope.availableActions.push(player);
+                    });
                     $scope.availableActions.push(campActions.back);
                     context = 'add';
                 },
                 'remove': function () {
                     $scope.tells = [infoText.removePlayer];
 
-                    // TO-DO might be able to avoid a copy here
-                    // angular.forEach(combatant.character.abilities, function(ability) {
-                    //     $scope.availableActions.push(ability);
-                    // });
-
-
-                    $scope.availableActions = angular.copy(partyDB.members);
+                    $scope.availableActions = [];
+                    angular.forEach(partyDB.members, function(player) {
+                         $scope.availableActions.push(player);
+                    });
                     $scope.availableActions.push(campActions.back);
                     context = 'remove';
                 },

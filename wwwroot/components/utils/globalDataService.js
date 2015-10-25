@@ -154,7 +154,7 @@ angular
             playerDB.dungeon = [
                 new Priest('Devonellah'),
                 new Ranger('Celadior'),
-                new Wizard('Beladriel'),
+                new Wizard('Vermandar'),
                 new Scout('Hedroxx')
             ];
 
