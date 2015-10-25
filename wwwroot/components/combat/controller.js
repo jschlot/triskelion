@@ -79,7 +79,12 @@ angular
                         .replace(/AURA/, event.aura);
                     tells.push(message);
                 } else {
-                    tells.push(infoText.auraOverheal.replace(/PLAYER/, player.character.identity.name).replace(/OVERHEAL/, result.amount));
+                    tells.push(
+                        infoText
+                            .auraOverheal
+                            .replace(/PLAYER/, player.character.identity.name)
+                            .replace(/OVERHEAL/, result.amount)
+                        );
                 }
                 return tells;
             };
@@ -104,7 +109,6 @@ angular
                 }
 
                 if (combatant.character.npc) {
-
                     if (combatant.character.stats.health !== 0) {
                         var randomPlayer = partyDB.members[Math.floor(Math.random()  *partyDB.members.length)];
                         $scope.tells = attack(randomPlayer, combatant.character.abilities[0]);
