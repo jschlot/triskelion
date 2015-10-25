@@ -40,7 +40,7 @@ angular
                  this.character.abilities.push(ability.shoot);
                  this.character.abilities.push(ability.powershot);
                  this.character.abilities.push(ability.flurry);
-                 this.character.abilities.push(ability.focusedshot);
+                 this.character.abilities.push(ability.deadlyshot);
 
                  this.character.inventory = {
                      armor: armor.leather,

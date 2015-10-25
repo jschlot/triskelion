@@ -130,6 +130,7 @@ angular
                     confirmFight: function (index) {
                         var lookup = $scope.mobData[index - 1];
                         if (lookup) {
+// TO-DO: Make happen
                             $scope.tells = [
                                 infoText.playerDoesDamage
                                 .replace(/TARGET/, lookup.character.identity.name)
@@ -163,6 +164,8 @@ angular
                         $scope.context = "confirmSpell";
                     },
                     confirmSpell: function (value) {
+// TO-DO: Make happen
+
                         if ($scope.subcontext === 'mobs') {
                             $scope.tells = [
                                 infoText.playerCastsSpell
@@ -184,6 +187,7 @@ angular
                         $scope.context = null;
                     },
                     confirmUse: function (index) {
+// TO-DO: this is spoofed
                         $scope.tells = [infoText.chosenThing];
 
                         $scope.availableActions = [

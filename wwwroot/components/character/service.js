@@ -13,25 +13,25 @@ angular
                 },
                 bolt: {
                     name: 'Bolt of Light',
-                    hotkey: 'b',
+                    hotkey: 'B',
                     _self: 'bolt',
                     actionType: 'damage'
                 },
                 restoration: {
                     name: 'Restoration',
-                    hotkey: 'r',
+                    hotkey: 'R',
                     _self: 'restoration',
                     actionType: 'heal'
                 },
                 prayer: {
                     name: 'Prayer of Hope',
-                    hotkey: 'p',
+                    hotkey: 'P',
                     _self: 'prayer',
                     actionType: 'heal'
                 },
                 shoot: {
                     name: 'Shoot Arrow',
-                    hotkey: 'h',
+                    hotkey: 'S',
                     _self: 'shoot',
                     actionType: 'damage'
                 },
@@ -43,14 +43,14 @@ angular
                 },
                 flurry: {
                     name: 'Flurry',
-                    hotkey: 'f',
+                    hotkey: 'F',
                     _self: 'flurry',
                     actionType: 'damage'
                 },
-                focusedshot: {
-                    name: 'Focused Shot',
-                    hotkey: 'F',
-                    _self: 'focusedshot',
+                deadlyshot: {
+                    name: 'Deadly Shot',
+                    hotkey: 'D',
+                    _self: 'deadlyshot',
                     actionType: 'damage'
                 },
                 fireball: {
