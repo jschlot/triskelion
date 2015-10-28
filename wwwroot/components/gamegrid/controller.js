@@ -121,6 +121,7 @@ angular
             };
 
             $scope.saveAndNext = function (value) {
+                $scope.tells.length = 0;
                 var returnValue = actionDispatcher(actionsList[value._self], value);
                 if (returnValue !== 'stop mazerunner') {
                     actionsList.updateMazeRunner();

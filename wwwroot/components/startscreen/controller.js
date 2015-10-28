@@ -9,11 +9,9 @@ angular
 
             'use strict';
 
-            tellsList = [];
-
             var actionsList = {
                 newgame: function (actionSelected) {
-                    $scope.tells = [infoText.choosemodule];
+                    $scope.tells.push(infoText.choosemodule);
                     $scope.availableActions = [
                         gameModules.dungeon
                     ];
@@ -24,8 +22,6 @@ angular
                     userData.cursor.level = actionSelected.defaultLevel;
                     userData.cursor.direction = actionSelected.defaultCompassDirection;
                     userData.cursor.coordinates = actionSelected.startingCoordinates;
-
-                    $scope.tells.length = 0;
                     $location.path('/camp');
                 }
             };
@@ -46,6 +42,8 @@ angular
                 startScreenMenuOptions.newgame
             ];
 
+            // always reset tells DB
+            tellsList.length = 0;
             $scope.tells = tellsList;
         }
     ]);

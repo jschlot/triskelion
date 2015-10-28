@@ -27,7 +27,7 @@ angular
 
             actionsList = {
                 'add': function () {
-                    $scope.tells = [infoText.whowilljoin];
+                    $scope.tells.push(infoText.whowilljoin);
 
                     $scope.availableActions = [];
                     angular.forEach(cast, function(player) {
@@ -37,7 +37,7 @@ angular
                     context = 'add';
                 },
                 'remove': function () {
-                    $scope.tells = [infoText.removePlayer];
+                    $scope.tells.push(infoText.removePlayer);
 
                     $scope.availableActions = [];
                     angular.forEach(partyDB.members, function(player) {
@@ -101,13 +101,13 @@ angular
                         }
                     }, abilityList);
 
-                    $scope.tells = [
+                    $scope.tells.push(
                         infoText.describeCharacter
                             .replace(/NAME/, character.identity.name)
                             .replace(/LEVEL/, character.experience.level)
                             .replace(/RACE/, character.identity.race)
                             .replace(/SPEC/, character.identity.spec)
-                    ];
+                    );
 
                     $scope.availableActions = [
                         campActions.confirmAdd,
@@ -124,7 +124,7 @@ angular
                     }
 
                     if (partyDB.members.length < userData.gameModuleSelected.maxparty) {
-                        $scope.tells = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
+                        $scope.tells.push(infoText.actionchoice.replace(/STRING/, currentPick.name));
                         partyDB.members.push(currentPick);
                         $scope.partyData = partyDB.members;
                     }
@@ -143,7 +143,7 @@ angular
                         }
                     }
 
-                    $scope.tells = [infoText.actionchoice.replace(/STRING/, currentPick.name)];
+                    $scope.tells.push(infoText.actionchoice.replace(/STRING/, currentPick.name));
                     cast.push(currentPick);
 
                     $scope.partyData = partyDB.members;
@@ -153,6 +153,7 @@ angular
             };
 
             $scope.saveAndNext = function (value) {
+                $scope.tells.length = 0;
                 if (actionsList[value._self]) {
                     actionDispatcher(actionsList[value._self], value);
                 } else if (angular.isNumber(value)) {

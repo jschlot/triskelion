@@ -1,11 +1,11 @@
 /* global angular */
 angular
-    .module('triskelion.combatScreen.controller',['triskelion.combatScreen.service'])
+    .module('triskelion.combatScreen.controller',['triskelion.combatScreen.service', 'triskelion.character.service'])
     .controller('combatScreenController', [
         '$scope', '$location', 'accessControl', 'userData', 'partyDB', 'mobDB', 'infoText', 'hotkeyAction',
-        'combatScreenMenuOptions', 'tellsList', 'diceService', 'actionDispatcher',
+        'combatScreenMenuOptions', 'tellsList', 'diceService', 'actionDispatcher', 'ability',
         function ($scope, $location, accessControl, userData, partyDB, mobDB, infoText, hotkeyAction,
-            combatScreenMenuOptions, tellsList, diceService, actionDispatcher) {
+            combatScreenMenuOptions, tellsList, diceService, actionDispatcher, ability) {
 
             'use strict';
 
@@ -22,6 +22,7 @@ angular
                 mobInitiative = 0,
                 playerInitiative = 0;
 
+            mobDB.length = 0;
             mobDB.add(tileAction.mobMembers);
             mobInitiative = diceService.roll(1,20);
             playerInitiative = diceService.roll(1,20);
@@ -97,13 +98,15 @@ angular
 
                 if (partyDB.partyHP() === 0) {
                     userData.gameMode = 'exploration';
-                    $location.path('/gamegrid');
+                    $location.path('/camp');
+                    return;
                 }
 
                 if (mobDB.partyHP() === 0) {
-                    alert("Enemy party is all dead; Time for the loot screen");
+                    console.log("Enemy party is all dead; Time for the loot screen!!");
                     userData.gameMode = 'exploration';
                     $location.path('/gamegrid');
+                    return;
                 }
 
                 if (combatant.character.npc) {
@@ -187,24 +190,7 @@ angular
                     confirmFight: function (index) {
                         var lookup = $scope.mobData[index - 1];
                         if (lookup) {
-                            // TO DO this is a hack - we should reference a real ability here
-                            $scope.tells.push(attack(lookup, {
-                                name: 'Melee',
-                                hotkey: 'M',
-                                _self: 'melee',
-                                actionType: 'damage',
-                                description: '',
-                                aura: 'blunt',
-                                save: 'agility',
-                                level: 1,
-                                check: 10,
-                                modifier: 1,
-                                hit: {
-                                    numberOfDice: 1,
-                                    diceSides: 4
-                                },
-                                miss: null
-                            }));
+                            $scope.tells.push(attack(lookup, ability.fight));
 
                             $scope.availableActions = [
                                 combatScreenMenuOptions.next

@@ -7,7 +7,7 @@ angular
             var ability = {
                 fight: {
                     name: 'Fight',
-                    hotkey: 'f',
+                    hotkey: 'F',
                     _self: 'fight',
                     actionType: 'damage',
                     description: '',
@@ -34,7 +34,7 @@ angular
                     check: 0,
                     modifier: 1,
                     hit: {
-                        numberOfDice: 1,
+                        numberOfDice: 3,
                         diceSides: 4
                     },
                     miss: null

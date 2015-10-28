@@ -66,7 +66,7 @@ angular
                 menuOptions.teleport
             ];
 
-            $scope.tells = [];
+            $scope.tells = tellsList;
             startingActionTells();
         }
     ]);

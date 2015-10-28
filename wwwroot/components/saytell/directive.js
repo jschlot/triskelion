@@ -40,7 +40,7 @@ angular
                       $scope.tells.push(actionNotFound());
                   }
 
-                  $scope.tells = $scope.tells.length > 3 ? $scope.tells.slice(-4) : $scope.tells;
+                  $scope.buffer = $scope.tells.length > 3 ? $scope.tells.slice(-4) : $scope.tells;
 
                   $scope.prompt = '';
               };
