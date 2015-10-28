@@ -48,45 +48,40 @@ angular
             }
 
             var attack = function(player, event) {
-                var tells = [];
+                var message;
                 if (player.character.stats.health > 0) {
-                    var result = player.character.damage(event), message = '';
+                    var result = player.character.damage(event);
 
                     if (result.amount) {
                         message = infoText.auraDamage
                             .replace(/PLAYER/, player.character.identity.name)
                             .replace(/DAMAGE/, result.amount)
                             .replace(/AURA/, event.aura);
-                        tells.push(message);
                     } else {
-                        tells.push(infoText.auraMissed.replace(/PLAYER/, player.character.identity.name));
+                        message = infoText.auraMissed.replace(/PLAYER/, player.character.identity.name);
                     }
 
                     if (result.death) {
-                        tells.push(infoText.deathNote.replace(/PLAYER/, player.character.identity.name));
+                        message += infoText.deathNote.replace(/PLAYER/, player.character.identity.name);
                     }
                 }
-                return tells;
+                return message;
             };
 
             var heal = function(player, event) {
-                var tells = [];
-                var result =  player.character.healing(event), message = '';
+                var message;
+                var result =  player.character.healing(event);
                 if (result.hit) {
                     message = infoText.auraHeal
                         .replace(/PLAYER/, player.character.identity.name)
                         .replace(/HEALTH/, result.amount)
                         .replace(/AURA/, event.aura);
-                    tells.push(message);
                 } else {
-                    tells.push(
-                        infoText
-                            .auraOverheal
+                    message = infoText.auraOverheal
                             .replace(/PLAYER/, player.character.identity.name)
-                            .replace(/OVERHEAL/, result.amount)
-                        );
+                            .replace(/OVERHEAL/, result.amount);
                 }
-                return tells;
+                return message;
             };
 
             var updateTurns = function() {
@@ -101,23 +96,24 @@ angular
                 combatant = turnsList[currentTurn];
 
                 if (partyDB.partyHP() === 0) {
-                    alert("Party all dead; Time to go back to camp");
+                    alert("Your Party all dead; Time to go back to camp");
                     return;
                 }
 
                 if (mobDB.partyHP() === 0) {
-                    alert("Mobs all dead; Time for the loot screen");
+                    alert("Enemy party is all dead; Time for the loot screen");
                     return;
                 }
 
                 if (combatant.character.npc) {
-                    $scope.subcontext = 'mobs';
+                    $scope.currentCombatantParty = 'mobs';
                     if (combatant.character.stats.health === 0) {
                         updateTurns();
                         return;
                     } else {
                         var randomPlayer = partyDB.members[Math.floor(Math.random()  *partyDB.members.length)];
-                        $scope.tells = attack(randomPlayer, combatant.character.abilities[0]);
+                        var actionResult = attack(randomPlayer, combatant.character.abilities[0]);
+                        $scope.tells.push(actionResult);
                      }
 
                     $scope.availableActions = [
@@ -130,8 +126,8 @@ angular
                         who: combatant.character.identity.name
                     };
                 } else {
-                    $scope.subcontext = 'players';
-                    $scope.tells = [infoText.playerTurn.replace(/PLAYER/, combatant.character.identity.name)];
+                    $scope.currentCombatantParty = 'players';
+                    $scope.tells.push(infoText.playerTurn.replace(/PLAYER/, combatant.character.identity.name));
 
                     $scope.availableActions = [
                         combatScreenMenuOptions.fight,
@@ -150,13 +146,13 @@ angular
             };
 
             $scope.context = null;
-            $scope.subcontext = null;
+            $scope.currentCombatantParty = null;
             $scope.abilitySelected = null;
 
             $scope.saveAndNext = function (value) {
                 var actionsList = {
                     fight: function (actionSelected) {
-                        $scope.tells = [infoText.chooseEnemy];
+                        $scope.tells.push(infoText.chooseEnemy);
                         $scope.availableActions = [
                             combatScreenMenuOptions.choosetarget
                         ];
@@ -164,7 +160,7 @@ angular
                     },
                     spell: function (actionSelected) {
                         var combatant = turnsList[currentTurn];
-                        $scope.tells = [infoText.chooseSpell];
+                        $scope.tells.push(infoText.chooseSpell);
 
                         $scope.availableActions = [];
                         angular.forEach(combatant.character.abilities, function(ability) {
@@ -174,14 +170,14 @@ angular
                         $scope.context = 'confirmSpellTarget';
                     },
                     use: function (actionSelected) {
-                        $scope.tells = [infoText.chooseItem];
+                        $scope.tells.push(infoText.chooseItem);
                         $scope.availableActions = [
                             combatScreenMenuOptions.choosetarget
                         ];
                         $scope.context = 'confirmUse';
                     },
                     run: function (actionSelected) {
-                        $scope.tells = [infoText.playerRuns];
+                        $scope.tells.push(infoText.playerRuns);
                         updateTurns();
                     },
                     next: function (actionSelected) {
@@ -190,7 +186,8 @@ angular
                     confirmFight: function (index) {
                         var lookup = $scope.mobData[index - 1];
                         if (lookup) {
-                            $scope.tells = attack(lookup, {
+                            // TO DO this is a hack - we should reference a real ability here
+                            $scope.tells.push(attack(lookup, {
                                 name: 'Melee',
                                 hotkey: 'M',
                                 _self: 'melee',
@@ -206,7 +203,7 @@ angular
                                     diceSides: 4
                                 },
                                 miss: null
-                            });
+                            }));
 
                             $scope.availableActions = [
                                 combatScreenMenuOptions.next
@@ -216,7 +213,7 @@ angular
                         }
                     },
                     confirmSpellTarget: function (actionSelected) {
-                        $scope.tells = [infoText.chooseTargetPlayer];
+                        $scope.tells.push(infoText.chooseTargetPlayer);
 
                         $scope.availableActions = [
                             combatScreenMenuOptions.choosetarget
@@ -225,13 +222,13 @@ angular
                         $scope.context = "confirmSpell";
                     },
                     confirmSpell: function (value) {
-                        if ($scope.subcontext === 'mobs') {
-                            $scope.tells = attack(mobDB.members[value-1], $scope.abilitySelected);
+                        if ($scope.currentCombatantParty === 'mobs') {
+                            $scope.tells.push(attack(mobDB.members[value-1], $scope.abilitySelected));
                         } else {
                             if ($scope.abilitySelected.actionType === 'damage') {
-                                $scope.tells = attack(mobDB.members[value-1], $scope.abilitySelected);
+                                $scope.tells.push(attack(mobDB.members[value-1], $scope.abilitySelected));
                             } else {
-                                $scope.tells = heal(partyDB.members[value-1], $scope.abilitySelected);
+                                $scope.tells.push(heal(partyDB.members[value-1], $scope.abilitySelected));
                             }
                         }
 
@@ -243,7 +240,7 @@ angular
                     },
                     confirmUse: function (index) {
                         // TO-DO: this is spoofed
-                        $scope.tells = [infoText.chosenThing];
+                        $scope.tells.push(infoText.chosenThing);
 
                         $scope.availableActions = [
                             combatScreenMenuOptions.next

@@ -32,8 +32,6 @@ angular
                       lookup = objectFindByKey($scope.actions, 'hotkey', hotkey);
                   }
 
-                  $scope.tells = [];
-
                   if (lookup) {
                       $scope.callback(lookup);
                   } else if (isFinite(parseInt(hotkey)) && objectFindByKey($scope.actions, 'hotkey', "#")) {
@@ -41,6 +39,8 @@ angular
                   } else {
                       $scope.tells.push(actionNotFound());
                   }
+
+                   $scope.tells = $scope.tells.slice(Math.max( $scope.tells.length - 5, 1));
 
                   $scope.prompt = '';
               };
