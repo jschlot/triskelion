@@ -22,7 +22,7 @@ angular
                 mobInitiative = 0,
                 playerInitiative = 0;
 
-            mobDB.length = 0;
+            mobDB.members.length = 0;
             mobDB.add(tileAction.mobMembers);
             mobInitiative = diceService.roll(1,20);
             playerInitiative = diceService.roll(1,20);
@@ -97,7 +97,7 @@ angular
                 combatant = turnsList[currentTurn];
 
                 if (partyDB.partyHP() === 0) {
-                    userData.gameMode = 'exploration';
+                    userData.gameMode = 'downtime';
                     $location.path('/camp');
                     return;
                 }
