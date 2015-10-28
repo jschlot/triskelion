@@ -15,7 +15,8 @@ svg {
 }
 
 svg polygon {
-    fill: black;
+    fill: steelblue;
+    opacity: 0.80;
     stroke: white;
     stroke-width: 1px;
     shape-rendering:crispEdges;

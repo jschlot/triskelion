@@ -58,16 +58,22 @@ angular
                     backgroundClosedMid: [{'x': 120, 'y': 60}, {'x': 120,'y': 240}, {'x': 380,'y': 240}, {'x': 380,'y': 60}],
                     backgroundClosedFront: [{'x': 60, 'y': 30}, {'x': 60,'y': 270}, {'x': 440,'y': 270}, {'x': 440,'y': 30}],
 
-                    backgroundDoorBack: [{'x': 180, 'y': 90}, {'x': 180,'y': 210}, {'x': 200,'y': 210}, {'x': 200,'y': 110}, {'x': 300,'y': 110}, {'x': 300,'y': 210}, {'x': 320,'y': 210}, {'x': 320,'y': 90}],
-                    backgroundDoorMid: [{'x': 120, 'y': 60}, {'x': 120,'y': 240}, {'x': 160,'y': 240}, {'x': 160,'y': 90}, {'x': 340,'y': 90}, {'x': 340,'y': 240}, {'x': 380,'y': 240}, {'x': 380,'y': 60}],
-                    backgroundDoorFront: [{'x': 60, 'y': 30}, {'x': 60,'y': 270}, {'x': 120,'y': 270}, {'x': 120,'y': 60}, {'x': 380,'y': 60}, {'x': 380,'y': 270}, {'x': 440,'y': 270}, {'x': 440,'y': 30}],
+                    backgroundDoorFrontPanel: [{'x': 165, 'y': 75},{'x': 165, 'y': 255},{'x': 335, 'y': 255},{'x': 335, 'y': 75}],
+                    backgroundDoorFrontArch: [{'x': 90, 'y': 45}, {'x': 90,'y': 255}, {'x': 165,'y': 255}, {'x': 165,'y': 75}, {'x': 335,'y': 75}, {'x': 335,'y': 255}, {'x': 410,'y': 255}, {'x': 410,'y': 45}],
 
                     backgroundLeftEnd: [{'x': 180, 'y': 90}, {'x': 180,'y': 210}, {'x': 220,'y': 190}, {'x': 220,'y': 110}],
                     backgroundLeftThru: [{'x': 100, 'y': 110}, {'x': 100,'y': 190}, {'x': 200,'y': 190}, {'x': 200,'y': 110}],
                     backgroundMidThru: [{'x': 200, 'y': 110}, {'x': 200,'y': 190}, {'x': 300,'y': 190}, {'x': 300,'y': 110}],
 
                     backgroundRightThru: [{'x': 300, 'y': 110}, {'x': 300,'y': 190}, {'x': 400,'y': 190}, {'x': 400,'y': 110}],
-                    backgroundRightEnd: [{'x': 280, 'y': 110}, {'x': 280,'y': 190}, {'x': 320,'y': 210}, {'x': 320,'y': 90}]
+                    backgroundRightEnd: [{'x': 280, 'y': 110}, {'x': 280,'y': 190}, {'x': 320,'y': 210}, {'x': 320,'y': 90}],
+
+                    backgroundDoorBackPanel: [{'x': 220, 'y': 120},{'x': 220, 'y': 200},{'x': 280, 'y': 200},{'x': 280, 'y': 120}],
+                    backgroundDoorBackArch: [{'x': 200, 'y': 100}, {'x': 200,'y': 200}, {'x': 220,'y': 200}, {'x': 220,'y': 120}, {'x': 280,'y': 120}, {'x': 280,'y': 200}, {'x': 300,'y': 200}, {'x': 300,'y': 100}],
+
+                    backgroundDoorMidPanel: [{'x': 195, 'y': 100},{'x': 195, 'y': 225},{'x': 305, 'y': 225},{'x': 305, 'y': 100}],
+                    backgroundDoorMidArch: [{'x': 150, 'y': 75}, {'x': 150,'y': 225}, {'x': 195,'y': 225}, {'x': 195,'y': 100}, {'x': 305,'y': 100}, {'x': 305,'y': 225}, {'x': 350,'y': 225}, {'x': 350,'y': 75}]
+
                 };
 
                 // depth 4's background goes first as it's the final back wall,
@@ -133,9 +139,9 @@ angular
                     check = tileService.isDoor(view[1][1]);
                     if (check) {
                         if (check !== 'ns-arch' && check !== 'ew-arch') {
-                            wallFactory(coordinates.backgroundClosedBack, 'mid-4');
+                            wallFactory(coordinates.backgroundDoorBackPanel, 'mid-4');
                         }
-                        doorFactory(coordinates.backgroundDoorBack, 'mid-door-4');
+                        doorFactory(coordinates.backgroundDoorBackArch, 'mid-door-4');
                     }
                 }
 
@@ -146,9 +152,9 @@ angular
                     check = tileService.isDoor(view[2][1]);
                     if (check) {
                         if (check !== 'ns-arch' && check !== 'ew-arch') {
-                            wallFactory(coordinates.backgroundClosedMid, 'mid-3');
+                            wallFactory(coordinates.backgroundDoorMidPanel, 'mid-3');
                         }
-                        doorFactory(coordinates.backgroundDoorMid, 'mid-door-3');
+                        doorFactory(coordinates.backgroundDoorMidArch, 'mid-door-3');
                     }
                 }
 
@@ -159,9 +165,9 @@ angular
                     check = tileService.isDoor(view[3][1]);
                     if (check) {
                         if (check !== 'ns-arch' && check !== 'ew-arch') {
-                            wallFactory(coordinates.backgroundClosedFront, 'mid-2');
+                            wallFactory(coordinates.backgroundDoorFrontPanel, 'mid-2');
                         }
-                        doorFactory(coordinates.backgroundDoorFront, 'mid-door-2');
+                        doorFactory(coordinates.backgroundDoorFrontArch, 'mid-door-2');
                     }
                 }
             };
