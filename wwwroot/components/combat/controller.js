@@ -62,7 +62,7 @@ angular
                     }
 
                     if (result.death) {
-                        message += infoText.deathNote.replace(/PLAYER/, player.character.identity.name);
+                        message += infoText.deathNote;
                     }
                 }
                 return message;

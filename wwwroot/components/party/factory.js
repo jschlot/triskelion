@@ -36,13 +36,13 @@ angular
                                     .replace(/PLAYER/, player.character.identity.name)
                                     .replace(/DAMAGE/, result.amount)
                                     .replace(/AURA/, event.aura);
+                                if (result.death) {
+                                    message += infoText.deathNote;
+                                }
                                 tells.push(message);
+
                             } else {
                                 tells.push(infoText.auraMissed.replace(/PLAYER/, player.character.identity.name));
-                            }
-
-                            if (result.death) {
-                                tells.push(infoText.deathNote.replace(/PLAYER/, player.character.identity.name));
                             }
                         }
                     });

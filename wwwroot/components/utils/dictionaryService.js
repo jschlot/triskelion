@@ -54,7 +54,7 @@ angular
                 whowillleave: 'Who will you remove to the party?',
                 closeminimap: 'R)eturn to Game',
                 campingislovely: 'Your team kicks it\'s collective shoes off, leans back, and smokes the halfling leaf for 2 turns...',
-                deathNote: 'PLAYER has died',
+                deathNote: ' and has died',
                 alldead: 'All players in the party are dead. You must return to camp.',
                 charactersheet: 'Character Sheet: CHARACTER',
                 describeCharacter: 'NAME, lvl LEVEL RACE SPEC',

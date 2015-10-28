@@ -56,7 +56,6 @@ angular
                                 break;
                         }
 
-                        $scope.tells = [];
                         userData.cursor.tile = next;
                         mode = tileService.action({_self: next, party: $scope.partyData, tells: $scope.tells});
                         if (mode !== 'exploration') {
@@ -116,16 +115,12 @@ angular
                         $scope.availableActions = [
                             menuOptions.camp
                         ];
-                        $scope.tells = [
-                            infoText.alldead
-                        ];
+                        $scope.tells.push(infoText.alldead);
                     }
                 }
             };
 
             $scope.saveAndNext = function (value) {
-                $scope.tells = [];
-
                 var returnValue = actionDispatcher(actionsList[value._self], value);
                 if (returnValue !== 'stop mazerunner') {
                     actionsList.updateMazeRunner();
