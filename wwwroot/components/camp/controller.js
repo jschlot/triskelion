@@ -174,6 +174,7 @@ angular
                 name: infoText.camp
             };
 
+            tellsList.length = 0;
             $scope.tells = tellsList;
 
             $scope.partyData = partyDB.members;

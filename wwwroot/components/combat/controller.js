@@ -96,13 +96,14 @@ angular
                 combatant = turnsList[currentTurn];
 
                 if (partyDB.partyHP() === 0) {
-                    alert("Your Party all dead; Time to go back to camp");
-                    return;
+                    userData.gameMode = 'exploration';
+                    $location.path('/gamegrid');
                 }
 
                 if (mobDB.partyHP() === 0) {
                     alert("Enemy party is all dead; Time for the loot screen");
-                    return;
+                    userData.gameMode = 'exploration';
+                    $location.path('/gamegrid');
                 }
 
                 if (combatant.character.npc) {
