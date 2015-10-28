@@ -58,7 +58,7 @@ angular
                             modifier: 1,
                             hit: {
                                 numberOfDice: 1,
-                                diceSides: 20
+                                diceSides: 4
                             },
                             miss: null
                         },

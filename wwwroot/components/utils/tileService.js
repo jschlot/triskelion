@@ -20,11 +20,15 @@ angular
                 switch (event.actionType) {
                     case 'damage':
                         messages = partyDB.aoeDamage(event);
-                        this.spoolMessages(tells, messages);
+                        if (messages.length) {
+                            this.spoolMessages(tells, messages);
+                        }
                         break;
                     case 'heal':
                         messages = partyDB.aoeHeal(event);
-                        this.spoolMessages(tells, messages);
+                        if (messages.length) {
+                            this.spoolMessages(tells, messages);
+                        }
                         break;
                     case 'combat':
                         gameMode = 'combat';
@@ -35,8 +39,9 @@ angular
                     case 'container':
                         gameMode = 'container';
                         break;
-                    default:
+                    case 'message':
                         this.spoolMessages(tells, [event.description]);
+                        break;
                 }
                 return gameMode;
             };
