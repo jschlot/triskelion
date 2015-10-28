@@ -102,14 +102,20 @@ angular
 
                 if (partyDB.partyHP() === 0) {
                     alert("Party all dead; Time to go back to camp");
+                    return;
                 }
 
                 if (mobDB.partyHP() === 0) {
                     alert("Mobs all dead; Time for the loot screen");
+                    return;
                 }
 
                 if (combatant.character.npc) {
-                    if (combatant.character.stats.health !== 0) {
+                    $scope.subcontext = 'mobs';
+                    if (combatant.character.stats.health === 0) {
+                        updateTurns();
+                        return;
+                    } else {
                         var randomPlayer = partyDB.members[Math.floor(Math.random()  *partyDB.members.length)];
                         $scope.tells = attack(randomPlayer, combatant.character.abilities[0]);
                      }
@@ -124,6 +130,7 @@ angular
                         who: combatant.character.identity.name
                     };
                 } else {
+                    $scope.subcontext = 'players';
                     $scope.tells = [infoText.playerTurn.replace(/PLAYER/, combatant.character.identity.name)];
 
                     $scope.availableActions = [
@@ -164,7 +171,7 @@ angular
                             $scope.availableActions.push(ability);
                         });
 
-                        $scope.context = 'confirmPartyTarget';
+                        $scope.context = 'confirmSpellTarget';
                     },
                     use: function (actionSelected) {
                         $scope.tells = [infoText.chooseItem];
@@ -208,34 +215,21 @@ angular
                             $scope.context = null;
                         }
                     },
-                    confirmPartyTarget: function (actionSelected) {
-                        $scope.tells = [infoText.chooseTargetGroup];
-
-                        $scope.availableActions = [
-                            combatScreenMenuOptions.party,
-                            combatScreenMenuOptions.mobs
-                        ];
-
-                        $scope.context = "confirmSpellTarget";
-                        $scope.abilitySelected = actionSelected;
-                    },
                     confirmSpellTarget: function (actionSelected) {
                         $scope.tells = [infoText.chooseTargetPlayer];
 
                         $scope.availableActions = [
                             combatScreenMenuOptions.choosetarget
                         ];
-
+                        $scope.abilitySelected = actionSelected;
                         $scope.context = "confirmSpell";
                     },
                     confirmSpell: function (value) {
                         if ($scope.subcontext === 'mobs') {
                             $scope.tells = attack(mobDB.members[value-1], $scope.abilitySelected);
                         } else {
-
-                            // check to see what the spell type is
                             if ($scope.abilitySelected.actionType === 'damage') {
-                                $scope.tells = attack(partyDB.members[value-1], $scope.abilitySelected);
+                                $scope.tells = attack(mobDB.members[value-1], $scope.abilitySelected);
                             } else {
                                 $scope.tells = heal(partyDB.members[value-1], $scope.abilitySelected);
                             }
@@ -262,7 +256,6 @@ angular
                 if (angular.isNumber(value) && $scope.context) {
                     actionsList[$scope.context](value);
                 } else if (actionsList[$scope.context]) {
-                    $scope.subcontext = value._self;
                     actionsList[$scope.context](value);
                 } else {
                     actionDispatcher(actionsList[value._self], value);
