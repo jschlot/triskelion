@@ -150,7 +150,7 @@ angular
 
             var playerDB = {};
             playerDB.dungeon = [
-                new Priest('Devonellah')
+                new Priest('Devonellah'), new Priest('Imhotep')
             ];
 
             return playerDB;

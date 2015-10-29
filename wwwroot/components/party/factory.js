@@ -16,6 +16,7 @@ angular
 
                 this.partyHP = function() {
                     var partyHP = 0;
+
                     angular.forEach(this.members, function(player) {
                         if (player.character.status === 'alive') {
                             partyHP += player.character.stats.health;
