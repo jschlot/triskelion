@@ -130,7 +130,7 @@ angular
 
             $scope.tells = tellsList.log;
             $scope.partyData = partyDB.members;
-            $scope.auras = aurasList; // is this right? maybe we don't want to always reset auras???
+            $scope.auras = aurasList.log;
 
             $scope.availableActions = [
                 menuOptions.forward,

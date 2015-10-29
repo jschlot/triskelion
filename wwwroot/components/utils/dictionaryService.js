@@ -60,6 +60,7 @@ angular
                 describeCharacter: 'NAME, lvl LEVEL RACE SPEC',
                 xpEarned: 'Your party is granted POINTS experience.',
                 playerDinged: 'PLAYER has advanced to level LEVEL',
+                gavesaved: 'Game saved',
                 keys: {
                     name: 'Name: VALUE',
                     spec: 'Spec: VALUE',

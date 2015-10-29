@@ -6,9 +6,19 @@ angular
             'use strict';
             var startScreenMenuOptions = {
                 newgame: {
-                    name: 'Create new Game',
-                    hotkey: 'C',
+                    name: 'New Game',
+                    hotkey: 'N',
                     _self: 'newgame'
+                },
+                continuegame: {
+                    name: 'Continue Game',
+                    hotkey: 'C',
+                    _self: 'continuegame'
+                },
+                savegame: {
+                    name: 'Save Game',
+                    hotkey: 'S',
+                    _self: 'savegame'
                 }
             };
 

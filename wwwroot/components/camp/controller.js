@@ -60,7 +60,7 @@ angular
                 },
                 'quit': function () {
                     // force a reload to completely reload state
-                    $window.location.reload();
+                    $location.path('/startscreen');
                     return;
                 },
                 'mainActions': function () {

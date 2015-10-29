@@ -142,7 +142,8 @@ angular
         function () {
             'use strict';
 
-            var aurasList = [];
+            var aurasList = {};
+            aurasList.log = [];
             return aurasList;
         }
     ])
