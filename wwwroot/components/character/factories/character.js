@@ -55,15 +55,15 @@ angular
                 this.character.experience.level = 1;
                 this.character.experience.points = 0;
                 this.character.experience.bonus = 1;
-                this.character.experience.add = function (xp) {
-                    var currentLevel = this.level,
-                        earned = xp + (xp * this.bonus);
+                this.character.addXP = function (xp) {
+                    var currentLevel = this.experience.level,
+                        earned = xp + (xp * this.experience.bonus);
 
-                    this.points = this.points + earned;
-                    this.level = Math.floor((1 + Math.sqrt(1 + this.points/125))/2, 1);
+                    this.experience.points = this.experience.points + earned;
+                    this.experience.level = Math.floor( ( 1 + Math.sqrt( 1 + this.experience.points/125 ) ) / 2 );
 
-                    if (this.level > currentLevel) {
-                        this.character.levelUp();
+                    if (this.experience.level > currentLevel) {
+                        this.levelUp();
                     }
                     return { amount: earned };
                 };
@@ -160,7 +160,7 @@ angular
                 this.character.tags = [];
 
                 this.character.levelUp = function () {
-                    this.character.updateHealth();
+                    this.updateHealth();
                     return 'ding';
                 };
             };

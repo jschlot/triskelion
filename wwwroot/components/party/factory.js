@@ -25,6 +25,17 @@ angular
                     return partyHP;
                 };
 
+                this.partyXPGiven = function() {
+                    var earnedXP = 0;
+
+                    angular.forEach(this.members, function(player) {
+                        earnedXP += 125 * ( Math.pow( ( 2 * player.character.experience.level - 1 ), 2 ) - 1 );
+                    });
+
+                    return earnedXP;
+
+                };
+
                 this.aoeDamage = function (event) {
                     var tells = [];
                     tells.push(event.description);

@@ -104,6 +104,13 @@ angular
 
                 if (mobDB.partyHP() === 0) {
                     console.log("Enemy party is all dead; Time for the loot screen!!");
+
+                    // find out what the XP levels were per each monster
+                    // calculate XP (and gold?) based on the level
+                    // grant XP evenly to all characters (even dead ones??)
+                    // give Party object gold?
+                    console.log(mobDB.partyXPGiven());
+
                     userData.gameMode = 'exploration';
                     $location.path('/gamegrid');
                     return;
