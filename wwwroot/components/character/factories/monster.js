@@ -7,7 +7,7 @@ angular
             this.spawn = function(player) {
 
                 var monster = {
-                    fiend: function(player) { return new Fiend(player.name, player.level); }
+                    fiend: function(player) { return new Fiend(player.spec, player.level); }
                 };
 
                 return actionDispatcher(monster[player.spec], player);
@@ -27,18 +27,15 @@ angular
 
                  this.character.hpDice = 4;
                  this.character.nrgDice = 6;
-                 this.character.updateHealth();
-
-                 var earnedXP = Math.max(125 * ( Math.pow(2*level-1,2) - 1), 200);
-                 this.character.addXP(earnedXP);
-
 
                  this.character.abilities.push(ability.fight);
-
                  this.character.inventory = {
                      armor: armor.leather,
                      weapon: weapon.staff
                  };
+
+                 this.character.updateHealth();
+                 this.character.boostExperience(level);
              };
          }
      ]);

@@ -83,7 +83,8 @@ angular
                             description: 'You stumble upon a pair of Elvish Fiends!',
                             actionType:  'combat',
                             mobMembers: [
-                                { spec: 'fiend', level: 1 }
+                                { spec: 'fiend', level: 1 },
+                                { spec: 'fiend', level: 2 }
                             ]
                         }
                     ]

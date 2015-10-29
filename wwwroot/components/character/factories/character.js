@@ -68,6 +68,16 @@ angular
                     return { amount: earned };
                 };
 
+                this.character.fetchXP = function(levelSet) {
+                    var level = (levelSet) ? levelSet : this.experience.level;
+                    return Math.max(125 * ( Math.pow(2* level-1,2) - 1), 200);
+                };
+
+                this.character.boostExperience = function(level) {
+                    var earnedXP = this.fetchXP(level);
+                    this.addXP(earnedXP);
+                };
+
                 this.character.stats = {};
                 this.character.stats.health = 1;
                 this.character.stats.maxhealth = 1;
