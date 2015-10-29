@@ -128,7 +128,7 @@ angular
                 }
             };
 
-            $scope.tells = tellsList;
+            $scope.tells = tellsList.log;
             $scope.partyData = partyDB.members;
             $scope.auras = aurasList; // is this right? maybe we don't want to always reset auras???
 

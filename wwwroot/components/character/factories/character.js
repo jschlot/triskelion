@@ -57,14 +57,16 @@ angular
                 this.character.experience.bonus = 0;
                 this.character.addXP = function (xp) {
                     var currentLevel = this.experience.level,
-                        earned = xp + (xp * this.experience.bonus);
+                        earned = xp + (xp * this.experience.bonus),
+                        isDing;
 
                     this.experience.points = this.experience.points + earned;
                     this.experience.level = Math.floor( ( 1 + Math.sqrt( 1 + this.experience.points/125 ) ) / 2 );
 
                     if (this.experience.level > currentLevel) {
-                        this.levelUp();
+                        isDing = this.levelUp();
                     }
+                    return isDing;
                 };
 
                 this.character.fetchXP = function(levelSet) {

@@ -133,7 +133,8 @@ angular
         function () {
             'use strict';
 
-            var tellsList = [];
+            var tellsList = {};
+            tellsList.log = [];
             return tellsList;
         }
     ])

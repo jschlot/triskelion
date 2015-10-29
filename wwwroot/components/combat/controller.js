@@ -3,9 +3,9 @@ angular
     .module('triskelion.combatScreen.controller',['triskelion.combatScreen.service', 'triskelion.character.service'])
     .controller('combatScreenController', [
         '$scope', '$location', 'accessControl', 'userData', 'partyDB', 'mobDB', 'infoText', 'hotkeyAction',
-        'combatScreenMenuOptions', 'tellsList', 'diceService', 'actionDispatcher', 'ability',
+        'combatScreenMenuOptions', 'tellsList', 'aurasList', 'diceService', 'actionDispatcher', 'ability',
         function ($scope, $location, accessControl, userData, partyDB, mobDB, infoText, hotkeyAction,
-            combatScreenMenuOptions, tellsList, diceService, actionDispatcher, ability) {
+            combatScreenMenuOptions, tellsList, aurasList, diceService, actionDispatcher, ability) {
 
             'use strict';
 
@@ -27,8 +27,8 @@ angular
             mobInitiative = diceService.roll(1,20);
             playerInitiative = diceService.roll(1,20);
 
-            $scope.tells = tellsList;
-            $scope.tells = [tileAction.description];
+            $scope.tells = tellsList.log;
+            $scope.tells.push(tileAction.description);
 
             if(mobInitiative > playerInitiative) {
                 $scope.tells.push(infoText.initiativeRolled.replace(/TEAM/, 'Mobs'));
@@ -103,10 +103,25 @@ angular
                 }
 
                 if (mobDB.partyHP() === 0) {
-                    var earned = mobDB.partyXPGiven() / partyDB.members.length;
-                    console.log(earned);
+                    var given, earned;
+
+                    given = mobDB.partyXPGiven();
+                    earned = given / partyDB.members.length;
+
+                    $scope.tells.length = 0;
+
+                    $scope.tells.push(infoText.xpEarned.replace(/POINTS/, given));
+
                     partyDB.members.map(function(obj) {
-                       obj.character.addXP(earned);
+                       var isDing = obj.character.addXP(earned);
+
+                       if (isDing) {
+                           $scope.tells.push(
+                               infoText.playerDinged
+                                .replace(/PLAYER/, obj.character.identity.name)
+                                .replace(/LEVEL/, obj.character.experience.level)
+                            );
+                       }
                     });
 
                     userData.gameMode = 'exploration';

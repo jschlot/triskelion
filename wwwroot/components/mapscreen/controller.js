@@ -57,6 +57,6 @@ angular
                 menuOptions.teleport
             ];
 
-            $scope.tells = tellsList;
+            $scope.tells = tellsList.log;
         }
     ]);

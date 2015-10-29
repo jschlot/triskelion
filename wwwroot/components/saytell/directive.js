@@ -20,6 +20,11 @@ angular
           }
 
           function controller($scope) {
+
+              if ($scope.tells) {
+                  $scope.buffer = $scope.tells.length > 3 ? $scope.tells.slice(-4) : $scope.tells;
+              }
+
               $scope.say = function (event) {
                   var lookup, hotkey, keynum;
 

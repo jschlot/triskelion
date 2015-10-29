@@ -37,6 +37,6 @@ angular
                 characterSheetMenuOptions.backtoselect
             ];
 
-            $scope.tells = tellsList;
+            $scope.tells = tellsList.log;
         }
     ]);

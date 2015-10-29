@@ -58,6 +58,8 @@ angular
                 alldead: 'All players in the party are dead. You must return to camp.',
                 charactersheet: 'Character Sheet: CHARACTER',
                 describeCharacter: 'NAME, lvl LEVEL RACE SPEC',
+                xpEarned: 'Your party is granted POINTS experience.',
+                playerDinged: 'PLAYER has advanced to level LEVEL',
                 keys: {
                     name: 'Name: VALUE',
                     spec: 'Spec: VALUE',
