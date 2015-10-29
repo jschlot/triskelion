@@ -1,6 +1,20 @@
 /* global angular */
 angular
-    .module('triskelion.character.elf.factory', ['triskelion.character.factory', 'triskelion.character.service'])
+    .module('triskelion.character.hero.factory', ['triskelion.character.factory', 'triskelion.character.service'])
+    .service('heroMaker', ['actionDispatcher', 'Priest',
+        function (actionDispatcher, Priest) {
+            'use strict';
+
+            this.spawn = function(player) {
+
+                var hero = {
+                    priest: function(player) { return new Priest(player.name); }
+                };
+
+                return actionDispatcher(hero[player.spec], player);
+            };
+        }
+    ])
     .factory('Priest', ['Healer', 'diceService', 'ability', 'race', 'spec', 'armor', 'weapon',
          function (Healer, diceService, ability, race, spec, armor, weapon) {
              'use strict';

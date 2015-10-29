@@ -1,17 +1,19 @@
 /* global angular */
 angular
-    .module('triskelion.startScreen.controller',['triskelion.startscreen.service'])
+    .module('triskelion.startScreen.controller',['triskelion.startscreen.service','triskelion.character.hero.factory'])
     .controller('startScreenController', [
         '$scope', '$location', 'gameModules', 'infoText', 'userData', 'tellsList', 'actionDispatcher',
-        'startScreenMenuOptions', 'objectFindByKey', 'aurasList', 'partyDB',
+        'startScreenMenuOptions', 'objectFindByKey', 'aurasList', 'partyDB', 'heroMaker',
         function ($scope, $location, gameModules, infoText, userData, tellsList, actionDispatcher,
-        startScreenMenuOptions, objectFindByKey, aurasList, partyDB) {
+        startScreenMenuOptions, objectFindByKey, aurasList, partyDB, heroMaker) {
 
             'use strict';
 
             var actionsList = {
                 newgame: function (actionSelected) {
                     $scope.tells.push(infoText.choosemodule);
+
+                    localStorage.clear();
 
                     // a new game should reset userData, partyDB, aurasList
                     aurasList.log.length = 0;
@@ -38,17 +40,25 @@ angular
                     var loadedPartyDB = JSON.parse(localStorage.getItem('partyDB'));
                     var loadedAurasList = JSON.parse(localStorage.getItem('aurasList'));
 
-                    userData.gameModuleSelected = loadedUserData.gameModuleSelected;
-                    userData.gameMode = 'downtime';
-                    userData.cursor.level = loadedUserData.cursor.level;
-                    userData.cursor.direction = loadedUserData.cursor.direction;
-                    userData.cursor.coordinates = loadedUserData.cursor.coordinates;
+                    if (loadedUserData && loadedPartyDB && loadedAurasList) {
+                        userData.gameModuleSelected = loadedUserData.gameModuleSelected;
+                        userData.gameMode = 'downtime';
+                        userData.cursor.level = loadedUserData.cursor.level;
+                        userData.cursor.direction = loadedUserData.cursor.direction;
+                        userData.cursor.coordinates = loadedUserData.cursor.coordinates;
+                        aurasList.log = loadedAurasList.log;
 
-                    partyDB.members = loadedPartyDB.members;
-                    aurasList.log = loadedAurasList.log;
+                        // for each loadedPartyDB.members
+                        angular.forEach(loadedPartyDB.members, function(savedPlayer) {
+                            var loadedPlayer;
+                            loadedPlayer = heroMaker.spawn({name: savedPlayer.character.identity.name, spec: savedPlayer.character.identity.spec});
+                            // must figure out how to load in stats
+                            partyDB.members.push(loadedPlayer);
+                        });
 
-                    userData.gameMode = 'downtime';
-                    $location.path('/camp');
+
+                        $location.path('/camp');
+                    }
                 },
                 createNewGame: function (actionSelected) {
                     $scope.tells.push(infoText.actionchoice.replace(/STRING/, actionSelected.name));

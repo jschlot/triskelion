@@ -1,6 +1,6 @@
 /* global angular */
 angular
-    .module('triskelion.utils.globalData.service', ['triskelion.party.factory', 'triskelion.character.elf.factory', 'triskelion.monster.factory'])
+    .module('triskelion.utils.globalData.service', ['triskelion.party.factory', 'triskelion.character.hero.factory', 'triskelion.monster.factory'])
     .service('gameModules', [
         function () {
             'use strict';
@@ -147,14 +147,14 @@ angular
             return aurasList;
         }
     ])
-    .service('playerDB',['Priest', 'Ranger', 'Wizard', 'Scout',
-        function (Priest, Ranger, Wizard, Scout) {
+    .service('playerDB',['heroMaker',
+        function (heroMaker) {
             'use strict';
 
             var playerDB = {};
-            playerDB.dungeon = [
-                new Priest('Devonellah'), new Priest('Imhotep')
-            ];
+            playerDB.dungeon = [];
+            playerDB.dungeon.push(heroMaker.spawn({name: 'Devonellah', spec: 'priest'}));
+            playerDB.dungeon.push(heroMaker.spawn({name: 'Frank', spec: 'priest'}));
 
             return playerDB;
         }]
