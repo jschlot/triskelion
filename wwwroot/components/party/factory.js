@@ -29,7 +29,7 @@ angular
                     var earnedXP = 0;
 
                     angular.forEach(this.members, function(player) {
-                        earnedXP += 125 * ( Math.pow( ( 2 * player.character.experience.level - 1 ), 2 ) - 1 );
+                        earnedXP += player.character.fetchXP();
                     });
 
                     return earnedXP;

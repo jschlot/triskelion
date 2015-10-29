@@ -19,24 +19,15 @@ angular
             var currentLevel = userData.cursor.level,
                 currentLevelMap = userData.gameModuleSelected.map[currentLevel],
                 coordinates = userData.cursor.coordinates,
-                startingActionTells,
                 menuOptions = mapScreenMenuOptions;
 
             levelMap.setDimensions(userData.gameModuleSelected.mapRows, userData.gameModuleSelected.mapCols);
             levelMap.init(currentLevelMap.layout);
             miniMap(levelMap.getMap());
 
-            startingActionTells = function () {
-                $scope.tells = [];
-                for (var i = 0; i < $scope.availableActions.length; i++) {
-                    $scope.tells.push(hotkeyAction($scope.availableActions[i]));
-                }
-            };
-
             $scope.saveAndNext = function (value) {
                 var actionsList = {
                     returntogame: function (actionSelected) {
-                        $scope.tells = [];
                         $location.path('/gamegrid');
                     },
                     teleport: function (actionSelected) {
@@ -67,6 +58,5 @@ angular
             ];
 
             $scope.tells = tellsList;
-            startingActionTells();
         }
     ]);

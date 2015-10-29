@@ -5,9 +5,9 @@ angular
     ])
     .controller('characterSheetController', [
         '$scope', '$location', '$routeParams', 'infoText', 'partyDB', 'userData', 'hotkeyAction',
-        'characterSheetMenuOptions', 'actionDispatcher', 'accessControl',
+        'characterSheetMenuOptions', 'actionDispatcher', 'accessControl', 'tellsList',
         function ($scope, $location, $routeParams, infoText, partyDB, userData, hotkeyAction,
-            characterSheetMenuOptions, actionDispatcher, accessControl) {
+            characterSheetMenuOptions, actionDispatcher, accessControl, tellsList) {
             'use strict';
 
             var check = accessControl.check('downtime')();
@@ -20,7 +20,6 @@ angular
             $scope.saveAndNext = function (value) {
                 var actionsList = {
                     backtoselect: function (actionSelected) {
-                        $scope.tells = [];
                         $location.path('/camp');
                     }
                 };
@@ -38,9 +37,6 @@ angular
                 characterSheetMenuOptions.backtoselect
             ];
 
-            $scope.tells = [];
-            for (var i = 0; i < $scope.availableActions.length; i++) {
-                $scope.tells.push(hotkeyAction($scope.availableActions[i]));
-            }
+            $scope.tells = tellsList;
         }
     ]);
