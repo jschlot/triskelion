@@ -60,7 +60,7 @@ angular
                         earned = xp + (xp * this.bonus);
 
                     this.points = this.points + earned;
-                    this.level = Math.floor((1 + Math.sqrt(1 + this.points /125))/2, 1);
+                    this.level = Math.floor((1 + Math.sqrt(1 + this.points/125))/2, 1);
 
                     if (this.level > currentLevel) {
                         this.character.levelUp();
