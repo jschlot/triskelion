@@ -87,9 +87,7 @@ angular
             };
 
             $scope.availableActions = [
-                startScreenMenuOptions.newgame,
-                startScreenMenuOptions.continuegame,
-                startScreenMenuOptions.savegame
+                startScreenMenuOptions.newgame
             ];
 
             $scope.tells = tellsList.log;
