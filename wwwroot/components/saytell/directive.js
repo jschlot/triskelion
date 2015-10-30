@@ -33,6 +33,11 @@ angular
                   keynum = event.which || event.keyCode;
                   hotkey = String.fromCharCode(keynum);
 
+                  if (keynum > 36 && keynum < 40) {
+                      var dict = { "37": "L", "38": "F", "39": "R", };
+                      hotkey = dict[keynum];
+                  }
+
                   if (hotkey) {
                       lookup = objectFindByKey($scope.actions, 'hotkey', hotkey);
                   }

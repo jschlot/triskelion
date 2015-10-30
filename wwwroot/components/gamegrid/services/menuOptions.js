@@ -6,18 +6,18 @@ angular
             'use strict';
             var menuOptions = {
                 forward: {
-                    name: 'WForward',
-                    hotkey: 'W',
+                    name: 'Forward',
+                    hotkey: 'F',
                     _self: 'forward'
                 },
                 goleft: {
-                    name: 'ALeft',
-                    hotkey: 'A',
+                    name: 'Left',
+                    hotkey: 'L',
                     _self: 'left'
                 },
                 goright: {
-                    name: 'DRight',
-                    hotkey: 'D',
+                    name: 'Right',
+                    hotkey: 'R',
                     _self: 'right'
                 },
                 camp: {

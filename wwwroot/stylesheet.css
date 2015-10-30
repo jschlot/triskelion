@@ -6,7 +6,7 @@ body {
 
 section {
     width: 80%;
-    min-width: 960px;
+    width: 960px;
     margin: 2em auto;
 }
 
@@ -48,6 +48,10 @@ ul {
 
 label {
     padding-left: 0.5em;
+}
+
+pre {
+    font-size: 75%;
 }
 
 .outline {
