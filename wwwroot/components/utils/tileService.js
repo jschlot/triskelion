@@ -9,7 +9,10 @@ angular
                 var actionsList = [],
                     lookup, event, messages = [], tells = value.tells, gameMode = 'exploration';
 
-                if (value._self < 32) {
+                // the exit
+                if (value._self === 255) {
+                    return 'startscreen';
+                } else if (value._self < 32) {
                     return gameMode;
                 }
 

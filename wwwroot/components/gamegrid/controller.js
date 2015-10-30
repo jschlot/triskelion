@@ -18,7 +18,7 @@ angular
                 if (userData.gameMode === 'combat') {
                     $location.path('/combat');
                 } else {
-                    $location.path('/startscreen');
+                    $location.path('/camp');
                 }
                 return;
             }

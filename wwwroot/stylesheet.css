@@ -5,8 +5,7 @@ body {
 }
 
 section {
-    width: 80%;
-    width: 960px;
+    width: 1080px;
     margin: 2em auto;
 }
 
@@ -52,6 +51,11 @@ label {
 
 pre {
     font-size: 75%;
+}
+
+b {
+    background-color: white;
+    color: black;
 }
 
 .outline {
