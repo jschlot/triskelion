@@ -35,6 +35,7 @@ angular
                 chooseItem: "Choose an item to use?",
                 chosenThing: "PLAYER uses THING and EFFECT.",
                 startscreen: 'Welcome to Triskelion.',
+                recapscreen: 'Level Complete',
                 choosemodule: 'To begin, choose an adventure',
                 mapscreen: 'Map',
                 combatscreen: 'Combat',

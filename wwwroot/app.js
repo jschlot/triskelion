@@ -8,6 +8,7 @@ angular
         'triskelion.mapScreen.controller',
         'triskelion.characterSheet.controller',
         'triskelion.combatScreen.controller',
+        'triskelion.recapScreen.controller',
 
         'triskelion.actionsList.directive',
         'triskelion.saytell.directive',
@@ -41,6 +42,10 @@ angular
                 .when('/camp', {
                     templateUrl: 'components/camp/layout.html',
                     controller: 'campController'
+                })
+                .when('/recap', {
+                    templateUrl: 'components/recap/layout.html',
+                    controller: 'recapScreenController'
                 })
                 .when('/charactersheet/:characterkey', {
                     templateUrl: 'components/charactersheet/layout.html',

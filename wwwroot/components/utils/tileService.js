@@ -11,7 +11,7 @@ angular
 
                 // the exit
                 if (value._self === 255) {
-                    return 'startscreen';
+                    return 'recap';
                 } else if (value._self < 32) {
                     return gameMode;
                 }
