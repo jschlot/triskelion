@@ -95,7 +95,8 @@ angular
             };
 
             this.set = {
-                'NOTHING': 0x00
+                'NOTHING': 0x00,
+                'FLOOR': 0x18
             };
         }
     ]);

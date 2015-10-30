@@ -3,9 +3,9 @@ angular
     .module('triskelion.combatScreen.controller',['triskelion.combatScreen.service', 'triskelion.character.service'])
     .controller('combatScreenController', [
         '$scope', '$location', 'accessControl', 'userData', 'partyDB', 'mobDB', 'infoText', 'hotkeyAction',
-        'combatScreenMenuOptions', 'tellsList', 'aurasList', 'diceService', 'actionDispatcher', 'ability',
+        'combatScreenMenuOptions', 'tellsList', 'aurasList', 'diceService', 'actionDispatcher', 'ability', 'tileService',
         function ($scope, $location, accessControl, userData, partyDB, mobDB, infoText, hotkeyAction,
-            combatScreenMenuOptions, tellsList, aurasList, diceService, actionDispatcher, ability) {
+            combatScreenMenuOptions, tellsList, aurasList, diceService, actionDispatcher, ability, tileService) {
 
             'use strict';
 
@@ -123,6 +123,16 @@ angular
                             );
                        }
                     });
+
+
+                    var currentLevel = userData.cursor.level,
+                        currentLevelMap = userData.gameModuleSelected.map[currentLevel],
+                        coordinates = userData.cursor.coordinates;
+
+                    console.log(coordinates);
+                    console.log(currentLevelMap.layout[ coordinates[1] ][ coordinates[0] ]);
+                    currentLevelMap.layout[ coordinates[1] ][ coordinates[0] ] = tileService.set.FLOOR;
+                    console.log(currentLevelMap.layout);
 
                     userData.gameMode = 'exploration';
                     $location.path('/gamegrid');
