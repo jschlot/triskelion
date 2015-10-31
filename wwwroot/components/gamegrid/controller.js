@@ -90,8 +90,8 @@ angular
                     userData.gameMode = 'downtime';
                     $location.path('/camp');
                 },
-                'look': function () {
-                    //// describe gets any metadata abount the current cell
+                'zoom': function () {
+                    $location.path('/zoomscreen');
                 },
                 'map': function () {
                     $location.path('/mapscreen');
@@ -137,7 +137,7 @@ angular
                 menuOptions.goleft,
                 menuOptions.goright,
                 menuOptions.camp,
-                menuOptions.look,
+                menuOptions.zoom,
                 menuOptions.map
             ];
 

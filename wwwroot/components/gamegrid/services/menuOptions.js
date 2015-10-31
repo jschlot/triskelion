@@ -25,10 +25,10 @@ angular
                     hotkey: 'C',
                     _self: 'camp'
                 },
-                look: {
-                    name: 'Look',
-                    hotkey: 'L',
-                    _self: 'look'
+                zoom: {
+                    name: 'Zoom',
+                    hotkey: 'Z',
+                    _self: 'zoom'
                 },
                 map: {
                     name: 'Map',

@@ -9,6 +9,7 @@ angular
         'triskelion.characterSheet.controller',
         'triskelion.combatScreen.controller',
         'triskelion.recapScreen.controller',
+        'triskelion.zoomScreen.controller',
 
         'triskelion.actionsList.directive',
         'triskelion.saytell.directive',
@@ -62,6 +63,10 @@ angular
                 .when('/combat', {
                     templateUrl: 'components/combat/layout.html',
                     controller: 'combatScreenController'
+                })
+                .when('/zoomscreen', {
+                    templateUrl: 'components/zoomscreen/layout.html',
+                    controller: 'zoomScreenController'
                 })
                 .otherwise({
                     redirectTo: '/startscreen'
