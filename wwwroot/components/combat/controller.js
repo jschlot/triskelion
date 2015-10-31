@@ -166,7 +166,6 @@ angular
                     $scope.availableActions = [
                         combatScreenMenuOptions.fight,
                         combatScreenMenuOptions.spell,
-                        combatScreenMenuOptions.use,
                         combatScreenMenuOptions.run,
                         combatScreenMenuOptions.next
                     ];
@@ -202,13 +201,6 @@ angular
                         });
 
                         $scope.context = 'confirmSpellTarget';
-                    },
-                    use: function (actionSelected) {
-                        $scope.tells.push(infoText.chooseItem);
-                        $scope.availableActions = [
-                            combatScreenMenuOptions.choosetarget
-                        ];
-                        $scope.context = 'confirmUse';
                     },
                     run: function (actionSelected) {
                         $scope.tells.push(infoText.playerRuns);
@@ -248,16 +240,6 @@ angular
                                 $scope.tells.push(heal(partyDB.members[value-1], $scope.abilitySelected));
                             }
                         }
-
-                        $scope.availableActions = [
-                            combatScreenMenuOptions.next
-                        ];
-
-                        $scope.context = null;
-                    },
-                    confirmUse: function (index) {
-                        // TO-DO: this is spoofed
-                        $scope.tells.push(infoText.chosenThing);
 
                         $scope.availableActions = [
                             combatScreenMenuOptions.next

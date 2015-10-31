@@ -159,7 +159,6 @@ angular
                 } else if (angular.isNumber(value)) {
                     actionsList.viewplayer(value);
                 } else {
-                    //// TO-DO: currentPick being used like this feels bad (it's a global)
                     currentPick = {};
                     angular.copy(value, currentPick);
 
