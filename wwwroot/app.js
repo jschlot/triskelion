@@ -64,10 +64,6 @@ angular
                     templateUrl: 'components/combat/layout.html',
                     controller: 'combatScreenController'
                 })
-                .when('/zoomscreen', {
-                    templateUrl: 'components/zoomscreen/layout.html',
-                    controller: 'zoomScreenController'
-                })
                 .otherwise({
                     redirectTo: '/startscreen'
                 });

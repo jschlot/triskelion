@@ -15,7 +15,7 @@ angular
 
                 vis.selectAll('*').remove();
 
-                wallFactory = function (data, className, cellValue) {
+                wallFactory = function (data, className) {
                     vis.selectAll('polygon.' + className)
                         .data([data])
                         .enter().append('polygon')
@@ -27,7 +27,7 @@ angular
                         });
                 };
 
-                doorFactory = function (data, className, cellValue) {
+                doorFactory = function (data, className) {
                     vis.selectAll('polygon.' + className)
                         .data([data])
                         .enter().append('polygon')
@@ -46,7 +46,6 @@ angular
                     leftMidThru: [{'x': 0, 'y': 60}, {'x': 0,'y': 240}, {'x': 120,'y': 240}, {'x': 120,'y': 60}],
                     leftBack: [{'x': 120, 'y': 60}, {'x': 120,'y': 240}, {'x': 180,'y': 210}, {'x': 180,'y': 90}],
                     leftBackThru: [{'x': 60, 'y': 90}, {'x': 60,'y': 210}, {'x': 180,'y': 210}, {'x': 180,'y': 90}],
-
                     rightFront: [{'x': 440, 'y': 30}, {'x': 440,'y': 270}, {'x': 500,'y': 300}, {'x': 500,'y': 0}],
                     rightFrontThru: [{'x': 440, 'y': 30}, {'x': 440,'y': 270}, {'x': 500,'y': 270}, {'x': 500,'y': 30}],
                     rightMid: [{'x': 380, 'y': 60}, {'x': 380,'y': 240}, {'x': 440,'y': 270}, {'x': 440,'y': 30}],
@@ -57,16 +56,17 @@ angular
                     backgroundClosedBack: [{'x': 180, 'y': 90}, {'x': 180,'y': 210}, {'x': 320,'y': 210}, {'x': 320,'y': 90}],
                     backgroundClosedMid: [{'x': 120, 'y': 60}, {'x': 120,'y': 240}, {'x': 380,'y': 240}, {'x': 380,'y': 60}],
                     backgroundClosedFront: [{'x': 60, 'y': 30}, {'x': 60,'y': 270}, {'x': 440,'y': 270}, {'x': 440,'y': 30}],
-
                     backgroundDoorFrontPanel: [{'x': 165, 'y': 75},{'x': 165, 'y': 255},{'x': 335, 'y': 255},{'x': 335, 'y': 75}],
                     backgroundDoorFrontArch: [{'x': 90, 'y': 45}, {'x': 90,'y': 255}, {'x': 165,'y': 255}, {'x': 165,'y': 75}, {'x': 335,'y': 75}, {'x': 335,'y': 255}, {'x': 410,'y': 255}, {'x': 410,'y': 45}],
 
-                    backgroundLeftEnd: [{'x': 180, 'y': 90}, {'x': 180,'y': 210}, {'x': 220,'y': 190}, {'x': 220,'y': 110}],
-                    backgroundLeftThru: [{'x': 100, 'y': 110}, {'x': 100,'y': 190}, {'x': 200,'y': 190}, {'x': 200,'y': 110}],
-                    backgroundMidThru: [{'x': 200, 'y': 110}, {'x': 200,'y': 190}, {'x': 300,'y': 190}, {'x': 300,'y': 110}],
 
+                    backgroundLeftThru: [{'x': 100, 'y': 110}, {'x': 100,'y': 190}, {'x': 200,'y': 190}, {'x': 200,'y': 110}],
                     backgroundRightThru: [{'x': 300, 'y': 110}, {'x': 300,'y': 190}, {'x': 400,'y': 190}, {'x': 400,'y': 110}],
+
+                    backgroundLeftEnd: [{'x': 180, 'y': 90}, {'x': 180,'y': 210}, {'x': 220,'y': 190}, {'x': 220,'y': 110}],
                     backgroundRightEnd: [{'x': 280, 'y': 110}, {'x': 280,'y': 190}, {'x': 320,'y': 210}, {'x': 320,'y': 90}],
+
+                    backgroundMidThru: [{'x': 200, 'y': 110}, {'x': 200,'y': 190}, {'x': 300,'y': 190}, {'x': 300,'y': 110}],
 
                     backgroundDoorBackPanel: [{'x': 220, 'y': 120},{'x': 220, 'y': 200},{'x': 280, 'y': 200},{'x': 280, 'y': 120}],
                     backgroundDoorBackArch: [{'x': 200, 'y': 100}, {'x': 200,'y': 200}, {'x': 220,'y': 200}, {'x': 220,'y': 120}, {'x': 280,'y': 120}, {'x': 280,'y': 200}, {'x': 300,'y': 200}, {'x': 300,'y': 100}],
@@ -134,6 +134,8 @@ angular
 
                 if (view[1]) {
                     if (tileService.isBlock(view[1][1])) {
+                        wallFactory(coordinates.backgroundLeftEnd, 'left-4b');
+                        wallFactory(coordinates.backgroundRightEnd, 'right-4b');
                         wallFactory(coordinates.backgroundClosedBack, 'mid-4');
                     }
                     check = tileService.isDoor(view[1][1]);
@@ -147,6 +149,8 @@ angular
 
                 if (view[2]) {
                     if (tileService.isBlock(view[2][1])) {
+                        wallFactory(coordinates.leftBack, 'left-3b');
+                        wallFactory(coordinates.rightBack, 'right-3b');
                         wallFactory(coordinates.backgroundClosedMid, 'mid-3');
                     }
                     check = tileService.isDoor(view[2][1]);
@@ -160,6 +164,8 @@ angular
 
                 if (view[3]) {
                     if (tileService.isBlock(view[3][1])) {
+                        wallFactory(coordinates.leftMid, 'left-2b');
+                        wallFactory(coordinates.rightMid, 'right-2b');
                         wallFactory(coordinates.backgroundClosedFront, 'mid-2');
                     }
                     check = tileService.isDoor(view[3][1]);

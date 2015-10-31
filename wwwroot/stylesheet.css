@@ -17,19 +17,19 @@ svg polygon {
     fill: black;
     stroke: white;
     stroke-width: 1px;
-    shape-rendering:crispEdges;
+    shape-rendering: auto;
 }
 
 svg rect {
     stroke: black;
     stroke-width: 1px;
-    shape-rendering:crispEdges;
+    shape-rendering: auto;
 }
 
 svg line {
     stroke: black;
     stroke-width: 2px;
-    shape-rendering:crispEdges;
+    shape-rendering: auto;
 }
 
 svg text {
