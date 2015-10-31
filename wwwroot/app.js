@@ -9,7 +9,6 @@ angular
         'triskelion.characterSheet.controller',
         'triskelion.combatScreen.controller',
         'triskelion.recapScreen.controller',
-        'triskelion.zoomScreen.controller',
 
         'triskelion.actionsList.directive',
         'triskelion.saytell.directive',

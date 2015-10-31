@@ -90,8 +90,8 @@ angular
                     userData.gameMode = 'downtime';
                     $location.path('/camp');
                 },
-                'zoom': function () {
-                    $location.path('/zoomscreen');
+                'map': function () {
+                    $location.path('/mapscreen');
                 },
                 'updateMazeRunner': function () {
                     $scope.view = levelMap.getView(coordinates[0],coordinates[1], compassDirection);

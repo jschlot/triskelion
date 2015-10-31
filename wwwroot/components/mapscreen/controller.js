@@ -29,11 +29,6 @@ angular
                 var actionsList = {
                     returntogame: function (actionSelected) {
                         $location.path('/gamegrid');
-                    },
-                    teleport: function (actionSelected) {
-                        userData.cursor.coordinates = userData.gameModuleSelected.startingCoordinates;
-                        userData.cursor.direction = userData.gameModuleSelected.defaultCompassDirection;
-                        $location.path('/gamegrid');
                     }
                 };
 
@@ -53,8 +48,7 @@ angular
             };
 
             $scope.availableActions = [
-                menuOptions.returntogame,
-                menuOptions.teleport
+                menuOptions.returntogame
             ];
 
             $scope.tells = tellsList.log;
