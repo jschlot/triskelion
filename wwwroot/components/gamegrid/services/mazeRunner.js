@@ -78,7 +78,7 @@ angular
 
                 // depth 4's background goes first as it's the final back wall,
                 // also we skip the door since the back wall is sort of a hack
-                if (tileService.isBlock(view[0][1]) || tileService.isDoor(view[0][1])) {
+                if (tileService.isBlock(view[0][1])) {
                     wallFactory(coordinates.backgroundMidThru, 'mid-5');
                 }
 

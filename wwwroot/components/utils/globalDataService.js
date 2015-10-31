@@ -12,7 +12,7 @@ angular
                     _self: 'dungeon',
                     maxparty: 3,
                     mapRows: 20, // offset by 1
-                    mapCols: 29, // offset by 1
+                    mapCols: 30, // offset by 1
                     defaultCompassDirection: 'west',
                     defaultLevel: 0,
                     startingCoordinates: [28,1], // [ X, Y ]
@@ -155,8 +155,8 @@ angular
             'use strict';
 
             var playerDB = [];
-            playerDB.dungeon.push(heroMaker.spawn({name: 'Devonellah', spec: 'priest'}));
-            playerDB.dungeon.push(heroMaker.spawn({name: 'Frank', spec: 'priest'}));
+            playerDB.push(heroMaker.spawn({name: 'Devonellah', spec: 'priest'}));
+            playerDB.push(heroMaker.spawn({name: 'Frank', spec: 'priest'}));
 
             return playerDB;
         }]

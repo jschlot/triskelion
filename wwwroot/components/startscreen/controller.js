@@ -13,8 +13,6 @@ angular
                 newgame: function (actionSelected) {
                     $scope.tells.push(infoText.choosemodule);
 
-                    localStorage.clear();
-
                     // a new game should reset userData, partyDB, aurasList
                     aurasList.log.length = 0;
 
@@ -28,40 +26,11 @@ angular
                         gameModules.dungeon
                     ];
                 },
-                savegame: function() {
-                    localStorage.setItem('userData', JSON.stringify(userData));
-                    localStorage.setItem('partyDB', JSON.stringify(partyDB));
-                    localStorage.setItem('aurasList', JSON.stringify(aurasList));
-
-                    $scope.tells.push(infoText.gavesaved);
-                },
-                continuegame: function () {
-                    var loadedUserData = JSON.parse(localStorage.getItem('userData'));
-                    var loadedPartyDB = JSON.parse(localStorage.getItem('partyDB'));
-                    var loadedAurasList = JSON.parse(localStorage.getItem('aurasList'));
-
-                    if (loadedUserData && loadedPartyDB && loadedAurasList) {
-                        userData.gameModuleSelected = loadedUserData.gameModuleSelected;
-                        userData.gameMode = 'downtime';
-                        userData.cursor.level = loadedUserData.cursor.level;
-                        userData.cursor.direction = loadedUserData.cursor.direction;
-                        userData.cursor.coordinates = loadedUserData.cursor.coordinates;
-                        aurasList.log = loadedAurasList.log;
-
-                        // for each loadedPartyDB.members
-                        angular.forEach(loadedPartyDB.members, function(savedPlayer) {
-                            var loadedPlayer;
-                            loadedPlayer = heroMaker.spawn({name: savedPlayer.character.identity.name, spec: savedPlayer.character.identity.spec});
-                            // must figure out how to load in stats
-                            partyDB.members.push(loadedPlayer);
-                        });
-
-
-                        $location.path('/camp');
-                    }
-                },
                 createNewGame: function (actionSelected) {
                     $scope.tells.push(infoText.actionchoice.replace(/STRING/, actionSelected.name));
+
+                    // TO-DO: should perform a deep copy or should go to factory to generate the instance.
+                    // right now it's NOT an instance, it's a reference, so we don't get to replay a module
 
                     userData.gameModuleSelected = actionSelected;
                     userData.gameMode = 'downtime';
