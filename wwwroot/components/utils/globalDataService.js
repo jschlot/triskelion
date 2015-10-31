@@ -154,8 +154,7 @@ angular
         function (heroMaker) {
             'use strict';
 
-            var playerDB = {};
-            playerDB.dungeon = [];
+            var playerDB = [];
             playerDB.dungeon.push(heroMaker.spawn({name: 'Devonellah', spec: 'priest'}));
             playerDB.dungeon.push(heroMaker.spawn({name: 'Frank', spec: 'priest'}));
 

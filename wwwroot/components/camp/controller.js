@@ -14,7 +14,7 @@ angular
                 return;
             }
 
-            var allPlayers = playerDB[userData.gameModuleSelected._self],
+            var allPlayers = playerDB,
                 currentPick = {},
                 context = null,
                 actionsList = {},
