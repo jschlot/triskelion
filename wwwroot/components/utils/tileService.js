@@ -10,7 +10,7 @@ angular
                     lookup, event, messages = [], tells = value.tells, gameMode = 'exploration';
 
                 // the exit
-                if (value._self === 255) {
+                if (value._self > 253) {
                     return 'recap';
                 } else if (value._self < 32) {
                     return gameMode;
