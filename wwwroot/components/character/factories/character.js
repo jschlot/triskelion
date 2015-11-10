@@ -87,34 +87,34 @@ angular
 
                 //// HEALTH OR ENERGY ADJUSTERS
                 // These are not attached directly to stats, because they use the parent
-                this.character.damage = function (event) {
-                    var savingThrow = 0,
+                this.character.damage = function (attackAbility) {
+                    var enemyAttackRoll = 0,
                         modifier = 0,
                         bonus = 0,
                         damage = 0,
                         isSuccess = false,
                         isDead = false;
 
-                    //// PLAYER SAVING THROW
-                    // roll a d20 and add a modifier based on the rating to the d20 rolled above
-                    savingThrow = diceService.roll( 1, 20 );
-                    modifier = Math.floor( this.stats[event.save] / 2 ) - 5;
+                    enemyAttackRoll = diceService.roll(1,20);
+
+                    modifier = Math.floor( this.stats[attackAbility.save] / 2 ) - 5;
 
                     // if the player has a saving throw bonus add a profiency bonus based on their level
-                    if (this.savingThrows.indexOf(event.save) > -1) {
+                    if (this.savingThrows.indexOf(attackAbility.save) > -1) {
                         bonus = Math.floor( this.experience.level / 2 ) - 5;
                     }
 
-                    //// compare the event's difficulty check to the player's saving throw
+                    //// compare the attackAbility's difficulty check to the player's saving throw
                     // if our roll is higher - we HIT, and the enemy is MISS
-                    if ((savingThrow + modifier + bonus) >= (event.check + event.modifier)) {
-                        isSuccess = true;
-                        if (event.miss) {
-                            damage = diceService.roll( event.miss.numberOfDice, event.miss.diceSides );
+                    if ((modifier + bonus + this.inventory.armor.rating) >= (enemyAttackRoll + attackAbility.modifier)) {
+                        if (attackAbility.miss) {
+                            isSuccess = true;
+                            damage = diceService.roll( attackAbility.miss.numberOfDice, attackAbility.miss.diceSides );
                             this.stats.health = this.stats.health - damage;
                         }
                     } else {
-                        damage = diceService.roll( event.hit.numberOfDice, event.hit.diceSides );
+                        isSuccess = true;
+                        damage = diceService.roll( attackAbility.hit.numberOfDice, attackAbility.hit.diceSides );
                         this.stats.health = this.stats.health - damage;
                     }
 
@@ -128,10 +128,10 @@ angular
 
                 };
 
-                this.character.healing = function (event) {
+                this.character.healing = function (benefitAbility) {
                     var healing = 0, updatedHealth = 0 + this.stats.health;
 
-                    healing = diceService.roll( event.hit.numberOfDice, event.hit.diceSides );
+                    healing = diceService.roll( benefitAbility.hit.numberOfDice, benefitAbility.hit.diceSides );
                     updatedHealth += healing;
 
                     if (updatedHealth <= this.stats.maxhealth) {

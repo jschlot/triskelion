@@ -69,9 +69,9 @@ angular
                     isDoor = 'ns-locked';
                 } else if (tile === 4) {
                     isDoor = 'ew-locked';
-                } else if (tile === 27) {
+                } else if (tile === 27 || tile === 255) {
                     isDoor = 'ew-arch';
-                } else if (tile === 28) {
+                } else if (tile === 28 || tile === 254) {
                     isDoor = 'ns-arch';
                 }
                 return isDoor;

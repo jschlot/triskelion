@@ -212,7 +212,7 @@ angular
                     confirmFight: function (index) {
                         var lookup = $scope.mobData[index - 1];
                         if (lookup) {
-                            $scope.tells.push(attack(lookup, ability.fight));
+                            $scope.tells.push(attack(lookup, lookup.character.inventory.weapon));
 
                             $scope.availableActions = [
                                 combatScreenMenuOptions.next

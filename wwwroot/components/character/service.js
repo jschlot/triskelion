@@ -14,7 +14,6 @@ angular
                     aura: 'blunt',
                     save: 'agility',
                     level: 1,
-                    check: 10,
                     modifier: 1,
                     hit: {
                         numberOfDice: 1,
@@ -31,7 +30,6 @@ angular
                     aura: 'light',
                     save: 'agility',
                     level: 1,
-                    check: 0,
                     modifier: 1,
                     hit: {
                         numberOfDice: 3,
@@ -48,97 +46,12 @@ angular
                     aura: 'light',
                     save: 'agility',
                     level: 1,
-                    check: 18,
-                    modifier: 1,
+                    modifier: 10,
                     hit: {
                         numberOfDice: 3,
                         diceSides: 8
                     },
                     miss: null
-                },
-                restoration: {
-                    name: 'Restoration',
-                    hotkey: 'R',
-                    _self: 'restoration',
-                    actionType: 'heal'
-                },
-                prayer: {
-                    name: 'Prayer of Hope',
-                    hotkey: 'P',
-                    _self: 'prayer',
-                    actionType: 'heal'
-                },
-                shoot: {
-                    name: 'Shoot Arrow',
-                    hotkey: 'S',
-                    _self: 'shoot',
-                    actionType: 'damage'
-                },
-                powershot: {
-                    name: 'Power Shot',
-                    hotkey: 'p',
-                    _self: 'powershot',
-                    actionType: 'damage'
-                },
-                flurry: {
-                    name: 'Flurry',
-                    hotkey: 'F',
-                    _self: 'flurry',
-                    actionType: 'damage'
-                },
-                deadlyshot: {
-                    name: 'Deadly Shot',
-                    hotkey: 'D',
-                    _self: 'deadlyshot',
-                    actionType: 'damage'
-                },
-                fireball: {
-                    name: 'Fireball',
-                    hotkey: 'F',
-                    _self: 'fireball',
-                    actionType: 'damage'
-                },
-                inferno: {
-                    name: 'Inferno',
-                    hotkey: 'I',
-                    _self: 'inferno',
-                    actionType: 'damage'
-                },
-                dragonbreath: {
-                    name: 'Dragon Breath',
-                    hotkey: 'D',
-                    _self: 'dragonbreath',
-                    actionType: 'damage'
-                },
-                meteor: {
-                    name: 'Meteor',
-                    hotkey: 'M',
-                    _self: 'meteor',
-                    actionType: 'damage'
-                },
-                cheapshot: {
-                    name: 'Cheap Shot',
-                    hotkey: 'C',
-                    _self: 'cheapshot',
-                    actionType: 'damage'
-                },
-                stab: {
-                    name: 'stab',
-                    hotkey: 'S',
-                    _self: 'stab',
-                    actionType: 'damage'
-                },
-                wound: {
-                    name: 'wound',
-                    hotkey: 'W',
-                    _self: 'wound',
-                    actionType: 'damage'
-                },
-                bloodlet: {
-                    name: 'Bloodlet',
-                    hotkey: 'B',
-                    _self: 'bloodlet',
-                    actionType: 'damage'
                 }
             };
 
@@ -258,19 +171,19 @@ angular
                     name: 'Cloth Robes',
                     hotkey: 'C',
                     _self: 'cloth',
-                    modifier: 10
+                    rating: 10
                 },
                 leather: {
                     name: 'Leather Vestments',
                     hotkey: 'L',
                     _self: 'leather',
-                    modifier: 25
+                    rating: 15
                 },
                 plate: {
                     name: 'Plate Armor',
                     hotkey: 'P',
                     _self: 'plate',
-                    modifier: 50
+                    rating: 18
                 }
             };
 
@@ -285,19 +198,43 @@ angular
                     name: 'Glowing Wooden Staff',
                     hotkey: 'G',
                     _self: 'staff',
-                    modifier: 1
+                    aura: 'blunt',
+                    save: 'agility',
+                    itemLevel: 1,
+                    modifier: 1,
+                    hit: {
+                        numberOfDice: 1,
+                        diceSides: 6
+                    },
+                    miss: null
                 },
                 bow: {
                     name: 'Bow of Yew',
                     hotkey: 'B',
                     _self: 'bow',
-                    modifier: 1
+                    aura: 'piercing',
+                    save: 'agility',
+                    itemLevel: 1,
+                    modifier: 1,
+                    hit: {
+                        numberOfDice: 1,
+                        diceSides: 8
+                    },
+                    miss: null
                 },
                 spear: {
                     name: 'Spear of Iron',
                     hotkey: 'S',
                     _self: 'spear',
-                    modifier: 1
+                    aura: 'piercing',
+                    save: 'agility',
+                    itemLevel: 1,
+                    modifier: 1,
+                    hit: {
+                        numberOfDice: 1,
+                        diceSides: 6
+                    },
+                    miss: null
                 }
             };
 
