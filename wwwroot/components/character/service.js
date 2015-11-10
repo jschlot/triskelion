@@ -5,22 +5,6 @@ angular
         function () {
             'use strict';
             var ability = {
-                fight: {
-                    name: 'Fight',
-                    hotkey: 'F',
-                    _self: 'fight',
-                    actionType: 'damage',
-                    description: '',
-                    aura: 'blunt',
-                    save: 'agility',
-                    level: 1,
-                    modifier: 1,
-                    hit: {
-                        numberOfDice: 1,
-                        diceSides: 4
-                    },
-                    miss: null
-                },
                 heal: {
                     name: 'Healing Word',
                     hotkey: 'h',
@@ -32,7 +16,7 @@ angular
                     level: 1,
                     modifier: 1,
                     hit: {
-                        numberOfDice: 3,
+                        numberOfDice: 1,
                         diceSides: 4
                     },
                     miss: null
@@ -48,8 +32,24 @@ angular
                     level: 1,
                     modifier: 10,
                     hit: {
-                        numberOfDice: 3,
+                        numberOfDice: 2,
                         diceSides: 8
+                    },
+                    miss: null
+                },
+                powershot: {
+                    name: 'Power Shot',
+                    hotkey: 'P',
+                    _self: 'powershot',
+                    actionType: 'damage',
+                    description: '',
+                    aura: 'piercing',
+                    save: 'agility',
+                    level: 1,
+                    modifier: 10,
+                    hit: {
+                        numberOfDice: 3,
+                        diceSides: 10
                     },
                     miss: null
                 }

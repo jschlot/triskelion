@@ -1,14 +1,15 @@
 /* global angular */
 angular
     .module('triskelion.character.hero.factory', ['triskelion.character.factory', 'triskelion.character.service'])
-    .service('heroMaker', ['actionDispatcher', 'Priest',
-        function (actionDispatcher, Priest) {
+    .service('heroMaker', ['actionDispatcher', 'Priest', 'Ranger',
+        function (actionDispatcher, Priest, Ranger) {
             'use strict';
 
             this.spawn = function(player) {
 
                 var hero = {
-                    priest: function(player) { return new Priest(player.name); }
+                    priest: function(player) { return new Priest(player.name); },
+                    ranger: function(player) { return new Ranger(player.name); }
                 };
 
                 return actionDispatcher(hero[player.spec], player);
@@ -28,7 +29,6 @@ angular
                  this.character.alignment.adjust('morals', diceService.roll(2,20));
 
                  this.character.abilities.push(ability.heal);
-                 this.character.abilities.push(ability.bolt);
 
                  this.character.inventory = {
                      armor: armor.cloth,
@@ -49,7 +49,6 @@ angular
                  this.character.alignment.adjust('ethics',  diceService.roll(2,20));
                  // leave neutral // this.character.alignment.adjust('morals', diceService.roll(2,20));
 
-                 this.character.abilities.push(ability.shoot);
                  this.character.abilities.push(ability.powershot);
 
                  this.character.inventory = {
@@ -72,7 +71,6 @@ angular
                  this.character.alignment.adjust('morals', diceService.roll(2,20));
 
                  this.character.abilities.push(ability.fireball);
-                 this.character.abilities.push(ability.inferno);
 
                  this.character.inventory = {
                      armor: armor.cloth,
@@ -94,7 +92,6 @@ angular
                  this.character.alignment.adjust('morals', -1 * diceService.roll(2,20));
 
                  this.character.abilities.push(ability.cheapshot);
-                 this.character.abilities.push(ability.stab);
 
                  this.character.inventory = {
                      armor: armor.leather,
