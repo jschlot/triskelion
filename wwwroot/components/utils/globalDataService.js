@@ -13,9 +13,9 @@ angular
                     maxparty: 3,
                     mapRows: 20, // offset by 1
                     mapCols: 30, // offset by 1
-                    defaultCompassDirection: 'south',
+                    defaultCompassDirection: 'west',
                     defaultLevel: 0,
-                    startingCoordinates: [2,18], // [ X, Y ]
+                    startingCoordinates: [28,1], // [ X, Y ]
                     map: [
                         {
                             name: 'The Catacombs',
