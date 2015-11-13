@@ -155,6 +155,7 @@ angular
             var playerDB = [];
             playerDB.push(heroMaker.spawn({name: 'Devonellah', spec: 'priest'}));
             playerDB.push(heroMaker.spawn({name: 'Fletch', spec: 'ranger'}));
+            playerDB.push(heroMaker.spawn({name: 'Thermofax', spec: 'wizard'}));
 
             return playerDB;
         }]

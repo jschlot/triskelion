@@ -1,15 +1,16 @@
 /* global angular */
 angular
     .module('triskelion.character.hero.factory', ['triskelion.character.factory', 'triskelion.character.service'])
-    .service('heroMaker', ['actionDispatcher', 'Priest', 'Ranger',
-        function (actionDispatcher, Priest, Ranger) {
+    .service('heroMaker', ['actionDispatcher', 'Priest', 'Ranger', 'Wizard',
+        function (actionDispatcher, Priest, Ranger, Wizard) {
             'use strict';
 
             this.spawn = function(player) {
 
                 var hero = {
                     priest: function(player) { return new Priest(player.name); },
-                    ranger: function(player) { return new Ranger(player.name); }
+                    ranger: function(player) { return new Ranger(player.name); },
+                    wizard: function(player) { return new Wizard(player.name); }
                 };
 
                 return actionDispatcher(hero[player.spec], player);
@@ -29,6 +30,7 @@ angular
                  this.character.alignment.adjust('morals', diceService.roll(2,20));
 
                  this.character.abilities.push(ability.heal);
+                 this.character.abilities.push(ability.curewounds);
 
                  this.character.inventory = {
                      armor: armor.cloth,
@@ -47,9 +49,8 @@ angular
                  this.character.identity.race = race.elf.name;
                  this.character.identity.spec = spec.ranger.name;
                  this.character.alignment.adjust('ethics',  diceService.roll(2,20));
-                 // leave neutral // this.character.alignment.adjust('morals', diceService.roll(2,20));
 
-                 this.character.abilities.push(ability.powershot);
+                 this.character.abilities.push(ability.aimedshot);
 
                  this.character.inventory = {
                      armor: armor.leather,
@@ -70,11 +71,12 @@ angular
                  this.character.alignment.adjust('ethics', -1 * diceService.roll(2,20));
                  this.character.alignment.adjust('morals', diceService.roll(2,20));
 
-                 this.character.abilities.push(ability.fireball);
+                 this.character.abilities.push(ability.missile);
+                 this.character.abilities.push(ability.burninghands);
 
                  this.character.inventory = {
                      armor: armor.cloth,
-                     weapon: weapon.staff
+                     weapon: weapon.wand
                  };
              };
          }

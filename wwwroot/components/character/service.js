@@ -21,6 +21,22 @@ angular
                     },
                     miss: null
                 },
+                curewounds: {
+                    name: 'Cure Wounds',
+                    hotkey: 'c',
+                    _self: 'curewounds',
+                    actionType: 'heal',
+                    description: '',
+                    aura: 'light',
+                    save: 'agility',
+                    level: 1,
+                    modifier: 1,
+                    hit: {
+                        numberOfDice: 1,
+                        diceSides: 8
+                    },
+                    miss: null
+                },
                 bolt: {
                     name: 'Bolt of Light',
                     hotkey: 'B',
@@ -29,7 +45,7 @@ angular
                     description: '',
                     aura: 'light',
                     save: 'agility',
-                    level: 1,
+                    level: 2,
                     modifier: 10,
                     hit: {
                         numberOfDice: 2,
@@ -37,10 +53,42 @@ angular
                     },
                     miss: null
                 },
-                powershot: {
-                    name: 'Power Shot',
-                    hotkey: 'P',
-                    _self: 'powershot',
+                missile: {
+                    name: 'Magic Missile',
+                    hotkey: 'M',
+                    _self: 'missile',
+                    actionType: 'damage',
+                    description: '',
+                    aura: 'force',
+                    save: 'agility',
+                    level: 1,
+                    modifier: 8,
+                    hit: {
+                        numberOfDice: 3,
+                        diceSides: 4
+                    },
+                    miss: null
+                },
+                burninghands: {
+                    name: 'Burning Hands',
+                    hotkey: 'B',
+                    _self: 'burninghands',
+                    actionType: 'damage',
+                    description: '',
+                    aura: 'force',
+                    save: 'agility',
+                    level: 1,
+                    modifier: 8,
+                    hit: {
+                        numberOfDice: 3,
+                        diceSides: 6
+                    },
+                    miss: null
+                },
+                aimedshot: {
+                    name: 'Aimed Shot',
+                    hotkey: 'A',
+                    _self: 'aimedshot',
                     actionType: 'damage',
                     description: '',
                     aura: 'piercing',
@@ -219,6 +267,20 @@ angular
                     hit: {
                         numberOfDice: 1,
                         diceSides: 8
+                    },
+                    miss: null
+                },
+                wand: {
+                    name: 'Wand of the Storm',
+                    hotkey: 'W',
+                    _self: 'wand',
+                    aura: 'lightning',
+                    save: 'agility',
+                    itemLevel: 1,
+                    modifier: 1,
+                    hit: {
+                        numberOfDice: 1,
+                        diceSides: 4
                     },
                     miss: null
                 },
