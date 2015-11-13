@@ -1,8 +1,8 @@
 /* global angular */
 angular
     .module('triskelion.character.hero.factory', ['triskelion.character.factory', 'triskelion.character.service'])
-    .service('heroMaker', ['actionDispatcher', 'Priest', 'Ranger', 'Wizard',
-        function (actionDispatcher, Priest, Ranger, Wizard) {
+    .service('heroMaker', ['actionDispatcher', 'Priest', 'Ranger', 'Wizard', 'Scout',
+        function (actionDispatcher, Priest, Ranger, Wizard, Scout) {
             'use strict';
 
             this.spawn = function(player) {
@@ -10,7 +10,8 @@ angular
                 var hero = {
                     priest: function(player) { return new Priest(player.name); },
                     ranger: function(player) { return new Ranger(player.name); },
-                    wizard: function(player) { return new Wizard(player.name); }
+                    wizard: function(player) { return new Wizard(player.name); },
+                    scout: function(player) { return new Scout(player.name); }
                 };
 
                 return actionDispatcher(hero[player.spec], player);
@@ -93,7 +94,7 @@ angular
                  this.character.alignment.adjust('ethics', -1 * diceService.roll(2,20));
                  this.character.alignment.adjust('morals', -1 * diceService.roll(2,20));
 
-                 this.character.abilities.push(ability.cheapshot);
+                 this.character.abilities.push(ability.sneakattack);
 
                  this.character.inventory = {
                      armor: armor.leather,

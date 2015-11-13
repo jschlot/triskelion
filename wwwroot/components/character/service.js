@@ -37,22 +37,6 @@ angular
                     },
                     miss: null
                 },
-                bolt: {
-                    name: 'Bolt of Light',
-                    hotkey: 'B',
-                    _self: 'bolt',
-                    actionType: 'damage',
-                    description: '',
-                    aura: 'light',
-                    save: 'agility',
-                    level: 2,
-                    modifier: 10,
-                    hit: {
-                        numberOfDice: 2,
-                        diceSides: 8
-                    },
-                    miss: null
-                },
                 missile: {
                     name: 'Magic Missile',
                     hotkey: 'M',
@@ -97,7 +81,23 @@ angular
                     modifier: 10,
                     hit: {
                         numberOfDice: 3,
-                        diceSides: 10
+                        diceSides: 6
+                    },
+                    miss: null
+                },
+                sneakattack: {
+                    name: 'Sneak Attack',
+                    hotkey: 'S',
+                    _self: 'sneakattack',
+                    actionType: 'damage',
+                    description: '',
+                    aura: 'slashing',
+                    save: 'agility',
+                    level: 1,
+                    modifier: 13,
+                    hit: {
+                        numberOfDice: 1,
+                        diceSides: 20
                     },
                     miss: null
                 }
