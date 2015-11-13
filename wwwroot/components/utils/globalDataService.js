@@ -50,6 +50,7 @@ angular
                         {
                             description: 'A spray of lava splashes on the party!',
                             actionType: 'damage',
+                            repeater: 9999,
                             aura: 'fire',
                             save: 'agility',
                             modifier: 1,
@@ -61,7 +62,8 @@ angular
                         },
                         {
                             description: 'A ray of light shines upon the group!',
-                            actionType:  'heal',
+                            actionType: 'heal',
+                            repeater: 2,
                             aura: 'light',
                             save: null,
                             modifier: 0,
@@ -73,11 +75,14 @@ angular
                         },
                         {
                             description: 'A eerie wailing sound comes from down the hallway...',
-                            actionType:  'message'
+                            actionType: 'message',
+                            repeater: 9999
                         },
                         {
                             description: 'You stumble upon a pair of Elvish Fiends!',
-                            actionType:  'combat',
+                            actionType: 'combat',
+                            repeater: 0,
+                            save: null,
                             mobMembers: [
                                 { spec: 'fiend', level: 1 },
                                 { spec: 'fiend', level: 2 }

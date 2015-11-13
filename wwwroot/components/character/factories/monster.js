@@ -28,7 +28,6 @@ angular
                  this.character.hpDice = 4;
                  this.character.nrgDice = 6;
 
-                 this.character.abilities.push(ability.fight);
                  this.character.inventory = {
                      armor: armor.leather,
                      weapon: weapon.staff

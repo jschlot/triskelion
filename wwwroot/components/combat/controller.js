@@ -3,9 +3,9 @@ angular
     .module('triskelion.combatScreen.controller',['triskelion.combatScreen.service', 'triskelion.character.service'])
     .controller('combatScreenController', [
         '$scope', '$location', 'accessControl', 'userData', 'partyDB', 'mobDB', 'infoText', 'hotkeyAction',
-        'combatScreenMenuOptions', 'tellsList', 'aurasList', 'diceService', 'actionDispatcher', 'ability', 'tileService',
+        'combatScreenMenuOptions', 'tellsList', 'aurasList', 'diceService', 'actionDispatcher', 'ability',
         function ($scope, $location, accessControl, userData, partyDB, mobDB, infoText, hotkeyAction,
-            combatScreenMenuOptions, tellsList, aurasList, diceService, actionDispatcher, ability, tileService) {
+            combatScreenMenuOptions, tellsList, aurasList, diceService, actionDispatcher, ability) {
 
             'use strict';
 
@@ -51,6 +51,7 @@ angular
             var attack = function(player, event) {
                 var message;
                 if (player.character.stats.health > 0) {
+                    console.log(event);
                     var result = player.character.damage(event);
 
                     if (result.amount) {
@@ -125,14 +126,7 @@ angular
                     });
 
 
-                    var currentLevel = userData.cursor.level,
-                        currentLevelMap = userData.gameModuleSelected.map[currentLevel],
-                        coordinates = userData.cursor.coordinates;
-
-                    console.log(coordinates);
-                    console.log(currentLevelMap.layout[ coordinates[1] ][ coordinates[0] ]);
-                    currentLevelMap.layout[ coordinates[1] ][ coordinates[0] ] = tileService.set.FLOOR;
-                    console.log(currentLevelMap.layout);
+                    tileAction.repeater--;
 
                     userData.gameMode = 'exploration';
                     $location.path('/gamegrid');
@@ -145,8 +139,8 @@ angular
                         updateTurns();
                         return;
                     } else {
-                        var randomPlayer = partyDB.members[Math.floor(Math.random()  *partyDB.members.length)];
-                        var actionResult = attack(randomPlayer, combatant.character.abilities[0]);
+                        var randomPlayer = partyDB.members[Math.floor(Math.random() * partyDB.members.length)];
+                        var actionResult = attack(randomPlayer, combatant.character.inventory.weapon);
                         $scope.tells.push(actionResult);
                      }
 

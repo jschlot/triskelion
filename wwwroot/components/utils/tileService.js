@@ -20,18 +20,24 @@ angular
                 lookup = value._self - 32;
                 event = actionsList[lookup];
 
+                if (event.repeater < 0) {
+                    return gameMode;
+                }
+
                 switch (event.actionType) {
                     case 'damage':
                         messages = partyDB.aoeDamage(event);
                         if (messages.length) {
                             this.spoolMessages(tells, messages);
                         }
+                        event.repeater--;
                         break;
                     case 'heal':
                         messages = partyDB.aoeHeal(event);
                         if (messages.length) {
                             this.spoolMessages(tells, messages);
                         }
+                        event.repeater--;
                         break;
                     case 'combat':
                         gameMode = 'combat';
@@ -44,6 +50,7 @@ angular
                         break;
                     case 'message':
                         this.spoolMessages(tells, [event.description]);
+                        event.repeater--;
                         break;
                 }
                 return gameMode;
