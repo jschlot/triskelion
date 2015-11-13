@@ -94,12 +94,15 @@ angular
                     aura: 'slashing',
                     save: 'agility',
                     level: 1,
-                    modifier: 13,
+                    modifier: 8,
                     hit: {
                         numberOfDice: 1,
                         diceSides: 20
                     },
-                    miss: null
+                    miss: {
+                        numberOfDice: 1,
+                        diceSides: 4
+                    }
                 }
             };
 
