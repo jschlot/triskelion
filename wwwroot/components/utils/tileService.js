@@ -20,6 +20,10 @@ angular
                 lookup = value._self - 32;
                 event = actionsList[lookup];
 
+                if (!event) {
+                    return gameMode;
+                }
+
                 if (event.repeater < 0) {
                     return gameMode;
                 }

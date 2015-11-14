@@ -51,7 +51,6 @@ angular
             var attack = function(player, event) {
                 var message;
                 if (player.character.stats.health > 0) {
-                    console.log(event);
                     var result = player.character.damage(event);
 
                     if (result.amount) {
@@ -160,7 +159,6 @@ angular
                     $scope.availableActions = [
                         combatScreenMenuOptions.fight,
                         combatScreenMenuOptions.spell,
-                        combatScreenMenuOptions.run,
                         combatScreenMenuOptions.next
                     ];
 
@@ -195,10 +193,6 @@ angular
                         });
 
                         $scope.context = 'confirmSpellTarget';
-                    },
-                    run: function (actionSelected) {
-                        $scope.tells.push(infoText.playerRuns);
-                        updateTurns();
                     },
                     next: function (actionSelected) {
                         updateTurns();
