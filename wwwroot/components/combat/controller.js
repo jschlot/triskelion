@@ -112,14 +112,10 @@ angular
 
                     $scope.tells.push(infoText.xpEarned.replace(/POINTS/, given));
 
-                    partyDB.members.map(function(obj) {
-                       var isDing = obj.character.addXP(earned);
-
-                       if (isDing) {
-                           $scope.tells.push(infoText.partyDinged);
-                       }
-                    });
-
+                    var isDing = partyDB.addXP(earned);
+                    if (isDing) {
+                        $scope.tells.push(infoText.partyDinged);
+                    }
 
                     tileAction.repeater--;
 

@@ -42,13 +42,13 @@ angular
                 this.addExperiencePoints = function (xp) {
                     var currentLevel = this.experience.level,
                         earned = xp + (xp * this.experience.bonus),
-                        isDing;
+                        isDing = false;
 
                     this.experience.points = this.experience.points + earned;
                     this.experience.level = Math.floor( ( 1 + Math.sqrt( 1 + this.experience.points/125 ) ) / 2 );
 
                     if (this.experience.level > currentLevel) {
-                        // isDing = this.levelUp();
+                        isDing = true;
                     }
                     return isDing;
                 };
