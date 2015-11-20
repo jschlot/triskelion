@@ -111,6 +111,19 @@ b {
     padding: 0 2em 1em 0;
 }
 
+.party-level {
+	font-size: 400%; font-weight: bold;
+}
+
+.party-level-left-shim {
+	border-right: 1px solid white;
+}
+
+
+.party-level-right-shim {
+	padding-left: 0.5em;
+}
+
 #commandPrompt {
     background-color: black;
     color: white;

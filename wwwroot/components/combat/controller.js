@@ -112,7 +112,7 @@ angular
 
                     $scope.tells.push(infoText.xpEarned.replace(/POINTS/, given));
 
-                    var isDing = partyDB.addXP(earned);
+                    var isDing = partyDB.addExperiencePoints(earned);
                     if (isDing) {
                         $scope.tells.push(infoText.partyDinged);
                     }
