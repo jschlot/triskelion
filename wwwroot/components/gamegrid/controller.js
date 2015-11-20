@@ -129,6 +129,7 @@ angular
             $scope.tells = tellsList.log;
             $scope.partyData = partyDB.members;
             $scope.auras = aurasList.log;
+						$scope.partyLevel = partyDB.experience.level;
 
             $scope.availableActions = [
                 menuOptions.forward,

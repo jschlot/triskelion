@@ -241,6 +241,7 @@ angular
             $scope.mobData = mobDB.members;
             $scope.availableActions = [];
             $scope.partyData = partyDB.members;
+						$scope.partyLevel = partyDB.experience.level;
 
             updateTurns();
         }

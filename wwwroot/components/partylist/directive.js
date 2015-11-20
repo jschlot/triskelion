@@ -24,7 +24,8 @@ angular
                 controller: controller,
                 scope: {
                     partydata: '=',
-										ismob: '='
+										ismob: '=',
+										partylevel: '='
                 },
                 templateUrl: 'components/partylist/partial.html',
                 link: linkingFunction
