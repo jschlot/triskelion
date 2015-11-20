@@ -113,7 +113,7 @@ angular
 
                     var isDing = partyDB.addExperiencePoints(given);
                     if (isDing) {
-                        $scope.tells.push(infoText.partyDinged);
+//                        $scope.tells.push(infoText.partyDinged);
                     }
 
                     tileAction.repeater--;

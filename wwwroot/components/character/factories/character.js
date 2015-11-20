@@ -11,8 +11,6 @@ angular
                 this.hotkey = this.name.substr(0,1);
                 this._this = this.name.toLowerCase();
 
-                this.partyLevel = partyDB.experience.level;
-
                 this.character = {};
                 this.character.status = 'alive';
                 this.character.hpDice = 3;
@@ -72,7 +70,7 @@ angular
 
                     // if the player has a saving throw bonus add a profiency bonus based on their party level
                     if (this.savingThrows.indexOf(attackAbility.save) > -1) {
-                        bonus = Math.floor( this.partyLevel / 2 ) - 5;
+                        bonus = Math.floor( partyDB.experience.level / 2 ) - 5;
                     }
 
                     //// compare the attackAbility's difficulty check to the player's saving throw
@@ -117,7 +115,7 @@ angular
                 };
 
                 this.character.updateHealth = function () {
-                    var initialHealth = diceService.roll(this.partyLevel, this.hpDice) + this.hpDice;
+                    var initialHealth = diceService.roll(partyDB.experience.level, this.hpDice) + this.hpDice;
 
                     this.stats.health = initialHealth;
                     this.stats.maxhealth = initialHealth;
@@ -187,7 +185,6 @@ angular
                  angular.extend(this, new Character(name));
 
                  this.character.hpDice = 8;
-
                  this.character.updateHealth();
 
                  this.character.stats.wisdom = this.character.stats.wisdom + 7;

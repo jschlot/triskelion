@@ -44,7 +44,11 @@ angular
                     this.experience.level = Math.floor( ( 1 + Math.sqrt( 1 + this.experience.points/125 ) ) / 2 );
 
                     if (this.experience.level > currentLevel) {
-                        isDing = true;
+											angular.forEach(this.members, function(player) {
+												player.character.updateHealth();
+											});
+
+                      isDing = true;
                     }
                     return isDing;
                 };
@@ -58,8 +62,6 @@ angular
                     var earnedExperiencePoints = this.fetchExperiencePoints(level);
                     this.addExperiencePoints(earnedExperiencePoints);
                 };
-
-
 
                 this.aoeDamage = function (event) {
                     var tells = [];
