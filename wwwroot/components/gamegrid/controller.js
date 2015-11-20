@@ -40,6 +40,7 @@ angular
                     var nextTileIndex = $scope.view.length - 2,
                         next = $scope.view[nextTileIndex][1],
                         mode;
+
                     if (tileService.canGoForward(next)) {
                         switch (compassDirection) {
                             case 'east':
