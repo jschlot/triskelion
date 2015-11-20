@@ -26,7 +26,6 @@ angular
                  this.character.identity.spec = spec.scout.name;
 
                  this.character.hpDice = 4;
-                 this.character.nrgDice = 6;
 
                  this.character.inventory = {
                      armor: armor.leather,

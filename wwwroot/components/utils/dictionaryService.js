@@ -67,7 +67,6 @@ angular
                     spec: 'Spec: VALUE',
                     armor: 'Armor: VALUE',
                     health: 'Health: VALUE',
-                    energy: 'Energy: VALUE',
                     abilities: 'Abilities: VALUE',
                     race: 'Race: VALUE'
                 }

@@ -16,7 +16,6 @@ angular
                 this.character = {};
                 this.character.status = 'alive';
                 this.character.hpDice = 3;
-                this.character.nrgDice = 4;
 
                 this.character.identity = {};
                 this.character.identity.name = this.name;
@@ -56,8 +55,6 @@ angular
                 this.character.stats = {};
                 this.character.stats.health = 1;
                 this.character.stats.maxhealth = 1;
-                this.character.stats.energy = 1;
-                this.character.stats.maxenergy = 1;
 
                 //// HEALTH OR ENERGY ADJUSTERS
                 // These are not attached directly to stats, because they use the parent
@@ -120,14 +117,10 @@ angular
                 };
 
                 this.character.updateHealth = function () {
-                    var initialHealth = diceService.roll(this.partyLevel, this.hpDice) + this.hpDice,
-                        initialEnergy = diceService.roll(this.partyLevel, this.nrgDice) + this.nrgDice;
+                    var initialHealth = diceService.roll(this.partyLevel, this.hpDice) + this.hpDice;
 
                     this.stats.health = initialHealth;
                     this.stats.maxhealth = initialHealth;
-
-                    this.stats.energy = initialEnergy;
-                    this.stats.maxenergy = initialEnergy;
                 };
 
                 this.character.stats.strength = diceService.roll(3,6);
@@ -156,7 +149,6 @@ angular
                  angular.extend(this, new Character(name));
 
                  this.character.hpDice = 6;
-                 this.character.nrgDice = 12;
                  this.character.updateHealth();
 
                  this.character.stats.intelligence = this.character.stats.intelligence + 5;
@@ -176,7 +168,6 @@ angular
                  angular.extend(this, new Character(name));
 
                  this.character.hpDice = 10;
-                 this.character.nrgDice = 10;
                  this.character.updateHealth();
 
                  this.character.stats.strength = this.character.stats.strength + 6;
@@ -196,7 +187,6 @@ angular
                  angular.extend(this, new Character(name));
 
                  this.character.hpDice = 8;
-                 this.character.nrgDice = 16;
 
                  this.character.updateHealth();
 
@@ -217,7 +207,6 @@ angular
                  angular.extend(this, new Character(name));
 
                  this.character.hpDice = 8;
-                 this.character.nrgDice = 12;
                  this.character.updateHealth();
 
                  this.character.stats.wisdom = this.character.stats.dexterity + 7;
