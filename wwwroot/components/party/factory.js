@@ -26,12 +26,8 @@ angular
                 };
 
                 this.partyXPGivenWhenDead = function() {
-                    var earnedXP = 0;
-
-                    // return something from this object
-
+                    var earnedXP = this.fetchExperiencePoints();
                     return earnedXP;
-
                 };
 
                 this.experience = {};

@@ -103,16 +103,15 @@ angular
                 }
 
                 if (mobDB.partyHP() === 0) {
-                    var given, earned;
+                    var given;
 
                     given = mobDB.partyXPGivenWhenDead();
-                    earned = given / partyDB.members.length;
 
                     $scope.tells.length = 0;
 
                     $scope.tells.push(infoText.xpEarned.replace(/POINTS/, given));
 
-                    var isDing = partyDB.addExperiencePoints(earned);
+                    var isDing = partyDB.addExperiencePoints(given);
                     if (isDing) {
                         $scope.tells.push(infoText.partyDinged);
                     }
