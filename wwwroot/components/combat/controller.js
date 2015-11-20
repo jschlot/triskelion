@@ -180,7 +180,9 @@ angular
 
                         $scope.availableActions = [];
                         angular.forEach(combatant.character.abilities, function(ability) {
+													if (ability.level <= partyDB.experience.level) {
                             $scope.availableActions.push(ability);
+													}
                         });
 
                         $scope.context = 'confirmSpellTarget';
@@ -206,6 +208,7 @@ angular
                         $scope.availableActions = [
                             combatScreenMenuOptions.choosetarget
                         ];
+
                         $scope.abilitySelected = actionSelected;
                         $scope.context = "confirmSpell";
                     },

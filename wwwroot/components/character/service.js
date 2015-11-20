@@ -61,7 +61,7 @@ angular
                     description: '',
                     aura: 'force',
                     save: 'agility',
-                    level: 1,
+                    level: 2,
                     modifier: 8,
                     hit: {
                         numberOfDice: 3,
