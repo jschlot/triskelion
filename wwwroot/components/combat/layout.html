@@ -20,7 +20,7 @@
                 </td>
                 <td class="outline shim" valign="top" height="120">
                     <div class="flex-list">
-                        <party-list-directive partydata="mobData"></party-list-directive>
+                        <party-list-directive partydata="mobData" ismob="true"></party-list-directive>
                     </div>
                 </td>
             </tr>
@@ -33,11 +33,27 @@
             </tr>
         </table>
         <br>
-        <div class="outline">
-            <div class="shim">
-                <party-list-directive partydata="partyData"></party-list-directive>
-            </div>
-        </div>
+				<table width="100%" cellpadding="0" cellspacing="0">
+					<tr valign="top">
+						<td width="15%" class="outline shim">
+							<table width="100%" cellpadding="0" cellspacing="0">
+								<tr align="center">
+									<th colspan="2">
+										<span>party level</span>
+									</th>
+								<tr>
+								<tr align="center">
+									<td colspan="2">
+										<span class="party-level">1</span>
+									</td>
+								<tr>
+							</table>
+						</td>
+						<td class="outline shim">
+							<party-list-directive partydata="partyData"></party-list-directive>
+						</td>
+					</tr>
+				</table>
         <br>
         <div class="outline">
             <saytell-directive tells="tells" actions="availableActions" callback="saveAndNext"></saytell-directive>

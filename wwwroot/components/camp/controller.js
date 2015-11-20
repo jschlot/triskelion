@@ -176,6 +176,7 @@ angular
             $scope.tells = tellsList.log;
 
             $scope.partyData = partyDB.members;
+						$scope.partyLevel = partyDB.experience.level;
 
             actionsList.mainActions();
         }

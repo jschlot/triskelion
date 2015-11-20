@@ -23,7 +23,8 @@ angular
                 transclude: false,
                 controller: controller,
                 scope: {
-                    partydata: '='
+                    partydata: '=',
+										ismob: '='
                 },
                 templateUrl: 'components/partylist/partial.html',
                 link: linkingFunction
