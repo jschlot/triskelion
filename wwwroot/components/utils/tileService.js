@@ -17,7 +17,6 @@ angular
                 }
 
                 actionsList = userData.gameModuleSelected.tileActions;
-                lookup = value._self - 32;
                 event = actionsList[lookup];
 
                 if (!event) {

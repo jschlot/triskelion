@@ -7,7 +7,7 @@ angular
             this.spawn = function(player) {
 
                 var monster = {
-                    fiend: function(player) { return new Fiend(player.spec, player.level); }
+                    fiend: function(player) { return new Fiend(player.spec); }
                 };
 
                 return actionDispatcher(monster[player.spec], player);
@@ -18,7 +18,7 @@ angular
          function (Rogue, diceService, ability, race, spec, armor, weapon) {
              'use strict';
 
-             return function (name, level) {
+             return function (name) {
                  angular.extend(this, new Rogue(name));
 
                  this.character.npc = true;
@@ -34,7 +34,6 @@ angular
                  };
 
                  this.character.updateHealth();
-                 this.character.boostExperience(level);
              };
          }
      ]);

@@ -105,7 +105,7 @@ angular
                 if (mobDB.partyHP() === 0) {
                     var given, earned;
 
-                    given = mobDB.partyXPGiven();
+                    given = mobDB.partyXPGivenWhenDead();
                     earned = given / partyDB.members.length;
 
                     $scope.tells.length = 0;
@@ -116,11 +116,7 @@ angular
                        var isDing = obj.character.addXP(earned);
 
                        if (isDing) {
-                           $scope.tells.push(
-                               infoText.playerDinged
-                                .replace(/PLAYER/, obj.character.identity.name)
-                                .replace(/LEVEL/, obj.character.experience.level)
-                            );
+                           $scope.tells.push(infoText.partyDinged);
                        }
                     });
 

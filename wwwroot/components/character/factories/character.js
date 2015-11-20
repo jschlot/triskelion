@@ -1,8 +1,8 @@
 /* global angular */
 angular
     .module('triskelion.character.factory', ['triskelion.character.service'])
-    .factory('Character', ['race', 'spec', 'diceService',
-        function (race, spec, diceService) {
+    .factory('Character', ['race', 'spec', 'diceService', 'partyDB',
+        function (race, spec, diceService, partyDB) {
             'use strict';
 
             var Character = function (name) {
@@ -10,6 +10,8 @@ angular
                 this.created = new Date();
                 this.hotkey = this.name.substr(0,1);
                 this._this = this.name.toLowerCase();
+
+                this.partyLevel = partyDB.experience.level;
 
                 this.character = {};
                 this.character.status = 'alive';
@@ -51,34 +53,6 @@ angular
                     return rating;
                 };
 
-                this.character.experience = {};
-                this.character.experience.level = 1;
-                this.character.experience.points = 0;
-                this.character.experience.bonus = 0;
-                this.character.addXP = function (xp) {
-                    var currentLevel = this.experience.level,
-                        earned = xp + (xp * this.experience.bonus),
-                        isDing;
-
-                    this.experience.points = this.experience.points + earned;
-                    this.experience.level = Math.floor( ( 1 + Math.sqrt( 1 + this.experience.points/125 ) ) / 2 );
-
-                    if (this.experience.level > currentLevel) {
-                        isDing = this.levelUp();
-                    }
-                    return isDing;
-                };
-
-                this.character.fetchXP = function(levelSet) {
-                    var level = (levelSet) ? levelSet : this.experience.level;
-                    return Math.max(125 * ( Math.pow(2* level-1,2) - 1), 200);
-                };
-
-                this.character.boostExperience = function(level) {
-                    var earnedXP = this.fetchXP(level);
-                    this.addXP(earnedXP);
-                };
-
                 this.character.stats = {};
                 this.character.stats.health = 1;
                 this.character.stats.maxhealth = 1;
@@ -99,9 +73,9 @@ angular
 
                     modifier = Math.floor( this.stats[attackAbility.save] / 2 ) - 5;
 
-                    // if the player has a saving throw bonus add a profiency bonus based on their level
+                    // if the player has a saving throw bonus add a profiency bonus based on their party level
                     if (this.savingThrows.indexOf(attackAbility.save) > -1) {
-                        bonus = Math.floor( this.experience.level / 2 ) - 5;
+                        bonus = Math.floor( this.partyLevel / 2 ) - 5;
                     }
 
                     //// compare the attackAbility's difficulty check to the player's saving throw
@@ -146,8 +120,8 @@ angular
                 };
 
                 this.character.updateHealth = function () {
-                    var initialHealth = diceService.roll(this.experience.level, this.hpDice) + this.hpDice,
-                        initialEnergy = diceService.roll(this.experience.level, this.nrgDice) + this.nrgDice;
+                    var initialHealth = diceService.roll(this.partyLevel, this.hpDice) + this.hpDice,
+                        initialEnergy = diceService.roll(this.partyLevel, this.nrgDice) + this.nrgDice;
 
                     this.stats.health = initialHealth;
                     this.stats.maxhealth = initialHealth;
@@ -170,10 +144,6 @@ angular
                 this.character.quips = [];
                 this.character.tags = [];
 
-                this.character.levelUp = function () {
-                    this.updateHealth();
-                    return 'ding';
-                };
             };
             return Character;
         }

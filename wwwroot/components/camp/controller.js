@@ -104,7 +104,6 @@ angular
                     $scope.tells.push(
                         infoText.describeCharacter
                             .replace(/NAME/, character.identity.name)
-                            .replace(/LEVEL/, character.experience.level)
                             .replace(/RACE/, character.identity.race)
                             .replace(/SPEC/, character.identity.spec)
                     );

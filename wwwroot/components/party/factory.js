@@ -25,16 +25,45 @@ angular
                     return partyHP;
                 };
 
-                this.partyXPGiven = function() {
+                this.partyXPGivenWhenDead = function() {
                     var earnedXP = 0;
 
-                    angular.forEach(this.members, function(player) {
-                        earnedXP += player.character.fetchXP();
-                    });
+                    // return something from this object
 
                     return earnedXP;
 
                 };
+
+                this.experience = {};
+                this.experience.level = 1;
+                this.experience.points = 0;
+                this.experience.bonus = 0;
+
+                this.addExperiencePoints = function (xp) {
+                    var currentLevel = this.experience.level,
+                        earned = xp + (xp * this.experience.bonus),
+                        isDing;
+
+                    this.experience.points = this.experience.points + earned;
+                    this.experience.level = Math.floor( ( 1 + Math.sqrt( 1 + this.experience.points/125 ) ) / 2 );
+
+                    if (this.experience.level > currentLevel) {
+                        // isDing = this.levelUp();
+                    }
+                    return isDing;
+                };
+
+                this.fetchExperiencePoints = function(levelSet) {
+                    var level = (levelSet) ? levelSet : this.experience.level;
+                    return Math.max(125 * ( Math.pow(2* level-1,2) - 1), 200);
+                };
+
+                this.boostExperiencePoints = function(level) {
+                    var earnedExperiencePoints = this.fetchExperiencePoints(level);
+                    this.addExperiencePoints(earnedExperiencePoints);
+                };
+
+
 
                 this.aoeDamage = function (event) {
                     var tells = [];

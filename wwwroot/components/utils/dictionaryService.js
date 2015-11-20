@@ -58,9 +58,9 @@ angular
                 deathNote: ' and has died',
                 alldead: 'All players in the party are dead. You must return to camp.',
                 charactersheet: 'Character Sheet: CHARACTER',
-                describeCharacter: 'NAME, lvl LEVEL RACE SPEC',
+                describeCharacter: 'NAME, RACE SPEC',
                 xpEarned: 'Your party is granted POINTS experience.',
-                playerDinged: 'PLAYER has advanced to level LEVEL',
+                partyDinged: 'PLAYER has advanced to level LEVEL', // TO-DO
                 gavesaved: 'Game saved',
                 keys: {
                     name: 'Name: VALUE',
