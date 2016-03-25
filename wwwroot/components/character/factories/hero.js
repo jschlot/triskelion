@@ -25,6 +25,8 @@ angular
              return function (name) {
                  angular.extend(this, new Healer(name));
 
+								 this.character.portrait = "priest.png";
+
                  this.character.identity.race = race.elf.name;
                  this.character.identity.spec = spec.priest.name;
                  this.character.alignment.adjust('ethics',  diceService.roll(2,20));
@@ -47,6 +49,8 @@ angular
              return function (name) {
                  angular.extend(this, new Fighter(name));
 
+								 this.character.portrait = "ranger.png";
+
                  this.character.identity.race = race.elf.name;
                  this.character.identity.spec = spec.ranger.name;
                  this.character.alignment.adjust('ethics',  diceService.roll(2,20));
@@ -66,6 +70,8 @@ angular
 
              return function (name) {
                  angular.extend(this, new Caster(name));
+
+								 this.character.portrait = "mage.png";
 
                  this.character.identity.race = race.elf.name;
                  this.character.identity.spec = spec.wizard.name;
@@ -88,6 +94,8 @@ angular
 
              return function (name) {
                  angular.extend(this, new Rogue(name));
+
+								 this.character.portrait = "thief.png";
 
                  this.character.identity.race = race.elf.name;
                  this.character.identity.spec = spec.scout.name;

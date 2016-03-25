@@ -21,6 +21,8 @@ angular
              return function (name) {
                  angular.extend(this, new Rogue(name));
 
+								 this.character.portrait = "enemy.png";
+
                  this.character.npc = true;
                  this.character.identity.race = race.elf.name;
                  this.character.identity.spec = spec.scout.name;

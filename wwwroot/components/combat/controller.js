@@ -48,7 +48,7 @@ angular
                 });
             }
 
-            var attack = function(player, event) {
+            var attack = function(actor, player, event) {
                 var message;
                 if (player.character.stats.health > 0) {
                     var result = player.character.damage(event);
@@ -57,7 +57,7 @@ angular
                         message = infoText.auraDamage
                             .replace(/PLAYER/, player.character.identity.name)
                             .replace(/DAMAGE/, result.amount)
-                            .replace(/AURA/, event.aura);
+                            .replace(/ACTOR/, actor);
                     } else {
                         message = infoText.auraMissed.replace(/PLAYER/, player.character.identity.name);
                     }
@@ -69,14 +69,14 @@ angular
                 return message;
             };
 
-            var heal = function(player, event) {
+            var heal = function(actor, player, event) {
                 var message;
                 var result =  player.character.healing(event);
                 if (result.hit) {
                     message = infoText.auraHeal
                         .replace(/PLAYER/, player.character.identity.name)
                         .replace(/HEALTH/, result.amount)
-                        .replace(/AURA/, event.aura);
+                        .replace(/ACTOR/, event.aura);
                 } else {
                     message = infoText.auraOverheal
                             .replace(/PLAYER/, player.character.identity.name)
@@ -95,6 +95,16 @@ angular
                 }
 
                 combatant = turnsList[currentTurn];
+
+								$scope.page = {
+										name: infoText.combatscreen,
+										turn: currentTurn,
+										who: combatant.character.identity.name,
+										spec: combatant.character.identity.spec,
+										playericon: "images/" + combatant.character.portrait
+								};
+								$scope.page.targeticon = null;
+
 
                 if (partyDB.partyHP() === 0) {
                     userData.gameMode = 'downtime';
@@ -125,13 +135,20 @@ angular
 
                 if (combatant.character.npc) {
                     $scope.currentCombatantParty = 'mobs';
+                    $scope.tells.push(infoText.playerTurn.replace(/PLAYER/, combatant.character.identity.name));
                     if (combatant.character.stats.health === 0) {
                         updateTurns();
                         return;
                     } else {
-                        var randomPlayer = partyDB.members[Math.floor(Math.random() * partyDB.members.length)];
-                        var actionResult = attack(randomPlayer, combatant.character.inventory.weapon);
-                        $scope.tells.push(actionResult);
+											var randomPlayer = partyDB.members[Math.floor(Math.random() * partyDB.members.length)];
+											$scope.page.targeticon = 'images/' + randomPlayer.character.portrait;
+
+											$scope.tells.push(infoText.targetSelected
+												.replace(/PLAYER/, combatant.character.identity.name)
+												.replace(/ACTOR/, randomPlayer.character.identity.name));
+
+											var actionResult = attack(combatant.character.identity.name, randomPlayer, combatant.character.inventory.weapon);
+											$scope.tells.push(actionResult);
                      }
 
                     $scope.availableActions = [
@@ -139,6 +156,7 @@ angular
                     ];
 
                 } else {
+										$scope.page.targeticon = null;
                     $scope.currentCombatantParty = 'players';
                     $scope.tells.push(infoText.playerTurn.replace(/PLAYER/, combatant.character.identity.name));
 
@@ -148,14 +166,6 @@ angular
                         combatScreenMenuOptions.next
                     ];
                 }
-
-								$scope.page = {
-										name: infoText.combatscreen,
-										turn: currentTurn,
-										who: combatant.character.identity.name,
-										spec: combatant.character.identity.spec
-								};
-								console.log(combatant);
             };
 
             $scope.context = null;
@@ -188,9 +198,16 @@ angular
                         updateTurns();
                     },
                     confirmFight: function (index) {
-                        var lookup = $scope.mobData[index - 1];
+                        var lookup = $scope.mobData[index - 1],
+													  currentplayer = $scope.page.who;
                         if (lookup) {
-                            $scope.tells.push(attack(lookup, lookup.character.inventory.weapon));
+														$scope.tells.push(infoText.targetSelected
+														 		.replace(/PLAYER/, currentplayer)
+														 		.replace(/ACTOR/, lookup.character.identity.name));
+
+														$scope.page.targeticon = 'images/' + lookup.character.portrait;
+
+                            $scope.tells.push(attack(currentplayer, lookup, lookup.character.inventory.weapon));
 
                             $scope.availableActions = [
                                 combatScreenMenuOptions.next
@@ -210,13 +227,30 @@ angular
                         $scope.context = "confirmSpell";
                     },
                     confirmSpell: function (value) {
+											  var currentplayer = $scope.page.who;
+
                         if ($scope.currentCombatantParty === 'mobs') {
-                            $scope.tells.push(attack(mobDB.members[value-1], $scope.abilitySelected));
+														$scope.page.targeticon = 'images/' + mobDB.members[value-1].character.portrait;
+
+														$scope.tells.push(infoText.targetSelected
+																.replace(/PLAYER/, currentplayer)
+																.replace(/ACTOR/, mobDB.members[value-1].character.identity.name));
+                            $scope.tells.push(attack(currentplayer, mobDB.members[value-1], $scope.abilitySelected));
                         } else {
                             if ($scope.abilitySelected.actionType === 'damage') {
-                                $scope.tells.push(attack(mobDB.members[value-1], $scope.abilitySelected));
+																$scope.page.targeticon = 'images/' + mobDB.members[value-1].character.portrait;
+
+																$scope.tells.push(infoText.targetSelected
+																		.replace(/PLAYER/, currentplayer)
+																		.replace(/ACTOR/, mobDB.members[value-1].character.identity.name));
+                                $scope.tells.push(attack(currentplayer, mobDB.members[value-1], $scope.abilitySelected));
                             } else {
-                                $scope.tells.push(heal(partyDB.members[value-1], $scope.abilitySelected));
+																$scope.page.targeticon = 'images/' + partyDB.members[value-1].character.portrait;
+
+																$scope.tells.push(infoText.targetSelected
+																		.replace(/PLAYER/, currentplayer)
+																		.replace(/ACTOR/, partyDB.members[value-1].character.identity.name));
+                                $scope.tells.push(heal(currentplayer, partyDB.members[value-1], $scope.abilitySelected));
                             }
                         }
 

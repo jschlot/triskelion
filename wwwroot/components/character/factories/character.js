@@ -12,6 +12,7 @@ angular
                 this._this = this.name.toLowerCase();
 
                 this.character = {};
+								this.character.portrait = "generic.png";
                 this.character.status = 'alive';
                 this.character.hpDice = 3;
 

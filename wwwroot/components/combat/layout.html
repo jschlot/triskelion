@@ -17,7 +17,7 @@
             <tr>
 
                 <td class="outline" width="15%" valign="middle" align="center">
-									O
+									<img ng-src="{{page.playericon}}" width="120" height="120">
                 </td>
                 <td class="outline" width="35%" height="300" valign="middle" align="center" rowspan="2">
                     <!--img src="/images/combat.png" height="290" width="290" -->
@@ -30,8 +30,7 @@
             </tr>
             <tr>
                 <td class="outline shim" width="15%" height="120" valign="top" align="center">
-                    <span ng-bind="page.who"></span><br>
-										<span ng-bind="page.spec"></span>
+									<img ng-src="{{page.targeticon}}" width="120" height="120" ng-show="page.targeticon">
                 </td>
                 <td class="outline shim" valign="top" height="120">
                     <div class="flex-list">
