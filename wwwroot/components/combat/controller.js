@@ -138,11 +138,6 @@ angular
                         combatScreenMenuOptions.next
                     ];
 
-                    $scope.page = {
-                        name: infoText.combatscreen,
-                        turn: currentTurn,
-                        who: combatant.character.identity.name
-                    };
                 } else {
                     $scope.currentCombatantParty = 'players';
                     $scope.tells.push(infoText.playerTurn.replace(/PLAYER/, combatant.character.identity.name));
@@ -152,13 +147,15 @@ angular
                         combatScreenMenuOptions.spell,
                         combatScreenMenuOptions.next
                     ];
-
-                    $scope.page = {
-                        name: infoText.combatscreen,
-                        turn: currentTurn,
-                        who: combatant.character.identity.name
-                    };
                 }
+
+								$scope.page = {
+										name: infoText.combatscreen,
+										turn: currentTurn,
+										who: combatant.character.identity.name,
+										spec: combatant.character.identity.spec
+								};
+								console.log(combatant);
             };
 
             $scope.context = null;

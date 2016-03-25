@@ -15,8 +15,12 @@
         <br>
         <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
-                <td class="outline" width="500" height="300" valign="middle" align="center" rowspan="2">
-                    <img src="/images/combat.png" height="290" width="290">
+
+                <td class="outline" width="15%" valign="middle" align="center">
+									O
+                </td>
+                <td class="outline" width="35%" height="300" valign="middle" align="center" rowspan="2">
+                    <!--img src="/images/combat.png" height="290" width="290" -->
                 </td>
                 <td class="outline shim" valign="top" height="120">
                     <div class="flex-list">
@@ -25,6 +29,10 @@
                 </td>
             </tr>
             <tr>
+                <td class="outline shim" width="15%" height="120" valign="top" align="center">
+                    <span ng-bind="page.who"></span><br>
+										<span ng-bind="page.spec"></span>
+                </td>
                 <td class="outline shim" valign="top" height="120">
                     <div class="flex-list">
                         <actions-list-directive actions="availableActions"></actions-list-directive>
