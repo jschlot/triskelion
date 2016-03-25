@@ -156,15 +156,21 @@ angular
                     ];
 
                 } else {
-										$scope.page.targeticon = null;
-                    $scope.currentCombatantParty = 'players';
-                    $scope.tells.push(infoText.playerTurn.replace(/PLAYER/, combatant.character.identity.name));
+                    if (combatant.character.stats.health === 0) {
+                        updateTurns();
+                        return;
+                    } else {
 
-                    $scope.availableActions = [
-                        combatScreenMenuOptions.fight,
-                        combatScreenMenuOptions.spell,
-                        combatScreenMenuOptions.next
-                    ];
+											$scope.page.targeticon = null;
+											$scope.currentCombatantParty = 'players';
+											$scope.tells.push(infoText.playerTurn.replace(/PLAYER/, combatant.character.identity.name));
+
+											$scope.availableActions = [
+													combatScreenMenuOptions.fight,
+													combatScreenMenuOptions.spell,
+													combatScreenMenuOptions.next
+											];
+										}
                 }
             };
 
