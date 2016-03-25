@@ -63,10 +63,11 @@ b {
     border: 1px solid white;
 }
 
-.prompt {
-    color: white;
-    border-top: 1px solid white;
+.combat .outline {
+    color: red;
+    border: 1px solid red;
 }
+
 
 .table-header {
     font-weight: bold;
