@@ -5,13 +5,13 @@
 This is a D&D based Maze Crawler, RPG, Text-Based Adventure a'la Wizardry and Ultima.
 
 ### The Maze
-![Triskelion UI - Maze](./maze.png "Triskelion UI - Maze")
+![Triskelion UI - Maze](./maze.jpg "Triskelion UI - Maze")
 
 ### The Map
-![Triskelion UI - Map](./map.png "Triskelion UI - Map")
+![Triskelion UI - Map](./map.jpg "Triskelion UI - Map")
 
 ### A Character sheet
-![Triskelion UI - Charactersheet](./charactersheetswarm.png "Triskelion UI - Charactersheet")
+![Triskelion UI - Charactersheet](./charactersheetswarm.jpg "Triskelion UI - Charactersheet")
 
 ## Installation
 
