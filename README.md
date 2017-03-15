@@ -11,7 +11,7 @@ This is a D&D based Maze Crawler, RPG, Text-Based Adventure a'la Wizardry and Ul
 ![Triskelion UI - Map](./map.jpg "Triskelion UI - Map")
 
 ### A Character sheet
-![Triskelion UI - Charactersheet](./charactersheetswarm.jpg "Triskelion UI - Charactersheet")
+![Triskelion UI - Charactersheet](./charactersheet.jpg "Triskelion UI - Charactersheet")
 
 ## Installation
 
